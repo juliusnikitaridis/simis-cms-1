@@ -10,7 +10,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and 
  * limitations under the License.
  */
 
@@ -61,6 +61,7 @@ public class DatabaseCommand {
       DatabaseVersionRepository.save(databaseVersion);
     } else {
       LOG.info("Checking for database upgrades... " + jdbcUrl);
+      System.out.println("Test");
       if (!upgrade(jdbcUrl, databaseProperties)) {
         return false;
       }
