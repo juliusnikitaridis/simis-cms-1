@@ -1,0 +1,11 @@
+
+
+POST http://localhost:8080/api/oauth2/authorize
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+
+###
+
+GET http://localhost:8080/api/carfix/listVehicles
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-2c59278b-ab34-45ba-9fda-fe1b01a0c5d91
