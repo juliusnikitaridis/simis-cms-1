@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 public class VehicleRepository {
 
@@ -17,7 +18,8 @@ public class VehicleRepository {
     private static String[] PRIMARY_KEY = new String[]{"vehicle_id"};
 
     public static Vehicle add(Vehicle record) {
-        SqlUtils insertValues = new SqlUtils() 
+        SqlUtils insertValues = new SqlUtils()
+                .add("vehicle_id", UUID.randomUUID().toString())
                 .add("vin_number", record.getVinNumber())
                 .add("registration_number", record.getReqistration())
                 .add("make", record.getMake())
