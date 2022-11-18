@@ -37,7 +37,7 @@ public class Vehicle extends Entity {
 
     }
 
-    public long getVehicleId() {
+    public Long getVehicleId() {
         return vehicleId;
     }
 

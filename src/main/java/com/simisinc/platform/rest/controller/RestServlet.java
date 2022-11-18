@@ -159,6 +159,7 @@ public class RestServlet extends HttpServlet {
       serviceContext.setParameterMap(request.getParameterMap());
       serviceContext.setApp((App) request.getAttribute(RequestConstants.REST_APP));
       serviceContext.setUser((User) request.getAttribute(RequestConstants.REST_USER));
+      serviceContext.setJsonRequest((String)request.getAttribute(RequestConstants.JSON_DATA));
 
       // Execute the service
       ServiceResponse result = null;

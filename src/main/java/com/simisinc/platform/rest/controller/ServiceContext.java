@@ -39,6 +39,7 @@ public class ServiceContext implements Serializable {
   private HttpServletResponse response = null;
   private String pathParam = null;
   private Map<String, String[]> parameterMap = null;
+  private String jsonRequest = null;
 
   private App app = null;
   private User user = null;
@@ -49,6 +50,14 @@ public class ServiceContext implements Serializable {
   public ServiceContext(HttpServletRequest request, HttpServletResponse response) {
     this.request = request;
     this.response = response;
+  }
+
+  public String getJsonRequest() {
+    return jsonRequest;
+  }
+
+  public void setJsonRequest(String jsonRequest) {
+    this.jsonRequest = jsonRequest;
   }
 
   public HttpServletRequest getRequest() {

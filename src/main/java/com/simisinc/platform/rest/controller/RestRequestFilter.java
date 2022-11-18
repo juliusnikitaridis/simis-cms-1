@@ -39,6 +39,7 @@ import javax.security.auth.login.LoginException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -251,6 +252,20 @@ public class RestRequestFilter implements Filter {
       }
 
       // Let the REST service process this request
+      //@todo : is this the best place to do this
+      String contentType = httpServletRequest.getHeader("Content-Type");
+      if(contentType != null && contentType.contains("json")) {
+        String line = null;
+        BufferedReader reader = request.getReader();
+        StringBuffer jb = new StringBuffer();
+
+        while ((line = reader.readLine()) != null) {
+          jb.append(line);
+        }
+       request.setAttribute(RequestConstants.JSON_DATA,jb.toString());
+      }
+
+
       request.setAttribute(RequestConstants.REST_USER, user);
       chain.doFilter(request, servletResponse);
       return;

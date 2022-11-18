@@ -8,4 +8,23 @@ Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRm
 
 GET http://localhost:8080/api/carfix/listVehicles
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-2c59278b-ab34-45ba-9fda-fe1b01a0c5d91
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+###
+
+POST http://localhost:8080/api/carfix/CreateVehicleService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "vinNumber": "23432666456",
+  "registration": "G3344d GP",
+  "make": "Mercedes",
+  "model": "year",
+  "year": "2002",
+  "fuelType": "petrol",
+  "transmission": "manual",
+  "odoReading": "2340333",
+  "engineCode": "3043"
+}
+###

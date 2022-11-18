@@ -17,11 +17,11 @@ public class VehicleRepository {
     private static String TABLE_NAME = "carfix.vehicles";
     private static String[] PRIMARY_KEY = new String[]{"vehicle_id"};
 
-    public static Vehicle add(Vehicle record) {
+    public static Vehicle add(Vehicle record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
-                .add("vehicle_id", UUID.randomUUID().toString())
+                .add("vehicle_id", record.getVehicleId())
                 .add("vin_number", record.getVinNumber())
-                .add("registration_number", record.getReqistration())
+                .add("registration", record.getReqistration())
                 .add("make", record.getMake())
                 .add("model", record.getModel())
                 .add("year", record.getYear())
@@ -35,15 +35,14 @@ public class VehicleRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                record.setVehicleId(DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY));
+                DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
                 transaction.commit();
                 return record;
             }
-        } catch (SQLException se) {
+        } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
         }
-        LOG.error("An id was not set!");
-        return null;
     }
 
 

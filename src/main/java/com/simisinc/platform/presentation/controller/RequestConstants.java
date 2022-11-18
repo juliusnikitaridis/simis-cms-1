@@ -64,6 +64,7 @@ public class RequestConstants {
   public static final String OVERLAY_MESSAGE = "requestOverlayMessage";
 
   public static final String LOG_USER = "LOG_USER";
+  public static final String JSON_DATA = "JSON_DATA";
 
   public static final String REST_APP = "REST_APP";
   public static final String REST_USER = "REST_USER";
