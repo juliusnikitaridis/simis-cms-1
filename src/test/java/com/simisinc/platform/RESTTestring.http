@@ -29,6 +29,47 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:8080/api/carfix/CreateRFSService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "date": "12-12-2022",
+  "type": "REQUEST_FOR_SERVICE",
+  "vehicleId": "4333e",
+  "memberId": "334423",
+  "radius": "10 KM",
+  "status": "CREATED",
+  "currentOdoReading": "234233.00",
+  "pictureData": "base64Ecode(some data)",
+  "lastServiceDate": "10-10-2021",
+  "serviceRequestItems": [{"serviceRequestOptionId": "34234234"},{"serviceRequestOptionId": "34234111"},{"serviceRequestOptionId": "34235554"}]
+}
+###
+
+###
+GET http://localhost:8080/api/carfix/RFSListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{}
+
+###
+
+###
+GET http://localhost:8080/api/carfix/RFSListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "vehicleId": "2345675"
+}
+
+###
+
 POST http://localhost:8080/api/carfix/RegisterMemberService
 X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
 Authorization: Bearer API-a23d6962-c337-4f4c-ac4f-73ff0837f4cc1
