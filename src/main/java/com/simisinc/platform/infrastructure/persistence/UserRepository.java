@@ -257,7 +257,8 @@ public class UserRepository {
         .add("enabled", true)
         .add("account_token", record.getAccountToken())
         .addIfExists("created", record.getCreated())
-        .add("created_by", record.getCreatedBy(), -1);
+        .add("created_by", record.getCreatedBy(), -1)
+            .add("id_number",StringUtils.trimToNull(record.getIdnum()));
     if (record.hasGeoPoint()) {
       insertValues.add("latitude", record.getLatitude());
       insertValues.add("longitude", record.getLongitude());
@@ -270,6 +271,7 @@ public class UserRepository {
            AutoRollback transaction = new AutoRollback(connection)) {
         // In a transaction (use the existing connection)
         record.setId(DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY));
+        //DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
         // Manage the access groups
         UserGroupRepository.insertUserGroupList(connection, record);
         // Manage the roles

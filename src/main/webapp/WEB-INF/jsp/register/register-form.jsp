@@ -49,6 +49,9 @@
       <label>Email Address
         <input name="email" type="email" placeholder="Email Address" value="<c:out value="${user.email}"/>" required>
       </label>
+      <label>ID Number
+        <input name="idnum" type="text" placeholder="ID Number"  required />
+      </label>
       <label>Password
         <input name="password" type="password" placeholder="Password" autocomplete="off" required>
       </label>

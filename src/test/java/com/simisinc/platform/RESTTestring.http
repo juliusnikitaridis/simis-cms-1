@@ -12,8 +12,8 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 ###
 
 POST http://localhost:8080/api/carfix/CreateVehicleService
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
+Authorization:Bearer API-a23d6962-c337-4f4c-ac4f-73ff0837f4cc1
 Content-Type: application/json
 
 {
@@ -28,3 +28,18 @@ Content-Type: application/json
   "engineCode": "3043"
 }
 ###
+
+POST http://localhost:8080/api/carfix/RegisterMemberService
+X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
+Authorization: Bearer API-a23d6962-c337-4f4c-ac4f-73ff0837f4cc1
+Content-Type: application/json
+
+{
+"uniqueId":"23141",
+"firstName":"Test",
+"lastName":"T",
+"email":"r@2",
+"username":"r@2",
+  "idnum": "1996",
+  "password": "qwerty"
+}

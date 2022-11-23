@@ -25,4 +25,6 @@
   <service method="get" endpoint="item/{itemUniqueId}" class="com.simisinc.platform.rest.services.items.ItemService" />
   <service method="get" endpoint="carfix/listVehicles" class="com.simisinc.platform.rest.services.carfix.VehicleListService" />
   <service method="get" endpoint="carfix/CreateVehicleService" class="com.simisinc.platform.rest.services.carfix.CreateVehicleService" />
+  <service method="get" endpoint="carfix/RegisterMemberService" class="com.simisinc.platform.rest.services.carfix.RegisterMemberService" />
+
 </services>

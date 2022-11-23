@@ -33,6 +33,7 @@
   <%@include file="../page_messages.jspf" %>
   <div class="grid-x grid-margin-x">
     <div class="small-12 cell">
+      <label>HI Mr Dev</label>
       <label>Email
         <input name="email" type="text" placeholder="Email" required>
       </label>

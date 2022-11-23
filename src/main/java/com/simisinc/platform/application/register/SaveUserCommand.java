@@ -143,6 +143,7 @@ public class SaveUserCommand {
     user.setRoleList(userBean.getRoleList());
     user.setGroupList(userBean.getGroupList());
     user.setTimeZone(userBean.getTimeZone());
+   // user.setIdnum(userBean.getIdnum());
     return UserRepository.save(user);
   }
 

@@ -79,6 +79,7 @@ public class RegisterUserCommand {
     user.setNickname(userBean.getNickname());
     user.setEmail(userBean.getEmail());
     user.setUsername(userBean.getEmail());
+    user.setIdnum(userBean.getIdnum());  //set password
     user.setPassword(hash);
     // Assign the default group
     Group defaultGroup = GroupRepository.findByName("All Users");

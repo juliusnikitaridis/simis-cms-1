@@ -36,6 +36,10 @@ public class User extends Entity {
   private String firstName = null;
   private String lastName = null;
   private String title = null;
+
+
+
+  private  String Idnum =null;
   private String organization = null;
   private String department = null;
   private String nickname = null;
@@ -66,6 +70,13 @@ public class User extends Entity {
   public User() {
   }
 
+  public String getIdnum() {
+    return Idnum;
+  }
+
+  public void setIdnum(String idnum) {
+    Idnum = idnum;
+  }
   public Long getId() {
     return id;
   }
