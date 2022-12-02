@@ -46,7 +46,9 @@ alter table carfix.vehicles owner to postgres;
 create table carfix.quote(
     id varchar,
     request_for_service varchar,
-    service_provider_id varchar
+    service_provider_id varchar,
+    total varchar,
+    date varchar
 );
 
 
