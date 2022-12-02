@@ -69,6 +69,18 @@ Content-Type: application/json
 }
 
 ###
+###
+GET http://localhost:8080/api/carfix/RFSListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "memberId": "2345675"
+}
+
+###
+
 
 POST http://localhost:8080/api/carfix/RegisterMemberService
 X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
@@ -84,3 +96,59 @@ Content-Type: application/json
   "idnum": "1996",
   "password": "qwerty"
 }
+
+
+###
+
+
+
+
+POST http://localhost:8080/api/carfix/CreateQuoteService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "date":"12-12-2022",
+  "requestForServiceId":"2343243254",
+  "serviceProviderId":"234234543",
+  "total": "5000.00",
+  "quotationItems":[
+    {
+      "id":"34234234",
+      "quoteId":"23423434",
+      "partNumber":"3323ASD",
+      "partDescription":"23444.33",
+      "itemTotalPrice": "2000.00"
+    },
+    {
+      "id":"34234234",
+      "quoteId":"23423434",
+      "partNumber":"3323ASD",
+      "partDescription":"23444.33",
+      "itemTotalPrice": "2000.00"
+    },
+    {
+      "id":"34234234",
+      "quoteId":"23423434",
+      "partNumber":"3323ASD",
+      "partDescription":"23444.33",
+      "itemTotalPrice": "2000.00"
+    },
+    {
+      "id":"34234234",
+      "quoteId":"23423434",
+      "partNumber":"3323ASD",
+      "partDescription":"23444.33",
+      "itemTotalPrice": "2000.00"
+    }
+  ]
+}
+###
+
+
+
+
+
+
+

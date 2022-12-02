@@ -28,5 +28,6 @@
   <service method="post" endpoint="carfix/CreateRFSService" class="com.simisinc.platform.rest.services.carfix.CreateRFSService" />
   <service method="get" endpoint="carfix/RFSListService" class="com.simisinc.platform.rest.services.carfix.RFSListService" />
   <service method="get" endpoint="carfix/RegisterMemberService" class="com.simisinc.platform.rest.services.carfix.RegisterMemberService" />
+  <service method="post" endpoint="carfix/CreateQuoteService" class="com.simisinc.platform.rest.services.carfix.CreateQuoteService" />
 
 </services>

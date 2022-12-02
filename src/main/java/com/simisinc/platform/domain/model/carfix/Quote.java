@@ -1,0 +1,34 @@
+package com.simisinc.platform.domain.model.carfix;
+
+import com.simisinc.platform.domain.model.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**
+ * Julius Nikitaridis
+ * class that will represent a quote from service providers
+ * be 3 types of service requests
+ */
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Quote extends Entity {
+
+    private Long id;
+    private String requestForServiceId;
+    private String serviceProviderId;
+    private String QuotationTotal;
+    private QuoteItem[] quotationItems;
+    private String date;
+    private String total;
+
+
+}
+
+
+
+

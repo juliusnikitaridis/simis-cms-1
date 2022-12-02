@@ -43,3 +43,18 @@ create table carfix.vehicles
 
 alter table carfix.vehicles owner to postgres;
 
+create table carfix.quote(
+    id varchar,
+    request_for_service varchar,
+    service_provider_id varchar
+);
+
+
+create table quotation_item(
+    id varchar,
+    quote_id varchar,
+    part_number varchar,
+    part_description varchar,
+    item_total_price varchar
+);
+
