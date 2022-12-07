@@ -10,5 +10,6 @@ public class QuoteSpecification {
 
     private long requestForServiceId = -1L;
     private long serviceProviderId = -1L;
+    private long id = -1L;
 
 }

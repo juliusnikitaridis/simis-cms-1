@@ -4,30 +4,29 @@ import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.UUID;
+
 
 public class VehicleRepository {
 
     private static Log LOG = LogFactory.getLog(VehicleRepository.class);
     private static String TABLE_NAME = "carfix.vehicles";
-    private static String[] PRIMARY_KEY = new String[]{"vehicle_id"};
+    private static String[] PRIMARY_KEY = new String[]{"id"};
 
     public static Vehicle add(Vehicle record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("vehicle_id", record.getVehicleId())
                 .add("vin_number", record.getVinNumber())
-                .add("registration", record.getReqistration())
+                .add("registration", record.getRegistration())
                 .add("make", record.getMake())
                 .add("model", record.getModel())
                 .add("year", record.getYear())
                 .add("fuel_type", record.getFuelType())
                 .add("transmission", record.getTransmission())
                 .add("odo_reading", record.getOdoReading())
+                .add("member_id",record.getMemberId())
                 .add("engine_code", record.getEngineCode());
 
         try {
@@ -63,19 +62,20 @@ public class VehicleRepository {
             return null;
         }
         return (Vehicle) DB.selectRecordFrom(
-                TABLE_NAME, new SqlUtils().add("vehicle_id = ?", id),
+                TABLE_NAME, new SqlUtils().add("id = ?", id),
                 VehicleRepository::buildRecord);
     }
 
 
 
-    private static DataResult query(VehicleSpecification specification, DataConstraints constraints) {
+    public static DataResult query(VehicleSpecification specification, DataConstraints constraints) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("vehicle_id = ?", specification.getVehicleId(), -1);
+                    .addIfExists("member_id = ?", specification.getMemberId())
+                    .addIfExists("id = ?", specification.getVehicleId(), -1);
 
         }
         return DB.selectAllFrom(
@@ -88,7 +88,7 @@ public class VehicleRepository {
 
         Vehicle vehicle = new Vehicle();
         try {
-            vehicle.setVehicleId(rs.getLong("vehicle_id"));
+            vehicle.setVehicleId(rs.getLong("id"));
             vehicle.setEngineCode(rs.getString("engine_code"));
             vehicle.setFuelType(rs.getString("fuel_type"));
             vehicle.setMake(rs.getString("make"));
@@ -98,6 +98,7 @@ public class VehicleRepository {
             vehicle.setTransmission(rs.getString("transmission"));
             vehicle.setVinNumber(rs.getString("vin_number"));
             vehicle.setYear(rs.getString("year"));
+            vehicle.setMemberId(rs.getString("member_id"));
             return vehicle;
         } catch (Exception e) {
             LOG.error("exception when building record for vehicle"+e.getMessage());

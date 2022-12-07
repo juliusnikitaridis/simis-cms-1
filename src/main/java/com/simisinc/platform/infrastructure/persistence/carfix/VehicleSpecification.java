@@ -1,25 +1,16 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class VehicleSpecification {
-
     private long vehicleId = -1L;
-    private long cutomerId = -1L;
-
-
-    public long getCutomerId() {
-        return cutomerId;
-    }
-
-    public void setCutomer_id(long cutomerId) {
-        this.cutomerId = cutomerId;
-    }
-
-    public long getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(long vehicleId) {
-        this.vehicleId = vehicleId;
-    }
+    private String memberId = null;
 
 }

@@ -94,10 +94,12 @@ public class QuoteRepository {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
+
         if (specification != null) {
             where
-                    .addIfExists("request_for_service = ?", specification.getRequestForServiceId(), -1)
-                    .addIfExists("service_provider_id = ?", specification.getServiceProviderId(), -1);
+                    .addIfExists("request_for_service_id = ?", specification.getRequestForServiceId(), -1)
+                    .addIfExists("service_provider_id = ?", specification.getServiceProviderId(), -1)
+                    .addIfExists("id = ?", specification.getId(), -1);
 
         }
         return DB.selectAllFrom(
@@ -110,7 +112,7 @@ public class QuoteRepository {
         Quote request = new Quote();
         try {
             request.setId(Long.valueOf(rs.getString("id")));
-            request.setRequestForServiceId(rs.getString("request_for_service"));
+            request.setRequestForServiceId(rs.getString("request_for_service_id"));
             request.setServiceProviderId(rs.getString("service_provider_id"));
             request.setDate(rs.getString("date"));
             request.setQuotationTotal(rs.getString("total"));

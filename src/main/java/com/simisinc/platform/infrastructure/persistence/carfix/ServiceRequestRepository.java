@@ -99,9 +99,9 @@ public class ServiceRequestRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("vehicle_id = ?", specification.getVehicleId(), -1)
-                    .addIfExists("member_id = ?", specification.getMemberId(), -1)
-                    .addIfExists("id = ?", specification.getServiceRequestId(), -1);
+                    .addIfExists("vehicle_id = ?", specification.getVehicleId())
+                    .addIfExists("member_id = ?", specification.getMemberId())
+                    .addIfExists("id = ?", specification.getServiceRequestId());
 
         }
         return DB.selectAllFrom(
@@ -120,9 +120,9 @@ public class ServiceRequestRepository {
             request.setMemberId(rs.getString("member_id"));
             request.setRadius(rs.getString("radius"));
             request.setStatus(rs.getString("status"));
-            request.setCurrentOdoReading("current_odo_reading");
-            request.setPictureData("picture_data");
-            request.setLastServiceDate("last_service_date");
+            request.setCurrentOdoReading(rs.getString("current_odo_reading"));
+            request.setPictureData(rs.getString("picture_data"));
+            request.setLastServiceDate(rs.getString("last_service_date"));
             return request;
         } catch (Exception e) {
             LOG.error("exception when building record for ServiceRequest" + e.getMessage());

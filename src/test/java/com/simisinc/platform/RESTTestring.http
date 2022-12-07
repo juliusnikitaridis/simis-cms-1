@@ -1,15 +1,35 @@
 
-
+###
 POST http://localhost:8080/api/oauth2/authorize
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
-
 ###
+
 
 GET http://localhost:8080/api/carfix/listVehicles
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "vehicleId":"-3169830153767555591"
+}
 ###
+
+
+
+##
+GET http://localhost:8080/api/carfix/listVehicles
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "memberId":"julius-niki"
+}
+###
+
+
 
 POST http://localhost:8080/api/carfix/CreateVehicleService
 X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
@@ -76,7 +96,7 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 Content-Type: application/json
 
 {
-  "memberId": "2345675"
+  "memberId": "334423"
 }
 
 ###
@@ -93,11 +113,9 @@ Content-Type: application/json
 "lastName":"T",
 "email":"r@2",
 "username":"r@2",
-  "idnum": "1996",
-  "password": "qwerty"
+"idnum": "1996",
+"password": "qwerty"
 }
-
-
 ###
 
 
@@ -147,7 +165,41 @@ Content-Type: application/json
 ###
 
 
+###
+GET http://localhost:8080/api/carfix/QuoteListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
 
+{
+  "serviceProviderId": "234234543"
+}
+
+###
+
+
+###
+GET http://localhost:8080/api/carfix/QuoteListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "requestForServiceId": "2343243254"
+}
+
+###
+
+GET http://localhost:8080/api/carfix/QuoteListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+{
+  "quoteId": "4543437981199825940"
+}
+
+###
 
 
 

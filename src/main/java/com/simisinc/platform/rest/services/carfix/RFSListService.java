@@ -38,13 +38,13 @@ public class RFSListService {
             ServiceRequestSpecification specification = new ServiceRequestSpecification();
 
             if(request.getMemberId()!= null) {
-                specification.setMemberId(Long.valueOf(request.getMemberId()));
+                specification.setMemberId(request.getMemberId());
             }
             else if(request.getVehicleId()!= null) {
-                specification.setVehicleId(Long.valueOf(request.getVehicleId()));
+                specification.setVehicleId(request.getVehicleId());
             }
             else if(request.getServiceRequestId() != null) {
-                specification.setServiceRequestId(Long.valueOf(request.getServiceRequestId()));
+                specification.setServiceRequestId(request.getServiceRequestId());
             } else {
                 //nothing to set in the specification
             }
