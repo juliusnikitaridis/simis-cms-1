@@ -30,5 +30,6 @@
   <service method="get" endpoint="carfix/RegisterMemberService" class="com.simisinc.platform.rest.services.carfix.RegisterMemberService" />
   <service method="post" endpoint="carfix/CreateQuoteService" class="com.simisinc.platform.rest.services.carfix.CreateQuoteService" />
   <service method="post" endpoint="carfix/QuoteListService" class="com.simisinc.platform.rest.services.carfix.QuoteListService" />
+  <service method="get" endpoint="carfix/ServiceRequestOptionsListService" class="com.simisinc.platform.rest.services.carfix.ServiceRequestOptionsListService" />
 
 </services>

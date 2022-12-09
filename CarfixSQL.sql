@@ -45,6 +45,7 @@ create table carfix.quote
     id varchar,
     request_for_service_id varchar,
     service_provider_id varchar,
+    additional_description varchar,
     date varchar,
     total varchar
 );

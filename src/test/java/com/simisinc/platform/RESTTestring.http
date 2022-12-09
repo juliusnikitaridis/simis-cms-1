@@ -67,6 +67,7 @@ Content-Type: application/json
   "status": "CREATED",
   "currentOdoReading": "234233.00",
   "pictureData": "base64Ecode(some data)",
+  "additionalDescription": "need to change shocks",
   "lastServiceDate": "10-10-2021",
   "serviceRequestItems": [{"serviceRequestOptionId": "34234234"},{"serviceRequestOptionId": "34234111"},{"serviceRequestOptionId": "34235554"}]
 }
@@ -204,6 +205,14 @@ Content-Type: application/json
 }
 
 ###
+
+GET http://localhost:8080/api/carfix/ServiceRequestOptionsListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Content-Type: application/json
+
+###
+
 
 
 

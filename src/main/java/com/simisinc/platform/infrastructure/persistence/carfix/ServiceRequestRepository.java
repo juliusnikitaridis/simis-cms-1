@@ -2,15 +2,13 @@ package com.simisinc.platform.infrastructure.persistence.carfix;
 
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
+import com.simisinc.platform.domain.model.carfix.ServiceRequestItemOption;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -24,24 +22,31 @@ public class ServiceRequestRepository {
     private static Log LOG = LogFactory.getLog(ServiceRequestRepository.class);
     private static String TABLE_NAME = "carfix.Service_request";
     private static String TABLE_NAME_ITEMS = "carfix.Service_request_items";
+    private static String TABLE_NAME_ITEM_OPTIONS = "carfix.service_request_items_options";
     private static String[] PRIMARY_KEY = new String[]{"id"};
     private static String[] PRIMARY_KEY_ITEMS = new String[]{"id"};
 
 
     public static void addItems(ServiceRequest serviceRequest) throws Exception {
-         Connection connection = DB.getConnection();
+        Connection connection = DB.getConnection();
         for (ServiceRequestItem serviceRequestItem : serviceRequest.getServiceRequestItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
-            .add("id", UUID.randomUUID().toString())
-                    .add("service_request_id",serviceRequest.getId())
-                    .add("service_request_option_id",serviceRequestItem.getServiceRequestOptionId());
+                    .add("id", UUID.randomUUID().toString())
+                    .add("service_request_id", serviceRequest.getId())
+                    .add("service_request_option_id", serviceRequestItem.getServiceRequestOptionId());
 
             AutoStartTransaction a = new AutoStartTransaction(connection);
             AutoRollback transaction = new AutoRollback(connection);
             DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
             transaction.commit();
         }
+    }
+
+
+    //return reference data for creating service requests
+    public static DataResult findOptions() throws Exception {
+        return DB.selectAllFrom(TABLE_NAME_ITEM_OPTIONS, null, null, ServiceRequestRepository::buildRecordItemsOption);
     }
 
 
@@ -56,6 +61,7 @@ public class ServiceRequestRepository {
                 .add("status", record.getStatus())
                 .add("current_odo_reading", record.getCurrentOdoReading())
                 .add("picture_data", record.getPictureData())
+                .add("additional_description", record.getAdditionalDescription())
                 .add("last_service_date", record.getLastServiceDate());
 
         try {
@@ -123,10 +129,25 @@ public class ServiceRequestRepository {
             request.setStatus(rs.getString("status"));
             request.setCurrentOdoReading(rs.getString("current_odo_reading"));
             request.setPictureData(rs.getString("picture_data"));
+            request.setAdditionalDescription(rs.getString("additional_description"));
             request.setLastServiceDate(rs.getString("last_service_date"));
             return request;
         } catch (Exception e) {
             LOG.error("exception when building record for ServiceRequest" + e.getMessage());
+            return null;
+        }
+    }
+
+
+    private static ServiceRequestItemOption buildRecordItemsOption(ResultSet rs) {
+        ServiceRequestItemOption option = new ServiceRequestItemOption();
+        try {
+            option.setCategory(rs.getString("category"));
+            option.setDescription(rs.getString("description"));
+            option.setId(rs.getString("id"));
+            return option;
+        } catch (Exception e) {
+            LOG.error("exception when building item option");
             return null;
         }
     }

@@ -24,8 +24,8 @@ public class ServiceRequest extends Entity {
     private String currentOdoReading;
     private String pictureData;
     private String lastServiceDate;
+    private String additionalDescription;
     private ServiceRequestItem[] serviceRequestItems;
-
 }
 
 
