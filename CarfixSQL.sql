@@ -62,3 +62,9 @@ create table carfix.quotation_item
 
 alter table carfix.quotation_item owner to postgres;
 
+create table carfix.service_request_items_options(
+ id varchar,
+ description varchar,
+ category varchar
+);
+
