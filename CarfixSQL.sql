@@ -1,6 +1,6 @@
 create table carfix.vehicles
 (
-    id bigint,
+    id varchar,
     vin_number varchar,
     registration varchar,
     make varchar,
@@ -42,9 +42,9 @@ alter table carfix.service_request_items owner to postgres;
 
 create table carfix.quote
 (
-    id bigint,
-    request_for_service_id bigint,
-    service_provider_id bigint,
+    id varchar,
+    request_for_service_id varchar,
+    service_provider_id varchar,
     date varchar,
     total varchar
 );
@@ -61,7 +61,4 @@ create table carfix.quotation_item
 );
 
 alter table carfix.quotation_item owner to postgres;
-
-
-
 

@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Quote extends Entity {
 
-    private Long id;
+    private String id;
     private String requestForServiceId;
     private String serviceProviderId;
     private String QuotationTotal;

@@ -33,7 +33,7 @@ public class CreateVehicleService {
             ObjectMapper mapper = new ObjectMapper();
             Vehicle newVehicle = mapper.readValue(context.getJsonRequest(), Vehicle.class);
             //newVehicle.setVehicleId(UUID.randomUUID().toString()); //todo seems that PK has to be a long here ??
-            newVehicle.setVehicleId(new Random().nextLong());
+            newVehicle.setVehicleId(UUID.randomUUID().toString());
 
             VehicleRepository.add(newVehicle);
 

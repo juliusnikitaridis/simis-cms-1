@@ -574,6 +574,18 @@ public class DB {
     }
   }
 
+  public static void insertIntoWithStringPk(Connection connection, String tableName, SqlUtils insertValues, String[] primaryKey)
+          throws SQLException {
+    try (PreparedStatement pst = createPreparedStatementForInsert(connection, tableName, insertValues, primaryKey,
+            null)) {
+       pst.executeUpdate();
+    } catch (SQLException se) {
+      throw new SQLException("insertInto record failed [" + tableName + "]: " + se.getMessage(), se);
+    }
+  }
+
+
+
   private static PreparedStatement createPreparedStatementForInsert(Connection connection, String tableName,
       SqlUtils insertValues, String[] primaryKey, String onConflict) throws SQLException {
     String SQL_INSERT_QUERY = "INSERT INTO " + tableName + " " +

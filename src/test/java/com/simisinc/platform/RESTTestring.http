@@ -32,8 +32,8 @@ Content-Type: application/json
 
 
 POST http://localhost:8080/api/carfix/CreateVehicleService
-X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
-Authorization:Bearer API-a23d6962-c337-4f4c-ac4f-73ff0837f4cc1
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-79c396c1-b96c-4cc0-a321-74f00e5715c91
 Content-Type: application/json
 
 {
@@ -45,9 +45,13 @@ Content-Type: application/json
   "fuelType": "petrol",
   "transmission": "manual",
   "odoReading": "2340333",
-  "engineCode": "3043"
+  "engineCode": "3043",
+  "memberId": "julius-niki"
 }
 ###
+
+
+
 
 POST http://localhost:8080/api/carfix/CreateRFSService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
@@ -85,7 +89,7 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 Content-Type: application/json
 
 {
-  "vehicleId": "2345675"
+  "vehicleId": "4333e"
 }
 
 ###
@@ -196,7 +200,7 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 Content-Type: application/json
 
 {
-  "quoteId": "4543437981199825940"
+  "quoteId": "81e1e347-50f3-41e8-8be1-31774cddf0e0"
 }
 
 ###

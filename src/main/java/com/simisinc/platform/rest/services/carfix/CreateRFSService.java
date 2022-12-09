@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 
 /**
@@ -34,7 +35,7 @@ public class CreateRFSService {
 
         try {
 
-            final long serviceRequestId = new Random().nextLong();
+            final String serviceRequestId = UUID.randomUUID().toString();
             ObjectMapper mapper = new ObjectMapper();
             ServiceRequest serviceRequest = mapper.readValue(context.getJsonRequest(), ServiceRequest.class);
             if(serviceRequest.getType() == null || !validateServiceRequestType(serviceRequest.getType())) {

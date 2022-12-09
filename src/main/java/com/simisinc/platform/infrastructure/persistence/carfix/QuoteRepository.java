@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Julius Nikitaridis
@@ -33,15 +34,15 @@ public class QuoteRepository {
         for (QuoteItem quoteItem : quote.getQuotationItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
-            .add("id", new Random().nextLong()) //TODO should be changed to UUID v4
-                    .add("quote_id",quoteItem.getId())
+            .add("id", UUID.randomUUID().toString())
+                    .add("quote_id",quote.getId())
                     .add("part_number",quoteItem.getPartNumber())
                     .add("part_description",quoteItem.getPartDescription())
                     .add("item_total_price",quoteItem.getItemTotalPrice());
 
             AutoStartTransaction a = new AutoStartTransaction(connection);
             AutoRollback transaction = new AutoRollback(connection);
-            DB.insertInto(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
+            DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
             transaction.commit();
         }
     }
@@ -59,7 +60,7 @@ public class QuoteRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+                DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
                 transaction.commit();
                 return record;
             }
@@ -97,9 +98,9 @@ public class QuoteRepository {
 
         if (specification != null) {
             where
-                    .addIfExists("request_for_service_id = ?", specification.getRequestForServiceId(), -1)
-                    .addIfExists("service_provider_id = ?", specification.getServiceProviderId(), -1)
-                    .addIfExists("id = ?", specification.getId(), -1);
+                    .addIfExists("request_for_service_id = ?", specification.getRequestForServiceId())
+                    .addIfExists("service_provider_id = ?", specification.getServiceProviderId())
+                    .addIfExists("id = ?", specification.getId());
 
         }
         return DB.selectAllFrom(
@@ -111,7 +112,7 @@ public class QuoteRepository {
 
         Quote request = new Quote();
         try {
-            request.setId(Long.valueOf(rs.getString("id")));
+            request.setId(rs.getString("id"));
             request.setRequestForServiceId(rs.getString("request_for_service_id"));
             request.setServiceProviderId(rs.getString("service_provider_id"));
             request.setDate(rs.getString("date"));

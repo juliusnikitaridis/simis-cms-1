@@ -37,7 +37,7 @@ public class VehicleListService {
             if(null!= request.getMemberId()) {
                 specification.setMemberId(request.getMemberId());
             } else if (null != request.getVehicleId()) {
-                specification.setVehicleId(Long.valueOf(request.getVehicleId()));
+                specification.setVehicleId(request.getVehicleId());
             }
             List<Vehicle> vehiclesList = (List<Vehicle>) VehicleRepository.query(specification, null).getRecords();
 

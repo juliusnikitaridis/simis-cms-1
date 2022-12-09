@@ -35,14 +35,14 @@ public class QuoteListService {
             QuoteSpecification specification = new QuoteSpecification();
 
             if(null != request.getQuoteId()) {
-                specification.setId(Long.valueOf(request.getQuoteId()));
+                specification.setId(request.getQuoteId());
             } else
 
             if (null != request.getRequestForServiceId()) {
-                specification.setRequestForServiceId(Long.valueOf(request.getRequestForServiceId())); //TODO should change this to UUID
+                specification.setRequestForServiceId(request.getRequestForServiceId()); //TODO should change this to UUID
             } else
             if (null != request.getServiceProviderId()) {
-                specification.setServiceProviderId(Long.valueOf(request.getServiceProviderId()));
+                specification.setServiceProviderId(request.getServiceProviderId());
             }
 
             List<Quote> quoteList = (List<Quote>) QuoteRepository.query(specification, null).getRecords();

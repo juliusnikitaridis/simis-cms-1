@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 
 /**
@@ -31,7 +32,7 @@ public class CreateQuoteService {
 
         try {
 
-            final long quoteId = new Random().nextLong();
+            final String quoteId = UUID.randomUUID().toString();
             ObjectMapper mapper = new ObjectMapper();
             Quote quote = mapper.readValue(context.getJsonRequest(), Quote.class);
             quote.setId(quoteId);

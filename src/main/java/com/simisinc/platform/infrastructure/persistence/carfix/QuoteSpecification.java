@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 public class QuoteSpecification {
 
-    private long requestForServiceId = -1L;
-    private long serviceProviderId = -1L;
-    private long id = -1L;
+    private String requestForServiceId;
+    private String serviceProviderId;
+    private String  id ;
 
 }

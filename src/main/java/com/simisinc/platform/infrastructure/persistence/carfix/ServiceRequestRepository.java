@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Julius Nikitaridis
@@ -32,13 +33,13 @@ public class ServiceRequestRepository {
         for (ServiceRequestItem serviceRequestItem : serviceRequest.getServiceRequestItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
-            .add("id", new Random().nextLong()) //TODO should be changed to UUID v4
+            .add("id", UUID.randomUUID().toString())
                     .add("service_request_id",serviceRequest.getId())
                     .add("service_request_option_id",serviceRequestItem.getServiceRequestOptionId());
 
             AutoStartTransaction a = new AutoStartTransaction(connection);
             AutoRollback transaction = new AutoRollback(connection);
-            DB.insertInto(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
+            DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
             transaction.commit();
         }
     }
@@ -62,7 +63,7 @@ public class ServiceRequestRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+                DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
                 transaction.commit();
                 return record;
             }
@@ -113,7 +114,7 @@ public class ServiceRequestRepository {
 
         ServiceRequest request = new ServiceRequest();
         try {
-            request.setId(Long.valueOf(rs.getString("id")));
+            request.setId(rs.getString("id"));
             request.setDate(rs.getString("date"));
             request.setType(rs.getString("type"));
             request.setVehicleId(rs.getString("vehicle_id"));

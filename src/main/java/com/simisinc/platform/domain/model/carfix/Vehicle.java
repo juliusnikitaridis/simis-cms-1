@@ -1,6 +1,7 @@
 package com.simisinc.platform.domain.model.carfix;
 
 import com.simisinc.platform.domain.model.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,7 +31,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Vehicle extends Entity {
-    private Long vehicleId = -1L;
+    private String vehicleId = null;
     private String vinNumber = null;
     private String registration = null;
     private String make = null;

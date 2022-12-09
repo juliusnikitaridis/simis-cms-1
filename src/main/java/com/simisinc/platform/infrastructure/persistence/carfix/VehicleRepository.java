@@ -17,7 +17,7 @@ public class VehicleRepository {
 
     public static Vehicle add(Vehicle record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
-                .add("vehicle_id", record.getVehicleId())
+                .add("id", record.getVehicleId())
                 .add("vin_number", record.getVinNumber())
                 .add("registration", record.getRegistration())
                 .add("make", record.getMake())
@@ -34,7 +34,7 @@ public class VehicleRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.insertInto(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+                DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
                 transaction.commit();
                 return record;
             }
@@ -75,7 +75,7 @@ public class VehicleRepository {
         if (specification != null) {
             where
                     .addIfExists("member_id = ?", specification.getMemberId())
-                    .addIfExists("id = ?", specification.getVehicleId(), -1);
+                    .addIfExists("id = ?", specification.getVehicleId());
 
         }
         return DB.selectAllFrom(
@@ -88,7 +88,7 @@ public class VehicleRepository {
 
         Vehicle vehicle = new Vehicle();
         try {
-            vehicle.setVehicleId(rs.getLong("id"));
+            vehicle.setVehicleId(rs.getString("id"));
             vehicle.setEngineCode(rs.getString("engine_code"));
             vehicle.setFuelType(rs.getString("fuel_type"));
             vehicle.setMake(rs.getString("make"));

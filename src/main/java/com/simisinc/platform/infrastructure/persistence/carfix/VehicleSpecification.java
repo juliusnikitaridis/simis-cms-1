@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class VehicleSpecification {
-    private long vehicleId = -1L;
+    private String vehicleId = null;
     private String memberId = null;
 
 }
