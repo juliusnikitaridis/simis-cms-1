@@ -46,17 +46,6 @@ public class VehicleRepository {
 
 
 
-    public static List<Vehicle> findAll(VehicleSpecification specification, DataConstraints constraints) {
-        if (constraints == null) {
-            constraints = new DataConstraints();
-        }
-        constraints.setDefaultColumnToSortBy("make");
-        DataResult result = query(specification, constraints);
-        return (List<Vehicle>) result.getRecords();
-    }
-
-
-
     public static Vehicle findById(long id) {
         if (id == -1) {
             return null;

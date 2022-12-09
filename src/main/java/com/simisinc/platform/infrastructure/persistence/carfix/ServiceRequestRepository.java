@@ -80,14 +80,6 @@ public class ServiceRequestRepository {
     }
 
 
-    public static List<ServiceRequest> findAll(ServiceRequestSpecification specification, DataConstraints constraints) {
-        if (constraints == null) {
-            constraints = new DataConstraints();
-        }
-        constraints.setDefaultColumnToSortBy("date");
-        DataResult result = query(specification, constraints);
-        return (List<ServiceRequest>) result.getRecords();
-    }
 
 
     public static ServiceRequest findById(long id) {

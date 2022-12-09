@@ -71,14 +71,6 @@ public class QuoteRepository {
     }
 
 
-    public static List<Quote> findAll(QuoteSpecification quote, DataConstraints constraints) {
-        if (constraints == null) {
-            constraints = new DataConstraints();
-        }
-        constraints.setDefaultColumnToSortBy("date");
-        DataResult result = query(quote, constraints);
-        return (List<Quote>) result.getRecords();
-    }
 
 
     public static Quote findById(long id) {
