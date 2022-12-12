@@ -23,7 +23,7 @@
   <service method="get" endpoint="categories/{collectionUniqueId}" class="com.simisinc.platform.rest.services.items.CategoryListService" />
   <service method="get" endpoint="items/{collectionUniqueId}" class="com.simisinc.platform.rest.services.items.ItemListService" />
   <service method="get" endpoint="item/{itemUniqueId}" class="com.simisinc.platform.rest.services.items.ItemService" />
-  <service method="get" endpoint="carfix/listVehicles" class="com.simisinc.platform.rest.services.carfix.VehicleListService" />
+  <service method="get" endpoint="carfix/VehicleListService" class="com.simisinc.platform.rest.services.carfix.VehicleListService" />
   <service method="post" endpoint="carfix/CreateVehicleService" class="com.simisinc.platform.rest.services.carfix.CreateVehicleService" />
   <service method="post" endpoint="carfix/CreateRFSService" class="com.simisinc.platform.rest.services.carfix.CreateRFSService" />
   <service method="get" endpoint="carfix/RFSListService" class="com.simisinc.platform.rest.services.carfix.RFSListService" />

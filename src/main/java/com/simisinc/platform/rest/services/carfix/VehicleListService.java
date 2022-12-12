@@ -28,16 +28,24 @@ public class VehicleListService {
 
     public ServiceResponse get(ServiceContext context) {
 
-
         try {
-            VehicleListServiceRequest request = new ObjectMapper().readValue(context.getJsonRequest(), VehicleListServiceRequest.class);
+            String memberId = context.getParameter("memberId");
+            String vehicleId = context.getParameter("vehicleId");
+
+            if(memberId == null && vehicleId == null) {
+                LOG.error("Error in VehicleListService. No parameters set in request");
+                ServiceResponse response = new ServiceResponse(400);
+                response.getError().put("title", "memberId or vehicleId parameter must be set");
+                return response;
+            }
+
             VehicleSpecification specification = new VehicleSpecification();
 
             //set the memberId
-            if(null!= request.getMemberId()) {
-                specification.setMemberId(request.getMemberId());
-            } else if (null != request.getVehicleId()) {
-                specification.setVehicleId(request.getVehicleId());
+            if(null!= memberId) {
+                specification.setMemberId(memberId);
+            } else if (null != vehicleId) {
+                specification.setVehicleId(vehicleId);
             }
             List<Vehicle> vehiclesList = (List<Vehicle>) VehicleRepository.query(specification, null).getRecords();
 
@@ -51,13 +59,5 @@ public class VehicleListService {
             response.getError().put("title", e.getMessage());
             return response;
         }
-
     }
-
-}
-
-@Data
-class VehicleListServiceRequest {
-    private String memberId;
-    private String vehicleId;
 }

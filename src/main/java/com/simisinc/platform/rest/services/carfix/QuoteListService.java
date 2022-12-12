@@ -30,19 +30,27 @@ public class QuoteListService {
     public ServiceResponse get(ServiceContext context) {
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            QuoteListServiceRequest request = mapper.readValue(context.getJsonRequest(), QuoteListServiceRequest.class);
+           String quoteId = context.getParameter("quoteId");
+           String requestForServiceId = context.getParameter("requestForServiceId");
+           String serviceProviderId = context.getParameter("serviceProviderId");
+
+           if(quoteId == null && requestForServiceId == null && serviceProviderId == null) {
+               LOG.error("Error in QuoteListService. No parameters set in request");
+               ServiceResponse response = new ServiceResponse(400);
+               response.getError().put("title", "QuoteId , requestForServiceId or serviceProviderId parameter must be set");
+               return response;
+           }
             QuoteSpecification specification = new QuoteSpecification();
 
-            if(null != request.getQuoteId()) {
-                specification.setId(request.getQuoteId());
+            if(null != quoteId) {
+                specification.setId(quoteId);
             } else
 
-            if (null != request.getRequestForServiceId()) {
-                specification.setRequestForServiceId(request.getRequestForServiceId()); //TODO should change this to UUID
+            if (null != requestForServiceId) {
+                specification.setRequestForServiceId(requestForServiceId);
             } else
-            if (null != request.getServiceProviderId()) {
-                specification.setServiceProviderId(request.getServiceProviderId());
+            if (null != serviceProviderId) {
+                specification.setServiceProviderId(serviceProviderId);
             }
 
             List<Quote> quoteList = (List<Quote>) QuoteRepository.query(specification, null).getRecords();
@@ -60,10 +68,4 @@ public class QuoteListService {
     }
 }
 
-@Data
-class QuoteListServiceRequest {
-    String serviceProviderId;
-    String requestForServiceId;
-    String quoteId;
-}
 

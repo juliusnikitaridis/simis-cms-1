@@ -32,19 +32,27 @@ public class RFSListService {
 
 
         try {
+            final String memberId = context.getParameter("memberId");
+            final String vehicleId = context.getParameter("vehicleId");
+            final String serviceRequestId = context.getParameter("serviceRequestId");
 
-            ObjectMapper mapper = new ObjectMapper();
-            RFSListServiceRequest request = mapper.readValue(context.getJsonRequest(), RFSListServiceRequest.class);
+            if(memberId == null && vehicleId == null && serviceRequestId == null) {
+                LOG.error("Error in RFSListService. No parameters set in request");
+                ServiceResponse response = new ServiceResponse(400);
+                response.getError().put("title", "memberId,vehicleId or serviceRequestId parameter must be set");
+                return response;
+            }
+
             ServiceRequestSpecification specification = new ServiceRequestSpecification();
 
-            if(request.getMemberId()!= null) {
-                specification.setMemberId(request.getMemberId());
+            if(memberId!= null) {
+                specification.setMemberId(memberId);
             }
-            else if(request.getVehicleId()!= null) {
-                specification.setVehicleId(request.getVehicleId());
+            else if(vehicleId != null) {
+                specification.setVehicleId(vehicleId);
             }
-            else if(request.getServiceRequestId() != null) {
-                specification.setServiceRequestId(request.getServiceRequestId());
+            else if(serviceRequestId != null) {
+                specification.setServiceRequestId(serviceRequestId);
             } else {
                 //nothing to set in the specification
             }
@@ -62,13 +70,5 @@ public class RFSListService {
             return response;
         }
     }
-
 }
 
-
-@Data
-class RFSListServiceRequest {
-    String memberId;
-    String vehicleId;
-    String serviceRequestId;
-}

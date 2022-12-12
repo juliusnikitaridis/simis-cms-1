@@ -6,27 +6,17 @@ Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRm
 ###
 
 
-GET http://localhost:8080/api/carfix/listVehicles
+GET http://localhost:8080/api/carfix/VehicleListService?vehicleId=224d68f0-2629-430e-833e-215a54cb702c
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
-
-{
-  "vehicleId":"-3169830153767555591"
-}
 ###
 
 
 
 ##
-GET http://localhost:8080/api/carfix/listVehicles
+GET http://localhost:8080/api/carfix/VehicleListService?memberId=julius-niki
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
-
-{
-  "memberId":"julius-niki"
-}
 ###
 
 
@@ -74,36 +64,22 @@ Content-Type: application/json
 ###
 
 ###
-GET http://localhost:8080/api/carfix/RFSListService
+GET http://localhost:8080/api/carfix/RFSListService?memberId=334423
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
-
-{}
-
 ###
 
 ###
-GET http://localhost:8080/api/carfix/RFSListService
+GET http://localhost:8080/api/carfix/RFSListService?vehicleId=4333e
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
+###
 
-{
-  "vehicleId": "4333e"
-}
 
 ###
-###
-GET http://localhost:8080/api/carfix/RFSListService
+GET http://localhost:8080/api/carfix/RFSListService?serviceRequestId=303a67af-f8da-4030-9144-90c56bfc3caf
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
-
-{
-  "memberId": "334423"
-}
-
 ###
 
 
@@ -171,46 +147,28 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/carfix/QuoteListService
+GET http://localhost:8080/api/carfix/QuoteListService?serviceProviderId=234234543
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 Content-Type: application/json
-
-{
-  "serviceProviderId": "234234543"
-}
-
 ###
 
 
 ###
-GET http://localhost:8080/api/carfix/QuoteListService
+GET http://localhost:8080/api/carfix/QuoteListService?requestForServiceId=2343243254
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 Content-Type: application/json
-
-{
-  "requestForServiceId": "2343243254"
-}
-
 ###
 
-GET http://localhost:8080/api/carfix/QuoteListService
+GET http://localhost:8080/api/carfix/QuoteListService?quoteId=81e1e347-50f3-41e8-8be1-31774cddf0e0
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
-
-{
-  "quoteId": "81e1e347-50f3-41e8-8be1-31774cddf0e0"
-}
-
 ###
 
 GET http://localhost:8080/api/carfix/ServiceRequestOptionsListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
-
 ###
 
 
