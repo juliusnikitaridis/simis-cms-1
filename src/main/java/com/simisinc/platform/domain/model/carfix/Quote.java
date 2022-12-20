@@ -24,7 +24,7 @@ public class Quote extends Entity {
     private String QuotationTotal;
     private QuoteItem[] quotationItems;
     private String date;
-    private String total;
+    private String serviceProviderName;
 
 
 }

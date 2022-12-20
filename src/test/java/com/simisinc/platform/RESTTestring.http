@@ -111,7 +111,8 @@ Content-Type: application/json
   "date":"12-12-2022",
   "requestForServiceId":"2343243254",
   "serviceProviderId":"234234543",
-  "total": "5000.00",
+  "quotationTotal": "5000.00",
+  "serviceProviderName": "serviceProviderName1",
   "quotationItems":[
     {
       "id":"34234234",

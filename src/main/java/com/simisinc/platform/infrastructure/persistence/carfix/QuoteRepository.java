@@ -53,6 +53,7 @@ public class QuoteRepository {
                 .add("id", record.getId())
                 .add("request_for_service_id", record.getRequestForServiceId())
                 .add("service_provider_id", record.getServiceProviderId())
+                .add("service_provider_name",record.getServiceProviderName())
                 .add("date",record.getDate())
                 .add("total",record.getQuotationTotal());
         try {
@@ -107,6 +108,7 @@ public class QuoteRepository {
             request.setId(rs.getString("id"));
             request.setRequestForServiceId(rs.getString("request_for_service_id"));
             request.setServiceProviderId(rs.getString("service_provider_id"));
+            request.setServiceProviderName(rs.getString("service_provider_name"));
             request.setDate(rs.getString("date"));
             request.setQuotationTotal(rs.getString("total"));
             return request;
