@@ -258,7 +258,8 @@ public class UserRepository {
         .add("account_token", record.getAccountToken())
         .addIfExists("created", record.getCreated())
         .add("created_by", record.getCreatedBy(), -1)
-            .add("id_number",StringUtils.trimToNull(record.getIdnum()));
+        .add("validated",record.getValidated())
+        .add("id_number",StringUtils.trimToNull(record.getIdnum()));
     if (record.hasGeoPoint()) {
       insertValues.add("latitude", record.getLatitude());
       insertValues.add("longitude", record.getLongitude());
@@ -450,6 +451,7 @@ public class UserRepository {
       User record = new User();
       record.setId(rs.getLong("user_id"));
       record.setUniqueId(rs.getString("unique_id"));
+      record.setUserType(rs.getString("user_type"));
       record.setFirstName(rs.getString("first_name"));
       record.setLastName(rs.getString("last_name"));
       record.setOrganization(rs.getString("organization"));

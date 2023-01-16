@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 /**
  * Julius Nikitaridis
  * class that will represent a quote from service providers
@@ -22,10 +24,9 @@ public class Quote extends Entity {
     private String requestForServiceId;
     private String serviceProviderId;
     private String QuotationTotal;
-    private QuoteItem[] quotationItems;
+    private ArrayList<QuoteItem> quotationItems;
     private String date;
     private String serviceProviderName;
-
 
 }
 

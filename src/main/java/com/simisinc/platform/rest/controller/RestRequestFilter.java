@@ -339,6 +339,7 @@ public class RestRequestFilter implements Filter {
         "\"first_name\":\"" + JsonCommand.toJson(user.getFirstName()) + "\",\n" +
         "\"last_name\":\"" + JsonCommand.toJson(user.getLastName()) + "\",\n" +
         "\"unique_id\":\"" + JsonCommand.toJson(user.getUniqueId()) + "\",\n" +
+        "\"user_type\":\"" + JsonCommand.toJson(user.getUserType()) + "\",\n" +
         "\"scope\":\"create\"\n" +
         "}";
     response.setContentType("application/json");

@@ -40,6 +40,8 @@ public class User extends Entity {
 
 
   private  String Idnum =null;
+  private String groupId = null;
+  private String roleId = null;
   private String organization = null;
   private String department = null;
   private String nickname = null;
@@ -66,8 +68,34 @@ public class User extends Entity {
   private List<Role> roleList = null;
   private List<Group> groupList = null;
   private UserLogin lastLogin = null;
+  private String userType = null;
+
 
   public User() {
+  }
+
+  public String getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(String groupId) {
+    this.groupId = groupId;
+  }
+
+  public String getRoleId() {
+    return roleId;
+  }
+
+  public void setRoleId(String roleId) {
+    this.roleId = roleId;
+  }
+
+  public String getUserType() {
+    return userType;
+  }
+
+  public void setUserType(String userType) {
+    this.userType = userType;
   }
 
   public String getIdnum() {

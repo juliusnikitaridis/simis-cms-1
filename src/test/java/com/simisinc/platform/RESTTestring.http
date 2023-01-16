@@ -45,7 +45,7 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/carfix/CreateRFSService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Authorization:Bearer API-a9a46150-a2a0-425a-9a9c-317e2ed3f2121
 Content-Type: application/json
 
 {
@@ -84,18 +84,19 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 
 
 POST http://localhost:8080/api/carfix/RegisterMemberService
-X-API-Key:03655c9a-ca14-4496-bffa-dad1a63f9849
-Authorization: Bearer API-a23d6962-c337-4f4c-ac4f-73ff0837f4cc1
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 Content-Type: application/json
 
 {
 "uniqueId":"23141",
 "firstName":"Test",
 "lastName":"T",
-"email":"r@2",
-"username":"r@2",
+"email":"julius3@test.com",
+"username":"julius3@test.com",
 "idnum": "1996",
-"password": "qwerty"
+"roleId": "5",
+"userType": "MEMBER"
 }
 ###
 
@@ -150,21 +151,20 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/carfix/QuoteListService?serviceProviderId=234234543
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
-Content-Type: application/json
+Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 ###
 
 
 ###
 GET http://localhost:8080/api/carfix/QuoteListService?requestForServiceId=2343243254
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
 Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/carfix/QuoteListService?quoteId=81e1e347-50f3-41e8-8be1-31774cddf0e0
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
 ###
 
 GET http://localhost:8080/api/carfix/ServiceRequestOptionsListService

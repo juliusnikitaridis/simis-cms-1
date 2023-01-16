@@ -75,13 +75,8 @@ Content-Type: application/json
 
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/QuoteListService
+GET https://carfix.connectmobiles24.com/api/carfix/QuoteListService?serviceProviderId=234234543
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
-Authorization: Bearer API-81b09a03-9dca-4a27-8df8-01d545c344af5
-Content-Type: application/json
-
-{
-  "serviceProviderId": "234234543"
-}
+Authorization: Bearer API-c7b60543-654c-4a28-b773-1acc5c492ab25
 
 ###

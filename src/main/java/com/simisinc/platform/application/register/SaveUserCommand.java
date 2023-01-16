@@ -95,7 +95,12 @@ public class SaveUserCommand {
       if (UserRepository.findByUsername(userBean.getEmail()) != null) {
         throw new AccountException("Information could not be saved. There is an account with this email address already.");
       }
-      user.setPassword("new");
+      if(userBean.getPassword() == null) { //for testing , allow the password to be set account validated without the verification process
+        user.setPassword("new");
+      } else {
+        user.setPassword(userBean.getPassword());
+      }
+      user.setValidated(userBean.getValidated()); //todo remove me
       user.setCreatedBy(userBean.getCreatedBy());
       user.setCreated(userBean.getCreated());
     }

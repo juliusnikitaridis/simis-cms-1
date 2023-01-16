@@ -5,14 +5,14 @@ import com.simisinc.platform.domain.model.carfix.QuoteItem;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
 import com.simisinc.platform.infrastructure.database.*;
+import lombok.SneakyThrows;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * Julius Nikitaridis
@@ -101,19 +101,46 @@ public class QuoteRepository {
     }
 
 
-    private static Quote buildRecord(ResultSet rs) {
 
-        Quote request = new Quote();
+
+    private static Quote buildRecord(ResultSet rs)  {
+
+        Quote quote = new Quote();
         try {
-            request.setId(rs.getString("id"));
-            request.setRequestForServiceId(rs.getString("request_for_service_id"));
-            request.setServiceProviderId(rs.getString("service_provider_id"));
-            request.setServiceProviderName(rs.getString("service_provider_name"));
-            request.setDate(rs.getString("date"));
-            request.setQuotationTotal(rs.getString("total"));
-            return request;
-        } catch (Exception e) {
-            LOG.error("exception when building record for Quote" + e.getMessage());
+            quote.setId(rs.getString("id"));
+            quote.setRequestForServiceId(rs.getString("request_for_service_id"));
+            quote.setServiceProviderId(rs.getString("service_provider_id"));
+            quote.setServiceProviderName(rs.getString("service_provider_name"));
+            quote.setDate(rs.getString("date"));
+            quote.setQuotationTotal(rs.getString("total"));
+
+            //get the line items for this record
+            SqlUtils select = new SqlUtils();
+            SqlUtils where = new SqlUtils();
+
+            where.add("quote_id = ?",rs.getString("id"));
+            ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, QuoteRepository::buildRecordQuoteItem)).getRecords();
+            quote.setQuotationItems(quoteItems);
+            return quote;
+        } catch (Exception throwables) {
+            LOG.error("exception when building quote item record");
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+
+    private static QuoteItem buildRecordQuoteItem(ResultSet rs) {
+        QuoteItem item = new QuoteItem();
+        try {
+            item.setId(rs.getString("id"));
+            item.setItemTotalPrice(rs.getString("item_total_price"));
+            item.setPartDescription("part_description");
+            item.setQuoteId("quote_id");
+            return item;
+        } catch (Exception throwables) {
+            LOG.error("Error when building quotetation item ",throwables);
+            throwables.printStackTrace();
             return null;
         }
     }
