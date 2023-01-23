@@ -172,6 +172,17 @@ X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 ###
 
+POST http://localhost:8080/api/carfix/AcceptQuoteService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-3f4f5866-3f7a-443b-94d7-29f2c6d032a11
+Content-Type: application/json
+
+{
+  "serviceRequestId": "303a67af-f8da-4030-9144-90c56bfc3caf",
+  "acceptedQuoteId": "bbe4c739-9745-4243-8d7f-475fc5045722",
+  "confirmedServiceProviderId":"bbf4c739-9745-4243-8d7f-475fc5045726"
+}
+
 
 
 

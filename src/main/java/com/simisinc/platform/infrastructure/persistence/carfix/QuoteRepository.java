@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -143,6 +144,45 @@ public class QuoteRepository {
             throwables.printStackTrace();
             return null;
         }
+    }
+
+    //update quote status once it has been accepted by the member
+    public static void updateQuoteStatus(String quoteId, String status, Connection conn) throws Exception {
+        String sql = "update carfix.quote set status = ? where id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,status);
+        pstmt.setString(2,quoteId);
+        pstmt.execute();
+    }
+
+
+    //updaete service request status once a quote has been accepted
+    public static void updateServiceRequestStatus(String serviceRequestId, Connection conn, String status) throws Exception {
+        String sql = "update carfix.service_request set status = ? where id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,status);
+        pstmt.setString(2,serviceRequestId);
+        pstmt.execute();
+    }
+
+
+    //insert the quoteId of the accepted quote into the service request table
+    public static void updateServiceRequestAcceptedQuoteId(String acceptedQuoteId, String serviceRequestId, Connection conn) throws Exception {
+        String sql = "update carfix.service_request set accepted_quote_id = ? where id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,acceptedQuoteId);
+        pstmt.setString(2,serviceRequestId);
+        pstmt.execute();
+    }
+
+
+    //need to update which service providers quote has been accepted for this service request
+    public static void updateAcceptedServiceProviderId(String acceptedServiceProviderId, String serviceRequestId,Connection conn) throws Exception {
+        String sql = "update carfix.service_request set confirmed_service_provider_id = ? where id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,acceptedServiceProviderId);
+        pstmt.setString(2,serviceRequestId);
+        pstmt.execute();
     }
 }
 
