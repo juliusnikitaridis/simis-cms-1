@@ -1,5 +1,6 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
+import com.simisinc.platform.domain.model.Entity;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
 import com.simisinc.platform.domain.model.carfix.ServiceRequestItemOption;
@@ -7,7 +8,10 @@ import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -123,9 +127,33 @@ public class ServiceRequestRepository {
             request.setPictureData(rs.getString("picture_data"));
             request.setAdditionalDescription(rs.getString("additional_description"));
             request.setLastServiceDate(rs.getString("last_service_date"));
+            request.setConfirmedServiceProvider(rs.getString("confirmed_service_provider_id"));
+            request.setAcceptedQuoteId(rs.getString("accepted_quote_id"));
+
+            //now also need to get all the service request items
+            ArrayList<ServiceRequestItem> serviceRequestItems = (ArrayList<ServiceRequestItem>) DB.selectAllFrom(TABLE_NAME_ITEMS,new SqlUtils(),new SqlUtils().add("service_request_id = ?",rs.getString("id")),null,null,ServiceRequestRepository::buildRecordServiceRequestItems).getRecords();
+            request.setServiceRequestItems(serviceRequestItems);
             return request;
         } catch (Exception e) {
             LOG.error("exception when building record for ServiceRequest" + e.getMessage());
+            return null;
+        }
+    }
+
+
+
+    private static ServiceRequestItem buildRecordServiceRequestItems(ResultSet resultSet) {
+        ServiceRequestItem serviceRequestItem = new ServiceRequestItem();
+        try {
+            serviceRequestItem.setId(resultSet.getString("id"));
+            serviceRequestItem.setServiceRequestOptionId(resultSet.getString("service_request_option_id"));
+            ///get the info from the service_request_items_options table to avoid the additional calls
+            ServiceRequestItemOption option = (ServiceRequestItemOption) DB.selectRecordFrom("carfix.service_request_items_options",new SqlUtils().add("id = ?", resultSet.getString("service_request_option_id")),ServiceRequestRepository::buildRecordItemsOption);
+            serviceRequestItem.setServiceRequestItemOptionCategory(option.getCategory());
+            serviceRequestItem.setServiceRequestItemOptionDescription(option.getDescription());
+            return serviceRequestItem;
+        } catch (SQLException throwables) {
+            LOG.error("exception when building record for buildRecordServiceRequestItems");
             return null;
         }
     }
@@ -141,6 +169,22 @@ public class ServiceRequestRepository {
         } catch (Exception e) {
             LOG.error("exception when building item option");
             return null;
+        }
+    }
+
+
+    //method to update the status
+    public static void updateStatus(String status, String serviceRequestId, Connection conn) {
+        String sql = "update carfix.service_request set status = ? where id = ?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,status);
+            pstmt.setString(2,serviceRequestId);
+            pstmt.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            LOG.error("error when updating service request status");
         }
     }
 }

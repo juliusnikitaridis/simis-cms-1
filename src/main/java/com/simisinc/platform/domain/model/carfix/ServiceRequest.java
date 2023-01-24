@@ -3,6 +3,8 @@ package com.simisinc.platform.domain.model.carfix;
 import com.simisinc.platform.domain.model.Entity;
 import lombok.*;
 
+import java.util.ArrayList;
+
 /**
  * Julius Nikitaridis
  * This will represent the service requests that are lodged by members of the platform. There can
@@ -25,7 +27,9 @@ public class ServiceRequest extends Entity {
     private String pictureData;
     private String lastServiceDate;
     private String additionalDescription;
-    private ServiceRequestItem[] serviceRequestItems;
+    private ArrayList<ServiceRequestItem> serviceRequestItems;
+    private String confirmedServiceProvider;
+    private String acceptedQuoteId;
 }
 
 

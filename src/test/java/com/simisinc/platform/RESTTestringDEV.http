@@ -80,3 +80,23 @@ X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization: Bearer API-c7b60543-654c-4a28-b773-1acc5c492ab25
 
 ###
+
+
+POST https://carfix.connectmobiles24.com/api/carfix/AcceptQuoteService
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-ec51cb2c-3b31-4f83-ab7d-5ffbbc2b40e55
+Content-Type: application/json
+
+{
+  "serviceRequestId": "303a67af-f8da-4030-9144 -90c56bfc3caf",
+  "acceptedQuoteId": "bbe4c739-9745-4243-8d7f-475fc5045722",
+  "confirmedServiceProviderId":"bbf4c739-9745-4243-8d7f-475fc5045726"
+}
+
+
+###
+GET http://localhost:8080/api/carfix/RFSListService?memberId=334423
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-3f4f5866-3f7a-443b-94d7-29f2c6d032a11
+###
+

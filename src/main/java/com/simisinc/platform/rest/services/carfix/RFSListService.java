@@ -64,7 +64,7 @@ public class RFSListService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in CreateRFSService", e);
+            LOG.error("Error in RFSListService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;

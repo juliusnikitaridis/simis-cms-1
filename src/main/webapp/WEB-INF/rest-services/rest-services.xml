@@ -34,5 +34,6 @@
   <service method="post" endpoint="carfix/RegisterServiceProviderService" class="com.simisinc.platform.rest.services.carfix.RegisterServiceProviderService"/>
   <service method="post" endpoint="carfix/RegisterMemberService" class="com.simisinc.platform.rest.services.carfix.RegisterMemberService"/>
   <service method="post" endpoint="carfix/AcceptQuoteService" class="com.simisinc.platform.rest.services.carfix.AcceptQuoteService"/>
+  <service method="post" endpoint="carfix/UpdateServiceRequestStatusService" class="com.simisinc.platform.rest.services.carfix.UpdateServiceRequestStatusService"/>
 
 </services>
