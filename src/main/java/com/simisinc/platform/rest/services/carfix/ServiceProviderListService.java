@@ -3,10 +3,12 @@ package com.simisinc.platform.rest.services.carfix;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.infrastructure.database.DataResult;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderSpecification;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import lombok.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +32,10 @@ public class ServiceProviderListService {
 
 
         try {
-            ServiceRequestSpecification specification = new ServiceRequestSpecification();
+            ServiceProviderSpecification specification = new ServiceProviderSpecification();
+            if(context.getParameter("id") != null) {
+                specification.setServiceProviderId(context.getParameter("id"));
+            }
 
             DataResult result = ServiceProviderRepository.query(specification,null);
             List<ServiceRequest> serviceRequestList = (List<ServiceRequest>) result.getRecords();
@@ -47,4 +52,6 @@ public class ServiceProviderListService {
         }
     }
 }
+
+
 

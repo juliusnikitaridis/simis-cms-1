@@ -37,10 +37,12 @@ public class ServiceProviderRepository {
     }
 
     //get all the service providers
-    public static DataResult query(ServiceRequestSpecification specification, DataConstraints constraints) {
+    public static DataResult query(ServiceProviderSpecification specification, DataConstraints constraints) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
+
+        where.addIfExists("id = ?",specification.getServiceProviderId());
 
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, ServiceProviderRepository::buildRecord);
@@ -56,6 +58,8 @@ public class ServiceProviderRepository {
             serviceProvider.setServices(rs.getString("services"));
             serviceProvider.setAboutUs(rs.getString("about_us"));
             serviceProvider.setAddress(rs.getString("address"));
+            serviceProvider.setId(rs.getString("id"));
+            serviceProvider.setLogoData(rs.getString("logo_data"));
             return serviceProvider;
         } catch (SQLException throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());

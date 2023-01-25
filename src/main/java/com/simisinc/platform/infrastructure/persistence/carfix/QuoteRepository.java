@@ -39,6 +39,7 @@ public class QuoteRepository {
                     .add("quote_id",quote.getId())
                     .add("part_number",quoteItem.getPartNumber())
                     .add("part_description",quoteItem.getPartDescription())
+                    .add("quantity")
                     .add("item_total_price",quoteItem.getItemTotalPrice());
 
             AutoStartTransaction a = new AutoStartTransaction(connection);
