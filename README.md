@@ -11,7 +11,7 @@ SimIS CMS comes out-of-the-box with modules, advanced security, easy setup, and 
 ## License
 
 ```
-Copyright 2022 SimIS Inc. (https://www.simiscms.com)
+Copyright 2023 SimIS Inc. (https://www.simiscms.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -121,6 +121,8 @@ The build process places the .war in the target/ directory, or the release file 
 CMS_ADMIN_USERNAME=
 CMS_ADMIN_PASSWORD=
 CMS_FORCE_SSL=true|false
+DB_SERVER_NAME=
+DB_NAME=
 DB_USER=
 DB_PASSWORD=
 ```
@@ -181,8 +183,8 @@ For development, it is recommended to run and debug directly as a process in you
 ```bash
 npm install -g snyk
 snyk auth
-snyk test --file=mvn-pom.xml --package-manager=maven
-snyk monitor --file=mvn-pom.xml --package-manager=maven
+snyk test --all-projects
+snyk monitor --all-projects
 ```
 
 ### Pipeline Build Stage
@@ -191,7 +193,7 @@ snyk monitor --file=mvn-pom.xml --package-manager=maven
 ant compile
 ```
 
-## Pipeline Unit Tests
+### Pipeline Unit Tests
 
 ```bash
 ant test
@@ -233,7 +235,6 @@ In SimIS CMS:
 
 ```sql
 UPDATE site_properties SET property_value = 'true' WHERE property_name = 'oauth.enabled';
-
 UPDATE site_properties SET property_value = 'Keycloak' WHERE property_name = 'oauth.provider';
 UPDATE site_properties SET property_value = 'simis-cms' WHERE property_name = 'oauth.clientId';
 UPDATE site_properties SET property_value = 'client-secret' WHERE property_name = 'oauth.clientSecret';
@@ -254,6 +255,86 @@ UPDATE groups SET oauth_path = '/instructors' WHERE unique_id = 'instructors';
 
 Reset the cache
 
+## API
+
+SimIS CMS includes an extendable api for user-based access and server-2-server capabilities.
+
+### User-Based JSON API
+
+1. Create an app client in Admin, note the app id and secret key.
+2. Make sure the API is enabled in Site Settings
+3. Optionally log the user in and obtain a 'token' for future calls:
+   * POST
+   * DIGEST AUTHENTICATION
+   * REQUEST HEADER (X-API-Key)
+4. If a user login is not required, then default access will be demoted to a Guest User
+5. Make API calls:
+   * GET/POST/PUT/DELETE
+   * BEARER TOKEN (optional)
+   * REQUEST HEADER (X-API-Key) or URL PARAMETER (key=) for api key
+
+In your application, have the user supply their CMS username and password, then request authorization:
+
+```bash
+http -a username:password POST http://localhost:8080/api/oauth2/authorize X-API-Key:<secret_key>
+```
+
+When authorization is obtained, the response will include an access token to use.
+
+```json
+{
+  "access_token": "you-receive-this",
+  "expires_in": 2592000,
+  "first_name": "First", "last_name": "Last", "name": "First Last",
+  "scope": "create", "token_type": "bearer"
+}
+```
+
+Now calls can be made with the access token:
+
+```bash
+http -A bearer -a <access_token> GET http://localhost:8080/api/me X-API-Key:<secret_key>
+```
+
+```bash
+http -A bearer -a <access_token> GET http://localhost:8080/api/me?key=<secret_key>
+```
+Calls without a user:
+
+```bash
+http GET http://localhost:8080/api/me?key=<secret_key>
+```
+
+## Customization
+
+* Content
+* CSS
+* Documents
+* Images
+* Layouts (header, footer)
+* Setup
+  * Blogs
+  * Calendars
+  * Collections
+  * Datasets
+  * Settings
+  * Site Maps
+  * User Groups
+* Templates
+* Videos
+* Web Pages
+
+## Development
+
+* Application Widgets
+* REST Services
+* Domain Model
+* Database
+* Cache
+* Permissions
+* Scheduled Tasks
+* Workflows
+
 ## Attribution
 
 Thank you to all those who have helped make SimIS CMS!
@@ -265,7 +346,9 @@ This project uses and licenses several technologies:
 
    Apache Commons              Apache   Utilities                                         https://commons.apache.org
    Argon2                      LGPL     Password hashing                                  https://github.com/phxql/argon2-jvm
+   Bucket4J                    Apache   Rate limiting                                     https://github.com/bucket4j/bucket4j
    Caffeine                    Apache   High performance cache                            https://github.com/ben-manes/caffeine
+   ClassGraph                  MIT      Module scanner                                    https://github.com/classgraph/classgraph
    Easy Flows Playbooks EditionMIT      Workflow engine                                   https://github.com/rajkowski/easy-flows
    FlexMark                    BSD2     Markdown parsing                                  https://github.com/vsch/flexmark-java
    Flyway                      Apache   Database scripts install and upgrade tracking     https://github.com/flyway/flyway
@@ -279,12 +362,14 @@ This project uses and licenses several technologies:
    Jackson Core Utils          LGPL     Json Parser Utility                               https://github.com/fge/jackson-coreutils
    JavaMail                    CDDL     Mail library                                      https://javaee.github.io/javamail/
    Jobrunr                     LGPL     Job scheduler                                     https://github.com/jobrunr/jobrunr
-   Johnzon                     Apache   Json Processing                                   https://johnzon.apache.org
+   Johnzon                     Apache   Json processing                                   https://johnzon.apache.org
+   JSON Schema Validator       Apache   JSON schema validator                             https://github.com/networknt/json-schema-validator
    JSoup                       MIT      HTML cleansing                                    https://github.com/jhy/jsoup/
-   JUnit5                      Apache   Unit testing framework                            https://junit.org/junit5/
+   JSTL                        Eclipse  Servlet tag library                               https://github.com/eclipse-ee4j/jstl-api
    libphonenumber              Apache   Phone number validation                           https://github.com/google/libphonenumber
    PostgreSQL                  BSD      Database driver                                   https://jdbc.postgresql.org
    Pushy                       MIT      Push notifications                                https://github.com/relayrides/pushy
+   RabbitMQ                    Apache   RabbitMQ java client library                      https://www.rabbitmq.com/java-client.html
    RestFB                      MIT      Facebook Graph API client                         https://github.com/restfb/restfb
    ROME                        Apache   RSS                                               https://github.com/rometools/rome
    SLF4j                       MIT      Logger                                            https://github.com/qos-ch/slf4j
@@ -324,6 +409,14 @@ This project uses and licenses several technologies:
    TinyMCE                     LGPL     HTML editor                                       https://github.com/tinymce/tinymce
    TinyMCE-FontAwesome-Plugin  MIT      Icon chooser                                      https://github.com/josh18/TinyMCE-FontAwesome-Plugin
 
+ Testing:
+ 
+   JUnit5                      Apache   Unit testing framework                            https://github.com/junit-team/junit5
+   Jacoco                      Eclipse  Code coverage                                     https://github.com/jacoco/jacoco
+   MeanBean                    Apache   JavaBean testing                                  https://github.com/meanbeanlib/meanbean
+   Mockito                     MIT      Mocking framework                                 https://github.com/mockito/mockito
+   Testcontainers              MIT      Containers library for tests                      https://github.com/testcontainers/testcontainers-java
+
  Data:
 
    Avalara                     CC       US sales tax rate tables                          https://www.avalara.com/taxrates/en/download-tax-tables.html
@@ -332,7 +425,7 @@ This project uses and licenses several technologies:
    Simple Maps                 CC       City, country, Lat, Long                          https://simplemaps.com/data/world-cities
    Zip Codes                   Attrib.  Zip codes                                         http://federalgovernmentzipcodes.us/
 
- Services:
+ Optional Services:
 
    Boxzooka                    Shipping/Fulfillment                                       https://boxzooka.com
    Google Analytics            Analytics                                                  https://marketingplatform.google.com/about/analytics/

@@ -16,13 +16,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="html" uri="/WEB-INF/html-functions.tld" %>
-<%@ taglib prefix="product" uri="/WEB-INF/product-functions.tld" %>
+<%@ taglib prefix="html" uri="/WEB-INF/tlds/html-functions.tld" %>
+<%@ taglib prefix="product" uri="/WEB-INF/tlds/product-functions.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="product" class="com.simisinc.platform.domain.model.ecommerce.Product" scope="request"/>
 <jsp:useBean id="fulfillmentOptionList" class="java.util.ArrayList" scope="request"/>
-<script src="${ctx}/javascript/tinymce-6.1.2/tinymce.min.js"></script>
+<script src="${ctx}/javascript/tinymce-6.3.1/tinymce.min.js"></script>
 <script>
   tinymce.init({
     selector: 'textarea',

@@ -15,18 +15,18 @@
   --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="js" uri="/WEB-INF/javascript-escape.tld" %>
+<%@ taglib prefix="js" uri="/WEB-INF/tlds/javascript-escape.tld" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="mapCredentials" class="com.simisinc.platform.domain.model.maps.MapCredentials" scope="request"/>
 <jsp:useBean id="mapHeight" class="java.lang.String" scope="request"/>
 <%-- Leaflet JS + Marker Cluster --%>
-<link rel="stylesheet" href="${ctx}/css/leaflet-1.6.0/leaflet.css" />
-<link rel="stylesheet" href="${ctx}/css/leaflet-markercluster-1.4.1/MarkerCluster.css" />
-<link rel="stylesheet" href="${ctx}/css/leaflet-markercluster-1.4.1/MarkerCluster.Default.css" />
-<script src="${ctx}/javascript/leaflet-1.6.0/leaflet.js"></script>
-<script src="${ctx}/javascript/leaflet-markercluster-1.4.1/leaflet.markercluster.js"></script>
+<link rel="stylesheet" href="${ctx}/javascript/leaflet-1.9.3/leaflet.css" />
+<link rel="stylesheet" href="${ctx}/javascript/leaflet.markercluster-1.5.3/MarkerCluster.css" />
+<link rel="stylesheet" href="${ctx}/javascript/leaflet.markercluster-1.5.3/MarkerCluster.Default.css" />
+<script src="${ctx}/javascript/leaflet-1.9.3/leaflet.js"></script>
+<script src="${ctx}/javascript/leaflet.markercluster-1.5.3/leaflet.markercluster.js"></script>
 <%-- Render the widget --%>
 <c:if test="${!empty title}">
   <h4><c:if test="${!empty icon}"><i class="fa ${icon}"></i> </c:if><c:out value="${title}" /></h4>

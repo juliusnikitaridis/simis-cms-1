@@ -2,13 +2,15 @@
     "java.project.referencedLibraries": [
         "lib/build/**/*.jar",
         "lib/compile/**/*.jar",
+        "lib/style/**/*.jar",
         "lib/tests/**/*.jar",
         "lib/war/**/*.jar",
         "lib/**/*.jar"
     ],
     "java.dependency.syncWithFolderExplorer": true,
     "cSpell.words": [
-        "Servlet"
+        "Servlet",
+        "tlds"
     ],
     "java.test.defaultConfig": "webConfig",
     "java.test.config": [
@@ -25,5 +27,6 @@
         "src/main/java",
         "src/test/java"
     ],
-    "snyk.advanced.additionalParameters": "--file=mvn-pom.xml --package-manager=maven"
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

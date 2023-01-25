@@ -82,7 +82,7 @@ public class WebRequestFilter implements Filter {
 
   public void init(FilterConfig config) throws ServletException {
     LOG.info("WebRequestFilter starting up...");
-    String startupSuccessful = (String) config.getServletContext().getAttribute("STARTUP_SUCCESSFUL");
+    String startupSuccessful = (String) config.getServletContext().getAttribute(ContextConstants.STARTUP_SUCCESSFUL);
     if (!"true".equals(startupSuccessful)) {
       throw new ServletException("Startup failed due to previous error");
     }
@@ -514,13 +514,13 @@ public class WebRequestFilter implements Filter {
   private void do301(ServletResponse servletResponse, String redirectLocation) throws IOException {
     HttpServletResponse response = (HttpServletResponse) servletResponse;
     response.setHeader("Location", redirectLocation);
-    response.sendError(SC_MOVED_PERMANENTLY);
+    response.setStatus(SC_MOVED_PERMANENTLY);
   }
 
   private void do302(ServletResponse servletResponse, String redirectLocation) throws IOException {
     HttpServletResponse response = (HttpServletResponse) servletResponse;
     response.setHeader("Location", redirectLocation);
-    response.sendError(SC_MOVED_TEMPORARILY);
+    response.setStatus(SC_MOVED_TEMPORARILY);
   }
 
   private void do401(ServletResponse servletResponse) throws IOException {

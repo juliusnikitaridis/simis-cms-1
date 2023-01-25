@@ -15,17 +15,17 @@
   --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="js" uri="/WEB-INF/javascript-escape.tld" %>
-<%@ taglib prefix="url" uri="/WEB-INF/url-functions.tld" %>
+<%@ taglib prefix="js" uri="/WEB-INF/tlds/javascript-escape.tld" %>
+<%@ taglib prefix="url" uri="/WEB-INF/tlds/url-functions.tld" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="dataset" class="com.simisinc.platform.domain.model.datasets.Dataset" scope="request"/>
 <jsp:useBean id="sampleRows" class="java.util.ArrayList" scope="request"/>
-<script src="${ctx}/javascript/jspreadsheet-4.10.1/jspreadsheet.min.js"></script>
-<link rel="stylesheet" media="screen" href="${ctx}/javascript/jspreadsheet-4.10.1/jspreadsheet.css">
-<script src="${ctx}/javascript/jsuites-4.9.11/jsuites.min.js"></script>
-<link rel="stylesheet" media="screen" href="${ctx}/javascript/jsuites-4.9.11/jsuites.css">
+<script src="${ctx}/javascript/jspreadsheet-4.11.1/jspreadsheet.min.js"></script>
+<link rel="stylesheet" media="screen" href="${ctx}/javascript/jspreadsheet-4.11.1/jspreadsheet.css">
+<script src="${ctx}/javascript/jsuites-4.17.5/jsuites.min.js"></script>
+<link rel="stylesheet" media="screen" href="${ctx}/javascript/jsuites-4.17.5/jsuites.css">
 <c:if test="${!empty title}">
   <h4><c:if test="${!empty icon}"><i class="fa ${icon}"></i> </c:if><c:out value="${title}"/></h4>
 </c:if>

@@ -17,9 +17,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="url" uri="/WEB-INF/url-functions.tld" %>
-<%@ taglib prefix="text" uri="/WEB-INF/text-functions.tld" %>
-<%@ taglib prefix="product" uri="/WEB-INF/product-functions.tld" %>
+<%@ taglib prefix="url" uri="/WEB-INF/tlds/url-functions.tld" %>
+<%@ taglib prefix="text" uri="/WEB-INF/tlds/text-functions.tld" %>
+<%@ taglib prefix="product" uri="/WEB-INF/tlds/product-functions.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="cart" class="com.simisinc.platform.domain.model.ecommerce.Cart" scope="request"/>
@@ -28,7 +28,7 @@
 <jsp:useBean id="priceChangeList" class="java.util.ArrayList" scope="request"/>
 <jsp:useBean id="noLongerAvailableList" class="java.util.ArrayList" scope="request"/>
 <link rel="stylesheet" href="${ctx}/css/platform-ecommerce.css?v=<%= VERSION %>"/>
-<script type="text/javascript" src="${ctx}/javascript/jquery-format-currency-1.4.0/jquery.formatCurrency-1.4.0.min.js"></script>
+<script type="text/javascript" src="${ctx}/javascript/jquery-formatcurrency-1.6.3/jquery.formatCurrency.min.js"></script>
 <span class="help-text float-right">
   <a href="${ctx}/cart">Edit</a>
 </span>

@@ -16,14 +16,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="js" uri="/WEB-INF/javascript-escape.tld" %>
-<%@ taglib prefix="user" uri="/WEB-INF/user-functions.tld" %>
-<%@ taglib prefix="group" uri="/WEB-INF/group-functions.tld" %>
-<%@ taglib prefix="folderCategory" uri="/WEB-INF/folder-category-functions.tld" %>
-<%@ taglib prefix="text" uri="/WEB-INF/text-functions.tld" %>
-<%@ taglib prefix="url" uri="/WEB-INF/url-functions.tld" %>
-<%@ taglib prefix="date" uri="/WEB-INF/date-functions.tld" %>
-<%@ taglib prefix="number" uri="/WEB-INF/number-functions.tld" %>
+<%@ taglib prefix="js" uri="/WEB-INF/tlds/javascript-escape.tld" %>
+<%@ taglib prefix="user" uri="/WEB-INF/tlds/user-functions.tld" %>
+<%@ taglib prefix="group" uri="/WEB-INF/tlds/group-functions.tld" %>
+<%@ taglib prefix="folderCategory" uri="/WEB-INF/tlds/folder-category-functions.tld" %>
+<%@ taglib prefix="text" uri="/WEB-INF/tlds/text-functions.tld" %>
+<%@ taglib prefix="url" uri="/WEB-INF/tlds/url-functions.tld" %>
+<%@ taglib prefix="date" uri="/WEB-INF/tlds/date-functions.tld" %>
+<%@ taglib prefix="number" uri="/WEB-INF/tlds/number-functions.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="folderList" class="java.util.ArrayList" scope="request"/>
@@ -34,7 +34,7 @@
 <jsp:useBean id="fileList" class="java.util.ArrayList" scope="request"/>
 <jsp:useBean id="canEdit" class="java.lang.String" scope="request"/>
 <jsp:useBean id="canDelete" class="java.lang.String" scope="request"/>
-<script src="${ctx}/javascript/clipboard-2.0.4/clipboard.min.js"></script>
+<script src="${ctx}/javascript/clipboard-2.0.11/clipboard.min.js"></script>
 <%@include file="../page_messages.jspf" %>
 <c:if test="${(userSession.hasRole('admin') || userSession.hasRole('content-manager'))}">
   <a href="${ctx}/admin/file-form?subFolderId=${subFolder.id}&folderId=${folder.id}&returnPage=${widgetContext.uri}%3FsubFolderId=${subFolder.id}%26folderId=${folder.id}" class="button small primary radius float-left"><i class="fa fa-plus"></i> Add File Link</a>

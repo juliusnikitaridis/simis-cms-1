@@ -71,7 +71,7 @@ public class PageServlet extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
 
     LOG.info("PageServlet starting up...");
-    String startupSuccessful = (String) config.getServletContext().getAttribute("STARTUP_SUCCESSFUL");
+    String startupSuccessful = (String) config.getServletContext().getAttribute(ContextConstants.STARTUP_SUCCESSFUL);
     if (!"true".equals(startupSuccessful)) {
       throw new ServletException("Startup failed due to previous error");
     }
@@ -214,7 +214,7 @@ public class PageServlet extends HttpServlet {
                     redirectLocation;
           }
           response.setHeader("Location", redirectLocation);
-          response.sendError(SC_MOVED_PERMANENTLY);
+          response.setStatus(SC_MOVED_PERMANENTLY);
           return;
         }
         request.setAttribute(MASTER_WEB_PAGE, webPage);

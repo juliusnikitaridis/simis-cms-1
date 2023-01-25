@@ -17,8 +17,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="js" uri="/WEB-INF/javascript-escape.tld" %>
-<%@ taglib prefix="url" uri="/WEB-INF/url-functions.tld" %>
+<%@ taglib prefix="js" uri="/WEB-INF/tlds/javascript-escape.tld" %>
+<%@ taglib prefix="url" uri="/WEB-INF/tlds/url-functions.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="calendarList" class="java.util.ArrayList" scope="request"/>
@@ -33,11 +33,11 @@
 <jsp:useBean id="moodleBackgroundColor" class="java.lang.String" scope="request"/>
 <jsp:useBean id="moodleTextColor" class="java.lang.String" scope="request"/>
 <%-- Full Calendar --%>
-<link rel="stylesheet" href="${ctx}/javascript/fullcalendar-5.11.0/main.min.css" />
+<link rel="stylesheet" href="${ctx}/javascript/fullcalendar-5.11.3/main.min.css" />
 <link rel="stylesheet" href="${ctx}/css/platform-calendar.css?v=<%= VERSION %>" />
-<script src="${ctx}/javascript/fullcalendar-5.11.0/moment-2.27.0.min.js"></script>
-<script src="${ctx}/javascript/fullcalendar-5.11.0/main.min.js"></script>
-<script src="${ctx}/javascript/fullcalendar-5.11.0/fc-plugin-moment-5.5.0.min.js"></script>
+<script src="${ctx}/javascript/fullcalendar-5.11.3/moment-2.27.0.min.js"></script>
+<script src="${ctx}/javascript/fullcalendar-5.11.3/main.min.js"></script>
+<script src="${ctx}/javascript/fullcalendar-5.11.3/fc-plugin-moment-5.5.0.min.js"></script>
 <c:if test="${(userSession.hasRole('admin') || userSession.hasRole('content-manager'))}">
 <style>
   .fc-day:hover{

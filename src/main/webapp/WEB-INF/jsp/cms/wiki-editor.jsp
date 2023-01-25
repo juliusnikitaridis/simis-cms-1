@@ -15,15 +15,15 @@
   --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="js" uri="/WEB-INF/javascript-escape.tld" %>
+<%@ taglib prefix="js" uri="/WEB-INF/tlds/javascript-escape.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="wiki" class="com.simisinc.platform.domain.model.cms.Wiki" scope="request"/>
 <jsp:useBean id="wikiPage" class="com.simisinc.platform.domain.model.cms.WikiPage" scope="request"/>
 <jsp:useBean id="content" class="java.lang.String" scope="request"/>
-<script src="${ctx}/javascript/ace-1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="${ctx}/javascript/ace-1.4.12/mode-xml.js" type="text/javascript" charset="utf-8"></script>
-<%--<script src="${ctx}/javascript/ace-1.4.12/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>--%>
+<script src="${ctx}/javascript/ace-1.14.0/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="${ctx}/javascript/ace-1.14.0/mode-xml.js" type="text/javascript" charset="utf-8"></script>
+<%--<script src="${ctx}/javascript/ace-1.14.0/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>--%>
 <style>
   #pageXml {
     right: 0;

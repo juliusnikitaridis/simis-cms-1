@@ -14,19 +14,19 @@
   ~ limitations under the License.
   --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="date" uri="/WEB-INF/date-functions.tld" %>
-<%@ taglib prefix="font" uri="/WEB-INF/font-functions.tld" %>
-<%@ taglib prefix="user" uri="/WEB-INF/user-functions.tld" %>
+<%@ taglib prefix="date" uri="/WEB-INF/tlds/date-functions.tld" %>
+<%@ taglib prefix="font" uri="/WEB-INF/tlds/font-functions.tld" %>
+<%@ taglib prefix="user" uri="/WEB-INF/tlds/user-functions.tld" %>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="contentHtml" class="java.lang.String" scope="request"/>
 <jsp:useBean id="wiki" class="com.simisinc.platform.domain.model.cms.Wiki" scope="request"/>
 <jsp:useBean id="wikiPage" class="com.simisinc.platform.domain.model.cms.WikiPage" scope="request"/>
 <jsp:useBean id="wikiLinkPrefix" class="java.lang.String" scope="request"/>
 <jsp:useBean id="mermaid" class="java.lang.String" scope="request"/>
-<link rel="stylesheet" href="${ctx}/css/prism-1.15.0/prism.css">
-<script src="${ctx}/javascript/prism-1.15.0/prism.min.js"></script>
+<link rel="stylesheet" href="${ctx}/javascript/prism-1.29.0/prism.css">
+<script src="${ctx}/javascript/prism-1.29.0/prism.min.js"></script>
 <c:if test="${mermaid eq 'true'}">
-<script src="${ctx}/javascript/mermaid-9.1.3/mermaid.min.js"></script>
+<script src="${ctx}/javascript/mermaid-9.3.0/mermaid.min.js"></script>
 </c:if>
 <c:choose>
   <c:when test="${wiki.startingPage eq wikiPage.id && !empty title}">

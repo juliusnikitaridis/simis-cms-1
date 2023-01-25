@@ -18,7 +18,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="font" uri="/WEB-INF/font-functions.tld" %>
+<%@ taglib prefix="font" uri="/WEB-INF/tlds/font-functions.tld" %>
 <%@ taglib prefix="g" uri="http://granule.com/tags" %>
 <jsp:useBean id="masterWebPage" class="com.simisinc.platform.domain.model.cms.WebPage" scope="request"/>
 <jsp:useBean id="pageRenderInfo" class="com.simisinc.platform.presentation.controller.PageRenderInfo" scope="request"/>
@@ -63,7 +63,7 @@
     <link rel="stylesheet" type="text/css" href="${ctx}/css/animate-3.7.2/animate.min.css" />
     <link rel="stylesheet" type="text/css" href="${ctx}/css/foundation-datepicker-20180424/foundation-datepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="${ctx}/javascript/autocomplete-1.0.7/auto-complete.css" />
-    <link rel="stylesheet" type="text/css" href="${ctx}/javascript/swiper-8.4.2/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/javascript/swiper-8.4.6/swiper-bundle.min.css" />
     <link rel="stylesheet" type="text/css" href="${ctx}/css/platform.css" />
   </g:compress>
   <c:if test="${!empty themePropertyMap}">
@@ -141,10 +141,10 @@
   </c:if>
   <%-- Javascript before content--%>
   <g:compress>
-    <script src="${ctx}/javascript/jquery-3.6.1/jquery-3.6.1.min.js"></script>
+    <script src="${ctx}/javascript/jquery-3.6.3/jquery.min.js"></script>
     <script src="${ctx}/javascript/foundation-datepicker-20180424/foundation-datepicker.min.js"></script>
     <script src="${ctx}/javascript/autocomplete-1.0.7/auto-complete.js"></script>
-    <script src="${ctx}/javascript/js-cookie-2.2.1/js.cookie.min.js"></script>
+    <script src="${ctx}/javascript/js-cookie-3.0.1/js.cookie.min.js"></script>
   </g:compress>
 </head>
 <body<c:if test="${pageRenderInfo.name eq '/'}"> id="body-home"</c:if><c:if test="${!empty pageRenderInfo.cssClass}"> class="<c:out value="${pageRenderInfo.cssClass}" />"</c:if>>

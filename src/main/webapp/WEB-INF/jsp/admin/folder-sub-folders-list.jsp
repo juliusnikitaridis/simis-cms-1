@@ -16,20 +16,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="font" uri="/WEB-INF/font-functions.tld" %>
-<%@ taglib prefix="js" uri="/WEB-INF/javascript-escape.tld" %>
-<%@ taglib prefix="user" uri="/WEB-INF/user-functions.tld" %>
-<%@ taglib prefix="group" uri="/WEB-INF/group-functions.tld" %>
-<%@ taglib prefix="url" uri="/WEB-INF/url-functions.tld" %>
-<%@ taglib prefix="date" uri="/WEB-INF/date-functions.tld" %>
-<%@ taglib prefix="number" uri="/WEB-INF/number-functions.tld" %>
+<%@ taglib prefix="font" uri="/WEB-INF/tlds/font-functions.tld" %>
+<%@ taglib prefix="js" uri="/WEB-INF/tlds/javascript-escape.tld" %>
+<%@ taglib prefix="user" uri="/WEB-INF/tlds/user-functions.tld" %>
+<%@ taglib prefix="group" uri="/WEB-INF/tlds/group-functions.tld" %>
+<%@ taglib prefix="url" uri="/WEB-INF/tlds/url-functions.tld" %>
+<%@ taglib prefix="date" uri="/WEB-INF/tlds/date-functions.tld" %>
+<%@ taglib prefix="number" uri="/WEB-INF/tlds/number-functions.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="folder" class="com.simisinc.platform.domain.model.cms.Folder" scope="request"/>
 <jsp:useBean id="subFolderList" class="java.util.ArrayList" scope="request"/>
 <jsp:useBean id="canEdit" class="java.lang.String" scope="request"/>
 <jsp:useBean id="canDelete" class="java.lang.String" scope="request"/>
-<script src="${ctx}/javascript/clipboard-2.0.4/clipboard.min.js"></script>
+<script src="${ctx}/javascript/clipboard-2.0.11/clipboard.min.js"></script>
 <button class="button small primary radius float-left" data-open="formReveal${widgetContext.uniqueId}"><i class="fa fa-plus"></i> Add Sub-Folder</button>
 <table class="unstriped">
   <thead>

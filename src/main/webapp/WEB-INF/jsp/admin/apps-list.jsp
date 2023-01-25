@@ -15,7 +15,7 @@
   --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="date" uri="/WEB-INF/date-functions.tld" %>
+<%@ taglib prefix="date" uri="/WEB-INF/tlds/date-functions.tld" %>
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="appList" class="java.util.ArrayList" scope="request"/>
@@ -41,7 +41,7 @@
           <br /><small class="subheader"><c:out value="${app.summary}" /></small>
         </c:if>
         <c:if test="${!empty app.publicKey && !date:isMinutesOld(app.created, 10)}">
-          <br /><small>New Public Key: <c:out value="${app.publicKey}" /></small>
+          <br /><small>New secret key: <c:out value="${app.publicKey}" /></small>
         </c:if>
       </td>
       <td class="text-center"><fmt:formatNumber value="0" /></td>

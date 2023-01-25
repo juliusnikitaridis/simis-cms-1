@@ -27,6 +27,7 @@ import com.simisinc.platform.domain.model.login.UserLogin;
 import com.simisinc.platform.domain.model.login.UserToken;
 import com.simisinc.platform.infrastructure.persistence.login.UserLoginRepository;
 import com.simisinc.platform.infrastructure.persistence.login.UserTokenRepository;
+import com.simisinc.platform.presentation.controller.ContextConstants;
 import com.simisinc.platform.presentation.controller.RequestConstants;
 import com.simisinc.platform.presentation.controller.UserSession;
 import org.apache.commons.codec.binary.Base64;
@@ -66,7 +67,7 @@ public class RestRequestFilter implements Filter {
   @Override
   public void init(FilterConfig config) throws ServletException {
     LOG.info("RestRequestFilter starting up...");
-    String startupSuccessful = (String) config.getServletContext().getAttribute("STARTUP_SUCCESSFUL");
+    String startupSuccessful = (String) config.getServletContext().getAttribute(ContextConstants.STARTUP_SUCCESSFUL);
     if (!"true".equals(startupSuccessful)) {
       throw new ServletException("Startup failed due to previous error");
     }
@@ -84,6 +85,7 @@ public class RestRequestFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain chain)
       throws ServletException, IOException {
     HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+    String requestMethod = ((HttpServletRequest) request).getMethod().toLowerCase();
     String scheme = request.getScheme();
     String contextPath = request.getServletContext().getContextPath();
     String requestURI = httpServletRequest.getRequestURI();
@@ -114,18 +116,36 @@ public class RestRequestFilter implements Filter {
       }
     }
 
-    LOG.trace("REST Resource: " + resource);
-
     boolean isAPIOnline = LoadSitePropertyCommand.loadByNameAsBoolean("site.api");
     if (!isAPIOnline) {
       LOG.debug("API is disabled");
       HttpServletResponse response = (HttpServletResponse) servletResponse;
-      RestServlet.sendError(response, SC_UNAUTHORIZED, "API is disabled");
+      RestServlet.sendError(response, SC_FORBIDDEN, "API is disabled");
+      return;
+    }
+
+    // Verify there is an endpoint specified
+    if (resource.lastIndexOf("/") <= 0) {
+      LOG.debug("No endpoint specified");
+      do404(servletResponse);
+      return;
+    }
+
+    // CORS OPTIONS request
+    if ("options".equals(requestMethod)) {
+      String siteUrl = LoadSitePropertyCommand.loadByName("site.url");
+      HttpServletResponse response = (HttpServletResponse) servletResponse;
+      if (StringUtils.isNotBlank(httpServletRequest.getHeader("Origin")) && StringUtils.isNotBlank(siteUrl)) {
+        response.addHeader("Access-Control-Allow-Origin", siteUrl);
+      }
+      response.addHeader("Access-Control-Allow-Methods", "OPTIONS,GET,POST,PUT,DELETE");
+      response.addHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,User-Agent,X-API-Key");
+      response.setStatus(200);
       return;
     }
 
     // Check for API Key
-    String apiKey = ((HttpServletRequest) request).getHeader("X-API-Key");
+    String apiKey = httpServletRequest.getHeader("X-API-Key");
     if (StringUtils.isEmpty(apiKey)) {
       apiKey = request.getParameter("key");
     }
@@ -154,14 +174,14 @@ public class RestRequestFilter implements Filter {
     request.setAttribute(RequestConstants.REST_APP, thisApp);
 
     if (LOG.isDebugEnabled()) {
-      LOG.debug(((HttpServletRequest) request).getMethod() + " " + resource);
+      LOG.debug(requestMethod + " " + resource);
     }
 
     // Token authorization
     String token = checkBearerAuthorization(request);
     if (token == null) {
       // Look for a session request
-      if ("/api/session".equals(resource) && "post".equalsIgnoreCase(httpServletRequest.getMethod())) {
+      if ("/api/session".equals(resource) && "post".equals(requestMethod)) {
         doRecordSession(thisApp, httpServletRequest, servletResponse);
         return;
       }
@@ -214,11 +234,11 @@ public class RestRequestFilter implements Filter {
 
       LOG.debug("Got a token user: " + user.getId());
 
-        // Limit the number of hits per minute based on the user and api key
-        if (!RateLimitCommand.isAppUserAllowedRightNow(thisApp, user.getId())) {
-          do429(servletResponse);
-          return;
-        }
+      // Limit the number of hits per minute based on the user and api key
+      if (!RateLimitCommand.isAppUserAllowedRightNow(thisApp, user.getId())) {
+        do429(servletResponse);
+        return;
+      }
 
       // If this request is the first for today, then record a new login and session
       if (userToken.getCreated().before(Timestamp.valueOf(LocalDate.now().atStartOfDay()))) {
@@ -241,7 +261,7 @@ public class RestRequestFilter implements Filter {
         userLogin.setUserId(user.getId());
         userLogin.setIpAddress(request.getRemoteAddr());
         userLogin.setSessionId(httpServletRequest.getSession().getId());
-        userLogin.setUserAgent(((HttpServletRequest) request).getHeader("USER-AGENT"));
+        userLogin.setUserAgent(httpServletRequest.getHeader("USER-AGENT"));
         UserLoginRepository.save(userLogin);
       } else {
 
@@ -315,7 +335,7 @@ public class RestRequestFilter implements Filter {
     userLogin.setUserId(user.getId());
     userLogin.setIpAddress(httpServletRequest.getRemoteAddr());
     userLogin.setSessionId(httpServletRequest.getSession().getId());
-    userLogin.setUserAgent((httpServletRequest).getHeader("USER-AGENT"));
+    userLogin.setUserAgent(httpServletRequest.getHeader("USER-AGENT"));
     UserLoginRepository.save(userLogin);
 
     // Create a 30-day token
