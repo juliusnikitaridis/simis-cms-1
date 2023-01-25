@@ -24,6 +24,8 @@ public class ServiceProvider extends Entity {
     private String name;
     private String services;
     private String certifications;
+    private String aboutUs;
+    private String address;
 }
 
 

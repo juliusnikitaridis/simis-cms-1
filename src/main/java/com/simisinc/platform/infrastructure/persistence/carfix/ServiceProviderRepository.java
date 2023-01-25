@@ -1,13 +1,12 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
 import com.simisinc.platform.domain.model.carfix.ServiceProvider;
-import com.simisinc.platform.infrastructure.database.AutoRollback;
-import com.simisinc.platform.infrastructure.database.AutoStartTransaction;
-import com.simisinc.platform.infrastructure.database.DB;
-import com.simisinc.platform.infrastructure.database.SqlUtils;
+import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ServiceProviderRepository {
 
@@ -35,5 +34,33 @@ public class ServiceProviderRepository {
                 LOG.error("SQLException: " + se.getMessage());
                 throw new Exception(se.getMessage());
             }
+    }
+
+    //get all the service providers
+    public static DataResult query(ServiceRequestSpecification specification, DataConstraints constraints) {
+        SqlUtils select = new SqlUtils();
+        SqlUtils where = new SqlUtils();
+        SqlUtils orderBy = new SqlUtils();
+
+        return DB.selectAllFrom(
+                TABLE_NAME, select, where, orderBy, constraints, ServiceProviderRepository::buildRecord);
+    }
+
+
+    //returns address, name , supported brands , services, about us ,
+    public static ServiceProvider buildRecord(ResultSet rs) {
+        try {
+            ServiceProvider serviceProvider = new ServiceProvider();
+            serviceProvider.setName(rs.getString("name"));
+            serviceProvider.setSupportedBrands(rs.getString("supported_brands"));
+            serviceProvider.setServices(rs.getString("services"));
+            serviceProvider.setAboutUs(rs.getString("about_us"));
+            serviceProvider.setAddress(rs.getString("address"));
+            return serviceProvider;
+        } catch (SQLException throwables) {
+            LOG.error("error when building record for service provider "+throwables.getMessage());
+            throwables.printStackTrace();
+            return null;
+        }
     }
 }

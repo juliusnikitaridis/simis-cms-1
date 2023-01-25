@@ -1,55 +1,38 @@
 package com.simisinc.platform.rest.services.carfix;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.infrastructure.database.DataResult;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
-import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 /**
  * Description
- * Service to return all service records created. if a member id is set, return the service records for that member
+ * List all the service providers
+ * returns address, name , supported brands , services, about us ,
  * @author Julius Nikitaridis
  * @created 18/11/22 11:28 AM
  */
 
 
-public class RFSListService {
+public class ServiceProviderListService {
 
-    private static Log LOG = LogFactory.getLog(RFSListService.class);
+    private static Log LOG = LogFactory.getLog(ServiceProviderListService.class);
 
     public ServiceResponse get(ServiceContext context) {
 
 
         try {
-            final String memberId = context.getParameter("memberId");
-            final String vehicleId = context.getParameter("vehicleId");
-            final String serviceRequestId = context.getParameter("serviceRequestId");
-
             ServiceRequestSpecification specification = new ServiceRequestSpecification();
 
-            if(memberId!= null) {
-                specification.setMemberId(memberId);
-            }
-            else if(vehicleId != null) {
-                specification.setVehicleId(vehicleId);
-            }
-            else if(serviceRequestId != null) {
-                specification.setServiceRequestId(serviceRequestId);
-            } else {
-                //nothing to set in the specification
-            }
-            DataResult result = ServiceRequestRepository.query(specification,null);
+            DataResult result = ServiceProviderRepository.query(specification,null);
             List<ServiceRequest> serviceRequestList = (List<ServiceRequest>) result.getRecords();
 
             ServiceResponse response = new ServiceResponse(200);

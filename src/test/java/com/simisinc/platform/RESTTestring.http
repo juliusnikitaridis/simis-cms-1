@@ -82,6 +82,12 @@ X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 ###
 
+###
+GET http://localhost:8080/api/carfix/RFSListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-fedf5757-f32c-48d7-bb6d-3169e2911e231
+###
+
 
 POST http://localhost:8080/api/carfix/RegisterMemberService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
@@ -99,6 +105,17 @@ Content-Type: application/json
 "userType": "MEMBER"
 }
 ###
+
+
+
+
+###
+GET http://localhost:8080/api/carfix/ServiceProviderListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
+###
+
+
 
 
 

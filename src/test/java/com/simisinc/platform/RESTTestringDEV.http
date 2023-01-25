@@ -95,8 +95,29 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/carfix/RFSListService?memberId=334423
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-3f4f5866-3f7a-443b-94d7-29f2c6d032a11
+GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?memberId=sizwe-maluleke
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-f97ea9ee-4219-4f37-85c9-fd9dbb800d5b5
+###
+
+
+POST https://carfix.connectmobiles24.com/api/carfix/CreateRFSService
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-f97ea9ee-4219-4f37-85c9-fd9dbb800d5b5
+Content-Type: application/json
+
+{
+  "date": "12-12-2022",
+  "type": "REQUEST_FOR_SERVICE",
+  "vehicleId": "4333e",
+  "memberId": "334423",
+  "radius": "10 KM",
+  "status": "CREATED",
+  "currentOdoReading": "234233.00",
+  "pictureData": "base64Ecode(some data)",
+  "additionalDescription": "need to change shocks",
+  "lastServiceDate": "10-10-2021",
+  "serviceRequestItems": [{"serviceRequestOptionId": "34234234"},{"serviceRequestOptionId": "34234111"},{"serviceRequestOptionId": "34235554"}]
+}
 ###
 
