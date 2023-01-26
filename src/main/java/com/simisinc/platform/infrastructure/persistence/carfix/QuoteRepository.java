@@ -137,8 +137,8 @@ public class QuoteRepository {
         try {
             item.setId(rs.getString("id"));
             item.setItemTotalPrice(rs.getString("item_total_price"));
-            item.setPartDescription("part_description");
-            item.setQuoteId("quote_id");
+            item.setPartDescription(rs.getString("part_description"));
+            item.setQuoteId(rs.getString("quote_id"));
             return item;
         } catch (Exception throwables) {
             LOG.error("Error when building quotetation item ",throwables);
