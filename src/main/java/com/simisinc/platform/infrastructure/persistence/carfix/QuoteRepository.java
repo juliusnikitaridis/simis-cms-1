@@ -57,6 +57,7 @@ public class QuoteRepository {
                 .add("service_provider_id", record.getServiceProviderId())
                 .add("service_provider_name",record.getServiceProviderName())
                 .add("date",record.getDate())
+                .add("status","CREATED")
                 .add("total",record.getQuotationTotal());
         try {
             try (Connection connection = DB.getConnection();

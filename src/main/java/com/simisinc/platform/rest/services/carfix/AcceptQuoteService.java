@@ -39,7 +39,7 @@ public class AcceptQuoteService {
             QuoteRepository.updateQuoteStatus(request.getAcceptedQuoteId(), "ACCEPTED",conn);
 
             //updaete service request status once a quote has been accepted
-            QuoteRepository.updateServiceRequestStatus(request.getServiceRequestId(),conn,"QUOTE_ACCEPTED_SERVICE_CONFIRMED");
+            QuoteRepository.updateServiceRequestStatus(request.getServiceRequestId(),conn,"ACCEPTED");
 
             //insert the quoteId of the accepted quote into the service request table
             QuoteRepository.updateServiceRequestAcceptedQuoteId(request.getAcceptedQuoteId(),request.getServiceRequestId(),conn);

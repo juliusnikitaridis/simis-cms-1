@@ -23,6 +23,7 @@ public class QuoteItem extends Entity {
     private String partNumber;
     private String partDescription;
     private String itemTotalPrice;
+    private String quantity;
 }
 
 

@@ -14,13 +14,17 @@ public class ServiceProviderRepository {
     private static String[] PRIMARY_KEY = new String[]{"id"};
     private static Log LOG = LogFactory.getLog(ServiceProviderRepository.class);
 
-    public static ServiceProvider add(ServiceProvider serviceProvider) throws Exception {
+    public static ServiceProvider add(ServiceProvider serviceProvider,String userUniqueId) throws Exception {
             SqlUtils insertValues = new SqlUtils()
-                    .add("id", serviceProvider.getId())
+                    .add("id", serviceProvider.getServiceProviderId()) //PK on SP table
                     .add("supported_brands", serviceProvider.getSupportedBrands())
                     .add("name", serviceProvider.getName())
                     .add("services", serviceProvider.getServices())
-                    .add("certifications", serviceProvider.getCertifications());
+                    .add ("address",serviceProvider.getAddress())
+                    .add("logo_data",serviceProvider.getLogoData())
+                    .add("about_us",serviceProvider.getAboutUs())
+                    .add("certifications", serviceProvider.getCertifications())
+                    .add("user_id",userUniqueId); //tie this to the user table
             try {
                 try (Connection connection = DB.getConnection();
                      AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -58,7 +62,7 @@ public class ServiceProviderRepository {
             serviceProvider.setServices(rs.getString("services"));
             serviceProvider.setAboutUs(rs.getString("about_us"));
             serviceProvider.setAddress(rs.getString("address"));
-            serviceProvider.setId(rs.getString("id"));
+            serviceProvider.setServiceProviderId(rs.getString("id"));
             serviceProvider.setLogoData(rs.getString("logo_data"));
             return serviceProvider;
         } catch (SQLException throwables) {

@@ -32,10 +32,12 @@ public class RegisterMemberService {
 
             ObjectMapper mapper = new ObjectMapper();
             User newUser = mapper.readValue(context.getJsonRequest(), User.class);
-            addUser(newUser,context.getUserId());
+            addUser(newUser, context.getUserId());
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("User has been registered");}};
+            ArrayList<String> responseMessage = new ArrayList<String>() {{
+                add("User has been registered");
+            }};
             response.setData(responseMessage);
             return response;
 
@@ -49,49 +51,50 @@ public class RegisterMemberService {
 
 
     //this should add a user - same as the logic in UserFormWidget
-    public void addUser(User user,long userId) throws Exception {
-        {
-            ////////////////////TODO this should be removed for prod!!!!!!!
-            user.setValidated(new Timestamp(System.currentTimeMillis()));
-            user.setPassword("$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw"); //this is dcd673bb-6f82-43c5-979c-df30da062562
+    public void addUser(User user, long modifiedById) throws Exception {
+        
+        ////////////////////TODO this should be removed for prod!!!!!!!
+        user.setValidated(new Timestamp(System.currentTimeMillis()));
+        user.setPassword("$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw"); //this is dcd673bb-6f82-43c5-979c-df30da062562
 
-            user.setModifiedBy(userId);
+        user.setModifiedBy(modifiedById);
+        user.setUserType("MEMBER");
 
-            // Populate the roles
-            if(user.getRoleId() != null) {
-                List<Role> roleList = RoleRepository.findAll();
-                if (roleList != null) {
-                    List<Role> userRoleList = new ArrayList<>();
-                    for (Role role : roleList) {
-                        if (user.getRoleId().equals(String.valueOf(role.getId()))) {
-                            LOG.debug("Adding user to role: " + role.getCode());
-                            userRoleList.add(role);
-                        }
+        // Populate the roles
+        if (user.getRoleId() != null) {
+            List<Role> roleList = RoleRepository.findAll();
+            if (roleList != null) {
+                List<Role> userRoleList = new ArrayList<>();
+                for (Role role : roleList) {
+                    if (user.getRoleId().equals(String.valueOf(role.getId()))) {
+                        LOG.debug("Adding user to role: " + role.getCode());
+                        userRoleList.add(role);
                     }
-                    user.setRoleList(userRoleList);
                 }
-            }
-
-            // Populate the groups
-            if(user.getGroupId() != null) {
-                List<Group> groupList = GroupRepository.findAll();
-                if (groupList != null) {
-                    List<Group> userGroupList = new ArrayList<>();
-                    for (Group group : groupList) {
-                        if (user.getGroupId().equals(String.valueOf(group.getId()))) {
-                            userGroupList.add(group);
-                        }
-                    }
-                    user.setGroupList(userGroupList);
-                }
-            }
-
-            // Save the user
-            User savedUser = null;
-            savedUser = SaveUserCommand.saveUser(user);
-            if(savedUser == null) {
-                throw new Exception("user could not be saved when calling RegisterMemberService");
+                user.setRoleList(userRoleList);
             }
         }
+
+        // Populate the groups
+        if (user.getGroupId() != null) {
+            List<Group> groupList = GroupRepository.findAll();
+            if (groupList != null) {
+                List<Group> userGroupList = new ArrayList<>();
+                for (Group group : groupList) {
+                    if (user.getGroupId().equals(String.valueOf(group.getId()))) {
+                        userGroupList.add(group);
+                    }
+                }
+                user.setGroupList(userGroupList);
+            }
+        }
+
+        // Save the user
+        User savedUser = null;
+        savedUser = SaveUserCommand.saveUser(user);
+        if (savedUser == null) {
+            throw new Exception("user could not be saved when calling RegisterMemberService");
+        }
+
     }
 }

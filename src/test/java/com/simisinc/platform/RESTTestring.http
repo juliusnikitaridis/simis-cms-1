@@ -95,14 +95,36 @@ Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 Content-Type: application/json
 
 {
-"uniqueId":"23141",
 "firstName":"Test",
 "lastName":"T",
-"email":"julius3@test.com",
-"username":"julius3@test.com",
+"email":"julius34@test.com",
+"username":"julius34@test.com",
 "idnum": "1996",
 "roleId": "5",
 "userType": "MEMBER"
+}
+###
+
+POST http://localhost:8080/api/carfix/RegisterServiceProviderService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
+Content-Type: application/json
+
+{
+  "firstName":"Test",
+  "lastName":"T",
+  "email":"julius12@test.com",
+  "username":"julius12@test.com",
+  "idnum": "1996",
+  "roleId": "5",
+  "certifications": "certifications format?",
+  "userType": "SERVICE_PROVIDER",
+  "supportedBrands": "brand1,brand2,brand3,brand4,brand5",
+  "name": "SomeAmazingServiceProvider",
+  "address": "1 Lobelia close bellville 7540",
+  "aboutUs": "some information about the SP",
+  "logoData": "encoded_logo_data",
+  "services": "CATEGORY1,CATEGORY2,CATEGORY3"
 }
 ###
 
