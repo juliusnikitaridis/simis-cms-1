@@ -131,5 +131,45 @@ Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
 GET https://carfix.connectmobiles24.com/api/carfix/ServiceProviderListService?id=de6e124f-e7c4-4882-af27-41ebd375a9cc
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
+
+
 ###
+POST https://carfix.connectmobiles24.com/api/carfix/RegisterMemberService
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
+Content-Type: application/json
+
+{
+"firstName":"Test",
+"lastName":"T",
+"email":"julius666566@test.com",
+"username":"julius6665663@test.com",
+"idnum": "1996",
+"roleId": "5"
+}
+###
+
+POST https://carfix.connectmobiles24.com/api/carfix/RegisterServiceProviderService
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
+Content-Type: application/json
+
+{
+  "firstName":"Test",
+  "lastName":"T",
+  "email":"julius129@test.com",
+  "username":"julius129@test.com",
+  "idnum": "1996",
+  "roleId": "5",
+  "certifications": "certifications format?",
+  "userType": "SERVICE_PROVIDER",
+  "supportedBrands": "brand1,brand2,brand3,brand4,brand5",
+  "name": "SomeAmazingServiceProvider",
+  "address": "1 Lobelia close bellville 7540",
+  "aboutUs": "some information about the SP",
+  "logoData": "encoded_logo_data",
+  "services": "CATEGORY1,CATEGORY2,CATEGORY3"
+}
+###
+
 

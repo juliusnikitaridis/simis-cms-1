@@ -41,7 +41,7 @@ public class RegisterServiceProviderService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in Register Member Service", e);
+            LOG.error("Error in RegisterServiceProvider Service", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;
@@ -93,7 +93,5 @@ public class RegisterServiceProviderService {
             throw new Exception("user could not be saved when calling RegisterServiceProviderService");
         }
         return savedUser.getUniqueId();
-        //should now insert the addtional fields for  a service provider into the serviceProvider table
-
     }
 }
