@@ -79,6 +79,7 @@ public class SaveUserCommand {
         throw new DataException("The existing record could not be found");
       }
       user.setModifiedBy(userBean.getModifiedBy());
+
       // Validate (skip if managed by provider)
       if (!isSystemUser) {
         if (user.getId() == userBean.getModifiedBy()) {
@@ -148,6 +149,7 @@ public class SaveUserCommand {
     user.setRoleList(userBean.getRoleList());
     user.setGroupList(userBean.getGroupList());
     user.setTimeZone(userBean.getTimeZone());
+    user.setUserType(userBean.getUserType());
    // user.setIdnum(userBean.getIdnum());
     return UserRepository.save(user);
   }

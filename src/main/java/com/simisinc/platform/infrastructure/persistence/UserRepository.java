@@ -259,7 +259,8 @@ public class UserRepository {
         .addIfExists("created", record.getCreated())
         .add("created_by", record.getCreatedBy(), -1)
         .add("validated",record.getValidated())
-        .add("id_number",StringUtils.trimToNull(record.getIdnum()));
+        .add("id_number",StringUtils.trimToNull(record.getIdnum()))
+        .add("user_type",record.getUserType());
     if (record.hasGeoPoint()) {
       insertValues.add("latitude", record.getLatitude());
       insertValues.add("longitude", record.getLongitude());

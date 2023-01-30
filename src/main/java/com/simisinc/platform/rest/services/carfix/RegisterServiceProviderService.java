@@ -36,7 +36,7 @@ public class RegisterServiceProviderService {
 
             ServiceProviderRepository.add(newUser,userSystemUniqueId);
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("User has been registered");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service Provider has been registered");}};
             response.setData(responseMessage);
             return response;
 
