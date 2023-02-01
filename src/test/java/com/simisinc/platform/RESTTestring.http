@@ -41,6 +41,39 @@ Content-Type: application/json
 ###
 
 
+POST http://localhost:8080/api/carfix/UpdateVehicleService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6b1bf111-e864-4f4a-8efa-ae4918e622fe1
+Content-Type: application/json
+
+{
+  "vehicleId": "224d68f0-2629-430e-833e-215a54cb702c",
+  "vinNumber": "23432666456",
+  "registration": "G3344d GP -UPDATED",
+  "make": "Mercedes",
+  "model": "year",
+  "year": "2002 - UPDATED",
+  "fuelType": "petrol",
+  "transmission": "manual",
+  "odoReading": "2340333",
+  "engineCode": "3043",
+  "memberId": "julius-niki"
+}
+###
+
+
+###
+POST http://localhost:8080/api/carfix/DeleteVehicleService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6b1bf111-e864-4f4a-8efa-ae4918e622fe1
+Content-Type: application/json
+
+{
+  "vehicleId": "fe2cda48-75a7-4c5e-96f8-393b3101542a"
+}
+###
+
+
 
 
 POST http://localhost:8080/api/carfix/CreateRFSService

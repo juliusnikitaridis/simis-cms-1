@@ -36,5 +36,6 @@
   <service method="post" endpoint="carfix/AcceptQuoteService" class="com.simisinc.platform.rest.services.carfix.AcceptQuoteService"/>
   <service method="post" endpoint="carfix/UpdateServiceRequestStatusService" class="com.simisinc.platform.rest.services.carfix.UpdateServiceRequestStatusService"/>
   <service method="get" endpoint="carfix/ServiceProviderListService" class="com.simisinc.platform.rest.services.carfix.ServiceProviderListService"/>
-
+  <service method="get" endpoint="carfix/DeleteVehicleService" class="com.simisinc.platform.rest.services.carfix.DeleteVehicleService"/>
+  <service method="get" endpoint="carfix/UpdateVehicleService" class="com.simisinc.platform.rest.services.carfix.UpdateVehicleService"/>
 </services>

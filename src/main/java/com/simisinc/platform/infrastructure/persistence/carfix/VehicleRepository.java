@@ -46,6 +46,36 @@ public class VehicleRepository {
 
 
 
+    public static void update(Vehicle record) throws Exception {
+        SqlUtils updateValues = new SqlUtils()
+                .add("id", record.getVehicleId())
+                .add("vin_number", record.getVinNumber())
+                .add("registration", record.getRegistration())
+                .add("make", record.getMake())
+                .add("model", record.getModel())
+                .add("year", record.getYear())
+                .add("fuel_type", record.getFuelType())
+                .add("transmission", record.getTransmission())
+                .add("odo_reading", record.getOdoReading())
+                .add("member_id",record.getMemberId())
+                .add("engine_code", record.getEngineCode());
+
+        try {
+            try (Connection connection = DB.getConnection();
+                 AutoStartTransaction a = new AutoStartTransaction(connection);
+                 AutoRollback transaction = new AutoRollback(connection)) {
+                // In a transaction (use the existing connection)
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?",record.getVehicleId()));
+                transaction.commit();
+            }
+        } catch (Exception se) {
+            LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
+        }
+    }
+
+
+
     public static Vehicle findById(long id) {
         if (id == -1) {
             return null;
@@ -69,6 +99,13 @@ public class VehicleRepository {
         }
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, VehicleRepository::buildRecord);
+    }
+
+
+    public static void delete(String vehicleId) throws Exception {
+        Connection connection = DB.getConnection();
+        DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", vehicleId));
+        LOG.debug("vehicle has been deleted:>>"+vehicleId);
     }
 
 
