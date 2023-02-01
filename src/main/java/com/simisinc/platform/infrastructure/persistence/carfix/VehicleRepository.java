@@ -48,17 +48,17 @@ public class VehicleRepository {
 
     public static void update(Vehicle record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .add("id", record.getVehicleId())
-                .add("vin_number", record.getVinNumber())
-                .add("registration", record.getRegistration())
-                .add("make", record.getMake())
-                .add("model", record.getModel())
-                .add("year", record.getYear())
-                .add("fuel_type", record.getFuelType())
-                .add("transmission", record.getTransmission())
-                .add("odo_reading", record.getOdoReading())
-                .add("member_id",record.getMemberId())
-                .add("engine_code", record.getEngineCode());
+                .addIfExists("id", record.getVehicleId())
+                .addIfExists("vin_number", record.getVinNumber())
+                .addIfExists("registration", record.getRegistration())
+                .addIfExists("make", record.getMake())
+                .addIfExists("model", record.getModel())
+                .addIfExists("year", record.getYear())
+                .addIfExists("fuel_type", record.getFuelType())
+                .addIfExists("transmission", record.getTransmission())
+                .addIfExists("odo_reading", record.getOdoReading())
+                .addIfExists("member_id",record.getMemberId())
+                .addIfExists("engine_code", record.getEngineCode());
 
         try {
             try (Connection connection = DB.getConnection();
