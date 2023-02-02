@@ -17,6 +17,7 @@
 package com.simisinc.platform.application;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
 import com.simisinc.platform.domain.model.App;
 import com.simisinc.platform.infrastructure.cache.CacheManager;
 import io.github.bucket4j.Bandwidth;
@@ -69,6 +70,10 @@ public class RateLimitCommand {
    * @return
    */
   public static boolean isIpAllowedRightNow(String ipAddress, boolean startWatching) {
+    boolean rateLimitEnabled = LoadSitePropertyCommand.loadByNameAsBoolean("site.retelimitenabled");
+    if(!rateLimitEnabled) {
+      return true; //for testing
+    }
     Cache cache = CacheManager.getCache(CacheManager.RATE_LIMIT_ATTEMPT_BY_IP_CACHE);
     Bucket bucket;
     synchronized (RateLimitCommand.class) {
@@ -92,6 +97,10 @@ public class RateLimitCommand {
    * @return
    */
   public static boolean isAppAllowedRightNow(App thisApp) {
+    boolean rateLimitEnabled = LoadSitePropertyCommand.loadByNameAsBoolean("site.retelimitenabled");
+    if(!rateLimitEnabled) {
+      return true; //for testing
+    }
     Cache cache = CacheManager.getCache(CacheManager.RATE_LIMIT_BY_APP_CACHE);
     Bucket bucket;
     synchronized (RateLimitCommand.class) {
@@ -113,6 +122,10 @@ public class RateLimitCommand {
    * @return
    */
   public static boolean isAppUserAllowedRightNow(App thisApp, long userId) {
+    boolean rateLimitEnabled = LoadSitePropertyCommand.loadByNameAsBoolean("site.retelimitenabled");
+    if(!rateLimitEnabled) {
+      return true;
+    }
     Cache cache = CacheManager.getCache(CacheManager.RATE_LIMIT_BY_APP_USER_CACHE);
     Bucket bucket;
     synchronized (RateLimitCommand.class) {

@@ -52,6 +52,7 @@ public class DataSource {
   public static void init(Properties properties) {
     HikariConfig config = new HikariConfig(properties);
     config.setMaxLifetime(600000);
+    config.setMaximumPoolSize(Integer.valueOf(properties.getProperty("maximumPoolSize")));
     ds = new HikariDataSource(config);
     LOG.info("Max pool size: " + ds.getMaximumPoolSize());
   }
