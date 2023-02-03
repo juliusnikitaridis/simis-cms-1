@@ -31,8 +31,7 @@ public class ServiceRequestRepository {
     private static String[] PRIMARY_KEY_ITEMS = new String[]{"id"};
 
 
-    public static void addItems(ServiceRequest serviceRequest) throws Exception {
-        Connection connection = DB.getConnection();
+    public static void addItems(ServiceRequest serviceRequest,Connection conn) throws Exception {
         for (ServiceRequestItem serviceRequestItem : serviceRequest.getServiceRequestItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
@@ -40,10 +39,7 @@ public class ServiceRequestRepository {
                     .add("service_request_id", serviceRequest.getId())
                     .add("service_request_option_id", serviceRequestItem.getServiceRequestOptionId());
 
-            AutoStartTransaction a = new AutoStartTransaction(connection);
-            AutoRollback transaction = new AutoRollback(connection);
-            DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
-            transaction.commit();
+            DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
         }
     }
 
@@ -68,15 +64,15 @@ public class ServiceRequestRepository {
                 .add("additional_description", record.getAdditionalDescription())
                 .add("last_service_date", record.getLastServiceDate());
 
-        try {
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
                 DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+                addItems(record,connection);
                 transaction.commit();
                 return record;
-            }
+
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
             throw new Exception(se.getMessage());

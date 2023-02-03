@@ -30,22 +30,18 @@ public class QuoteRepository {
     private static String[] PRIMARY_KEY_ITEMS = new String[]{"id"};
 
 
-    public static void addItems(Quote quote) throws Exception {
-         Connection connection = DB.getConnection();
+    public static void addItems(Quote quote, Connection conn) throws Exception {
         for (QuoteItem quoteItem : quote.getQuotationItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
-            .add("id", UUID.randomUUID().toString())
-                    .add("quote_id",quote.getId())
-                    .add("part_number",quoteItem.getPartNumber())
-                    .add("part_description",quoteItem.getPartDescription())
+                    .add("id", UUID.randomUUID().toString())
+                    .add("quote_id", quote.getId())
+                    .add("part_number", quoteItem.getPartNumber())
+                    .add("part_description", quoteItem.getPartDescription())
                     .add("quantity")
-                    .add("item_total_price",quoteItem.getItemTotalPrice());
+                    .add("item_total_price", quoteItem.getItemTotalPrice());
 
-            AutoStartTransaction a = new AutoStartTransaction(connection);
-            AutoRollback transaction = new AutoRollback(connection);
-            DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
-            transaction.commit();
+            DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
         }
     }
 
@@ -55,26 +51,25 @@ public class QuoteRepository {
                 .add("id", record.getId())
                 .add("request_for_service_id", record.getRequestForServiceId())
                 .add("service_provider_id", record.getServiceProviderId())
-                .add("service_provider_name",record.getServiceProviderName())
-                .add("date",record.getDate())
-                .add("status","CREATED")
-                .add("total",record.getQuotationTotal());
-        try {
-            try (Connection connection = DB.getConnection();
-                 AutoStartTransaction a = new AutoStartTransaction(connection);
-                 AutoRollback transaction = new AutoRollback(connection)) {
-                // In a transaction (use the existing connection)
-                DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
-                transaction.commit();
-                return record;
-            }
+                .add("service_provider_name", record.getServiceProviderName())
+                .add("date", record.getDate())
+                .add("status", "CREATED")
+                .add("total", record.getQuotationTotal());
+
+        try (Connection connection = DB.getConnection();
+             AutoStartTransaction a = new AutoStartTransaction(connection);
+             AutoRollback transaction = new AutoRollback(connection)) {
+            // In a transaction (use the existing connection)
+            DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+            addItems(record, connection);
+            //now insert the items
+            transaction.commit();
+            return record;
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
             throw new Exception(se.getMessage());
         }
     }
-
-
 
 
     public static Quote findById(long id) {
@@ -104,9 +99,7 @@ public class QuoteRepository {
     }
 
 
-
-
-    private static Quote buildRecord(ResultSet rs)  {
+    private static Quote buildRecord(ResultSet rs) {
 
         Quote quote = new Quote();
         try {
@@ -121,7 +114,7 @@ public class QuoteRepository {
             SqlUtils select = new SqlUtils();
             SqlUtils where = new SqlUtils();
 
-            where.add("quote_id = ?",rs.getString("id"));
+            where.add("quote_id = ?", rs.getString("id"));
             ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, QuoteRepository::buildRecordQuoteItem)).getRecords();
             quote.setQuotationItems(quoteItems);
             return quote;
@@ -142,7 +135,7 @@ public class QuoteRepository {
             item.setQuoteId(rs.getString("quote_id"));
             return item;
         } catch (Exception throwables) {
-            LOG.error("Error when building quotetation item ",throwables);
+            LOG.error("Error when building quotetation item ", throwables);
             throwables.printStackTrace();
             return null;
         }
@@ -151,40 +144,52 @@ public class QuoteRepository {
     //update quote status once it has been accepted by the member
     public static void updateQuoteStatus(String quoteId, String status, Connection conn) throws Exception {
         String sql = "update carfix.quote set status = ? where id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1,status);
-        pstmt.setString(2,quoteId);
-        pstmt.execute();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            pstmt.setString(2, quoteId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
     //updaete service request status once a quote has been accepted
     public static void updateServiceRequestStatus(String serviceRequestId, Connection conn, String status) throws Exception {
         String sql = "update carfix.service_request set status = ? where id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1,status);
-        pstmt.setString(2,serviceRequestId);
-        pstmt.execute();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            pstmt.setString(2, serviceRequestId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
     //insert the quoteId of the accepted quote into the service request table
     public static void updateServiceRequestAcceptedQuoteId(String acceptedQuoteId, String serviceRequestId, Connection conn) throws Exception {
         String sql = "update carfix.service_request set accepted_quote_id = ? where id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1,acceptedQuoteId);
-        pstmt.setString(2,serviceRequestId);
-        pstmt.execute();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, acceptedQuoteId);
+            pstmt.setString(2, serviceRequestId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
     //need to update which service providers quote has been accepted for this service request
-    public static void updateAcceptedServiceProviderId(String acceptedServiceProviderId, String serviceRequestId,Connection conn) throws Exception {
+    public static void updateAcceptedServiceProviderId(String acceptedServiceProviderId, String serviceRequestId, Connection conn) throws Exception {
         String sql = "update carfix.service_request set confirmed_service_provider_id = ? where id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1,acceptedServiceProviderId);
-        pstmt.setString(2,serviceRequestId);
-        pstmt.execute();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, acceptedServiceProviderId);
+            pstmt.setString(2, serviceRequestId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
 

@@ -103,9 +103,12 @@ public class VehicleRepository {
 
 
     public static void delete(String vehicleId) throws Exception {
-        Connection connection = DB.getConnection();
-        DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", vehicleId));
-        LOG.debug("vehicle has been deleted:>>"+vehicleId);
+        try(Connection connection = DB.getConnection()){
+            DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", vehicleId));
+            LOG.debug("vehicle has been deleted:>>"+vehicleId);
+        } catch(Exception e) {
+            throw e;
+        }
     }
 
 

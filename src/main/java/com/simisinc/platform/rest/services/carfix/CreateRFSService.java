@@ -41,11 +41,9 @@ public class CreateRFSService {
             if(serviceRequest.getType() == null || !validateServiceRequestType(serviceRequest.getType())) {
                 throw new Exception("Service request type not recognized ::"+serviceRequest.getType());
             }
-
             serviceRequest.setId(serviceRequestId);
 
             ServiceRequestRepository.add(serviceRequest);
-            ServiceRequestRepository.addItems(serviceRequest);
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("service request has been created");}};

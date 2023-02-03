@@ -26,7 +26,6 @@ public class UpdateVehicleService {
 
     public ServiceResponse post(ServiceContext context) {
 
-
         try {
 
             ObjectMapper mapper = new ObjectMapper();

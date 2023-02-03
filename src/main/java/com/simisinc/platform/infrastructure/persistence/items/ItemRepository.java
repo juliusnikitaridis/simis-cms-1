@@ -127,6 +127,7 @@ public class ItemRepository {
         CollectionRepository.updateItemCount(connection, record.getCollectionId(), 1);
         CategoryRepository.updateItemCount(connection, record.getCategoryId(), 1);
         // Finish the transaction
+
         transaction.commit();
         return record;
       }

@@ -38,7 +38,6 @@ public class CreateQuoteService {
             quote.setId(quoteId);
 
             QuoteRepository.add(quote);
-            QuoteRepository.addItems(quote);
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("quote has been created");}};
@@ -52,5 +51,4 @@ public class CreateQuoteService {
             return response;
         }
     }
-
 }

@@ -29,12 +29,10 @@ public class AcceptQuoteService {
 
     public ServiceResponse post(ServiceContext context) {
 
-
-        try {
+        try (Connection conn = DB.getConnection()){
             ObjectMapper mapper = new ObjectMapper();
             AcceptQuoteRequest request = mapper.readValue(context.getJsonRequest(), AcceptQuoteRequest.class);
 
-            Connection conn = DB.getConnection();
             //update quote status once it has been accepted by the member
             QuoteRepository.updateQuoteStatus(request.getAcceptedQuoteId(), "ACCEPTED",conn);
 
@@ -59,7 +57,6 @@ public class AcceptQuoteService {
             return response;
         }
     }
-
 }
 
 
