@@ -170,17 +170,14 @@ public class ServiceRequestRepository {
 
 
     //method to update the status
-    public static void updateStatus(String status, String serviceRequestId, Connection conn) {
+    public static void updateStatus(String status, String serviceRequestId, Connection conn) throws Exception {
         String sql = "update carfix.service_request set status = ? where id = ?";
-        PreparedStatement pstmt = null;
-        try {
-            pstmt = conn.prepareStatement(sql);
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1,status);
             pstmt.setString(2,serviceRequestId);
             pstmt.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            LOG.error("error when updating service request status");
+        } catch(Exception e) {
+            throw e;
         }
     }
 }
