@@ -7,18 +7,17 @@ import lombok.Setter;
 
 /**
  * Julius Nikitaridis
- * This will represent the service requests that are lodged by members of the platform. There can
+ * This will represent a supported brand in the system
  * be 3 types of service requests
  */
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class ServiceRequestItemOption extends Entity {
+public class Brand extends Entity {
 
     private String id;
-    private String description;
-    private String category;
+    private String brandName;
 }
 
 

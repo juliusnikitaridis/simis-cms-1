@@ -1,9 +1,9 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
-import com.simisinc.platform.domain.model.Entity;
+import com.simisinc.platform.domain.model.carfix.Brand;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
-import com.simisinc.platform.domain.model.carfix.ServiceRequestItemOption;
+import com.simisinc.platform.domain.model.carfix.Category;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,7 +25,8 @@ public class ServiceRequestRepository {
     private static Log LOG = LogFactory.getLog(ServiceRequestRepository.class);
     private static String TABLE_NAME = "carfix.Service_request";
     private static String TABLE_NAME_ITEMS = "carfix.Service_request_items";
-    private static String TABLE_NAME_ITEM_OPTIONS = "carfix.service_request_items_options";
+    private static String TABLE_NAME_CATEGORYS = "carfix.categories";
+    private static String TABLE_NAME_BRANDS = "carfix.brands";
     private static String[] PRIMARY_KEY = new String[]{"id"};
     private static String[] PRIMARY_KEY_ITEMS = new String[]{"id"};
 
@@ -37,7 +37,8 @@ public class ServiceRequestRepository {
             insertValue
                     .add("id", UUID.randomUUID().toString())
                     .add("service_request_id", serviceRequest.getId())
-                    .add("service_request_option_id", serviceRequestItem.getServiceRequestOptionId());
+                    .add("category_id", serviceRequestItem.getItemCategoryId())
+                    .add("item_description",serviceRequestItem.getItemDescription());
 
             DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
         }
@@ -45,8 +46,12 @@ public class ServiceRequestRepository {
 
 
     //return reference data for creating service requests
-    public static DataResult findOptions() throws Exception {
-        return DB.selectAllFrom(TABLE_NAME_ITEM_OPTIONS, null, null, ServiceRequestRepository::buildRecordItemsOption);
+    public static DataResult findCategories() throws Exception {
+        return DB.selectAllFrom(TABLE_NAME_CATEGORYS, null, null, ServiceRequestRepository::buildRecordCategories);
+    }
+
+    public static DataResult findBrands() throws Exception {
+        return DB.selectAllFrom(TABLE_NAME_BRANDS, null, null, ServiceRequestRepository::buildRecordBrands);
     }
 
 
@@ -144,9 +149,9 @@ public class ServiceRequestRepository {
             serviceRequestItem.setId(resultSet.getString("id"));
             serviceRequestItem.setServiceRequestOptionId(resultSet.getString("service_request_option_id"));
             ///get the info from the service_request_items_options table to avoid the additional calls
-            ServiceRequestItemOption option = (ServiceRequestItemOption) DB.selectRecordFrom("carfix.service_request_items_options",new SqlUtils().add("id = ?", resultSet.getString("service_request_option_id")),ServiceRequestRepository::buildRecordItemsOption);
-            serviceRequestItem.setServiceRequestItemOptionCategory(option.getCategory());
-            serviceRequestItem.setServiceRequestItemOptionDescription(option.getDescription());
+            Category option = (Category) DB.selectRecordFrom("carfix.service_request_items_options",new SqlUtils().add("id = ?", resultSet.getString("service_request_option_id")),ServiceRequestRepository::buildRecordCategories);
+            serviceRequestItem.setItemCategoryId(option.getCategory());
+            serviceRequestItem.setItemDescription(option.getDescription());
             return serviceRequestItem;
         } catch (SQLException throwables) {
             LOG.error("exception when building record for buildRecordServiceRequestItems");
@@ -155,15 +160,27 @@ public class ServiceRequestRepository {
     }
 
 
-    private static ServiceRequestItemOption buildRecordItemsOption(ResultSet rs) {
-        ServiceRequestItemOption option = new ServiceRequestItemOption();
+    private static Category buildRecordCategories(ResultSet rs) {
+        Category option = new Category();
         try {
             option.setCategory(rs.getString("category"));
             option.setDescription(rs.getString("description"));
             option.setId(rs.getString("id"));
             return option;
         } catch (Exception e) {
-            LOG.error("exception when building item option");
+            LOG.error("exception when buildingcategories");
+            return null;
+        }
+    }
+
+    private static Brand buildRecordBrands(ResultSet rs) {
+        Brand brand = new Brand();
+        try {
+            brand.setId(rs.getString("id"));
+            brand.setBrandName(rs.getString("brand_name"));
+            return brand;
+        } catch (Exception e) {
+            LOG.error("exception when buildRecordBrands");
             return null;
         }
     }

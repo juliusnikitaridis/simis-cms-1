@@ -30,7 +30,7 @@
   <service method="get" endpoint="carfix/RegisterMemberService" class="com.simisinc.platform.rest.services.carfix.RegisterMemberService" />
   <service method="post" endpoint="carfix/CreateQuoteService" class="com.simisinc.platform.rest.services.carfix.CreateQuoteService" />
   <service method="post" endpoint="carfix/QuoteListService" class="com.simisinc.platform.rest.services.carfix.QuoteListService" />
-  <service method="get" endpoint="carfix/ServiceRequestOptionsListService" class="com.simisinc.platform.rest.services.carfix.ServiceRequestOptionsListService" />
+  <service method="get" endpoint="carfix/CategoryListService" class="com.simisinc.platform.rest.services.carfix.CategoryListService" />
   <service method="post" endpoint="carfix/RegisterServiceProviderService" class="com.simisinc.platform.rest.services.carfix.RegisterServiceProviderService"/>
   <service method="post" endpoint="carfix/RegisterMemberService" class="com.simisinc.platform.rest.services.carfix.RegisterMemberService"/>
   <service method="post" endpoint="carfix/AcceptQuoteService" class="com.simisinc.platform.rest.services.carfix.AcceptQuoteService"/>
@@ -38,4 +38,6 @@
   <service method="get" endpoint="carfix/ServiceProviderListService" class="com.simisinc.platform.rest.services.carfix.ServiceProviderListService"/>
   <service method="get" endpoint="carfix/DeleteVehicleService" class="com.simisinc.platform.rest.services.carfix.DeleteVehicleService"/>
   <service method="get" endpoint="carfix/UpdateVehicleService" class="com.simisinc.platform.rest.services.carfix.UpdateVehicleService"/>
+  <service method="get" endpoint="carfix/CategoryListService" class="com.simisinc.platform.rest.services.carfix.CategoryListService"/>
+  <service method="get" endpoint="carfix/BrandListService" class="com.simisinc.platform.rest.services.carfix.BrandListService"/>
 </services>

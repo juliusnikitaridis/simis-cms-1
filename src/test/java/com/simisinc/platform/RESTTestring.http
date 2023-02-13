@@ -78,7 +78,7 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/carfix/CreateRFSService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-a9a46150-a2a0-425a-9a9c-317e2ed3f2121
+Authorization:Bearer API-51653205-c123-4cc9-9e36-2b9f56e29dc11
 Content-Type: application/json
 
 {
@@ -92,7 +92,7 @@ Content-Type: application/json
   "pictureData": "base64Ecode(some data)",
   "additionalDescription": "need to change shocks",
   "lastServiceDate": "10-10-2021",
-  "serviceRequestItems": [{"serviceRequestOptionId": "34234234"},{"serviceRequestOptionId": "34234111"},{"serviceRequestOptionId": "34235554"}]
+  "serviceRequestItems": [{"itemCategoryId": "34234234","itemDescription": "front shocks"},{"itemCategoryId": "34234234","itemDescription": "rear shocks"}]
 }
 ###
 
@@ -145,18 +145,18 @@ Content-Type: application/json
 {
   "firstName":"Test",
   "lastName":"T",
-  "email":"julius129@test.com",
-  "username":"julius129@test.com",
+  "email":"julius1295@test.com",
+  "username":"julius1295@test.com",
   "idnum": "1996",
   "roleId": "5",
   "certifications": "certifications format?",
   "userType": "SERVICE_PROVIDER",
-  "supportedBrands": "brand1,brand2,brand3,brand4,brand5",
+  "supportedBrands": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285aa2"}],
+  "supportedCategories": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285ab2"}],
   "name": "SomeAmazingServiceProvider",
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
-  "logoData": "encoded_logo_data",
-  "services": "CATEGORY1,CATEGORY2,CATEGORY3"
+  "logoData": "encoded_logo_data"
 }
 ###
 
@@ -237,9 +237,14 @@ X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
 ###
 
-GET http://localhost:8080/api/carfix/ServiceRequestOptionsListService
+GET http://localhost:8080/api/carfix/CategoryListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Authorization:Bearer API-111bddec-1137-49fb-822b-522530cf51a51
+###
+
+GET http://localhost:8080/api/carfix/BrandListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-111bddec-1137-49fb-822b-522530cf51a51
 ###
 
 POST http://localhost:8080/api/carfix/AcceptQuoteService
@@ -263,6 +268,69 @@ Content-Type: application/json
 "serviceRequestId": "303a67af-f8da-4030-9144-90c56bfc3caf",
 "status": "SOME AMAZING status"
 }
+###
+
+
+
+
+###
+POST https://sandbox-l.ppay.io/api/oauth/token
+Content-Type: application/json
+Authorization: Basic Njc0YTI4OWQyMzU3MTFlYjkzZDUwMmQxNGRlMThjMGM6ZGNsN0U1Sk1mWWhaMU90OWlIdkdWakFrTlNVZ3NU
+{
+    "clientId": "674a289d235711eb93d502d14de18c0c",
+    "clientSecret": "dcl7E5JMfYhZ1Ot9iHvGVjAkNSUgsT",
+    "merchantId": "6749df69235711eb93d502d14de18c0c"
+}
+###
+
+
+###
+POST https://sandbox-l.ppay.io/api/channels/6749df69235711eb93d502d14de18c0c/payments
+Content-Type: application/json
+
+{
+    "Authentication": {
+    "userid": "674a289d235711eb93d502d14de18c0c",
+    "password": "dcl7E5JMfYhZ1Ot9iHvGVjAkNSUgsT",
+    "entityid": "6749df69235711eb93d502d14de18c0c"
+  },
+    "payment": {
+        "merchantInvoiceId": "{{merchantInvoiceId}}",
+        "amount": {{$randomPrice}},
+        "currency": "ZAR",
+        "files": [],
+        "notes": "{{$randomBs}}"
+    },
+    "customer": {
+        "givenName": "{{$randomFirstName}}",
+        "surname": "{{$randomLastName}}",
+        "email": "{{$randomEmail}}",
+        "mobile": "+{{$randomPhoneNumber}}",
+        "whatsapp": "+{{$randomPhoneNumber}}",
+        "billing": {
+            "street1": "{{$randomStreetAddress}}",
+            "city": "{{$randomCity}}",
+            "state": "{{$randomCountry}}",
+            "postalCode": "{{$randomCreditCardMask}}",
+            "country": "{{$randomCountryCode}}"
+        }
+    },
+    "options": {
+        "sendEmail": false,
+        "sendSms": false,
+        "sendWhatsapp": false,
+        "emailCc": "{{$randomEmail}}",
+        "emailBcc": "{{$randomEmail}}",
+        "expiryTime": 5,
+        "notificationUrl": "{{notificationUrl}}"
+    },
+    "checkout": {
+        "defaultPaymentMethod": "CARD",
+        "tokeniseCard": true
+    }
+}
+
 ###
 
 

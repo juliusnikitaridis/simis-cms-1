@@ -38,7 +38,7 @@ public class QuoteRepository {
                     .add("quote_id", quote.getId())
                     .add("part_number", quoteItem.getPartNumber())
                     .add("part_description", quoteItem.getPartDescription())
-                    .add("quantity")
+                    .add("quantity",quoteItem.getQuantity())
                     .add("item_total_price", quoteItem.getItemTotalPrice());
 
             DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???

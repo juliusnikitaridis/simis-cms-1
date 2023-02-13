@@ -1,5 +1,8 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simisinc.platform.domain.model.carfix.Brand;
+import com.simisinc.platform.domain.model.carfix.Category;
 import com.simisinc.platform.domain.model.carfix.ServiceProvider;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
@@ -17,7 +20,8 @@ public class ServiceProviderRepository {
     public static ServiceProvider add(ServiceProvider serviceProvider,String userUniqueId) throws Exception {
             SqlUtils insertValues = new SqlUtils()
                     .add("id", serviceProvider.getServiceProviderId()) //PK on SP table
-                    .add("supported_brands", serviceProvider.getSupportedBrands())
+                    .add("supported_brands", serviceProvider.getSupportedBrandsAsJSONString())
+                    .add("supported_categories",serviceProvider.getSupportedCategoriesAsString())
                     .add("name", serviceProvider.getName())
                     .add("services", serviceProvider.getServices())
                     .add ("address",serviceProvider.getAddress())
@@ -56,16 +60,18 @@ public class ServiceProviderRepository {
     //returns address, name , supported brands , services, about us ,
     public static ServiceProvider buildRecord(ResultSet rs) {
         try {
+            ObjectMapper mapper = new ObjectMapper();
             ServiceProvider serviceProvider = new ServiceProvider();
             serviceProvider.setName(rs.getString("name"));
-            serviceProvider.setSupportedBrands(rs.getString("supported_brands"));
+            serviceProvider.setSupportedBrands(mapper.readValue(rs.getString("supported_brands"), Brand[].class));
+            serviceProvider.setSupportedCategories(mapper.readValue(rs.getString("supported_categories"), Category[].class));
             serviceProvider.setServices(rs.getString("services"));
             serviceProvider.setAboutUs(rs.getString("about_us"));
             serviceProvider.setAddress(rs.getString("address"));
             serviceProvider.setServiceProviderId(rs.getString("id"));
             serviceProvider.setLogoData(rs.getString("logo_data"));
             return serviceProvider;
-        } catch (SQLException throwables) {
+        } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());
             throwables.printStackTrace();
             return null;

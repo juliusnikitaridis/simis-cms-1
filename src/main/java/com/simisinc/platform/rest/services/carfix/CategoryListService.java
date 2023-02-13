@@ -1,16 +1,10 @@
 package com.simisinc.platform.rest.services.carfix;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.carfix.ServiceRequest;
-import com.simisinc.platform.domain.model.carfix.ServiceRequestItemOption;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
+import com.simisinc.platform.domain.model.carfix.Category;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.VehicleSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
-import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -23,22 +17,22 @@ import java.util.List;
  * @author Julius Nikitaridis
  * @created 01/11/22 11:28 AM
  */
-public class ServiceRequestOptionsListService {
+public class CategoryListService {
 
-    private static Log LOG = LogFactory.getLog(ServiceRequestOptionsListService.class);
+    private static Log LOG = LogFactory.getLog(CategoryListService.class);
 
     public ServiceResponse get(ServiceContext context) {
 
 
         try {
-            List<ServiceRequestItemOption> optionsList = (List<ServiceRequestItemOption>) ServiceRequestRepository.findOptions().getRecords();
+            List<Category> optionsList = (List<Category>) ServiceRequestRepository.findCategories().getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
-            ServiceResponseCommand.addMeta(response, "Options List", optionsList, null);
+            ServiceResponseCommand.addMeta(response, "Category List", optionsList, null);
             response.setData(optionsList);
             return response;
         } catch (Throwable e) {
-            LOG.error("Error in ServiceRequestOptionsListService", e);
+            LOG.error("Error in CategoryListService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;

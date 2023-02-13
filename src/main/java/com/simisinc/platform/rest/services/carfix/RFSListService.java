@@ -35,6 +35,7 @@ public class RFSListService {
             final String memberId = context.getParameter("memberId");
             final String vehicleId = context.getParameter("vehicleId");
             final String serviceRequestId = context.getParameter("serviceRequestId");
+            //todo - return applicable requests based on SP categories and brands = param = serviceProviderId
 
             ServiceRequestSpecification specification = new ServiceRequestSpecification();
 

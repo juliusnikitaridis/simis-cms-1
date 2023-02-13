@@ -8,6 +8,6 @@ public class ServiceRequestItem extends Entity {
     private String id;
     private String serviceRequestId;
     private String serviceRequestOptionId;
-    private String serviceRequestItemOptionDescription;
-    private String serviceRequestItemOptionCategory;
+    private String ItemDescription;
+    private String ItemCategoryId;
 }
