@@ -99,7 +99,7 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/carfix/RFSListService?memberId=334423
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-3f4f5866-3f7a-443b-94d7-29f2c6d032a11
+Authorization:Bearer API-c21459ef-3abb-48d6-9232-3411a445c0b91
 ###
 
 ###

@@ -13,4 +13,6 @@ public class ServiceRequestSpecification {
     private String vehicleId ;
     private String memberId;
     private String serviceRequestId;
+    private String status;
+    private String vehicleBrandId;
 }

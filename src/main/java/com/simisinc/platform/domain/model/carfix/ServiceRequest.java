@@ -30,6 +30,8 @@ public class ServiceRequest extends Entity {
     private ArrayList<ServiceRequestItem> serviceRequestItems;
     private String confirmedServiceProvider;
     private String acceptedQuoteId;
+    private String categoryHash;
+    private String vehicleBrandId;
 }
 
 

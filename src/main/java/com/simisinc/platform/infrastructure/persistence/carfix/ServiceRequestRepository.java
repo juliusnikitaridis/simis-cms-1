@@ -56,6 +56,8 @@ public class ServiceRequestRepository {
 
 
     public static ServiceRequest add(ServiceRequest record) throws Exception {
+        //build up the category hasn for lookups - this should be refined at some point
+        //record.getServiceRequestItems().for
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("date", record.getDate())
@@ -130,6 +132,7 @@ public class ServiceRequestRepository {
             request.setLastServiceDate(rs.getString("last_service_date"));
             request.setConfirmedServiceProvider(rs.getString("confirmed_service_provider_id"));
             request.setAcceptedQuoteId(rs.getString("accepted_quote_id"));
+            request.setCategoryHash(rs.getString("category_hash"));
 
             //now also need to get all the service request items
             ArrayList<ServiceRequestItem> serviceRequestItems = (ArrayList<ServiceRequestItem>) DB.selectAllFrom(TABLE_NAME_ITEMS,new SqlUtils(),new SqlUtils().add("service_request_id = ?",rs.getString("id")),null,null,ServiceRequestRepository::buildRecordServiceRequestItems).getRecords();
@@ -147,11 +150,10 @@ public class ServiceRequestRepository {
         ServiceRequestItem serviceRequestItem = new ServiceRequestItem();
         try {
             serviceRequestItem.setId(resultSet.getString("id"));
-            serviceRequestItem.setServiceRequestOptionId(resultSet.getString("service_request_option_id"));
-            ///get the info from the service_request_items_options table to avoid the additional calls
-            Category option = (Category) DB.selectRecordFrom("carfix.service_request_items_options",new SqlUtils().add("id = ?", resultSet.getString("service_request_option_id")),ServiceRequestRepository::buildRecordCategories);
+            serviceRequestItem.setServiceRequestId(resultSet.getString("service_request_id"));
+            Category option = (Category) DB.selectRecordFrom("carfix.categories",new SqlUtils().add("id = ?", resultSet.getString("category_id")),ServiceRequestRepository::buildRecordCategories);
             serviceRequestItem.setItemCategoryId(option.getCategory());
-            serviceRequestItem.setItemDescription(option.getDescription());
+            serviceRequestItem.setItemDescription(resultSet.getString("item_description"));
             return serviceRequestItem;
         } catch (SQLException throwables) {
             LOG.error("exception when building record for buildRecordServiceRequestItems");

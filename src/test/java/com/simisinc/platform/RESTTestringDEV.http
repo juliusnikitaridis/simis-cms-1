@@ -95,7 +95,7 @@ Content-Type: application/json
 
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?memberId=sizwe-maluleke
+GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?memberId=romeo-williams
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Bearer API-f97ea9ee-4219-4f37-85c9-fd9dbb800d5b5
 ###
@@ -117,7 +117,7 @@ Content-Type: application/json
   "pictureData": "base64Ecode(some data)",
   "additionalDescription": "need to change shocks",
   "lastServiceDate": "10-10-2021",
-  "serviceRequestItems": [{"serviceRequestOptionId": "34234234"},{"serviceRequestOptionId": "34234111"},{"serviceRequestOptionId": "34235554"}]
+  "serviceRequestItems": [{"itemCategoryId": "34234234","itemDescription": "front shocks"},{"itemCategoryId": "34234234","itemDescription": "rear shocks"}]
 }
 ###
 
