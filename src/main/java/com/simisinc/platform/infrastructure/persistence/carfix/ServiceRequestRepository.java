@@ -65,7 +65,7 @@ public class ServiceRequestRepository {
         }
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
-                .add("date", record.getDate())
+                .add("created_date", String.valueOf(System.currentTimeMillis()))
                 .add("type", record.getType())
                 .add("vehicle_id", record.getVehicleId())
                 .add("member_id", record.getMemberId())
@@ -129,7 +129,7 @@ public class ServiceRequestRepository {
         ServiceRequest request = new ServiceRequest();
         try {
             request.setId(rs.getString("id"));
-            request.setDate(rs.getString("date"));
+            request.setCreatedDate(rs.getString("created_date"));
             request.setType(rs.getString("type"));
             request.setVehicleId(rs.getString("vehicle_id"));
             request.setMemberId(rs.getString("member_id"));

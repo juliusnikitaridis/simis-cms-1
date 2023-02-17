@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ServiceRequest extends Entity {
 
     private String id;
-    private String date;
+    private String createdDate;
     private String type;
     private String vehicleId;
     private String memberId;

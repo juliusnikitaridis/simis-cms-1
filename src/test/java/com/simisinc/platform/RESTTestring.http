@@ -84,7 +84,6 @@ Authorization:Bearer API-51653205-c123-4cc9-9e36-2b9f56e29dc11
 Content-Type: application/json
 
 {
-  "date": "12-12-2022",
   "type": "REQUEST_FOR_SERVICE",
   "vehicleId": "4333e",
   "memberId": "334423",
@@ -95,7 +94,8 @@ Content-Type: application/json
   "additionalDescription": "need to change shocks",
   "lastServiceDate": "10-10-2021",
   "vehicleBrandId": "b8367ced-5395-465a-8012-b55779285ea2",
-  "serviceRequestItems": [{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b11","itemDescription": "front shocks"},{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b71","itemDescription": "rear shocks"}]
+  "serviceRequestItems": [{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b11","itemDescription": "front shocks"},{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b71","itemDescription": "rear shocks"}],
+  "preferred_date": "1676641315237"
 }
 ###
 
@@ -168,8 +168,7 @@ Content-Type: application/json
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
   "logoData": "encoded_logo_data",
-  "contact_no": "3423423452",
-  "preferred_date": "1676641315237"
+  "contact_no": "3423423452"
 }
 ###
 
