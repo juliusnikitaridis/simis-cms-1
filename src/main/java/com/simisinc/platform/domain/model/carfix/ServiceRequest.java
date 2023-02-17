@@ -32,6 +32,8 @@ public class ServiceRequest extends Entity {
     private String acceptedQuoteId;
     private String categoryHash;
     private String vehicleBrandId;
+    private String preferredDate;
+    private String confirmedDate;
 }
 
 

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Julius Nikitaridis
@@ -57,7 +58,11 @@ public class ServiceRequestRepository {
 
     public static ServiceRequest add(ServiceRequest record) throws Exception {
         //build up the category hasn for lookups - this should be refined at some point
-        //record.getServiceRequestItems().for
+
+        StringBuilder requestItemsCategoryHash = new StringBuilder("");
+        for(ServiceRequestItem serviceRequestItem : record.getServiceRequestItems()) {
+            requestItemsCategoryHash.append(serviceRequestItem.getItemCategoryId()+"|");
+        }
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("date", record.getDate())
@@ -69,7 +74,10 @@ public class ServiceRequestRepository {
                 .add("current_odo_reading", record.getCurrentOdoReading())
                 .add("picture_data", record.getPictureData())
                 .add("additional_description", record.getAdditionalDescription())
-                .add("last_service_date", record.getLastServiceDate());
+                .add("last_service_date", record.getLastServiceDate())
+                .add("vehicle_brand_id",record.getVehicleBrandId())
+                .add("category_hash",requestItemsCategoryHash.toString())
+                .add("preferred_date",record.getPreferredDate());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -107,7 +115,8 @@ public class ServiceRequestRepository {
             where
                     .addIfExists("vehicle_id = ?", specification.getVehicleId())
                     .addIfExists("member_id = ?", specification.getMemberId())
-                    .addIfExists("id = ?", specification.getServiceRequestId());
+                    .addIfExists("id = ?", specification.getServiceRequestId())
+                    .addIfExists("status = ?",specification.getStatus());
 
         }
         return DB.selectAllFrom(
@@ -132,7 +141,10 @@ public class ServiceRequestRepository {
             request.setLastServiceDate(rs.getString("last_service_date"));
             request.setConfirmedServiceProvider(rs.getString("confirmed_service_provider_id"));
             request.setAcceptedQuoteId(rs.getString("accepted_quote_id"));
+            request.setVehicleBrandId(rs.getString("vehicle_brand_id"));
             request.setCategoryHash(rs.getString("category_hash"));
+            request.setConfirmedDate(rs.getString("confirmed_date"));
+            request.setPreferredDate(rs.getString("preferred_date"));
 
             //now also need to get all the service request items
             ArrayList<ServiceRequestItem> serviceRequestItems = (ArrayList<ServiceRequestItem>) DB.selectAllFrom(TABLE_NAME_ITEMS,new SqlUtils(),new SqlUtils().add("service_request_id = ?",rs.getString("id")),null,null,ServiceRequestRepository::buildRecordServiceRequestItems).getRecords();

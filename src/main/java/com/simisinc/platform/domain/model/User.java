@@ -71,9 +71,20 @@ public class User extends Entity {
   private String userType = null;
 
 
+  private String contactNo = null;
+
+
   public User() {
   }
 
+
+  public String getContactNo() {
+    return contactNo;
+  }
+
+  public void setContactNo(String contactNo) {
+    this.contactNo = contactNo;
+  }
   public String getGroupId() {
     return groupId;
   }

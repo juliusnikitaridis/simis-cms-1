@@ -42,4 +42,6 @@ public class Vehicle extends Entity {
     private String odoReading = null;
     private String engineCode = null;
     private String memberId = null;
+    private String maintenancePlan;
+    private String serviceHistory;
 }

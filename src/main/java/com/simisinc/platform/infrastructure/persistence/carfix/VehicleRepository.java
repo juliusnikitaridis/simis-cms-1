@@ -27,6 +27,8 @@ public class VehicleRepository {
                 .add("transmission", record.getTransmission())
                 .add("odo_reading", record.getOdoReading())
                 .add("member_id",record.getMemberId())
+                .add("service_history",record.getServiceHistory())
+                .add("maintenance_plan",record.getMaintenancePlan())
                 .add("engine_code", record.getEngineCode());
 
         try {
@@ -58,7 +60,9 @@ public class VehicleRepository {
                 .addIfExists("transmission", record.getTransmission())
                 .addIfExists("odo_reading", record.getOdoReading())
                 .addIfExists("member_id",record.getMemberId())
-                .addIfExists("engine_code", record.getEngineCode());
+                .addIfExists("engine_code", record.getEngineCode())
+                .addIfExists("maintenance_plan",record.getMaintenancePlan())
+                .addIfExists("service_history",record.getServiceHistory());
 
         try {
             try (Connection connection = DB.getConnection();
@@ -127,6 +131,8 @@ public class VehicleRepository {
             vehicle.setTransmission(rs.getString("transmission"));
             vehicle.setVinNumber(rs.getString("vin_number"));
             vehicle.setYear(rs.getString("year"));
+            vehicle.setMaintenancePlan(rs.getString("maintenance_plan"));
+            vehicle.setServiceHistory(rs.getString("service_history"));
             vehicle.setMemberId(rs.getString("member_id"));
             return vehicle;
         } catch (Exception e) {

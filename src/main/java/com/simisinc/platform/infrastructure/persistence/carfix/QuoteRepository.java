@@ -2,17 +2,13 @@ package com.simisinc.platform.infrastructure.persistence.carfix;
 
 import com.simisinc.platform.domain.model.carfix.Quote;
 import com.simisinc.platform.domain.model.carfix.QuoteItem;
-import com.simisinc.platform.domain.model.carfix.ServiceRequest;
-import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
 import com.simisinc.platform.infrastructure.database.*;
-import lombok.SneakyThrows;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -52,7 +48,8 @@ public class QuoteRepository {
                 .add("request_for_service_id", record.getRequestForServiceId())
                 .add("service_provider_id", record.getServiceProviderId())
                 .add("service_provider_name", record.getServiceProviderName())
-                .add("date", record.getDate())
+                .add("created_date", String.valueOf(System.currentTimeMillis()))
+                .add("booking_date",record.getBookingDate())
                 .add("status", "CREATED")
                 .add("total", record.getQuotationTotal());
 
@@ -107,8 +104,10 @@ public class QuoteRepository {
             quote.setRequestForServiceId(rs.getString("request_for_service_id"));
             quote.setServiceProviderId(rs.getString("service_provider_id"));
             quote.setServiceProviderName(rs.getString("service_provider_name"));
-            quote.setDate(rs.getString("date"));
+            quote.setCreatedDate(rs.getString("date"));
             quote.setQuotationTotal(rs.getString("total"));
+            quote.setBookingDate(rs.getString("booking_date"));
+            quote.setCreatedDate(rs.getString("created_date"));
 
             //get the line items for this record
             SqlUtils select = new SqlUtils();
@@ -156,10 +155,11 @@ public class QuoteRepository {
 
     //updaete service request status once a quote has been accepted
     public static void updateServiceRequestStatus(String serviceRequestId, Connection conn, String status) throws Exception {
-        String sql = "update carfix.service_request set status = ? where id = ?";
+        String sql = "update carfix.service_request set status = ?,confirmed_date = ? where id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);
-            pstmt.setString(2, serviceRequestId);
+            pstmt.setString(2,String.valueOf(System.currentTimeMillis()));
+            pstmt.setString(3, serviceRequestId);
             pstmt.execute();
         } catch (Exception e) {
             throw e;

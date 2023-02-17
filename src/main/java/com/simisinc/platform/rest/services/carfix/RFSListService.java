@@ -87,7 +87,15 @@ public class RFSListService {
         specification.setServiceProviderId(serviceProviderId);
         ServiceProvider serviceProvider = (ServiceProvider)ServiceProviderRepository.query(specification,null).getRecords().get(0);
         List<Brand> serviceProviderBrandsIds = Arrays.asList(serviceProvider.getSupportedBrands()); //[{"id":"3838393939nd39","brandName":null},{"id":"fe14578f-1a2c-43f4-b293-2f7b039d3100","brandName":null},{"id":"208c4493-ed44-4508-80f7-0b7a42de7208","brandName":null},{"id":"299edb1b-f085-4eff-aec1-93fdddf190eb","brandName":null},{"id":"2619069d-0f4b-44ae-9a08-3d6ca0f586a2","brandName":null}]
+        List<String>serviceProviderBrandsIdsOnly = new ArrayList<>();
+        serviceProviderBrandsIds.stream().forEach(x->{
+            serviceProviderBrandsIdsOnly.add(x.getId());
+        });
         List<Category> serviceProviderCategories = Arrays.asList(serviceProvider.getSupportedCategories());
+        List<String> serviceProviderCategoriesOnly = new ArrayList<>();
+        serviceProviderCategories.stream().forEach(x->{
+            serviceProviderCategoriesOnly.add(x.getId());
+        });
 
         //get all service requests by status
         ServiceRequestSpecification specification1 = new ServiceRequestSpecification();
@@ -96,31 +104,16 @@ public class RFSListService {
 
         ArrayList<ServiceRequest> finalMatchingServiceRequests = new ArrayList<>();
 
-        matchingServiceRequests.forEach(serviceReq-> {
-            String[] serviceReqCategories = serviceReq.getCategoryHash().split("|");
+        for (ServiceRequest serviceReq : matchingServiceRequests) {
+            String[] serviceReqCategories = serviceReq.getCategoryHash().split("\\|");
             List<String> serviceRegCategoriesList = Arrays.asList(serviceReqCategories);
 
-            if(serviceProviderBrandsIds.contains(serviceReq.getVehicleBrandId())&& serviceProviderCategories.containsAll(serviceRegCategoriesList)){
+            if (serviceProviderBrandsIdsOnly.contains(serviceReq.getVehicleBrandId()) && serviceProviderCategoriesOnly.containsAll(serviceRegCategoriesList)) {
                 finalMatchingServiceRequests.add(serviceReq);
             }
-        });
+        }
 
         return matchingServiceRequests;
-    }
-
-    public static void main (String[]args) {
-        ArrayList<String> list1 = new ArrayList<String>();
-        list1.add("MERCEDES");
-        list1.add("MERCEDES");
-        list1.add("BMW");
-
-        ArrayList<String> list2 = new ArrayList<String>();
-        list2.add("MERCEDES");
-        list2.add("BMW");
-        list2.add("MERCEDES");
-        System.out.println("first ans"+list1.containsAll(list2));
-
-        System.out.println("sercond and"+list1.equals(list2));
     }
 }
 

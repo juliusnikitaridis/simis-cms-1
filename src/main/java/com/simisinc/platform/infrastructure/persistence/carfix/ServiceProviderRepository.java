@@ -28,6 +28,7 @@ public class ServiceProviderRepository {
                     .add("logo_data",serviceProvider.getLogoData())
                     .add("about_us",serviceProvider.getAboutUs())
                     .add("certifications", serviceProvider.getCertifications())
+                    .add("accreditations",serviceProvider.getAccreditations())
                     .add("user_id",userUniqueId); //tie this to the user table
             try {
                 try (Connection connection = DB.getConnection();
@@ -70,6 +71,7 @@ public class ServiceProviderRepository {
             serviceProvider.setAddress(rs.getString("address"));
             serviceProvider.setServiceProviderId(rs.getString("id"));
             serviceProvider.setLogoData(rs.getString("logo_data"));
+            serviceProvider.setAccreditations(rs.getString("accreditations"));
             return serviceProvider;
         } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());

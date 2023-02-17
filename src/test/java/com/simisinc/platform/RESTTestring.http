@@ -23,7 +23,7 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 
 POST http://localhost:8080/api/carfix/CreateVehicleService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-79c396c1-b96c-4cc0-a321-74f00e5715c91
+Authorization:Bearer API-49366db3-a792-42a6-acd1-a73aa44e6c2f1
 Content-Type: application/json
 
 {
@@ -36,7 +36,9 @@ Content-Type: application/json
   "transmission": "manual",
   "odoReading": "2340333",
   "engineCode": "3043",
-  "memberId": "julius-niki"
+  "memberId": "julius-niki",
+  "serviceHistory": "false",
+  "maintenancePlan": "false"
 }
 ###
 
@@ -92,7 +94,8 @@ Content-Type: application/json
   "pictureData": "base64Ecode(some data)",
   "additionalDescription": "need to change shocks",
   "lastServiceDate": "10-10-2021",
-  "serviceRequestItems": [{"itemCategoryId": "34234234","itemDescription": "front shocks"},{"itemCategoryId": "34234234","itemDescription": "rear shocks"}]
+  "vehicleBrandId": "b8367ced-5395-465a-8012-b55779285ea2",
+  "serviceRequestItems": [{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b11","itemDescription": "front shocks"},{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b71","itemDescription": "rear shocks"}]
 }
 ###
 
@@ -107,6 +110,13 @@ GET http://localhost:8080/api/carfix/RFSListService?vehicleId=4333e
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 ###
+
+###
+GET http://localhost:8080/api/carfix/RFSListService?serviceProviderId=cecdb81f-9aa6-488e-8d85-3d3973dccb4e
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-7c480096-1cfb-40c0-acba-e701f115d7b61
+###
+
 
 
 ###
@@ -133,7 +143,8 @@ Content-Type: application/json
 "email":"julius666566@test.com",
 "username":"julius6665663@test.com",
 "idnum": "1996",
-"roleId": "5"
+"roleId": "5",
+"contact_no": "3423423452"
 }
 ###
 
@@ -156,7 +167,9 @@ Content-Type: application/json
   "name": "SomeAmazingServiceProvider",
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
-  "logoData": "encoded_logo_data"
+  "logoData": "encoded_logo_data",
+  "contact_no": "3423423452",
+  "preferred_date": "1676641315237"
 }
 ###
 
@@ -186,7 +199,7 @@ Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 Content-Type: application/json
 
 {
-  "date":"12-12-2022",
+  "booking_date":"1676641315237",
   "requestForServiceId":"2343243254",
   "serviceProviderId":"234234543",
   "quotationTotal": "5000.00",
