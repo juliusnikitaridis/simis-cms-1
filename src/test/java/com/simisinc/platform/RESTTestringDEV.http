@@ -142,8 +142,8 @@ Content-Type: application/json
 {
 "firstName":"Test",
 "lastName":"T",
-"email":"julius666566@test.com",
-"username":"julius6665663@test.com",
+"email":"julius6366566@test.com",
+"username":"julius66365663@test.com",
 "idnum": "1996",
 "roleId": "5"
 }
@@ -170,6 +170,12 @@ Content-Type: application/json
   "logoData": "encoded_logo_data",
   "services": "CATEGORY1,CATEGORY2,CATEGORY3"
 }
+###
+
+###
+GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?serviceProviderId=cecdb81f-9aa6-488e-8d85-3d3973dccb4e
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
 ###
 
 

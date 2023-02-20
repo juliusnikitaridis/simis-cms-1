@@ -40,6 +40,7 @@ public class User extends Entity {
 
 
   private  String Idnum =null;
+  private String contactNo = null;
   private String groupId = null;
   private String roleId = null;
   private String organization = null;
@@ -69,9 +70,6 @@ public class User extends Entity {
   private List<Group> groupList = null;
   private UserLogin lastLogin = null;
   private String userType = null;
-
-
-  private String contactNo = null;
 
 
   public User() {
