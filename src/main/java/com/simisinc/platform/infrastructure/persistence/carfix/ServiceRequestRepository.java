@@ -212,7 +212,7 @@ public class ServiceRequestRepository {
         }
     }
     public static void addJobNumber(String job_num, String serviceRequestId, Connection conn) throws Exception {
-        String sql = "update carfix.service_request set job_num = ? where id = ?";
+        String sql = "update carfix.service_request set job_number = ? where id = ?";
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1,job_num);
             pstmt.setString(2,serviceRequestId);
