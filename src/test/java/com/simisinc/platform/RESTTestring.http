@@ -140,11 +140,11 @@ Content-Type: application/json
 {
 "firstName":"Test",
 "lastName":"T",
-"email":"julius666566@test.com",
-"username":"julius6665663@test.com",
+"email":"julius6665636@test.com",
+"username":"julius66365663@test.com",
 "idnum": "1996",
 "roleId": "5",
-"contact_no": "3423423452"
+"contactNo": "3423423452"
 }
 ###
 
@@ -156,8 +156,8 @@ Content-Type: application/json
 {
   "firstName":"Test",
   "lastName":"T",
-  "email":"julius1295@test.com",
-  "username":"julius1295@test.com",
+  "email":"julius129d5@test.com",
+  "username":"julius129d5@test.com",
   "idnum": "1996",
   "roleId": "5",
   "certifications": "certifications format?",
@@ -168,7 +168,7 @@ Content-Type: application/json
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
   "logoData": "encoded_logo_data",
-  "contact_no": "3423423452"
+  "contactNo": "3423423452"
 }
 ###
 

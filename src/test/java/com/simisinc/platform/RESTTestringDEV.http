@@ -75,9 +75,9 @@ Content-Type: application/json
 
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/QuoteListService?serviceProviderId=sizwe-maluleke
+GET https://carfix.connectmobiles24.com/api/carfix/QuoteListService?serviceProviderId=234234543
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
-Authorization: Bearer API-98ae74e2-b91b-4c52-8001-91fe6bd0c9555
+Authorization: Bearer API-c7b60543-654c-4a28-b773-1acc5c492ab25
 
 ###
 
@@ -107,7 +107,6 @@ Authorization:Bearer API-3634edfb-50af-41dc-8ea2-53a14027bd8e5
 Content-Type: application/json
 
 {
-  "date": "12-12-2022",
   "type": "REQUEST_FOR_SERVICE",
   "vehicleId": "4333e",
   "memberId": "334423",
@@ -117,7 +116,9 @@ Content-Type: application/json
   "pictureData": "base64Ecode(some data)",
   "additionalDescription": "need to change shocks",
   "lastServiceDate": "10-10-2021",
-  "serviceRequestItems": [{"itemCategoryId": "34234234","itemDescription": "front shocks"},{"itemCategoryId": "34234234","itemDescription": "rear shocks"}]
+  "vehicleBrandId": "1dde16fc-bb78-41ec-bae0-7c6c9b4ba5ac",
+  "serviceRequestItems": [{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b33","itemDescription": "front shocks"},{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a8b70","itemDescription": "rear shocks"}],
+  "preferredDate": "1676641315237"
 }
 ###
 
@@ -142,8 +143,8 @@ Content-Type: application/json
 {
 "firstName":"Test",
 "lastName":"T",
-"email":"julius6665666@test.com",
-"username":"julius66656636@test.com",
+"email":"julius6366566@test.com",
+"username":"julius66365663@test.com",
 "idnum": "1996",
 "roleId": "5"
 }
@@ -157,19 +158,26 @@ Content-Type: application/json
 {
   "firstName":"Test",
   "lastName":"T",
-  "email":"julius1299@test.com",
-  "username":"julius1299@test.com",
+  "email":"nwesp2@test.com",
+  "username":"nwesp2@test.com",
   "idnum": "1996",
   "roleId": "5",
   "certifications": "certifications format?",
   "userType": "SERVICE_PROVIDER",
-  "supportedBrands": "brand1,brand2,brand3,brand4,brand5",
+  "supportedBrands": [{"id": "1dde16fc-bb78-41ec-bae0-7c6c9b4ba5ac"}],
+  "supportedCategories": [{"id": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b33"},{"id": "6ea8bc58-e17d-48c7-9ef7-d6746e6a8b70"}],
   "name": "SomeAmazingServiceProvider",
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
   "logoData": "encoded_logo_data",
-  "services": "CATEGORY1,CATEGORY2,CATEGORY3"
+  "contactNo": "3423423452"
 }
+###
+
+###
+GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?serviceProviderId=e05dc5d2-dd69-495f-98c5-066754a9b9c7
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
 ###
 
 
