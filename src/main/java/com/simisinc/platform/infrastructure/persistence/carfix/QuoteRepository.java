@@ -113,7 +113,7 @@ public class QuoteRepository {
             SqlUtils where = new SqlUtils();
 
             where.add("quote_id = ?", rs.getString("id"));
-            ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, exisitng QuoteRepository::buildRecordQuoteItem)).getRecords();
+            ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, QuoteRepository::buildRecordQuoteItem)).getRecords();
             quote.setQuotationItems(quoteItems);
             return quote;
         } catch (Exception throwables) {
@@ -124,7 +124,7 @@ public class QuoteRepository {
     }
 
 
-    private static QuoteItem buildRecordQuoteItem(ResultSet rs) throws Exception{
+    private static QuoteItem buildRecordQuoteItem(ResultSet rs){
         QuoteItem item = new QuoteItem();
         try {
             item.setId(rs.getString("id"));
@@ -137,7 +137,7 @@ public class QuoteRepository {
         } catch (Exception throwables) {
             LOG.error("Error when building quotetation item ", throwables);
             throwables.printStackTrace();
-            throw throwables;
+            return null;
         }
     }
 

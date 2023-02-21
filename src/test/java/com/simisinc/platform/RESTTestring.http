@@ -363,6 +363,7 @@ Content-Type: application/json
     "partDescription":"23444.33",
     "itemTotalPrice": "2000.00",
     "itemType": "ADDITIONAL_WORK_ITEM",
+    "quantity": "200",
     "itemStatus": "ADDITIONAL_WORK_PENDING_APP"
   },
   {
@@ -370,14 +371,16 @@ Content-Type: application/json
     "partDescription":"23444.33",
     "itemTotalPrice": "2000.00",
     "itemType": "CLIENT_REQUEST_NEW_ITEM",
-    "itemStatus": "NEW ITEM TO QUOTE"
+    "itemStatus": "NEW ITEM TO QUOTE",
+    "quantity": "200"
   },
   {
     "partNumber":"3323ASD",
     "partDescription":"23444.33",
     "itemTotalPrice": "2000.00",
     "itemType": "CLIENT_REQUEST_NEW_ITEM",
-    "itemStatus": "NEW ITEM TO QUOTE"
+    "itemStatus": "NEW ITEM TO QUOTE",
+    "quantity": "200"
   }
 ]
 }
