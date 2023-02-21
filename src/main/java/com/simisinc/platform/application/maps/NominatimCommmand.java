@@ -94,26 +94,7 @@ public class NominatimCommmand {
         return item;
       }
 
-      // [
-      //  {
-      //    "place_id": 139440771,
-      //    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
-      //    "osm_type": "way",
-      //    "osm_id": 204733765,
-      //    "boundingbox": [
-      //      "35.7655134",
-      //      "35.7657604",
-      //      "-78.7838912",
-      //      "-78.7835035"
-      //    ],
-      //    "lat": "35.765636900000004",
-      //    "lon": "-78.78369735",
-      //    "display_name": "1148, Kildaire Farm Road, Kildaire Plaza, Cary, Wake County, North Carolina, 27511, United States",
-      //    "class": "building",
-      //    "type": "yes",
-      //    "importance": 0.6309999999999999
-      //  }
-      //]
+
 
       if (LOG.isDebugEnabled()) {
         LOG.debug(value);

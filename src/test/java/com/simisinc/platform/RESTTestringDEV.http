@@ -75,9 +75,9 @@ Content-Type: application/json
 
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/QuoteListService?serviceProviderId=234234543
+GET https://carfix.connectmobiles24.com/api/carfix/QuoteListService?serviceProviderId=sizwe-maluleke
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
-Authorization: Bearer API-c7b60543-654c-4a28-b773-1acc5c492ab25
+Authorization: Bearer API-98ae74e2-b91b-4c52-8001-91fe6bd0c9555
 
 ###
 
@@ -142,8 +142,8 @@ Content-Type: application/json
 {
 "firstName":"Test",
 "lastName":"T",
-"email":"julius666566@test.com",
-"username":"julius6665663@test.com",
+"email":"julius6665666@test.com",
+"username":"julius66656636@test.com",
 "idnum": "1996",
 "roleId": "5"
 }

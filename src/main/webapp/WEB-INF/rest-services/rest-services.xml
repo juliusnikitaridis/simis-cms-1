@@ -40,4 +40,7 @@
   <service method="get" endpoint="carfix/UpdateVehicleService" class="com.simisinc.platform.rest.services.carfix.UpdateVehicleService"/>
   <service method="get" endpoint="carfix/CategoryListService" class="com.simisinc.platform.rest.services.carfix.CategoryListService"/>
   <service method="get" endpoint="carfix/BrandListService" class="com.simisinc.platform.rest.services.carfix.BrandListService"/>
+  <service method="post" endpoint="carfix/AddJobNumberService" class="com.simisinc.platform.rest.services.carfix.AddJobNumberService"/>
+  <service method="post" endpoint="carfix/RateServiceProviderService" class="com.simisinc.platform.rest.services.carfix.RateServiceProviderService"/>
+
 </services>

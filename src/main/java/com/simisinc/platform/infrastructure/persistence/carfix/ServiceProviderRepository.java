@@ -8,6 +8,7 @@ import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -72,6 +73,8 @@ public class ServiceProviderRepository {
             serviceProvider.setServiceProviderId(rs.getString("id"));
             serviceProvider.setLogoData(rs.getString("logo_data"));
             serviceProvider.setAccreditations(rs.getString("accreditations"));
+            serviceProvider.setCount(rs.getString("count"));
+            serviceProvider.setRating(rs.getString("rating"));
             return serviceProvider;
         } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());
@@ -79,4 +82,16 @@ public class ServiceProviderRepository {
             return null;
         }
     }
+
+    public static void rate(int rating, String serviceProviderId, Connection conn)throws Exception {
+        String sql = "update carfix.service_provider set rating = rating+?, count=count+1 where id = ?";
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,rating);
+            pstmt.setString(2,serviceProviderId);
+            pstmt.execute();
+        } catch(Exception e) {
+            throw e;
+        }
+    }
+
 }

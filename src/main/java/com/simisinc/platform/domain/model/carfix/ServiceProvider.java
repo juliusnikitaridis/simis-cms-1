@@ -32,6 +32,8 @@ public class ServiceProvider extends User {
     private String address;
     private String logoData;
     private String accreditations;
+    private String rating;
+    private String count;
 
     public String getSupportedBrandsAsJSONString() throws Exception {
         ObjectMapper mapper = new ObjectMapper();

@@ -211,5 +211,15 @@ public class ServiceRequestRepository {
             throw e;
         }
     }
+    public static void addJobNumber(String job_num, String serviceRequestId, Connection conn) throws Exception {
+        String sql = "update carfix.service_request set job_num = ? where id = ?";
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,job_num);
+            pstmt.setString(2,serviceRequestId);
+            pstmt.execute();
+        } catch(Exception e) {
+            throw e;
+        }
+    }
 }
 
