@@ -30,7 +30,9 @@ public class ServiceProviderRepository {
                     .add("about_us",serviceProvider.getAboutUs())
                     .add("certifications", serviceProvider.getCertifications())
                     .add("accreditations",serviceProvider.getAccreditations())
-                    .add("user_id",userUniqueId); //tie this to the user table
+                    .add("user_id",userUniqueId) //tie this to the user table
+                    .add("rating","0")
+                    .add("count","0");
             try {
                 try (Connection connection = DB.getConnection();
                      AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -52,7 +54,8 @@ public class ServiceProviderRepository {
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
 
-        where.addIfExists("id = ?",specification.getServiceProviderId());
+        where.addIfExists("id = ?",specification.getServiceProviderId())
+        .addIfExists("user_id= ?",specification.getServiceProviderUniqueId());
 
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, ServiceProviderRepository::buildRecord);

@@ -104,7 +104,6 @@ public class QuoteRepository {
             quote.setRequestForServiceId(rs.getString("request_for_service_id"));
             quote.setServiceProviderId(rs.getString("service_provider_id"));
             quote.setServiceProviderName(rs.getString("service_provider_name"));
-            quote.setCreatedDate(rs.getString("date"));
             quote.setQuotationTotal(rs.getString("total"));
             quote.setBookingDate(rs.getString("booking_date"));
             quote.setCreatedDate(rs.getString("created_date"));
