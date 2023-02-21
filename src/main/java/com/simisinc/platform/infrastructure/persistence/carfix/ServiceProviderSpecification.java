@@ -11,4 +11,5 @@ import lombok.Setter;
 public class ServiceProviderSpecification {
 
     private String serviceProviderId;
+    private String serviceProviderUniqueId;
 }

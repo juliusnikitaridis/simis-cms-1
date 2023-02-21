@@ -39,17 +39,19 @@ public class RFSListService {
             final String vehicleId = context.getParameter("vehicleId");
             final String serviceRequestId = context.getParameter("serviceRequestId");
             final String serviceProviderId = context.getParameter("serviceProviderId");
+            final String serviceProviderUniqueId = context.getParameter("serviceProviderUniqueId");
 
             //filter the service requests for a particular SP
+            ServiceRequestSpecification specification = new ServiceRequestSpecification();
             if(serviceProviderId != null) {
                 ServiceResponse response = new ServiceResponse(200);
-                response.setData(getApplicableServiceRequests(serviceProviderId));
+                response.setData(getApplicableServiceRequests(serviceProviderId,null));
                 return response;
-            }
-
-            ServiceRequestSpecification specification = new ServiceRequestSpecification();
-
-            if(memberId!= null) {
+            } else if(serviceProviderUniqueId != null) {
+                ServiceResponse response = new ServiceResponse(200);
+                response.setData(getApplicableServiceRequests(null,serviceProviderUniqueId));
+                return response;
+            } else if(memberId!= null) {
                 specification.setMemberId(memberId);
             }
             else if(vehicleId != null) {
@@ -82,9 +84,14 @@ public class RFSListService {
      * @return
      * @throws Exception
      */
-    public List<ServiceRequest> getApplicableServiceRequests(String serviceProviderId) throws Exception {
+    public List<ServiceRequest> getApplicableServiceRequests(String serviceProviderId,String serviceProviderUniqueId) throws Exception {
         ServiceProviderSpecification specification = new ServiceProviderSpecification();
-        specification.setServiceProviderId(serviceProviderId);
+        if(specification.getServiceProviderId() != null) {
+            specification.setServiceProviderId(serviceProviderId);
+        }
+        if(serviceProviderUniqueId != null) {
+            specification.setServiceProviderUniqueId(serviceProviderUniqueId);
+        }
         ServiceProvider serviceProvider = (ServiceProvider)ServiceProviderRepository.query(specification,null).getRecords().get(0);
         List<Brand> serviceProviderBrandsIds = Arrays.asList(serviceProvider.getSupportedBrands()); //[{"id":"3838393939nd39","brandName":null},{"id":"fe14578f-1a2c-43f4-b293-2f7b039d3100","brandName":null},{"id":"208c4493-ed44-4508-80f7-0b7a42de7208","brandName":null},{"id":"299edb1b-f085-4eff-aec1-93fdddf190eb","brandName":null},{"id":"2619069d-0f4b-44ae-9a08-3d6ca0f586a2","brandName":null}]
         List<String>serviceProviderBrandsIdsOnly = new ArrayList<>();

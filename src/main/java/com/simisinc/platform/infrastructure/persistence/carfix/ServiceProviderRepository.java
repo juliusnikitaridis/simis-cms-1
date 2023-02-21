@@ -54,7 +54,8 @@ public class ServiceProviderRepository {
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
 
-        where.addIfExists("id = ?",specification.getServiceProviderId());
+        where.addIfExists("id = ?",specification.getServiceProviderId())
+        .addIfExists("user_id= ?",specification.getServiceProviderUniqueId());
 
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, ServiceProviderRepository::buildRecord);
