@@ -21,8 +21,8 @@ public class ServiceProviderRepository {
     public static ServiceProvider add(ServiceProvider serviceProvider,String userUniqueId) throws Exception {
             SqlUtils insertValues = new SqlUtils()
                     .add("id", serviceProvider.getServiceProviderId()) //PK on SP table
-//                    .add("supported_brands", serviceProvider.getSupportedBrandsAsJSONString())
-//                    .add("supported_categories",serviceProvider.getSupportedCategoriesAsString())
+                    .add("supported_brands", serviceProvider.getSupportedBrandsAsJSONString())
+                    .add("supported_categories",serviceProvider.getSupportedCategoriesAsString())
                     .add("name", serviceProvider.getName())
                     .add("services", serviceProvider.getServices())
                     .add ("address",serviceProvider.getAddress())
