@@ -342,6 +342,52 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:8080/api/carfix/AddQuotationItemService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-d2eef46c-a62f-42a9-a7b4-385ee3ac38d61
+Content-Type: application/json
+
+{
+  "quoteId": "303a67af-f8da-4030-9144-90c56bfc3caf",
+  "quotationItems":[
+  {
+    "partNumber":"3323ASD",
+    "partDescription":"23444.33",
+    "itemTotalPrice": "2000.00",
+    "quantity": "200",
+    "itemType": "ADDITIONAL_WORK_ITEM",
+    "itemStatus": "ADDITIONAL_WORK_PENDING_APP"
+  },
+  {
+    "partNumber":"3323ASD",
+    "partDescription":"23444.33",
+    "itemTotalPrice": "2000.00",
+    "itemType": "ADDITIONAL_WORK_ITEM",
+    "quantity": "200",
+    "itemStatus": "ADDITIONAL_WORK_PENDING_APP"
+  },
+  {
+    "partNumber":"3323ASD",
+    "partDescription":"23444.33",
+    "itemTotalPrice": "2000.00",
+    "itemType": "CLIENT_REQUEST_NEW_ITEM",
+    "itemStatus": "NEW ITEM TO QUOTE",
+    "quantity": "200"
+  },
+  {
+    "partNumber":"3323ASD",
+    "partDescription":"23444.33",
+    "itemTotalPrice": "2000.00",
+    "itemType": "CLIENT_REQUEST_NEW_ITEM",
+    "itemStatus": "NEW ITEM TO QUOTE",
+    "quantity": "200"
+  }
+]
+}
+
+
+###
+
 
 
 

@@ -124,13 +124,15 @@ public class QuoteRepository {
     }
 
 
-    private static QuoteItem buildRecordQuoteItem(ResultSet rs) {
+    private static QuoteItem buildRecordQuoteItem(ResultSet rs){
         QuoteItem item = new QuoteItem();
         try {
             item.setId(rs.getString("id"));
             item.setItemTotalPrice(rs.getString("item_total_price"));
             item.setPartDescription(rs.getString("part_description"));
             item.setQuoteId(rs.getString("quote_id"));
+            item.setItemStatus(rs.getString("item_status"));
+            item.setItemType(rs.getString("item_type"));
             return item;
         } catch (Exception throwables) {
             LOG.error("Error when building quotetation item ", throwables);
@@ -188,6 +190,36 @@ public class QuoteRepository {
             pstmt.execute();
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+
+    // add additional work items to the quote
+    public static void addItemsToQuote(QuoteItem[] quoteList,String quoteId, Connection conn) throws Exception {
+
+        try (Connection connection = DB.getConnection();
+             AutoStartTransaction a = new AutoStartTransaction(connection);
+             AutoRollback transaction = new AutoRollback(connection)) {
+            // In a transaction (use the existing connection)
+            for (QuoteItem quoteItem : Arrays.asList(quoteList)) {
+                SqlUtils insertValue = new SqlUtils();
+                insertValue
+                        .add("id", UUID.randomUUID().toString())
+                        .add("quote_id", quoteId)
+                        .add("part_number", quoteItem.getPartNumber())
+                        .add("part_description", quoteItem.getPartDescription())
+                        .add("item_type",quoteItem.getItemType())
+                        .add("item_status",quoteItem.getItemStatus())
+                        .add("quantity",quoteItem.getQuantity())
+                        .add("item_total_price", quoteItem.getItemTotalPrice());
+
+                DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS);
+            }
+            //now insert the items
+            transaction.commit();
+        } catch (Exception se) {
+            LOG.error("Exception when adding item to quote!!: " + se.getMessage());
+            throw new Exception(se.getMessage());
         }
     }
 }
