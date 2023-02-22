@@ -23,7 +23,7 @@ public class AddJobNumberService {
         try {
             ObjectMapper mapper = new ObjectMapper();
             AddJobNumberRequest request = mapper.readValue(context.getJsonRequest(), AddJobNumberRequest.class);
-            ServiceRequestRepository.addJobNumber(request.getJobNumber(),request.getServiceRequestId(), DB.getConnection());
+            ServiceRequestRepository.addJobNumber(request.getJobNumber(),request.getServiceRequestId());
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service Job Number has been updated ");}};

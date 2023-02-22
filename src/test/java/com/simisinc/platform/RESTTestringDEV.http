@@ -108,7 +108,7 @@ Content-Type: application/json
 
 {
   "type": "REQUEST_FOR_SERVICE",
-  "vehicleId": "4333e",
+  "vehicleId": "4333e22",
   "memberId": "334423",
   "radius": "10 KM",
   "status": "CREATED",
@@ -158,8 +158,8 @@ Content-Type: application/json
 {
   "firstName":"Test",
   "lastName":"T",
-  "email":"nwesp2@test.com",
-  "username":"nwesp2@test.com",
+  "email":"nwesp22@test.com",
+  "username":"nwesp22@test.com",
   "idnum": "1996",
   "roleId": "5",
   "certifications": "certifications format?",

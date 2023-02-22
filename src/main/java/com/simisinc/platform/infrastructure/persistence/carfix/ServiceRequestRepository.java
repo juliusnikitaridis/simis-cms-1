@@ -32,7 +32,7 @@ public class ServiceRequestRepository {
     private static String[] PRIMARY_KEY_ITEMS = new String[]{"id"};
 
 
-    public static void addItems(ServiceRequest serviceRequest,Connection conn) throws Exception {
+    private static void addItems(ServiceRequest serviceRequest,Connection conn) throws Exception {
         for (ServiceRequestItem serviceRequestItem : serviceRequest.getServiceRequestItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
@@ -201,9 +201,10 @@ public class ServiceRequestRepository {
 
 
     //method to update the status
-    public static void updateStatus(String status, String serviceRequestId, Connection conn) throws Exception {
+    public static void updateStatus(String status, String serviceRequestId) throws Exception {
         String sql = "update carfix.service_request set status = ? where id = ?";
-        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);){
             pstmt.setString(1,status);
             pstmt.setString(2,serviceRequestId);
             pstmt.execute();
@@ -211,9 +212,10 @@ public class ServiceRequestRepository {
             throw e;
         }
     }
-    public static void addJobNumber(String job_num, String serviceRequestId, Connection conn) throws Exception {
+    public static void addJobNumber(String job_num, String serviceRequestId) throws Exception {
         String sql = "update carfix.service_request set job_num = ? where id = ?";
-        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1,job_num);
             pstmt.setString(2,serviceRequestId);
             pstmt.execute();

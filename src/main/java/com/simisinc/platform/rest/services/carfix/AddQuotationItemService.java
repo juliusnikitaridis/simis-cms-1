@@ -43,7 +43,7 @@ public class AddQuotationItemService {
             ObjectMapper mapper = new ObjectMapper();
             AddQuotationItemServicesRequest request = mapper.readValue(context.getJsonRequest(), AddQuotationItemServicesRequest.class);
             //TODO should validate that the quote exists!!
-            QuoteRepository.addItemsToQuote(request.getQuotationItems(),request.getQuoteId(),DB.getConnection());
+            QuoteRepository.addItemsToQuote(request.getQuotationItems(),request.getQuoteId());
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("Item has been added to quote");}};

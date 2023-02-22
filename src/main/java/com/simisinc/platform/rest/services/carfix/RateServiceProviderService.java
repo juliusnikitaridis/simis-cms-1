@@ -21,7 +21,7 @@ public class RateServiceProviderService {
         try {
             ObjectMapper mapper = new ObjectMapper();
             RateServiceProviderRequest request = mapper.readValue(context.getJsonRequest(), RateServiceProviderRequest.class);
-            ServiceProviderRepository.rate(request.getRating(), request.getServiceProviderId(), DB.getConnection());
+            ServiceProviderRepository.rate(request.getRating(), request.getServiceProviderId());
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{

@@ -26,7 +26,7 @@ public class QuoteRepository {
     private static String[] PRIMARY_KEY_ITEMS = new String[]{"id"};
 
 
-    public static void addItems(Quote quote, Connection conn) throws Exception {
+    private static void addItems(Quote quote,Connection conn) throws Exception {
         for (QuoteItem quoteItem : quote.getQuotationItems()) {
             SqlUtils insertValue = new SqlUtils();
             insertValue
@@ -142,9 +142,10 @@ public class QuoteRepository {
     }
 
     //update quote status once it has been accepted by the member
-    public static void updateQuoteStatus(String quoteId, String status, Connection conn) throws Exception {
+    public static void updateQuoteStatus(String quoteId, String status) throws Exception {
         String sql = "update carfix.quote set status = ? where id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);
             pstmt.setString(2, quoteId);
             pstmt.execute();
@@ -155,9 +156,10 @@ public class QuoteRepository {
 
 
     //updaete service request status once a quote has been accepted
-    public static void updateServiceRequestStatus(String serviceRequestId, Connection conn, String status) throws Exception {
+    public static void updateServiceRequestStatus(String serviceRequestId, String status) throws Exception {
         String sql = "update carfix.service_request set status = ?,confirmed_date = ? where id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);
             pstmt.setString(2,String.valueOf(System.currentTimeMillis()));
             pstmt.setString(3, serviceRequestId);
@@ -169,9 +171,10 @@ public class QuoteRepository {
 
 
     //insert the quoteId of the accepted quote into the service request table
-    public static void updateServiceRequestAcceptedQuoteId(String acceptedQuoteId, String serviceRequestId, Connection conn) throws Exception {
+    public static void updateServiceRequestAcceptedQuoteId(String acceptedQuoteId, String serviceRequestId) throws Exception {
         String sql = "update carfix.service_request set accepted_quote_id = ? where id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, acceptedQuoteId);
             pstmt.setString(2, serviceRequestId);
             pstmt.execute();
@@ -182,9 +185,10 @@ public class QuoteRepository {
 
 
     //need to update which service providers quote has been accepted for this service request
-    public static void updateAcceptedServiceProviderId(String acceptedServiceProviderId, String serviceRequestId, Connection conn) throws Exception {
+    public static void updateAcceptedServiceProviderId(String acceptedServiceProviderId, String serviceRequestId) throws Exception {
         String sql = "update carfix.service_request set confirmed_service_provider_id = ? where id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, acceptedServiceProviderId);
             pstmt.setString(2, serviceRequestId);
             pstmt.execute();
@@ -195,7 +199,7 @@ public class QuoteRepository {
 
 
     // add additional work items to the quote
-    public static void addItemsToQuote(QuoteItem[] quoteList,String quoteId, Connection conn) throws Exception {
+    public static void addItemsToQuote(QuoteItem[] quoteList,String quoteId) throws Exception {
 
         try (Connection connection = DB.getConnection();
              AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -213,7 +217,7 @@ public class QuoteRepository {
                         .add("quantity",quoteItem.getQuantity())
                         .add("item_total_price", quoteItem.getItemTotalPrice());
 
-                DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS);
+                DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS);
             }
             //now insert the items
             transaction.commit();

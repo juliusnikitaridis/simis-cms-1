@@ -33,7 +33,7 @@ public class ServiceProviderRepository {
                     .add("user_id",userUniqueId) //tie this to the user table
                     .add("rating","0")
                     .add("count","0");
-            try {
+
                 try (Connection connection = DB.getConnection();
                      AutoStartTransaction a = new AutoStartTransaction(connection);
                      AutoRollback transaction = new AutoRollback(connection)) {
@@ -41,7 +41,7 @@ public class ServiceProviderRepository {
                     DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
                     transaction.commit();
                     return serviceProvider;
-                }
+
             } catch (Exception se) {
                 LOG.error("SQLException: " + se.getMessage());
                 throw new Exception(se.getMessage());
@@ -86,9 +86,10 @@ public class ServiceProviderRepository {
         }
     }
 
-    public static void rate(int rating, String serviceProviderId, Connection conn)throws Exception {
+    public static void rate(int rating, String serviceProviderId) throws Exception {
         String sql = "update carfix.service_provider set rating = rating+?, count=count+1 where id = ?";
-        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,rating);
             pstmt.setString(2,serviceProviderId);
             pstmt.execute();
