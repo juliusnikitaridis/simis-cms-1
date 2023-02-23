@@ -32,7 +32,7 @@ public class UpdateServiceRequestStatusService {
         try {
             ObjectMapper mapper = new ObjectMapper();
             UpdateServiceRequestStatusRequest request = mapper.readValue(context.getJsonRequest(), UpdateServiceRequestStatusRequest.class);
-            ServiceRequestRepository.updateStatus(request.getStatus(),request.getServiceRequestId(), DB.getConnection());
+            ServiceRequestRepository.updateStatus(request.getStatus(),request.getServiceRequestId());
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service request status has been updated ");}};

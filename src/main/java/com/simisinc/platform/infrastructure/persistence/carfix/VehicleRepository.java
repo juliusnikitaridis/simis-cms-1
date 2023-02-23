@@ -4,6 +4,7 @@ import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
@@ -26,26 +27,25 @@ public class VehicleRepository {
                 .add("fuel_type", record.getFuelType())
                 .add("transmission", record.getTransmission())
                 .add("odo_reading", record.getOdoReading())
-                .add("member_id",record.getMemberId())
-                .add("service_history",record.getServiceHistory())
-                .add("maintenance_plan",record.getMaintenancePlan())
+                .add("member_id", record.getMemberId())
+                .add("service_history", record.getServiceHistory())
+                .add("maintenance_plan", record.getMaintenancePlan())
                 .add("engine_code", record.getEngineCode());
 
-        try {
-            try (Connection connection = DB.getConnection();
-                 AutoStartTransaction a = new AutoStartTransaction(connection);
-                 AutoRollback transaction = new AutoRollback(connection)) {
-                // In a transaction (use the existing connection)
-                DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
-                transaction.commit();
-                return record;
-            }
+
+        try (Connection connection = DB.getConnection();
+             AutoStartTransaction a = new AutoStartTransaction(connection);
+             AutoRollback transaction = new AutoRollback(connection)) {
+            // In a transaction (use the existing connection)
+            DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+            transaction.commit();
+            return record;
+
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
             throw new Exception(se.getMessage());
         }
     }
-
 
 
     public static void update(Vehicle record) throws Exception {
@@ -59,25 +59,24 @@ public class VehicleRepository {
                 .addIfExists("fuel_type", record.getFuelType())
                 .addIfExists("transmission", record.getTransmission())
                 .addIfExists("odo_reading", record.getOdoReading())
-                .addIfExists("member_id",record.getMemberId())
+                .addIfExists("member_id", record.getMemberId())
                 .addIfExists("engine_code", record.getEngineCode())
-                .addIfExists("maintenance_plan",record.getMaintenancePlan())
-                .addIfExists("service_history",record.getServiceHistory());
+                .addIfExists("maintenance_plan", record.getMaintenancePlan())
+                .addIfExists("service_history", record.getServiceHistory());
 
-        try {
+
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?",record.getVehicleId()));
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getVehicleId()));
                 transaction.commit();
-            }
+
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
             throw new Exception(se.getMessage());
         }
     }
-
 
 
     public static Vehicle findById(long id) {
@@ -88,7 +87,6 @@ public class VehicleRepository {
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 VehicleRepository::buildRecord);
     }
-
 
 
     public static DataResult query(VehicleSpecification specification, DataConstraints constraints) {
@@ -107,14 +105,13 @@ public class VehicleRepository {
 
 
     public static void delete(String vehicleId) throws Exception {
-        try(Connection connection = DB.getConnection()){
+        try (Connection connection = DB.getConnection()) {
             DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", vehicleId));
-            LOG.debug("vehicle has been deleted:>>"+vehicleId);
-        } catch(Exception e) {
+            LOG.debug("vehicle has been deleted:>>" + vehicleId);
+        } catch (Exception e) {
             throw e;
         }
     }
-
 
 
     private static Vehicle buildRecord(ResultSet rs) {
@@ -136,7 +133,7 @@ public class VehicleRepository {
             vehicle.setMemberId(rs.getString("member_id"));
             return vehicle;
         } catch (Exception e) {
-            LOG.error("exception when building record for vehicle"+e.getMessage());
+            LOG.error("exception when building record for vehicle" + e.getMessage());
             return null;
         }
     }

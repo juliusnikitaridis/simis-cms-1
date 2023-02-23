@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.carfix.Brand;
 import com.simisinc.platform.domain.model.carfix.Category;
 import com.simisinc.platform.domain.model.carfix.ServiceProvider;
+import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +34,7 @@ public class ServiceProviderRepository {
                     .add("user_id",userUniqueId) //tie this to the user table
                     .add("rating","0")
                     .add("count","0");
-            try {
+
                 try (Connection connection = DB.getConnection();
                      AutoStartTransaction a = new AutoStartTransaction(connection);
                      AutoRollback transaction = new AutoRollback(connection)) {
@@ -41,7 +42,7 @@ public class ServiceProviderRepository {
                     DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
                     transaction.commit();
                     return serviceProvider;
-                }
+
             } catch (Exception se) {
                 LOG.error("SQLException: " + se.getMessage());
                 throw new Exception(se.getMessage());
@@ -86,14 +87,45 @@ public class ServiceProviderRepository {
         }
     }
 
-    public static void rate(int rating, String serviceProviderId, Connection conn)throws Exception {
+    public static void rate(int rating, String serviceProviderId) throws Exception {
         String sql = "update carfix.service_provider set rating = rating+?, count=count+1 where id = ?";
-        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,rating);
             pstmt.setString(2,serviceProviderId);
             pstmt.execute();
         } catch(Exception e) {
             throw e;
+        }
+    }
+
+
+    public static void update(ServiceProvider record) throws Exception {
+        if(record.getServiceProviderId() == null) {
+            throw new Exception("serviceProviderId can not be null");
+        }
+        SqlUtils updateValues = new SqlUtils()
+                .addIfExists("id", record.getServiceProviderId())
+                .addIfExists("supported_brands", record.getSupportedBrandsAsJSONString())
+                .addIfExists("name", record.getName())
+                .addIfExists("services", record.getServices())
+                .addIfExists("certifications", record.getCertifications())
+                .addIfExists("address", record.getAddress())
+                .addIfExists("about_us", record.getAboutUs())
+                .addIfExists("logo_data", record.getLogoData())
+                .addIfExists("supported_categories", record.getSupportedCategoriesAsString())
+                .addIfExists("accreditations", record.getAccreditations());
+
+            try (Connection connection = DB.getConnection();
+                 AutoStartTransaction a = new AutoStartTransaction(connection);
+                 AutoRollback transaction = new AutoRollback(connection)) {
+                // In a transaction (use the existing connection)
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getServiceProviderId()));
+                transaction.commit();
+
+        } catch (Exception se) {
+            LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
         }
     }
 

@@ -172,6 +172,29 @@ Content-Type: application/json
 }
 ###
 
+
+POST http://localhost:8080/api/carfix/UpdateServiceProviderService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
+Content-Type: application/json
+
+{
+  "serviceProviderId": "a7dfc4d8-85e3-45ec-9c81-8a3b3827019c",
+  "roleId": "5",
+  "certifications": "certifications format?",
+  "supportedBrands": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285aa2"}],
+  "supportedCategories": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285ab2"}],
+  "name": "UPDATEDNAME",
+  "address": "1 Lobelia close bellville 7540",
+  "aboutUs": "some information about the SP",
+  "logoData": "encoded_logo_data",
+  "contactNo": "3423423452",
+  "accreditations": "acccreditation data"
+}
+###
+
+
+
 ###
 GET http://localhost:8080/api/carfix/ServiceProviderListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
@@ -384,7 +407,29 @@ Content-Type: application/json
   }
 ]
 }
+###
 
+POST http://localhost:8080/api/carfix/UpdateQuoteTotalService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-d2eef46c-a62f-42a9-a7b4-385ee3ac38d61
+Content-Type: application/json
+
+{
+  "quoteId": "ca48ca36-d77f-45c9-98b4-1cf37a7ac866"
+}
+
+###
+
+POST http://localhost:8080/api/carfix/UpdateQuoteItemStatusService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-d2eef46c-a62f-42a9-a7b4-385ee3ac38d61
+Content-Type: application/json
+
+{
+  "quoteId": "bbe4c739-9745-4243-8d7f-475fc5045722",
+  "quoteItemId": "2af4f64d-b1e9-4cad-849f-1a8af7e22e50",
+  "status": "ACCEPTED_BY_CLIENT"
+}
 
 ###
 

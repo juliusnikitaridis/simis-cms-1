@@ -1,10 +1,7 @@
 package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.carfix.Quote;
-import com.simisinc.platform.infrastructure.database.DB;
 import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import lombok.Data;
@@ -12,26 +9,36 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
-public class AddJobNumberService {
 
-    private static Log LOG = LogFactory.getLog(UpdateServiceRequestStatusService.class);
+/**
+ * Description
+ * update the status of a quote item
+ * @author Julius Nikitaridis
+ * @created 18/11/22 11:28 AM
+ */
+
+
+public class UpdateQuoteTotalService {
+
+    private static Log LOG = LogFactory.getLog(UpdateQuoteTotalService.class);
 
     public ServiceResponse post(ServiceContext context) {
 
         try {
+
             ObjectMapper mapper = new ObjectMapper();
-            AddJobNumberRequest request = mapper.readValue(context.getJsonRequest(), AddJobNumberRequest.class);
-            ServiceRequestRepository.addJobNumber(request.getJobNumber(),request.getServiceRequestId());
+            UpdateQuoteTotalServiceReq request = mapper.readValue(context.getJsonRequest(), UpdateQuoteTotalServiceReq.class);
+            //TODO check if quote exists
+            QuoteRepository.updateQuoteTotal(request.getQuoteId());
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service Job Number has been updated ");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Quote total has been updated");}};
             response.setData(responseMessage);
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in AddJobNumberService", e);
+            LOG.error("Error in UpdateQuoteTotalService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;
@@ -40,8 +47,6 @@ public class AddJobNumberService {
 }
 
 @Data
-class AddJobNumberRequest {
-    private String serviceRequestId;
-    private String jobNumber;
+class UpdateQuoteTotalServiceReq {
+    String quoteId;
 }
-

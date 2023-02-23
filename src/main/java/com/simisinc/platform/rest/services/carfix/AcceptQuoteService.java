@@ -29,21 +29,21 @@ public class AcceptQuoteService {
 
     public ServiceResponse post(ServiceContext context) {
 
-        try (Connection conn = DB.getConnection()){
+        try {
             ObjectMapper mapper = new ObjectMapper();
             AcceptQuoteRequest request = mapper.readValue(context.getJsonRequest(), AcceptQuoteRequest.class);
 
             //update quote status once it has been accepted by the member
-            QuoteRepository.updateQuoteStatus(request.getAcceptedQuoteId(), "ACCEPTED",conn);
+            QuoteRepository.updateQuoteStatus(request.getAcceptedQuoteId(), "ACCEPTED");
 
             //updaete service request status once a quote has been accepted - also update confirmed date here
-            QuoteRepository.updateServiceRequestStatus(request.getServiceRequestId(),conn,"ACCEPTED");
+            QuoteRepository.updateServiceRequestStatus(request.getServiceRequestId(),"ACCEPTED");
 
             //insert the quoteId of the accepted quote into the service request table
-            QuoteRepository.updateServiceRequestAcceptedQuoteId(request.getAcceptedQuoteId(),request.getServiceRequestId(),conn);
+            QuoteRepository.updateServiceRequestAcceptedQuoteId(request.getAcceptedQuoteId(),request.getServiceRequestId());
 
             ////need to update which service providers quote has been accepted for this service request
-            QuoteRepository.updateAcceptedServiceProviderId(request.getConfirmedServiceProviderId(), request.getServiceRequestId(),conn);
+            QuoteRepository.updateAcceptedServiceProviderId(request.getConfirmedServiceProviderId(), request.getServiceRequestId());
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("quote has been created");}};
