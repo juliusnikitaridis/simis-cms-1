@@ -29,13 +29,30 @@ public class QuoteRepository {
     private static void addItems(Quote quote,Connection conn) throws Exception {
         for (QuoteItem quoteItem : quote.getQuotationItems()) {
             SqlUtils insertValue = new SqlUtils();
+            double labourTotal = 0;
+            double partsTotal = 0; //unit price for part
+            double quantity =1;
+            if(quoteItem.getLabourTotal() != null) {
+                labourTotal = Double.valueOf(quoteItem.getLabourTotal());
+            }
+            if(quoteItem.getPartsTotal() != null) {
+                partsTotal = Double.valueOf(quoteItem.getPartsTotal());
+            }
+            if(quoteItem.getQuantity() != null) {
+                quantity = Double.valueOf(quoteItem.getQuantity());
+            }
+            double total = labourTotal+(quantity*partsTotal);
+
             insertValue
                     .add("id", UUID.randomUUID().toString())
                     .add("quote_id", quote.getId())
-                    .add("part_number", quoteItem.getPartNumber())
-                    .add("part_description", quoteItem.getPartDescription())
-                    .add("quantity",quoteItem.getQuantity())
-                    .add("item_total_price", quoteItem.getItemTotalPrice());
+                    .addIfExists("part_number", quoteItem.getPartNumber())
+                    .addIfExists("part_description", quoteItem.getPartDescription())
+                    .addIfExists("quantity",quoteItem.getQuantity())
+                    .add("item_total_price", total)
+                    .addIfExists("parts_total",quoteItem.getPartsTotal())
+                    .addIfExists("labour_total",quoteItem.getLabourTotal())
+                    .addIfExists("replacement_reason",quoteItem.getReplacementReason());
 
             DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
         }
@@ -133,6 +150,9 @@ public class QuoteRepository {
             item.setQuoteId(rs.getString("quote_id"));
             item.setItemStatus(rs.getString("item_status"));
             item.setItemType(rs.getString("item_type"));
+            item.setLabourTotal(rs.getString("labour_total"));
+            item.setPartsTotal(rs.getString("parts_total"));
+            item.setReplacementReason(rs.getString("replacement_reason"));
             return item;
         } catch (Exception throwables) {
             LOG.error("Error when building quotetation item ", throwables);
@@ -143,10 +163,42 @@ public class QuoteRepository {
 
     //update quote status once it has been accepted by the member
     public static void updateQuoteStatus(String quoteId, String status) throws Exception {
+
         String sql = "update carfix.quote set status = ? where id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);
+            pstmt.setString(2, quoteId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    /*
+     Iterate through all the quote items that have an accepted status and
+     add up all the totals.
+     */
+    public static void updateQuoteTotal(String quoteId) throws Exception {
+
+        SqlUtils select = new SqlUtils();
+        SqlUtils where = new SqlUtils();
+
+        where.add("quote_id = ?", quoteId);
+        where.add("item_status like ?","ACCEPTED"); //TODO check this
+        ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, QuoteRepository::buildRecordQuoteItem)).getRecords();
+
+        //add up all the items that have a valid accepted status
+
+        double newTotal = 0;
+        for(QuoteItem item : quoteItems) {
+            newTotal+=Double.valueOf(item.getItemTotalPrice());
+        }
+
+        String sql = "update carfix.quote set total = ? where id = ?";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, String.valueOf(newTotal));
             pstmt.setString(2, quoteId);
             pstmt.execute();
         } catch (Exception e) {
@@ -183,6 +235,19 @@ public class QuoteRepository {
         }
     }
 
+    public static void updateQuoteItemStatus(String quoteId,String itemId,String status) throws Exception {
+        String sql = "update carfix.quotation_item set item_status = ? where id = ? and quote_id = ?";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            pstmt.setString(2, itemId);
+            pstmt.setString(3,quoteId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 
     //need to update which service providers quote has been accepted for this service request
     public static void updateAcceptedServiceProviderId(String acceptedServiceProviderId, String serviceRequestId) throws Exception {
@@ -206,16 +271,32 @@ public class QuoteRepository {
              AutoRollback transaction = new AutoRollback(connection)) {
             // In a transaction (use the existing connection)
             for (QuoteItem quoteItem : Arrays.asList(quoteList)) {
+                double labourTotal = 0;
+                double partsTotal = 0; //unit price for part
+                double quantity =1;
+                if(quoteItem.getLabourTotal() != null) {
+                    labourTotal = Double.valueOf(quoteItem.getLabourTotal());
+                }
+                if(quoteItem.getPartsTotal() != null) {
+                    partsTotal = Double.valueOf(quoteItem.getPartsTotal());
+                }
+                if(quoteItem.getQuantity() != null) {
+                    quantity = Double.valueOf(quoteItem.getQuantity());
+                }
+                double total = labourTotal+(quantity*partsTotal);
                 SqlUtils insertValue = new SqlUtils();
                 insertValue
                         .add("id", UUID.randomUUID().toString())
                         .add("quote_id", quoteId)
-                        .add("part_number", quoteItem.getPartNumber())
-                        .add("part_description", quoteItem.getPartDescription())
+                        .addIfExists("part_number", quoteItem.getPartNumber())
+                        .addIfExists("part_description", quoteItem.getPartDescription())
                         .add("item_type",quoteItem.getItemType())
-                        .add("item_status",quoteItem.getItemStatus())
-                        .add("quantity",quoteItem.getQuantity())
-                        .add("item_total_price", quoteItem.getItemTotalPrice());
+                        .addIfExists("item_status",quoteItem.getItemStatus())
+                        .addIfExists("quantity",quoteItem.getQuantity())
+                        .add("item_total_price", total)
+                        .addIfExists("labour_total",quoteItem.getLabourTotal())
+                        .addIfExists("parts_total",quoteItem.getPartsTotal())
+                        .addIfExists("replacement_reason",quoteItem.getReplacementReason());
 
                 DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS);
             }

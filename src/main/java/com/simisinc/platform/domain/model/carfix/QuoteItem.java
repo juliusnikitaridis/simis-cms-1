@@ -26,6 +26,9 @@ public class QuoteItem extends Entity {
     private String quantity;
     private String itemType;
     private String itemStatus;
+    private String replacementReason;
+    private String partsTotal;
+    private String labourTotal;
 }
 
 
