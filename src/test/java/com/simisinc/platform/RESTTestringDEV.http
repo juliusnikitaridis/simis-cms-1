@@ -31,15 +31,13 @@ Content-Type: application/json
 
 POST https://carfix.connectmobiles24.com/api/carfix/CreateQuoteService
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
-Authorization: Bearer API-81b09a03-9dca-4a27-8df8-01d545c344af5
+Authorization: Bearer API-c7525b1f-2467-4edf-912f-36af613e17fc5
 Content-Type: application/json
 
 {
-  "date":"12-12-2022",
   "requestForServiceId":"2343243254",
   "serviceProviderId":"234234543",
-  "total": "5000.00",
-  "serviceProviderName": "serviceProviderName1",
+  "serviceProviderName": "TEST DATA",
   "quotationItems":[
     {
       "id":"34234234",

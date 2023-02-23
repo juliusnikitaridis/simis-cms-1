@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.carfix.Brand;
 import com.simisinc.platform.domain.model.carfix.Category;
 import com.simisinc.platform.domain.model.carfix.ServiceProvider;
+import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -95,6 +96,36 @@ public class ServiceProviderRepository {
             pstmt.execute();
         } catch(Exception e) {
             throw e;
+        }
+    }
+
+
+    public static void update(ServiceProvider record) throws Exception {
+        if(record.getServiceProviderId() == null) {
+            throw new Exception("serviceProviderId can not be null");
+        }
+        SqlUtils updateValues = new SqlUtils()
+                .addIfExists("id", record.getServiceProviderId())
+                .addIfExists("supported_brands", record.getSupportedBrandsAsJSONString())
+                .addIfExists("name", record.getName())
+                .addIfExists("services", record.getServices())
+                .addIfExists("certifications", record.getCertifications())
+                .addIfExists("address", record.getAddress())
+                .addIfExists("about_us", record.getAboutUs())
+                .addIfExists("logo_data", record.getLogoData())
+                .addIfExists("supported_categories", record.getSupportedCategoriesAsString())
+                .addIfExists("accreditations", record.getAccreditations());
+
+            try (Connection connection = DB.getConnection();
+                 AutoStartTransaction a = new AutoStartTransaction(connection);
+                 AutoRollback transaction = new AutoRollback(connection)) {
+                // In a transaction (use the existing connection)
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getServiceProviderId()));
+                transaction.commit();
+
+        } catch (Exception se) {
+            LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
         }
     }
 

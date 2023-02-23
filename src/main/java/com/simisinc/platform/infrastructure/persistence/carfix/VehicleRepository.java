@@ -64,14 +64,14 @@ public class VehicleRepository {
                 .addIfExists("maintenance_plan", record.getMaintenancePlan())
                 .addIfExists("service_history", record.getServiceHistory());
 
-        try {
+
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
                 DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getVehicleId()));
                 transaction.commit();
-            }
+
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
             throw new Exception(se.getMessage());
