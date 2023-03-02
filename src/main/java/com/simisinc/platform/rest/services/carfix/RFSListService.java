@@ -120,7 +120,7 @@ public class RFSListService {
             }
         }
 
-        return matchingServiceRequests;
+        return finalMatchingServiceRequests;
     }
 }
 
