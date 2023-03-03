@@ -296,7 +296,9 @@ public class QuoteRepository {
                         .add("item_total_price", total)
                         .addIfExists("labour_total",quoteItem.getLabourTotal())
                         .addIfExists("parts_total",quoteItem.getPartsTotal())
-                        .addIfExists("replacement_reason",quoteItem.getReplacementReason());
+                        .addIfExists("replacement_reason",quoteItem.getReplacementReason())
+                        .addIfExists("parts_picture",quoteItem.getPartsPicture());
+
 
                 DB.insertIntoWithStringPk(connection, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS);
             }

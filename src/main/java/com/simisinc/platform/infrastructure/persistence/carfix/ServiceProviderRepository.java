@@ -32,8 +32,8 @@ public class ServiceProviderRepository {
                     .add("certifications", serviceProvider.getCertifications())
                     .add("accreditations",serviceProvider.getAccreditations())
                     .add("user_id",userUniqueId) //tie this to the user table
-                    .add("rating","0")
-                    .add("count","0");
+                    .add("rating",0)
+                    .add("count",0);
 
                 try (Connection connection = DB.getConnection();
                      AutoStartTransaction a = new AutoStartTransaction(connection);

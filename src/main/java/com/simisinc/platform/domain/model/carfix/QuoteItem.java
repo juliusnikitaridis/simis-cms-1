@@ -29,6 +29,7 @@ public class QuoteItem extends Entity {
     private String replacementReason;
     private String partsTotal;
     private String labourTotal;
+    private String partsPicture;
 }
 
 
