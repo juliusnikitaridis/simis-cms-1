@@ -98,6 +98,13 @@ X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Bearer API-f97ea9ee-4219-4f37-85c9-fd9dbb800d5b5
 ###
 
+###
+GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?serviceProviderId=rz-perforamnce-rz-perforamnce
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-5da33a5a-6975-4186-83a7-6b7e92a393155
+###
+
+
 
 POST https://carfix.connectmobiles24.com/api/carfix/CreateRFSService
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695

@@ -161,7 +161,7 @@ public class QuoteRepository {
         }
     }
 
-    //update quote status once it has been accepted by the member
+    //update quote status once it has been accepted by the membere
     public static void updateQuoteStatus(String quoteId, String status) throws Exception {
 
         String sql = "update carfix.quote set status = ? where id = ?";
