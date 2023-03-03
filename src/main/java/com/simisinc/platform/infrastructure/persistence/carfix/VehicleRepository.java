@@ -22,6 +22,7 @@ public class VehicleRepository {
                 .add("vin_number", record.getVinNumber())
                 .add("registration", record.getRegistration())
                 .add("make", record.getMake())
+                .add("make_id",record.getMakeId())
                 .add("model", record.getModel())
                 .add("year", record.getYear())
                 .add("fuel_type", record.getFuelType())
@@ -54,6 +55,7 @@ public class VehicleRepository {
                 .addIfExists("vin_number", record.getVinNumber())
                 .addIfExists("registration", record.getRegistration())
                 .addIfExists("make", record.getMake())
+                .addIfExists("make_id",record.getMakeId())
                 .addIfExists("model", record.getModel())
                 .addIfExists("year", record.getYear())
                 .addIfExists("fuel_type", record.getFuelType())
@@ -131,6 +133,7 @@ public class VehicleRepository {
             vehicle.setMaintenancePlan(rs.getString("maintenance_plan"));
             vehicle.setServiceHistory(rs.getString("service_history"));
             vehicle.setMemberId(rs.getString("member_id"));
+            vehicle.setMakeId(rs.getString("make_id"));
             return vehicle;
         } catch (Exception e) {
             LOG.error("exception when building record for vehicle" + e.getMessage());

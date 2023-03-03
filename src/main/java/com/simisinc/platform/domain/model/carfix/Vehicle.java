@@ -35,6 +35,7 @@ public class Vehicle extends Entity {
     private String vinNumber = null;
     private String registration = null;
     private String make = null;
+    private String makeId = null;
     private String model = null;
     private String year = null;
     private String fuelType = null;
