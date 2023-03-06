@@ -33,7 +33,7 @@ public class ProcessPaymentService {
         try {
 
             ObjectMapper mapper = new ObjectMapper();
-            ProcessPaymentServiceRequest paymentRequest = mapper.readValue(context.getJsonRequest(), ProcessPaymentServiceRequest.class);
+            PaymentRequest paymentRequest = mapper.readValue(context.getJsonRequest(), PaymentRequest.class);
             processPeachPayment(paymentRequest);
 
             ServiceResponse response = new ServiceResponse(200);
@@ -49,7 +49,7 @@ public class ProcessPaymentService {
         }
     }
 
-    private void processPeachPayment(ProcessPaymentServiceRequest paymentRequest) {
+    private void processPeachPayment(PaymentRequest paymentRequest) {
     }
 
 
