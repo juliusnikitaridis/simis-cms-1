@@ -318,49 +318,18 @@ Authorization: Basic Njc0YTI4OWQyMzU3MTFlYjkzZDUwMmQxNGRlMThjMGM6ZGNsN0U1Sk1mWWh
 
 
 ###
-POST https://sandbox-l.ppay.io/api/channels/6749df69235711eb93d502d14de18c0c/payments
+POST https://testsecure.peachpayments.com/checkout/initiate
 Content-Type: application/json
 
 {
-    "Authentication": {
-    "userid": "674a289d235711eb93d502d14de18c0c",
-    "password": "dcl7E5JMfYhZ1Ot9iHvGVjAkNSUgsT",
-    "entityid": "6749df69235711eb93d502d14de18c0c"
-  },
-    "payment": {
-        "merchantInvoiceId": "{{merchantInvoiceId}}",
-        "amount": {{$randomPrice}},
-        "currency": "ZAR",
-        "files": [],
-        "notes": "{{$randomBs}}"
-    },
-    "customer": {
-        "givenName": "{{$randomFirstName}}",
-        "surname": "{{$randomLastName}}",
-        "email": "{{$randomEmail}}",
-        "mobile": "+{{$randomPhoneNumber}}",
-        "whatsapp": "+{{$randomPhoneNumber}}",
-        "billing": {
-            "street1": "{{$randomStreetAddress}}",
-            "city": "{{$randomCity}}",
-            "state": "{{$randomCountry}}",
-            "postalCode": "{{$randomCreditCardMask}}",
-            "country": "{{$randomCountryCode}}"
-        }
-    },
-    "options": {
-        "sendEmail": false,
-        "sendSms": false,
-        "sendWhatsapp": false,
-        "emailCc": "{{$randomEmail}}",
-        "emailBcc": "{{$randomEmail}}",
-        "expiryTime": 5,
-        "notificationUrl": "{{notificationUrl}}"
-    },
-    "checkout": {
-        "defaultPaymentMethod": "CARD",
-        "tokeniseCard": true
-    }
+  "amount":"10",
+  "authentication.entityId":"8ac7a4c98694e687018696fe5bdd024f",
+  "currency":"ZAR",
+  "merchantTransactionId":"SR485777463",
+  "nonce":"PeachTest",
+  "paymentType":"DB",
+  "shopperResultUrl":"https://carfix.connectmobiles24.com",
+  "signature": "1345411af1711b9e500318e832f283e88159d8f311e9e070b3be59fec847df15"
 }
 
 ###
