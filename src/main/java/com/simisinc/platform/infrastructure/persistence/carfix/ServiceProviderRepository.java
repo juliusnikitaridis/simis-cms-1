@@ -33,7 +33,9 @@ public class ServiceProviderRepository {
                     .add("accreditations",serviceProvider.getAccreditations())
                     .add("user_id",userUniqueId) //tie this to the user table
                     .add("rating",0)
-                    .add("count",0);
+                    .add("count",0)
+                    .add("drop_off",serviceProvider.getDropOff())
+                    .add("rmi",serviceProvider.getRMI());
 
                 try (Connection connection = DB.getConnection();
                      AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -79,6 +81,8 @@ public class ServiceProviderRepository {
             serviceProvider.setAccreditations(rs.getString("accreditations"));
             serviceProvider.setCount(rs.getString("count"));
             serviceProvider.setRating(rs.getString("rating"));
+            serviceProvider.setDropOff(rs.getString("drop_off"));
+            serviceProvider.setRMI(rs.getString("rmi"));
             return serviceProvider;
         } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());
