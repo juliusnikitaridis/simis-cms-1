@@ -1,15 +1,17 @@
 package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.application.ecommerce.SquareOrderCommand;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 
 
@@ -48,5 +50,4 @@ public class CreateVehicleService {
             return response;
         }
     }
-
 }

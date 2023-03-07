@@ -305,65 +305,42 @@ Content-Type: application/json
 
 
 
-###
-POST https://sandbox-l.ppay.io/api/oauth/token
-Content-Type: application/json
-Authorization: Basic Njc0YTI4OWQyMzU3MTFlYjkzZDUwMmQxNGRlMThjMGM6ZGNsN0U1Sk1mWWhaMU90OWlIdkdWakFrTlNVZ3NU
-{
-    "clientId": "674a289d235711eb93d502d14de18c0c",
-    "clientSecret": "dcl7E5JMfYhZ1Ot9iHvGVjAkNSUgsT",
-    "merchantId": "6749df69235711eb93d502d14de18c0c"
-}
-###
-
 
 ###
-POST https://sandbox-l.ppay.io/api/channels/6749df69235711eb93d502d14de18c0c/payments
+POST https://testsecure.peachpayments.com/checkout/initiate
 Content-Type: application/json
 
 {
-    "Authentication": {
-    "userid": "674a289d235711eb93d502d14de18c0c",
-    "password": "dcl7E5JMfYhZ1Ot9iHvGVjAkNSUgsT",
-    "entityid": "6749df69235711eb93d502d14de18c0c"
-  },
-    "payment": {
-        "merchantInvoiceId": "{{merchantInvoiceId}}",
-        "amount": {{$randomPrice}},
-        "currency": "ZAR",
-        "files": [],
-        "notes": "{{$randomBs}}"
-    },
-    "customer": {
-        "givenName": "{{$randomFirstName}}",
-        "surname": "{{$randomLastName}}",
-        "email": "{{$randomEmail}}",
-        "mobile": "+{{$randomPhoneNumber}}",
-        "whatsapp": "+{{$randomPhoneNumber}}",
-        "billing": {
-            "street1": "{{$randomStreetAddress}}",
-            "city": "{{$randomCity}}",
-            "state": "{{$randomCountry}}",
-            "postalCode": "{{$randomCreditCardMask}}",
-            "country": "{{$randomCountryCode}}"
-        }
-    },
-    "options": {
-        "sendEmail": false,
-        "sendSms": false,
-        "sendWhatsapp": false,
-        "emailCc": "{{$randomEmail}}",
-        "emailBcc": "{{$randomEmail}}",
-        "expiryTime": 5,
-        "notificationUrl": "{{notificationUrl}}"
-    },
-    "checkout": {
-        "defaultPaymentMethod": "CARD",
-        "tokeniseCard": true
-    }
+  "amount":"10",
+  "authentication.entityId":"8ac7a4c98694e687018696fe5bdd024f",
+  "currency":"ZAR",
+  "merchantTransactionId":"SR485777467",
+  "nonce":"PeachTest",
+  "paymentType":"DB",
+  "shopperResultUrl":"https://carfix.connectmobiles24.com?paymenyId",
+  "signature": "eb8beffbfef0571554a6c077203b2b509d97552fd9979bc18b9910a3fc221a96"
 }
 
 ###
+
+###
+POST http://localhost:8080/api/carfix/ProcessPaymentService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-d2eef46c-a62f-42a9-a7b4-385ee3ac38d61
+Content-Type: application/json
+
+{
+  "amount":"10",
+  "merchantTransactionId":"SR4857774677",
+  "shopperResultUrl":"https://carfix.connectmobiles24.com",
+  "memberId": "julius-niki",
+  "serviceProviderId": "amazing-amazing-something-2"
+}
+
+###
+
+
+
 
 POST http://localhost:8080/api/carfix/AddQuotationItemService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
