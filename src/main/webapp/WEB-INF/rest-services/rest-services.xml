@@ -46,5 +46,6 @@
   <service method="post" endpoint="carfix/UpdateServiceProviderService" class="com.simisinc.platform.rest.services.carfix.UpdateServiceProviderService"/>
   <service method="post" endpoint="carfix/UpdateQuoteItemStatusService" class="com.simisinc.platform.rest.services.carfix.UpdateQuoteItemStatusService"/>
   <service method="post" endpoint="carfix/UpdateQuoteTotalService" class="com.simisinc.platform.rest.services.carfix.UpdateQuoteTotalService"/>
+  <service method="post" endpoint="carfix/ProcessPaymentService" class="com.simisinc.platform.rest.services.carfix.ProcessPaymentService"/>
 
 </services>
