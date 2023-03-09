@@ -65,7 +65,7 @@ public class ProcessPaymentService {
     private String processPeachPayment(ProcessPaymentServiceRequest serviceRequest) throws Exception {
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setAmount(serviceRequest.getAmount());
-        paymentRequest.setMerchantTransactionId(serviceRequest.getMerchantTransactionId());
+        paymentRequest.setMerchantTransactionId(serviceRequest.getServiceRequestId()+"-"+System.currentTimeMillis());
         paymentRequest.setShopperResultUrl(serviceRequest.getShopperResultUrl());
 
         generateSignatureForRequest(paymentRequest);

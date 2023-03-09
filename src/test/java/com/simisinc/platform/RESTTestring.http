@@ -331,7 +331,7 @@ Content-Type: application/json
 
 {
   "amount":"10.69",
-  "merchantTransactionId":"SR4857774677",
+  "serviceRequestId":"SR4857774677",
   "shopperResultUrl":"https://carfix.connectmobiles24.com",
   "memberId": "julius-niki",
   "serviceProviderId": "amazing-amazing-something-2"
