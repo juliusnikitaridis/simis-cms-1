@@ -34,6 +34,8 @@ public class ServiceProvider extends User {
     private String accreditations;
     private String rating;
     private String count;
+    private String dropOff;
+    private String RMI;
 
     public String getSupportedBrandsAsJSONString() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
