@@ -123,6 +123,23 @@ public class ServiceRequestRepository {
                 TABLE_NAME, select, where, orderBy, constraints, ServiceRequestRepository::buildRecord);
     }
 
+    //see how many quotes exist for serviceRequest
+    public static int countNumberOfQuotes(String requestForServiceId) throws Exception {
+        String sql = "select count(*) as ans from  carfix.quote where request_for_service_id = ?";
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);){
+            pstmt.setString(1,requestForServiceId);
+            ResultSet rs = pstmt.executeQuery();
+            String count = null;
+            while(rs.next()) {
+                count = rs.getString("ans");
+            }
+            return Integer.valueOf(count);
+        } catch(Exception e) {
+            throw e;
+        }
+    }
+
 
     private static ServiceRequest buildRecord(ResultSet rs) {
 

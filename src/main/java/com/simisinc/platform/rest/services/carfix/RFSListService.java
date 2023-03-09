@@ -104,6 +104,8 @@ public class RFSListService {
             serviceProviderCategoriesOnly.add(x.getId());
         });
 
+        //check the service request id on the quote table
+
         //get all service requests by status
         ServiceRequestSpecification specification1 = new ServiceRequestSpecification();
         specification1.setStatus("CREATED"); //TODO this needs to be optimized - try and filter this further
@@ -112,6 +114,10 @@ public class RFSListService {
         ArrayList<ServiceRequest> finalMatchingServiceRequests = new ArrayList<>();
 
         for (ServiceRequest serviceReq : matchingServiceRequests) {
+            //check to see that there are no more than 8 quotes that already exist for this SR.
+            if(ServiceRequestRepository.countNumberOfQuotes(serviceReq.getId()) > 8){
+                continue;
+            }
             String[] serviceReqCategories = serviceReq.getCategoryHash().split("\\|");
             List<String> serviceRegCategoriesList = Arrays.asList(serviceReqCategories);
 
