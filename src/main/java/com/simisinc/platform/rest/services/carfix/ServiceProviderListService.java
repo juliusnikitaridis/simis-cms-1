@@ -33,8 +33,8 @@ public class ServiceProviderListService {
 
         try {
             ServiceProviderSpecification specification = new ServiceProviderSpecification();
-            if(context.getParameter("id") != null) {
-                specification.setServiceProviderId(context.getParameter("id"));
+            if(context.getParameter("serviceProviderUniqueId") != null) {
+                specification.setServiceProviderUniqueId(context.getParameter("serviceProviderUniqueId"));
             }
 
             DataResult result = ServiceProviderRepository.query(specification,null);
