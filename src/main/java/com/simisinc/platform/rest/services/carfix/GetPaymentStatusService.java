@@ -118,9 +118,9 @@ public class GetPaymentStatusService {
             PaymentRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
 
             JSONObject jsonObject = new JSONObject(remoteContent);
-            return jsonObject.getString("result.description").contains("Request successfully processed")?"SUCCESS":"FALIURE"; //TODO check this in prod !!!
+            return jsonObject.getString("result.description").contains("Request successfully processed")?"SUCCESS":"FAILURE"; //TODO check this in prod !!!
         } catch (Throwable e) {
-            LOG.error("Exception from peach payments API " + e);
+            LOG.error("Exception from API when checking payment status" + e);
             try {
                 PaymentRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
             } catch (Throwable ee) {
