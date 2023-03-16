@@ -317,7 +317,7 @@ Content-Type: application/json
   "merchantTransactionId":"SR485777467",
   "nonce":"PeachTest",
   "paymentType":"DB",
-  "shopperResultUrl":"https://carfix.connectmobiles24.com?paymenyId",
+  "shopperResultUrl":"https://carfix.connectmobiles24.com",
   "signature": "eb8beffbfef0571554a6c077203b2b509d97552fd9979bc18b9910a3fc221a96"
 }
 
@@ -332,7 +332,7 @@ Content-Type: application/json
 {
   "amount":"10.69",
   "serviceRequestId":"SR4857774677",
-  "shopperResultUrl":"https://carfix.connectmobiles24.com",
+  "shopperResultUrl":"https://carfix.connectmobiles24.com/SR4857774677",
   "memberId": "julius-niki",
   "serviceProviderId": "amazing-amazing-something-2"
 }
