@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.UUID;
 
 public class PaymentRepository {
@@ -39,6 +40,21 @@ public class PaymentRepository {
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
             throw new Exception(se.getMessage());
+        }
+    }
+
+
+
+    public static void updatePaymentHistory(String merchantTransactionId,String status) throws Exception {
+
+        String sql = "update carfix.payment_history set status = ? where merchant_transaction_no = ?";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            pstmt.setString(2, merchantTransactionId);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
         }
     }
 }
