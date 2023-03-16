@@ -50,5 +50,6 @@
   <service method="get" endpoint="carfix/AcceptedRFSListService" class="com.simisinc.platform.rest.services.carfix.AcceptedRFSListService" />
   <service method="post" endpoint="carfix/RegisterDeviceToken" class="com.simisinc.platform.rest.services.carfix.RegisterDeviceToken"/>
   <service method="get" endpoint="carfix/FetchDeviceTokenService" class="com.simisinc.platform.rest.services.carfix.FetchDeviceTokenService" />
+  <service method="get" endpoint="carfix/GetPaymentStatusService" class="com.simisinc.platform.rest.services.carfix.GetPaymentStatusService"/>
 
 </services>
