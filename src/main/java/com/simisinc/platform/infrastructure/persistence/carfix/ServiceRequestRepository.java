@@ -116,11 +116,25 @@ public class ServiceRequestRepository {
                     .addIfExists("vehicle_id = ?", specification.getVehicleId())
                     .addIfExists("member_id = ?", specification.getMemberId())
                     .addIfExists("id = ?", specification.getServiceRequestId())
+                    .addIfExists("confirmed_service_provider_id = ?", specification.getServiceProviderId())
                     .addIfExists("status = ?",specification.getStatus());
+
 
         }
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, ServiceRequestRepository::buildRecord);
+    }
+    public static DataResult AcceptedSPQuotes(String ServiceProviderId,DataConstraints constraints){
+        SqlUtils select = new SqlUtils();
+        SqlUtils where = new SqlUtils();
+        SqlUtils orderBy = new SqlUtils();
+
+        where.add("confirmed_service_provider_id = ?",ServiceProviderId)
+                .add("status != ?","CREATED");
+
+        return DB.selectAllFrom(
+                TABLE_NAME, select, where, orderBy, constraints, ServiceRequestRepository::buildRecord);
+
     }
 
     //see how many quotes exist for serviceRequest
