@@ -190,7 +190,7 @@ public class QuoteRepository {
 
         //add up all the items that have a valid accepted status
         System.out.print(quoteItems);
-        double newTotal = 5.11;
+        double newTotal = 0;
         for(QuoteItem item : quoteItems) {
 
             newTotal+=Double.parseDouble(item.getItemTotalPrice());
