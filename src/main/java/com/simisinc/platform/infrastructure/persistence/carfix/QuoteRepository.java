@@ -185,20 +185,21 @@ public class QuoteRepository {
         SqlUtils where = new SqlUtils();
 
         where.add("quote_id = ?", quoteId);
-        where.add("item_status like ?","ACCEPTED"); //TODO check this
+        where.add("item_status like ?","%ACCEPTED%"); //TODO check this
         ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, QuoteRepository::buildRecordQuoteItem)).getRecords();
 
         //add up all the items that have a valid accepted status
-
+        System.out.print(quoteItems);
         double newTotal = 0;
         for(QuoteItem item : quoteItems) {
-            newTotal+=Double.valueOf(item.getItemTotalPrice());
+
+            newTotal+=Double.parseDouble(item.getItemTotalPrice());
         }
 
         String sql = "update carfix.quote set total = ? where id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, String.valueOf(newTotal));
+            pstmt.setString(1, Double.toString(newTotal));
             pstmt.setString(2, quoteId);
             pstmt.execute();
         } catch (Exception e) {
