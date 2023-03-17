@@ -34,6 +34,7 @@ public class ServiceProviderRepository {
                     .add("user_id",userUniqueId) //tie this to the user table
                     .add("rating",0)
                     .add("count",0)
+                    .add("operating_year",serviceProvider.getOperatingYear())
                     .add("drop_off",serviceProvider.getDropOff())
                     .add("rmi",serviceProvider.getRMI());
 
@@ -83,6 +84,7 @@ public class ServiceProviderRepository {
             serviceProvider.setRating(rs.getString("rating"));
             serviceProvider.setDropOff(rs.getString("drop_off"));
             serviceProvider.setRMI(rs.getString("rmi"));
+            serviceProvider.setOperatingYear(rs.getString("operating_year"));
             return serviceProvider;
         } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());
@@ -116,6 +118,7 @@ public class ServiceProviderRepository {
                 .addIfExists("certifications", record.getCertifications())
                 .addIfExists("address", record.getAddress())
                 .addIfExists("about_us", record.getAboutUs())
+                .addIfExists("operating_year",record.getOperatingYear())
                 .addIfExists("logo_data", record.getLogoData())
                 .addIfExists("supported_categories", record.getSupportedCategoriesAsString())
                 .addIfExists("accreditations", record.getAccreditations());
