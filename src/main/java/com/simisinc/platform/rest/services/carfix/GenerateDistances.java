@@ -2,12 +2,12 @@ package com.simisinc.platform.rest.services.carfix;
 
 public class GenerateDistances {
 
-    public static void main(String[]args) {
-        // -33.87149194907947, 18.61520205628264
-        //-33.87227585316099, 18.644599065910324
-        System.out.println(GeoUtils.distanceInKilometers(-33.87149194907947,18.61520205628264,-33.87227585316099,18.644599065910324));
-        System.out.println(GeoUtils.distanceInKilometers(-33.87227585316099,18.644599065910324,-33.87149194907947,18.61520205628264));
-    }
+//    public static void main(String[]args) {
+//        // -33.87149194907947, 18.61520205628264
+//        //-33.87227585316099, 18.644599065910324
+//        System.out.println(GeoUtils.distanceInKilometers(-33.87149194907947,18.61520205628264,-33.87227585316099,18.644599065910324));
+//        System.out.println(GeoUtils.distanceInKilometers(-33.87227585316099,18.644599065910324,-33.87149194907947,18.61520205628264));
+//    }
 
 }
 
