@@ -30,7 +30,7 @@ import javax.json.JsonObject;
  * get the status of a particular transaction.
  *
  * @author Julius Nikitaridis
- * @created 01/11/22 11:28 AM
+ * @created 16/03/23 11:28 AM
  */
 public class GetPaymentStatusService {
 
@@ -43,6 +43,7 @@ public class GetPaymentStatusService {
             if(merchantTransactionNo == null) {
                 throw new Exception("merchantTransactionNo is not set");
             }
+            //todo check if there is already a status in the DB
             String status = getTransactionStatus(merchantTransactionNo);
             ServiceResponse response = new ServiceResponse(200);
             response.setData(status);
@@ -118,7 +119,17 @@ public class GetPaymentStatusService {
             PaymentRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
 
             JSONObject jsonObject = new JSONObject(remoteContent);
-            return jsonObject.getString("result.description").contains("Request successfully processed")?"SUCCESS":"FAILURE"; //TODO check this in prod !!!
+            String transStatus = jsonObject.getString("result.description");
+            Response res = new Response();
+            if(transStatus == null) {
+                throw new Exception("result.description is not present in response from API");
+            }
+            if(transStatus.contains("Request successfully processed")) {
+                res.setStatus("SUCCESS");
+            } else {
+                res.setStatus("FAILURE");
+            }
+            return new ObjectMapper().writeValueAsString(res);
         } catch (Throwable e) {
             LOG.error("Exception from API when checking payment status" + e);
             try {
@@ -144,6 +155,11 @@ class PaymentStatus {
     public String getConcatenatedString() {
         return "authentication.entityId" + authenticationEntityId + "merchantTransactionId" + merchantTransactionId;
     }
+}
+
+@Data
+class Response {
+    String status;
 }
 
 /**  whas is returned from invokePaymentStatusAPI
