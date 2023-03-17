@@ -1,10 +1,12 @@
 package com.simisinc.platform.rest.services.carfix;
 
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.Brand;
 import com.simisinc.platform.domain.model.carfix.Category;
 import com.simisinc.platform.domain.model.carfix.ServiceProvider;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.infrastructure.database.DataResult;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderSpecification;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
@@ -126,7 +128,18 @@ public class RFSListService {
             }
         }
 
-        return finalMatchingServiceRequests;
+        List<ServiceRequest> finalMatchingServiceRequestsWithinRadius = new ArrayList<>();
+        for(ServiceRequest request : finalMatchingServiceRequests) {
+            //get member id , and then get member lat and long
+            User member = UserRepository.findByUniqueId(request.getMemberId());
+            // calc distance between above and this service provider - serviceProviderId
+            double distance =  GeoUtils.distanceInKilometers(member.getLatitude(),member.getLongitude(),serviceProvider.getLatitude(),serviceProvider.getLongitude());
+            //this request has radius - check above distance is less than this radius
+            if(distance <= Double.valueOf(request.getRadius())){
+                finalMatchingServiceRequestsWithinRadius.add(request);
+            }
+        }
+        return finalMatchingServiceRequestsWithinRadius;
     }
 }
 

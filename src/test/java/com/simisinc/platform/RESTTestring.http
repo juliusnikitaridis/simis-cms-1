@@ -340,7 +340,7 @@ Content-Type: application/json
 
 {
   "amount":"10.69",
-  "serviceRequestId":"SR4857774677AA",
+  "serviceRequestId":"SR4857774677AAAA",
   "shopperResultUrl":"https://carfix.connectmobiles24.com/SR4857774677AA",
   "memberId": "julius-niki",
   "serviceProviderId": "amazing-amazing-something-2"
@@ -348,7 +348,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/carfix/GetPaymentStatusService?merchantTransactionNo=SR4857774677AA
+GET http://localhost:8080/api/carfix/GetPaymentStatusService?merchantTransactionNo=SR4857774677AAA
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-d2eef46c-a62f-42a9-a7b4-385ee3ac38d61
 ###
