@@ -340,8 +340,7 @@ Content-Type: application/json
 
 {
   "amount":"10.69",
-  "serviceRequestId":"SR4857774677AAAA",
-  "shopperResultUrl":"https://carfix.connectmobiles24.com/SR4857774677AA",
+  "serviceRequestId":"SR4857774677AAAAAAAA",
   "memberId": "julius-niki",
   "serviceProviderId": "amazing-amazing-something-2"
 }

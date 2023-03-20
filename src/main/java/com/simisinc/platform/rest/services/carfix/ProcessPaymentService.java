@@ -2,6 +2,7 @@ package com.simisinc.platform.rest.services.carfix;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.granule.json.JSONObject;
 import com.simisinc.platform.domain.model.carfix.PaymentRequest;
 import com.simisinc.platform.domain.model.carfix.ProcessPaymentServiceRequest;
 import com.simisinc.platform.infrastructure.persistence.carfix.PaymentRepository;
@@ -63,10 +64,12 @@ public class ProcessPaymentService {
 
 
     private String processPeachPayment(ProcessPaymentServiceRequest serviceRequest) throws Exception {
+        String uniqueTransactionNo = serviceRequest.getServiceRequestId()+"/"+System.currentTimeMillis();
+
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setAmount(serviceRequest.getAmount());
-        paymentRequest.setMerchantTransactionId(serviceRequest.getServiceRequestId());
-        paymentRequest.setShopperResultUrl(serviceRequest.getShopperResultUrl());
+        paymentRequest.setMerchantTransactionId(uniqueTransactionNo);
+        paymentRequest.setShopperResultUrl("https://member.carfixsa.com/home/service/service-details"+"/"+uniqueTransactionNo);
 
         generateSignatureForRequest(paymentRequest);
         String redirectUrl = invokePeachPaymentsAPI(paymentRequest, serviceRequest);
@@ -125,6 +128,7 @@ public class ProcessPaymentService {
             }
             //everything ok to this point, record the payment in DB
             PaymentRepository.add(serviceRequest, request, "NO ERROR-OK");
+            remoteContent = new JSONObject(remoteContent).append("transactionId",request.getMerchantTransactionId()).toString();
             return remoteContent;
         } catch (Throwable e) {
             LOG.error("Exception from peach payments API " + e);
