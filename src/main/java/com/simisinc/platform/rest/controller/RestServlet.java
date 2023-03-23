@@ -117,9 +117,11 @@ public class RestServlet extends HttpServlet {
 
     // Prep the response
     String siteUrl = LoadSitePropertyCommand.loadByName("site.url");
-    if (StringUtils.isNotBlank(request.getHeader("Origin")) && StringUtils.isNotBlank(siteUrl)) {
-      response.addHeader("Access-Control-Allow-Origin", siteUrl);
-    }
+    //this is done in the web.xml file on the nginx - add the cores filter to add these headers only
+    //oterwise there seems to be duplicate headers in the browser. tomcat must have no cores config either
+//    if (StringUtils.isNotBlank(request.getHeader("Origin")) && StringUtils.isNotBlank(siteUrl)) {
+//      response.addHeader("Access-Control-Allow-Origin", siteUrl);
+//    }
     response.setContentType("application/json");
     try {
       response.setCharacterEncoding("UTF-8");
