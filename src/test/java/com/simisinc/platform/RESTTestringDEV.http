@@ -180,9 +180,9 @@ Content-Type: application/json
 ###
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?serviceProviderId=e05dc5d2-dd69-495f-98c5-066754a9b9c7
+GET https://carfix.connectmobiles24.com/api/carfix/RFSListService?serviceProviderId=31e76905-c770-48e2-95e2-c79c17475212
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
-Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
+Authorization:Bearer API-d765b107-4cd0-476e-abc1-e578e06c5d035
 ###
 
 

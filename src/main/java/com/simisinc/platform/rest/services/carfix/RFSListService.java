@@ -81,7 +81,7 @@ public class RFSListService {
 
     /**Julius Nikitaridis
      * Need to return all the service requests where the supperted brands and supported categories of the
-     * give service provider match.
+     * give service provider match. DONT EVER CHANGE THIS CODE - SHOULD BE FULLY REFACTORED.
      * @param serviceProviderId
      * @return
      * @throws Exception
@@ -94,7 +94,11 @@ public class RFSListService {
         if(serviceProviderUniqueId != null) {
             specification.setServiceProviderUniqueId(serviceProviderUniqueId);
         }
-        ServiceProvider serviceProvider = (ServiceProvider)ServiceProviderRepository.query(specification,null).getRecords().get(0);
+        DataResult serviceProviderList = (DataResult)ServiceProviderRepository.query(specification,null);
+        if(serviceProviderList == null) {
+            throw new Exception("could not find service provider with id");
+        }
+        ServiceProvider serviceProvider = (ServiceProvider) serviceProviderList.getRecords().get(0);
         List<Brand> serviceProviderBrandsIds = Arrays.asList(serviceProvider.getSupportedBrands()); //[{"id":"3838393939nd39","brandName":null},{"id":"fe14578f-1a2c-43f4-b293-2f7b039d3100","brandName":null},{"id":"208c4493-ed44-4508-80f7-0b7a42de7208","brandName":null},{"id":"299edb1b-f085-4eff-aec1-93fdddf190eb","brandName":null},{"id":"2619069d-0f4b-44ae-9a08-3d6ca0f586a2","brandName":null}]
         List<String>serviceProviderBrandsIdsOnly = new ArrayList<>();
         serviceProviderBrandsIds.stream().forEach(x->{
@@ -132,8 +136,18 @@ public class RFSListService {
         for(ServiceRequest request : finalMatchingServiceRequests) {
             //get member id , and then get member lat and long
             User member = UserRepository.findByUniqueId(request.getMemberId());
+            User serviceProviderUser = UserRepository.findByUniqueId(serviceProviderUniqueId);
+            if(member == null) {
+                throw new Exception("could not find member "+request.getMemberId()+" for quote");
+            }
+            if(serviceProviderUser == null) {
+                throw new Exception("could not find system user["+serviceProvider.getUniqueId()+"] for service provider");
+            }
             // calc distance between above and this service provider - serviceProviderId
-            double distance =  GeoUtils.distanceInKilometers(member.getLatitude(),member.getLongitude(),serviceProvider.getLatitude(),serviceProvider.getLongitude());
+            if(member.getLatitude() == 0.0 || member.getLongitude() == 0.0 || serviceProviderUser.getLatitude() == 0.0 || serviceProviderUser.getLongitude() == 0.0) {
+                throw new Exception("Missing lat and long for serviceProvider or member.");
+            }
+            double distance =  GeoUtils.distanceInKilometers(member.getLatitude(),member.getLongitude(),serviceProviderUser.getLatitude(),serviceProviderUser.getLongitude());
             //this request has radius - check above distance is less than this radius
             if(distance <= Double.valueOf(request.getRadius())){
                 finalMatchingServiceRequestsWithinRadius.add(request);
