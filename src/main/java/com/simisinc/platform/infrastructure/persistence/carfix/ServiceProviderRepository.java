@@ -19,7 +19,7 @@ public class ServiceProviderRepository {
     private static String[] PRIMARY_KEY = new String[]{"id"};
     private static Log LOG = LogFactory.getLog(ServiceProviderRepository.class);
 
-    public static ServiceProvider add(ServiceProvider serviceProvider,String userUniqueId) throws Exception {
+    public static ServiceProvider add(ServiceProvider serviceProvider) throws Exception {
             SqlUtils insertValues = new SqlUtils()
                     .add("id", serviceProvider.getServiceProviderId()) //PK on SP table
                     .add("supported_brands", serviceProvider.getSupportedBrandsAsJSONString())
@@ -31,7 +31,7 @@ public class ServiceProviderRepository {
                     .add("about_us",serviceProvider.getAboutUs())
                     .add("certifications", serviceProvider.getCertifications())
                     .add("accreditations",serviceProvider.getAccreditations())
-                    .add("user_id",userUniqueId) //tie this to the user table
+                    .add("user_id",serviceProvider.getServiceProviderId()) //tie this to the user table
                     .add("rating",0)
                     .add("count",0)
                     .add("operating_year",serviceProvider.getOperatingYear())

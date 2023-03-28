@@ -2,6 +2,8 @@ package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.application.register.SaveUserCommand;
+import com.simisinc.platform.domain.events.cms.UserInvitedEvent;
+import com.simisinc.platform.domain.events.cms.UserSignedUpEvent;
 import com.simisinc.platform.domain.model.Group;
 import com.simisinc.platform.domain.model.Role;
 import com.simisinc.platform.domain.model.User;
@@ -10,6 +12,7 @@ import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
 import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
+import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import org.apache.commons.logging.Log;
@@ -29,12 +32,17 @@ public class RegisterServiceProviderService {
         try {
 
             ObjectMapper mapper = new ObjectMapper();
-            ServiceProvider newUser = mapper.readValue(context.getJsonRequest(), ServiceProvider.class);
+            ServiceProvider newServiceProvider = mapper.readValue(context.getJsonRequest(), ServiceProvider.class);
+            newServiceProvider.setServiceProviderId(UUID.randomUUID().toString());
 
-            String userSystemUniqueId = addUser(newUser);
-            newUser.setServiceProviderId(UUID.randomUUID().toString());
+            User userProviderUser = addUser(newServiceProvider);
 
-            ServiceProviderRepository.add(newUser,userSystemUniqueId);
+            ServiceProviderRepository.add(newServiceProvider);
+
+            // Trigger events - send the registration verification email.
+            WorkflowManager.triggerWorkflowForEvent(new UserSignedUpEvent(userProviderUser));
+            WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(userProviderUser,userProviderUser));
+
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service Provider has been registered");}};
             response.setData(responseMessage);
@@ -49,10 +57,10 @@ public class RegisterServiceProviderService {
     }
 
 
-    public String addUser(ServiceProvider user) throws Exception {
+    public User addUser(ServiceProvider user) throws Exception {
         ////////////////////TODO this should be removed for prod!!!!!!!
-        user.setValidated(new Timestamp(System.currentTimeMillis()));
-        user.setPassword("$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw"); //this is dcd673bb-6f82-43c5-979c-df30da062562
+        //user.setValidated(new Timestamp(System.currentTimeMillis()));
+        //user.setPassword("$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw"); //this is dcd673bb-6f82-43c5-979c-df30da062562
 
         user.setModifiedBy(1); //this should be the id of the sysadmin user
         user.setUserType("SERVICE_PROVIDER");
@@ -92,6 +100,6 @@ public class RegisterServiceProviderService {
         if (savedUser == null) {
             throw new Exception("user could not be saved when calling RegisterServiceProviderService");
         }
-        return savedUser.getUniqueId();
+        return savedUser;
     }
 }

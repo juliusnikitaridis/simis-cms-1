@@ -134,14 +134,14 @@ Authorization:Bearer API-fedf5757-f32c-48d7-bb6d-3169e2911e231
 
 POST http://localhost:8080/api/carfix/RegisterMemberService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
+Authorization:Bearer API-0a1c1f67-8b77-43f4-83d3-5060d3c6f9811
 Content-Type: application/json
 
 {
 "firstName":"Test",
 "lastName":"T",
-"email":"julius6665636@test.com",
-"username":"julius66365663@test.com",
+"email":"juliusniki@gmail.com",
+"username":"juliusnikiB@gmail.com",
 "idnum": "1996",
 "roleId": "5",
 "contactNo": "3423423452"
@@ -202,7 +202,7 @@ Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 ###
 
 ###
-GET http://localhost:8080/api/carfix/ServiceProviderListService?id=de6e124f-e7c4-4882-af27-41ebd375a9cc
+GET http://localhost:8080/api/carfix/ServiceProviderListService?id=0190604c-da39-4aa0-89b4-3d099732217d
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 ###

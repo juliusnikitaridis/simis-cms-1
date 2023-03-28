@@ -3,6 +3,8 @@ package com.simisinc.platform.rest.services.carfix;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.application.DataException;
 import com.simisinc.platform.application.register.SaveUserCommand;
+import com.simisinc.platform.domain.events.cms.UserInvitedEvent;
+import com.simisinc.platform.domain.events.cms.UserSignedUpEvent;
 import com.simisinc.platform.domain.model.Group;
 import com.simisinc.platform.domain.model.Role;
 import com.simisinc.platform.domain.model.User;
@@ -11,6 +13,7 @@ import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
 import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
+import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import org.apache.commons.beanutils.BeanUtils;
@@ -54,8 +57,8 @@ public class RegisterMemberService {
     public void addUser(User user, long modifiedById) throws Exception {
         
         ////////////////////TODO this should be removed for prod!!!!!!!
-        user.setValidated(new Timestamp(System.currentTimeMillis()));
-        user.setPassword("$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw"); //this is dcd673bb-6f82-43c5-979c-df30da062562
+        //user.setValidated(new Timestamp(System.currentTimeMillis()));
+        //user.setPassword("$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw"); //this is dcd673bb-6f82-43c5-979c-df30da062562
 
         user.setModifiedBy(modifiedById);
         user.setUserType("MEMBER");
@@ -88,13 +91,14 @@ public class RegisterMemberService {
                 user.setGroupList(userGroupList);
             }
         }
-
         // Save the user
         User savedUser = null;
         savedUser = SaveUserCommand.saveUser(user);
         if (savedUser == null) {
             throw new Exception("user could not be saved when calling RegisterMemberService");
         }
-
+        // Trigger events - send the registration verification email.
+        WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));
+        WorkflowManager.triggerWorkflowForEvent(new UserSignedUpEvent(savedUser));
     }
 }
