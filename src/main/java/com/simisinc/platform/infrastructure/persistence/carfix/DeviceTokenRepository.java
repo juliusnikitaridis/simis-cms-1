@@ -55,8 +55,8 @@ public class DeviceTokenRepository {
 
         DeviceToken deviceToken= new DeviceToken();
         try {
-            deviceToken.setToken(rs.getString("unique_id"));
-            deviceToken.setUniqueId(rs.getString("token"));
+            deviceToken.setToken(rs.getString("token"));
+            //deviceToken.setUniqueId(rs.getString("unique_id"));
             //get the line items for this record
 
             return deviceToken;
