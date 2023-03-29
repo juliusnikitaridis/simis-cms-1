@@ -77,7 +77,8 @@ public class ServiceRequestRepository {
                 .add("last_service_date", record.getLastServiceDate())
                 .add("vehicle_brand_id",record.getVehicleBrandId())
                 .add("category_hash",requestItemsCategoryHash.toString())
-                .add("preferred_date",record.getPreferredDate());
+                .add("preferred_date",record.getPreferredDate())
+                .add("customer_reference",record.getCustomerReference());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -176,6 +177,7 @@ public class ServiceRequestRepository {
             request.setCategoryHash(rs.getString("category_hash"));
             request.setConfirmedDate(rs.getString("confirmed_date"));
             request.setPreferredDate(rs.getString("preferred_date"));
+            request.setCustomerReference(rs.getString("customer_reference"));
 
             //now also need to get all the service request items
             ArrayList<ServiceRequestItem> serviceRequestItems = (ArrayList<ServiceRequestItem>) DB.selectAllFrom(TABLE_NAME_ITEMS,new SqlUtils(),new SqlUtils().add("service_request_id = ?",rs.getString("id")),null,null,ServiceRequestRepository::buildRecordServiceRequestItems).getRecords();

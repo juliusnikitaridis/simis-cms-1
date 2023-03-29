@@ -147,10 +147,10 @@ Authorization:Bearer API-93464062-39e1-46cd-92af-2600c75d0d715
 Content-Type: application/json
 
 {
-"firstName":"Test",
-"lastName":"T",
-"email":"juliusniki2@gmail.com",
-"username":"juliusniki2@gmail.com",
+"firstName":"Julius",
+"lastName":"Nikitaridis",
+"email":"juliusniki@gmail.com",
+"username":"juliusniki@gmail.com",
 "idnum": "8712225152088",
 "roleId": "5"
 }
@@ -176,7 +176,8 @@ Content-Type: application/json
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
   "logoData": "encoded_logo_data",
-  "contactNo": "3423423452"
+  "contactNo": "3423423452",
+  "operatingHours":[{"day": "Monday","hours": "1-5pm"}]
 }
 ###
 

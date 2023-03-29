@@ -42,6 +42,7 @@ public class CreateRFSService {
                 throw new Exception("Service request type not recognized ::"+serviceRequest.getType());
             }
             serviceRequest.setId(serviceRequestId);
+            serviceRequest.setCustomerReference(new RandomToken(6).nextString());
 
             ServiceRequestRepository.add(serviceRequest);
 

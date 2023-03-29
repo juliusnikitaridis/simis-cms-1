@@ -35,6 +35,7 @@ public class ServiceProviderRepository {
                     .add("rating",0)
                     .add("count",0)
                     .add("operating_year",serviceProvider.getOperatingYear())
+                    .add("operating_hours",serviceProvider.getOperatingHours())
                     .add("drop_off",serviceProvider.getDropOff())
                     .add("rmi",serviceProvider.getRMI());
 
@@ -85,6 +86,7 @@ public class ServiceProviderRepository {
             serviceProvider.setDropOff(rs.getString("drop_off"));
             serviceProvider.setRMI(rs.getString("rmi"));
             serviceProvider.setOperatingYear(rs.getString("operating_year"));
+            serviceProvider.setOperatingHours(rs.getString("operating_hours"));
             return serviceProvider;
         } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());
