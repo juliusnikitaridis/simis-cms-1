@@ -215,36 +215,25 @@ Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
 
 POST http://localhost:8080/api/carfix/CreateQuoteService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
+Authorization:Bearer API-8ded99c1-0f4c-414b-9ebe-9786af7ac7ad1
 Content-Type: application/json
 
 {
-  "booking_date":"1676641315237",
   "requestForServiceId":"2343243254",
   "serviceProviderId":"234234543",
   "quotationTotal": "5000.00",
   "serviceProviderName": "serviceProviderName1",
   "quotationItems":[
     {
-      "partNumber":"3323ASD",
-      "partDescription":"23444.33",
-      "itemTotalPrice": "2000.00",
-      "quantity": "200"
+      "partDescription":"labour",
+      "labourTotal": "2000.00",
+      "quantity": "1"
     },
     {
       "partNumber":"3323ASD",
-      "partDescription":"23444.33",
-      "itemTotalPrice": "2000.00"
-    },
-    {
-      "partNumber":"3323ASD",
-      "partDescription":"23444.33",
-      "itemTotalPrice": "2000.00"
-    },
-    {
-      "partNumber":"3323ASD",
-      "partDescription":"23444.33",
-      "itemTotalPrice": "2000.00"
+      "partDescription":"oil",
+      "partsTotal": "200.00",
+      "quantity": "2"
     }
   ]
 }

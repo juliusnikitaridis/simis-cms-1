@@ -123,7 +123,8 @@ public class ServiceProviderRepository {
                 .addIfExists("operating_year",record.getOperatingYear())
                 .addIfExists("logo_data", record.getLogoData())
                 .addIfExists("supported_categories", record.getSupportedCategoriesAsString())
-                .addIfExists("accreditations", record.getAccreditations());
+                .addIfExists("accreditations", record.getAccreditations())
+                .addIfExists("operating_hours",record.getOperatingHours());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
