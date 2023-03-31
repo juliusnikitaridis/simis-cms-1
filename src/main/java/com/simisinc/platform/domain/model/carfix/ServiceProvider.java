@@ -41,11 +41,17 @@ public class ServiceProvider extends User {
 
     public String getSupportedBrandsAsJSONString() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        if(this.supportedBrands == null) {
+            return null;
+        }
         return mapper.writeValueAsString(this.supportedBrands);
     }
 
     public String getSupportedCategoriesAsString() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        if(this.supportedCategories == null) {
+            return null;
+        }
         return mapper.writeValueAsString(this.supportedCategories);
     }
 }

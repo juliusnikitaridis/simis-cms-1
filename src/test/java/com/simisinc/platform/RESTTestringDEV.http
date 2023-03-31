@@ -134,7 +134,7 @@ Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
 ###
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/ServiceProviderListService?id=0190604c-da39-4aa0-89b4-3d099732217d
+GET https://carfix.connectmobiles24.com/api/carfix/ServiceProviderListService?id=53a066c9-4af4-47f5-8663-cf071baef294
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Bearer API-93464062-39e1-46cd-92af-2600c75d0d715
 
@@ -153,6 +153,18 @@ Content-Type: application/json
 "username":"juliusniki@gmail.com",
 "idnum": "8712225152088",
 "roleId": "5"
+}
+###
+
+POST https://carfix.connectmobiles24.com/api/carfix/UpdateServiceProviderService
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-93464062-39e1-46cd-92af-2600c75d0d715
+Content-Type: application/json
+
+{
+  "serviceProviderId": "3f5efcf8-eced-4d1a-8b38-f9df3790328f",
+  "operatingHours": "{none}",
+  "aboutUs": "something new"
 }
 ###
 

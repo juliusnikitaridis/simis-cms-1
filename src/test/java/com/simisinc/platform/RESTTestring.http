@@ -194,6 +194,19 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:8080/api/carfix/UpdateServiceProviderService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cf1f2f46-ac51-4a40-9b60-bfccdd66f74e1
+Content-Type: application/json
+
+{
+  "serviceProviderId": "20f8238d-dee5-4e3b-a621-2fbdfe385a8c",
+  "accreditations": "UPDATED ACCREDITATIONS 22",
+  "operatingHours": "{none}"
+
+}
+###
+
 
 
 ###
@@ -226,14 +239,14 @@ Content-Type: application/json
   "quotationItems":[
     {
       "partDescription":"labour",
-      "labourTotal": "2000.00",
+      "labourTotal": "2500.00",
       "quantity": "1"
     },
     {
       "partNumber":"3323ASD",
       "partDescription":"oil",
       "partsTotal": "200.00",
-      "quantity": "2"
+      "quantity": "4"
     }
   ]
 }
