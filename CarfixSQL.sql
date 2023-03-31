@@ -1,6 +1,8 @@
 create table carfix.categories
 (
-    id varchar,
+    id varchar not null
+        constraint categories_pk
+            primary key,
     description varchar,
     category varchar
 );
@@ -54,7 +56,8 @@ create table carfix.service_request
     vehicle_brand_id varchar,
     preferred_date varchar,
     confirmed_date varchar,
-    job_number varchar
+    job_number varchar,
+    customer_reference varchar
 );
 
 alter table carfix.service_request owner to postgres;
@@ -100,9 +103,7 @@ create table carfix.service_provider
     name varchar,
     services varchar,
     certifications varchar,
-    user_id varchar
-        constraint service_provider_users_unique_id_fk
-            references users (unique_id),
+    user_id varchar,
     address varchar,
     about_us varchar,
     logo_data varchar,
@@ -111,7 +112,9 @@ create table carfix.service_provider
     rating integer,
     count integer,
     drop_off varchar,
-    rmi varchar
+    rmi varchar,
+    operating_year varchar,
+    operating_hours varchar
 );
 
 alter table carfix.service_provider owner to postgres;
@@ -147,3 +150,7 @@ create table carfix.device_token
 
 alter table carfix.device_token owner to postgres;
 
+
+
+--for disablinh users
+update users set username = concat(username,'OLD'),email = concat(email,'OLD'),unique_id=concat(unique_id,'OLD')where password = '$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw';

@@ -31,7 +31,7 @@ public class ServiceProviderRepository {
                     .add("about_us",serviceProvider.getAboutUs())
                     .add("certifications", serviceProvider.getCertifications())
                     .add("accreditations",serviceProvider.getAccreditations())
-                    .add("user_id",serviceProvider.getServiceProviderId()) //tie this to the user table
+                    .add("user_id",serviceProvider.getUniqueId())
                     .add("rating",0)
                     .add("count",0)
                     .add("operating_year",serviceProvider.getOperatingYear())

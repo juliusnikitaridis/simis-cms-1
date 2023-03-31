@@ -36,7 +36,7 @@ public class RegisterServiceProviderService {
             newServiceProvider.setServiceProviderId(UUID.randomUUID().toString());
 
             User userProviderUser = addUser(newServiceProvider);
-
+                newServiceProvider.setUniqueId(userProviderUser.getUniqueId());
             ServiceProviderRepository.add(newServiceProvider);
 
             // Trigger events - send the registration verification email.
