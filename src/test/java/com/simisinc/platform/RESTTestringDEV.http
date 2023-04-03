@@ -134,7 +134,7 @@ Authorization:Bearer API-3c289184-e690-4ac7-bdb3-32cff6d209665
 ###
 
 ###
-GET https://carfix.connectmobiles24.com/api/carfix/ServiceProviderListService?id=cfc0dbcc-c846-43de-b811-0384ca6ea91f
+GET https://carfix.connectmobiles24.com/api/carfix/ServiceProviderListService?serviceProviderUniqueId=steves-auto-workshop-steves-auto-workshop
 X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Bearer API-93464062-39e1-46cd-92af-2600c75d0d715
 
