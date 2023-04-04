@@ -1,10 +1,16 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.Brand;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
 import com.simisinc.platform.domain.model.carfix.Category;
+import com.simisinc.platform.domain.model.mailinglists.Email;
 import com.simisinc.platform.infrastructure.database.*;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
@@ -254,6 +260,49 @@ public class ServiceRequestRepository {
             pstmt.execute();
         } catch(Exception e) {
             throw e;
+        }
+    }
+
+    //get all service requests between now and same timee tomorrow
+    public static ArrayList<EmailReminderInfo> getServiceRequestsForTomorrow() throws  Exception {
+        String sql = "select * from carfix.service_request where date(TO_CHAR(TO_TIMESTAMP(confirmed_date::BIGINT/ 1000), 'DD/MM/YYYY HH24:MI:SS')) > current_date and date(TO_CHAR(TO_TIMESTAMP(confirmed_date::BIGINT/ 1000), 'DD/MM/YYYY HH24:MI:SS')) < current_date + INTERVAL '1 DAY';\n";
+        ArrayList<EmailReminderInfo>serviceRequestConfirmedServiceProviderIdList = new ArrayList<>();
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                EmailReminderInfo info = new EmailReminderInfo(rs.getString("confirmed_service_provider_id"));
+                info.setBookingNumber(rs.getString("customer_reference"));
+                info.setConfirmedDate(rs.getString("confirmed_date"));
+                serviceRequestConfirmedServiceProviderIdList.add(info);
+            }
+        } catch(Exception e) {
+            throw e;
+        }
+
+
+        //need to get user info for the service providers
+        for (EmailReminderInfo s : serviceRequestConfirmedServiceProviderIdList) {
+            User serviceProviderUser = UserRepository.findByUniqueId(s.getConfirmedServiceProviderId());
+            s.setEmailAddress(serviceProviderUser.getEmail());
+            s.setFirstName(serviceProviderUser.getFirstName());
+        }
+
+        return serviceRequestConfirmedServiceProviderIdList;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class EmailReminderInfo {
+        String firstName;
+        String confirmedServiceProviderId;
+        String confirmedDate;
+        String emailAddress;
+        String bookingNumber; //@todo going to add more items to this
+
+        EmailReminderInfo(String confirmedServiceProviderId) {
+            this.confirmedServiceProviderId = confirmedServiceProviderId;
         }
     }
 }
