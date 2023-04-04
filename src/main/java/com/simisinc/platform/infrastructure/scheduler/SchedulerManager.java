@@ -18,10 +18,7 @@ package com.simisinc.platform.infrastructure.scheduler;
 
 import com.simisinc.platform.infrastructure.database.DataSource;
 import com.simisinc.platform.infrastructure.scheduler.admin.DatasetsDownloadAndSyncJob;
-import com.simisinc.platform.infrastructure.scheduler.cms.LoadSystemFilesJob;
-import com.simisinc.platform.infrastructure.scheduler.cms.RecordWebPageHitJob;
-import com.simisinc.platform.infrastructure.scheduler.cms.WebPageHitSnapshotJob;
-import com.simisinc.platform.infrastructure.scheduler.cms.WebPageHitsCleanupJob;
+import com.simisinc.platform.infrastructure.scheduler.cms.*;
 import com.simisinc.platform.infrastructure.scheduler.ecommerce.OrderManagementProcessNewOrders;
 import com.simisinc.platform.infrastructure.scheduler.ecommerce.OrderManagementProcessShippingUpdates;
 import com.simisinc.platform.infrastructure.scheduler.login.UserTokensCleanupJob;
@@ -67,6 +64,7 @@ public class SchedulerManager {
   public static final String ORDER_MANAGEMENT_PROCESS_SHIPPING_UPDATES_JOB = "OrderManagementProcessShippingUpdates";
   public static final String PROCESS_MEDICINE_SCHEDULES_JOB = "ProcessMedicineSchedules";
   public static final String LOAD_SYSTEM_FILES_JOB = "LoadSystemFiles";
+  public static final String SEND_SP_REMINDERS_JOB = "sendSpReminders";
 
   public SchedulerManager() {
   }
@@ -128,6 +126,7 @@ public class SchedulerManager {
       BackgroundJob.scheduleRecurrently(RECORD_WEB_PAGE_HITS_JOB, Cron.every15seconds(), RecordWebPageHitJob::execute);
       BackgroundJob.scheduleRecurrently(WEB_PAGE_HIT_SNAPSHOT_JOB, Cron.every5minutes(), WebPageHitSnapshotJob::execute);
       BackgroundJob.scheduleRecurrently(WEB_PAGE_HITS_CLEANUP_JOB, Cron.daily(4), WebPageHitsCleanupJob::execute);
+      BackgroundJob.scheduleRecurrently(SEND_SP_REMINDERS_JOB, Cron.every15seconds(), SendReminderToServiceProviderJob::execute); //TODO check the hour 5PM ?
 
       BackgroundJob.scheduleRecurrently(USER_TOKENS_CLEANUP_JOB, Cron.hourly(), UserTokensCleanupJob::execute);
 

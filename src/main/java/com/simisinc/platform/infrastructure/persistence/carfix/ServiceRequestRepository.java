@@ -265,7 +265,7 @@ public class ServiceRequestRepository {
 
     //get all service requests between now and same timee tomorrow
     public static ArrayList<EmailReminderInfo> getServiceRequestsForTomorrow() throws  Exception {
-        String sql = "select * from carfix.service_request where date(TO_CHAR(TO_TIMESTAMP(confirmed_date::BIGINT/ 1000), 'DD/MM/YYYY HH24:MI:SS')) > current_date and date(TO_CHAR(TO_TIMESTAMP(confirmed_date::BIGINT/ 1000), 'DD/MM/YYYY HH24:MI:SS')) < current_date + INTERVAL '1 DAY';\n";
+        String sql = "select * from carfix.service_request where date(TO_CHAR(TO_TIMESTAMP(confirmed_date::BIGINT/ 1000), 'DD/MM/YYYY HH24:MI:SS')) > now() and date(TO_CHAR(TO_TIMESTAMP(confirmed_date::BIGINT/ 1000), 'DD/MM/YYYY HH24:MI:SS')) < now() + INTERVAL '1 DAY';\n";
         ArrayList<EmailReminderInfo>serviceRequestConfirmedServiceProviderIdList = new ArrayList<>();
         try(Connection conn = DB.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -284,8 +284,10 @@ public class ServiceRequestRepository {
         //need to get user info for the service providers
         for (EmailReminderInfo s : serviceRequestConfirmedServiceProviderIdList) {
             User serviceProviderUser = UserRepository.findByUniqueId(s.getConfirmedServiceProviderId());
-            s.setEmailAddress(serviceProviderUser.getEmail());
-            s.setFirstName(serviceProviderUser.getFirstName());
+            if(serviceProviderUser == null) {
+                throw new Exception("could not find system user for service provider when sending reminders");
+            }
+            s.setServiceProviderUser(serviceProviderUser);
         }
 
         return serviceRequestConfirmedServiceProviderIdList;
@@ -295,11 +297,10 @@ public class ServiceRequestRepository {
     @Getter
     @Setter
     public static class EmailReminderInfo {
-        String firstName;
         String confirmedServiceProviderId;
         String confirmedDate;
-        String emailAddress;
         String bookingNumber; //@todo going to add more items to this
+        User   serviceProviderUser;
 
         EmailReminderInfo(String confirmedServiceProviderId) {
             this.confirmedServiceProviderId = confirmedServiceProviderId;

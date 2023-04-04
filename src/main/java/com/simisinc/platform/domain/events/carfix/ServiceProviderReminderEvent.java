@@ -14,40 +14,39 @@
  * limitations under the License.
  */
 
-package com.simisinc.platform.domain.events.cms;
+package com.simisinc.platform.domain.events.carfix;
 
 import com.simisinc.platform.domain.events.Event;
 import com.simisinc.platform.domain.model.User;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * Send reminder emails to service providers
+ * Event details for when a user signed up
  *
- * @author Julius Niki
- * @created 4/4/23 5:32 PM
+ * @author matt rajkowski
+ * @created 4/29/21 5:32 PM
  */
 @NoArgsConstructor
-public class UserSignedUpEvent extends Event {
+@Getter
+@Setter
+public class ServiceProviderReminderEvent extends Event {
 
-  public static final String ID = "user-signed-up";
+  public static final String ID = "service-provider-reminder";
+  public static String customerReference;
+  public static String bookingConfirmedDate;
+
 
   private User user = null;
 
-  public UserSignedUpEvent(User user) {
+  public ServiceProviderReminderEvent(User user) {
     this.user = user;
   }
 
   @Override
   public String getDomainEventType() {
     return ID;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public User getUser() {
-    return user;
   }
 
 }
