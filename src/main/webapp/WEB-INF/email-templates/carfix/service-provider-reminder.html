@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title></title>
@@ -144,12 +144,12 @@
                     </tr>
                     <tr>
                       <td class="template-content" style="font-family: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; padding: 0;">
-                        <p style="color: #333333; font-family: 'Proxima Nova Soft', 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; font-size: 18px; line-height: 1.5; margin: 0;" align="center">This is a reminder for booking with reference:<span th:text="${customerReference}"/><p><span th:text="${bookingDate}"/><span th:text="${spName}"/></p>
+                        <p style="color: #333333; font-family: 'Proxima Nova Soft', 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; font-size: 18px; line-height: 1.5; margin: 0;" align="center">This is a reminder for booking with reference:<span th:text="${customerReference}"/>::[[${customerReference}]]</p>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <div style="text-align: center !important" align="center"><a class="web-button" target="_blank" href="https://example.com/validate-account" th:href="${validateAccountUrl}" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #1c7cd6; border: 1px solid #1c7cd6; border-radius: 4px; color: #f8f9fa; display: inline-block; font-family: 'Proxima Nova Soft', 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 600; padding: 16px 48px; text-decoration: none; margin: 50px 0 20px">Confirm your email address</a></div>
+                        <div style="text-align: center !important" align="center"><span th:text="${validateAccountUrl}">https://example.com/validate-account</span></div>
                       </td>
                     </tr>
                   </table>
