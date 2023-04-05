@@ -126,7 +126,7 @@ public class SchedulerManager {
       BackgroundJob.scheduleRecurrently(RECORD_WEB_PAGE_HITS_JOB, Cron.every15seconds(), RecordWebPageHitJob::execute);
       BackgroundJob.scheduleRecurrently(WEB_PAGE_HIT_SNAPSHOT_JOB, Cron.every5minutes(), WebPageHitSnapshotJob::execute);
       BackgroundJob.scheduleRecurrently(WEB_PAGE_HITS_CLEANUP_JOB, Cron.daily(4), WebPageHitsCleanupJob::execute);
-      BackgroundJob.scheduleRecurrently(SEND_SP_REMINDERS_JOB, Cron.daily(17), SendReminderToServiceProviderJob::execute); //TODO check the hour 5PM ?
+      BackgroundJob.scheduleRecurrently(SEND_SP_REMINDERS_JOB, Cron.every15seconds(), SendReminderToServiceProviderJob::execute); //TODO check the hour 5PM ?
 
       BackgroundJob.scheduleRecurrently(USER_TOKENS_CLEANUP_JOB, Cron.hourly(), UserTokensCleanupJob::execute);
 

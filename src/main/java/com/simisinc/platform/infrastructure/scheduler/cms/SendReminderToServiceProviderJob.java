@@ -43,7 +43,12 @@ public class SendReminderToServiceProviderJob {
     List<ServiceRequestRepository.EmailReminderInfo> emailNotifications = ServiceRequestRepository.getServiceRequestsForTomorrow();
 
     for (ServiceRequestRepository.EmailReminderInfo emailNotification : emailNotifications) {
-      WorkflowManager.triggerWorkflowForEvent(new ServiceProviderReminderEvent(emailNotification.getServiceProviderUser())); //todo pass in additional vars, customer_ref etc
+      ServiceProviderReminderEvent event = new ServiceProviderReminderEvent(emailNotification.getServiceProviderUser());
+      event.setServiceProviderName(emailNotification.getServiceProviderName());
+      event.setServiceProviderAddress(emailNotification.getServiceProviderAddress());
+      event.setBookingConfirmedDate(emailNotification.getConfirmedDate());
+      event.setCustomerReference(emailNotification.getBookingNumber());
+      WorkflowManager.triggerWorkflowForEvent(event); //todo pass in additional vars, customer_ref etc
     }
   }
 }

@@ -59,6 +59,10 @@ public class EmailTask implements Work {
   public static final String SUBJECT = "subject";
   public static final String TEMPLATE = "template";
 
+  public static final String BOOKING_DATE = "bookingConfirmedDate";
+  public static final String CUSTOMER_REF = "customerReference";
+  public static final String SP_ADDRESS = "serviceProviderAddress";
+  public static final String SP_NAME="serviceProviderName";
   @Override
   public WorkReport execute(WorkContext workContext, TaskContext taskContext) {
 
@@ -68,6 +72,14 @@ public class EmailTask implements Work {
     String toEmail = WorkflowCommand.getValue(workContext, taskContext, taskContext.get(TO_EMAIL));
     String subject = WorkflowCommand.getValue(workContext, taskContext, taskContext.get(SUBJECT));
     String template = WorkflowCommand.getValue(workContext, taskContext, taskContext.get(TEMPLATE));
+
+
+    //not sure where this shold be - sene reminders to SPs need this info in the email template
+    String bookingDate = (String)workContext.get(BOOKING_DATE);
+    String customerRef = (String)workContext.get(CUSTOMER_REF);
+    String spAddress = (String)workContext.get(SP_ADDRESS);
+    String spName = (String)workContext.get(SP_NAME);
+
 
     // Validate the requirements
     if (StringUtils.isBlank(template)) {
@@ -103,6 +115,14 @@ public class EmailTask implements Work {
 
       // Prepare the HTML Message Context
       Context ctx = EmailTemplateCommand.createSiteContext();
+
+      //this is only needed if reminders are being sent to the SP
+      if(spName != null && spAddress != null &&bookingDate != null && customerRef != null) {
+        ctx.setVariable("customerReference",customerRef);
+        ctx.setVariable("spName",spName);
+        ctx.setVariable("spAddress",spAddress);
+        ctx.setVariable("bookingDate",bookingDate);
+      }
 
       // Use the specified event variables
       Set<Map.Entry<String, Object>> entrySet = workContext.getEntrySet();

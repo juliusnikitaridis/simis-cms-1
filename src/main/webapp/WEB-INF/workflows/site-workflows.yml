@@ -15,6 +15,8 @@
     user: '{{ event.user }}'
     bookingConfirmedDate: '{{event.bookingConfirmedDate}}'
     customerReference: '{{event.customerReference}}'
+    serviceProviderAddress: '{{event.serviceProviderAddress}}'
+    serviceProviderName: '{{event.serviceProviderName}}'
   workflow:
     - email:
       to-user: '{{ user.id }}'

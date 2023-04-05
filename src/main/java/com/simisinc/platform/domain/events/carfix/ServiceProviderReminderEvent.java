@@ -29,16 +29,57 @@ import lombok.Setter;
  * @created 4/29/21 5:32 PM
  */
 @NoArgsConstructor
-@Getter
-@Setter
+
 public class ServiceProviderReminderEvent extends Event {
 
   public static final String ID = "service-provider-reminder";
-  public static String customerReference;
+  private static String customerReference;
   public static String bookingConfirmedDate;
-
-
+  private static String serviceProviderAddress;
+  private static String serviceProviderName;
   private User user = null;
+
+  public static String getCustomerReference() {
+    return customerReference;
+  }
+
+
+
+  public static void setCustomerReference(String customerReference) {
+    ServiceProviderReminderEvent.customerReference = customerReference;
+  }
+
+  public static String getBookingConfirmedDate() {
+    return bookingConfirmedDate;
+  }
+
+  public static void setBookingConfirmedDate(String bookingConfirmedDate) {
+    ServiceProviderReminderEvent.bookingConfirmedDate = bookingConfirmedDate;
+  }
+
+  public static String getServiceProviderAddress() {
+    return serviceProviderAddress;
+  }
+
+  public static void setServiceProviderAddress(String serviceProviderAddress) {
+    ServiceProviderReminderEvent.serviceProviderAddress = serviceProviderAddress;
+  }
+
+  public static String getServiceProviderName() {
+    return serviceProviderName;
+  }
+
+  public static void setServiceProviderName(String serviceProviderName) {
+    ServiceProviderReminderEvent.serviceProviderName = serviceProviderName;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 
   public ServiceProviderReminderEvent(User user) {
     this.user = user;

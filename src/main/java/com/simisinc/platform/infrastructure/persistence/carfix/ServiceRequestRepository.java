@@ -299,6 +299,8 @@ public class ServiceRequestRepository {
     public static class EmailReminderInfo {
         String confirmedServiceProviderId;
         String confirmedDate;
+        String serviceProviderName;
+        String serviceProviderAddress;
         String bookingNumber; //@todo going to add more items to this
         User   serviceProviderUser;
 
