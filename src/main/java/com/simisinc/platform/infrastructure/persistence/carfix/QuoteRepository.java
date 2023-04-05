@@ -52,7 +52,7 @@ public class QuoteRepository {
                     .add("item_total_price", total)
                     .addIfExists("parts_total",quoteItem.getPartsTotal())
                     .addIfExists("labour_total",quoteItem.getLabourTotal())
-                    .addIfExists("item_status",quoteItem.getStatus())
+                    .addIfExists("item_status",quoteItem.getItemStatus())
                     .addIfExists("replacement_reason",quoteItem.getReplacementReason());
 
             DB.insertIntoWithStringPk(conn, TABLE_NAME_ITEMS, insertValue, PRIMARY_KEY_ITEMS); //TODO is there a way to insert batches - lists ???
