@@ -20,7 +20,7 @@
   workflow:
     - email:
       to-user: '{{ user.id }}'
-      subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow'
+      subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow - {{event.customerReference}}'
       template: 'carfix/service-provider-reminder'
 
 - id: user-invited

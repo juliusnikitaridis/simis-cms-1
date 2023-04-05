@@ -48,7 +48,7 @@ public class SendReminderToServiceProviderJob {
       event.setServiceProviderAddress(emailNotification.getServiceProviderAddress());
       event.setBookingConfirmedDate(emailNotification.getConfirmedDate());
       event.setCustomerReference(emailNotification.getBookingNumber());
-      WorkflowManager.triggerWorkflowForEvent(event); //todo pass in additional vars, customer_ref etc
+      WorkflowManager.triggerWorkflowForEvent(event);
     }
   }
 }
