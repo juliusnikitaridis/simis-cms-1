@@ -154,6 +154,7 @@ public class QuoteRepository {
             item.setLabourTotal(rs.getString("labour_total"));
             item.setPartsTotal(rs.getString("parts_total"));
             item.setReplacementReason(rs.getString("replacement_reason"));
+            item.setQuantity(rs.getString("quantity"));
             return item;
         } catch (Exception throwables) {
             LOG.error("Error when building quotetation item ", throwables);
