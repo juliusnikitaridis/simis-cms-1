@@ -1,10 +1,7 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
 import com.simisinc.platform.domain.model.User;
-import com.simisinc.platform.domain.model.carfix.Brand;
-import com.simisinc.platform.domain.model.carfix.ServiceRequest;
-import com.simisinc.platform.domain.model.carfix.ServiceRequestItem;
-import com.simisinc.platform.domain.model.carfix.Category;
+import com.simisinc.platform.domain.model.carfix.*;
 import com.simisinc.platform.domain.model.mailinglists.Email;
 import com.simisinc.platform.infrastructure.database.*;
 import com.simisinc.platform.infrastructure.persistence.UserRepository;
@@ -272,8 +269,9 @@ public class ServiceRequestRepository {
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()) {
                 EmailReminderInfo info = new EmailReminderInfo(rs.getString("confirmed_service_provider_id"));
-                info.setBookingNumber(rs.getString("customer_reference"));
-                info.setConfirmedDate(rs.getString("confirmed_date"));
+                info.setCustomerReference(rs.getString("customer_reference"));
+                info.setServiceRequestAdditionalDescription(rs.getString("additional_description"));
+                info.setVehicleId(rs.getString("vehicle_id"));
                 serviceRequestConfirmedServiceProviderIdList.add(info);
             }
         } catch(Exception e) {
@@ -283,29 +281,110 @@ public class ServiceRequestRepository {
 
         //need to get user info for the service providers
         for (EmailReminderInfo s : serviceRequestConfirmedServiceProviderIdList) {
-            User serviceProviderUser = UserRepository.findByUniqueId(s.getConfirmedServiceProviderId());
+            User serviceProviderUser = UserRepository.findByUniqueId(s.getServiceProviderUniqueId());
+            Vehicle serviceRequestVehicle = VehicleRepository.findById(s.getVehicleId());
+            if(serviceRequestVehicle == null) {
+                throw new Exception("vehicle for service request not found");
+            }
             if(serviceProviderUser == null) {
                 throw new Exception("could not find system user for service provider when sending reminders");
             }
             s.setServiceProviderUser(serviceProviderUser);
+            s.setVehicleMake(serviceRequestVehicle.getMake());
+            s.setVehicleRegistration(serviceRequestVehicle.getRegistration());
+            s.setVehicleModel(serviceRequestVehicle.getModel());
+            s.setServiceProviderName(serviceProviderUser.getFirstName());
         }
 
         return serviceRequestConfirmedServiceProviderIdList;
     }
 
-    @AllArgsConstructor
-    @Getter
-    @Setter
-    public static class EmailReminderInfo {
-        String confirmedServiceProviderId;
-        String confirmedDate;
-        String serviceProviderName;
-        String serviceProviderAddress;
-        String bookingNumber; //@todo going to add more items to this
-        User   serviceProviderUser;
 
-        EmailReminderInfo(String confirmedServiceProviderId) {
-            this.confirmedServiceProviderId = confirmedServiceProviderId;
+    public static class EmailReminderInfo {
+        private  String customerReference;
+        private  String vehicleModel;
+        private  String vehicleMake;
+        private  String vehicleRegistration;
+        private  String serviceProviderName;
+        private  String serviceProviderUniqueId;
+        private  String serviceRequestAdditionalDescription;
+        private  User   serviceProviderUser;
+        private String vehicleId;
+
+        EmailReminderInfo(String serviceProviderUniqueId) {
+            this.serviceProviderUniqueId = serviceProviderUniqueId;
+        }
+
+        public String getVehicleId() {
+            return vehicleId;
+        }
+
+        public void setVehicleId(String vehicleId) {
+            this.vehicleId = vehicleId;
+        }
+
+        public String getCustomerReference() {
+            return customerReference;
+        }
+
+        public void setCustomerReference(String customerReference) {
+            this.customerReference = customerReference;
+        }
+
+        public String getVehicleModel() {
+            return vehicleModel;
+        }
+
+        public void setVehicleModel(String vehicleModel) {
+            this.vehicleModel = vehicleModel;
+        }
+
+        public String getVehicleMake() {
+            return vehicleMake;
+        }
+
+        public void setVehicleMake(String vehicleMake) {
+            this.vehicleMake = vehicleMake;
+        }
+
+        public String getVehicleRegistration() {
+            return vehicleRegistration;
+        }
+
+        public void setVehicleRegistration(String vehicleRegistration) {
+            this.vehicleRegistration = vehicleRegistration;
+        }
+
+        public String getServiceProviderName() {
+            return serviceProviderName;
+        }
+
+        public void setServiceProviderName(String serviceProviderName) {
+            this.serviceProviderName = serviceProviderName;
+        }
+
+        public String getServiceProviderUniqueId() {
+            return serviceProviderUniqueId;
+        }
+
+        public void setServiceProviderUniqueId(String serviceProviderUniqueId) {
+            this.serviceProviderUniqueId = serviceProviderUniqueId;
+        }
+
+        public String getServiceRequestAdditionalDescription() {
+            return serviceRequestAdditionalDescription;
+        }
+
+        public void setServiceRequestAdditionalDescription(String serviceRequestAdditionalDescription) {
+            this.serviceRequestAdditionalDescription = serviceRequestAdditionalDescription;
+        }
+
+        public User getServiceProviderUser() {
+            return serviceProviderUser;
+        }
+
+        public void setServiceProviderUser(User serviceProviderUser) {
+            this.serviceProviderUser = serviceProviderUser;
         }
     }
 }

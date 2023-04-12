@@ -27,67 +27,49 @@ import lombok.Setter;
  *
  * @author matt rajkowski
  * @created 4/29/21 5:32 PM
+ * // Car brand and model : Reg Nr: XXXXXXX: Owners : Ms. XXXXXXX. Job description: XXXXXXXX Reference number XXXXXXX.
  */
 @NoArgsConstructor
 
 public class ServiceProviderReminderEvent extends Event {
 
-  public static final String ID = "service-provider-reminder";
-  private static String customerReference;
-  public static String bookingConfirmedDate;
-  private static String serviceProviderAddress;
-  private static String serviceProviderName;
-  private User user = null;
-
-  public static String getCustomerReference() {
-    return customerReference;
-  }
+    private String bookingListDisplayString;
+    private String serviceProviderName;
+    private User user = null;
+    public static final String ID = "service-provider-reminder";
 
 
+    public String getBookingListDisplayString() {
+        return bookingListDisplayString;
+    }
 
-  public static void setCustomerReference(String customerReference) {
-    ServiceProviderReminderEvent.customerReference = customerReference;
-  }
+    public void setBookingListDisplayString(String bookingListDisplayString) {
+        this.bookingListDisplayString = bookingListDisplayString;
+    }
 
-  public static String getBookingConfirmedDate() {
-    return bookingConfirmedDate;
-  }
+    public String getServiceProviderName() {
+        return serviceProviderName;
+    }
 
-  public static void setBookingConfirmedDate(String bookingConfirmedDate) {
-    ServiceProviderReminderEvent.bookingConfirmedDate = bookingConfirmedDate;
-  }
+    public void setServiceProviderName(String serviceProviderName) {
+        this.serviceProviderName = serviceProviderName;
+    }
 
-  public static String getServiceProviderAddress() {
-    return serviceProviderAddress;
-  }
+    public User getUser() {
+        return user;
+    }
 
-  public static void setServiceProviderAddress(String serviceProviderAddress) {
-    ServiceProviderReminderEvent.serviceProviderAddress = serviceProviderAddress;
-  }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-  public static String getServiceProviderName() {
-    return serviceProviderName;
-  }
+    public ServiceProviderReminderEvent(User user) {
+        this.user = user;
+    }
 
-  public static void setServiceProviderName(String serviceProviderName) {
-    ServiceProviderReminderEvent.serviceProviderName = serviceProviderName;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public ServiceProviderReminderEvent(User user) {
-    this.user = user;
-  }
-
-  @Override
-  public String getDomainEventType() {
-    return ID;
-  }
+    @Override
+    public String getDomainEventType() {
+        return ID;
+    }
 
 }

@@ -13,14 +13,12 @@
 - id: service-provider-reminder
   vars:
     user: '{{ event.user }}'
-    bookingConfirmedDate: '{{event.bookingConfirmedDate}}'
-    customerReference: '{{event.customerReference}}'
-    serviceProviderAddress: '{{event.serviceProviderAddress}}'
-    serviceProviderName: '{{event.serviceProviderName}}'
+    displayString: '{{event.bookingListDisplayString}}'
+    spName: '{{event.serviceProviderName}}'
   workflow:
     - email:
       to-user: '{{ user.id }}'
-      subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow - {{event.customerReference}}'
+      subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow'
       template: 'carfix/service-provider-reminder'
 
 - id: user-invited

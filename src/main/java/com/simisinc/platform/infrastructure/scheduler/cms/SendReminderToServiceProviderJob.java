@@ -44,10 +44,9 @@ public class SendReminderToServiceProviderJob {
 
     for (ServiceRequestRepository.EmailReminderInfo emailNotification : emailNotifications) {
       ServiceProviderReminderEvent event = new ServiceProviderReminderEvent(emailNotification.getServiceProviderUser());
+      String displayListString = emailNotification.getVehicleMake() + " " + emailNotification.getVehicleModel() + "\nReg No:" + emailNotification.getVehicleRegistration() + "\nJob Description:" + emailNotification.getServiceRequestAdditionalDescription() + "\nReference no:" + emailNotification.getCustomerReference() + "\n";
+      event.setBookingListDisplayString(displayListString);
       event.setServiceProviderName(emailNotification.getServiceProviderName());
-      event.setServiceProviderAddress(emailNotification.getServiceProviderAddress());
-      event.setBookingConfirmedDate(emailNotification.getConfirmedDate());
-      event.setCustomerReference(emailNotification.getBookingNumber());
       WorkflowManager.triggerWorkflowForEvent(event);
     }
   }

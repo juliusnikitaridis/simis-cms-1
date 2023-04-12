@@ -143,13 +143,24 @@
                       </td>
                     </tr>
                     <tr>
-                      <td class="template-content" style="font-family: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; padding: 0;">
-                        <p style="color: #333333; font-family: 'Proxima Nova Soft', 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; font-size: 18px; line-height: 1.5; margin: 0;" align="center">This is a reminder for booking with reference:<span th:text="${customerReference}"/>::[[${customerReference}]]</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div style="text-align: center !important" align="center"><span th:text="${validateAccountUrl}">https://example.com/validate-account</span></div>
+                      <td style="font-family: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; padding: 0;">
+                        <p>Dear [[${spName}]]</p>
+                        <p/>
+                        <p>Thank you for using the CarFiX platform.</p>
+                        <p>Please be advised that the following job is successfully booked via the platform for tomorrow X April 2023</p>
+                        <p/>
+                        <p/>
+                        <p><b>[[${displayString}]]</b></p>
+                        <p/>
+                        <p/>
+                        <p>Please contact <a href="https://example.com/contact" th:href="${site.contactUsUrl}" style="color: #adb5bd;" target="_blank">enquiries@CarFiXsa.com</a> should this information not the same as you see on the platform in your profile.</p>
+                        <p/>
+                        <p>We thank you for the excellent service you provide to customers.</p>
+                        <p/>
+                        <p>Kind Regards<p>
+                        <p/>
+                        <p/>
+                        <p>CarFiX Team </p>
                       </td>
                     </tr>
                   </table>

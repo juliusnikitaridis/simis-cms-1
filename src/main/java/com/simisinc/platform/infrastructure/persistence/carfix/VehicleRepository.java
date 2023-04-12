@@ -81,10 +81,8 @@ public class VehicleRepository {
     }
 
 
-    public static Vehicle findById(long id) {
-        if (id == -1) {
-            return null;
-        }
+    public static Vehicle findById(String id) {
+
         return (Vehicle) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 VehicleRepository::buildRecord);

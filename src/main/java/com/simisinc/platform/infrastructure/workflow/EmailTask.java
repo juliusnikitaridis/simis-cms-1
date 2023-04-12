@@ -59,10 +59,8 @@ public class EmailTask implements Work {
   public static final String SUBJECT = "subject";
   public static final String TEMPLATE = "template";
 
-  public static final String BOOKING_DATE = "bookingConfirmedDate";
-  public static final String CUSTOMER_REF = "customerReference";
-  public static final String SP_ADDRESS = "serviceProviderAddress";
-  public static final String SP_NAME="serviceProviderName";
+  public static final String DISPLAY_STRING = "displayString";
+  public static final String SP_NAME="spName";
   @Override
   public WorkReport execute(WorkContext workContext, TaskContext taskContext) {
 
@@ -75,9 +73,7 @@ public class EmailTask implements Work {
 
 
     //not sure where this shold be - sene reminders to SPs need this info in the email template
-    String bookingDate = (String)workContext.get(BOOKING_DATE);
-    String customerRef = (String)workContext.get(CUSTOMER_REF);
-    String spAddress = (String)workContext.get(SP_ADDRESS);
+    String displayString = (String)workContext.get(DISPLAY_STRING);
     String spName = (String)workContext.get(SP_NAME);
 
 
@@ -117,11 +113,9 @@ public class EmailTask implements Work {
       Context ctx = EmailTemplateCommand.createSiteContext();
 
       //this is only needed if reminders are being sent to the SP
-      if(spName != null && spAddress != null &&bookingDate != null && customerRef != null) {
-        ctx.setVariable("customerReference",customerRef);
+      if(displayString != null && spName != null) {
         ctx.setVariable("spName",spName);
-        ctx.setVariable("spAddress",spAddress);
-        ctx.setVariable("bookingDate",bookingDate);
+        ctx.setVariable("displayString",displayString);
       }
 
       // Use the specified event variables
