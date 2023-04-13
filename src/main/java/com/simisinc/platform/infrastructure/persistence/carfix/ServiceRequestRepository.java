@@ -101,10 +101,7 @@ public class ServiceRequestRepository {
 
 
 
-    public static ServiceRequest findById(long id) {
-        if (id == -1) {
-            return null;
-        }
+    public static ServiceRequest findById(String id) {
         return (ServiceRequest) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 ServiceRequestRepository::buildRecord);

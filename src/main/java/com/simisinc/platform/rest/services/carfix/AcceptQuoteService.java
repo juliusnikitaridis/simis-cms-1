@@ -1,9 +1,16 @@
 package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simisinc.platform.domain.events.carfix.ServiceProviderQuoteAcceptedEvent;
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.Quote;
+import com.simisinc.platform.domain.model.carfix.ServiceRequest;
+import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.DB;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import lombok.Data;
@@ -45,6 +52,9 @@ public class AcceptQuoteService {
             ////need to update which service providers quote has been accepted for this service request
             QuoteRepository.updateAcceptedServiceProviderId(request.getConfirmedServiceProviderId(), request.getServiceRequestId());
 
+            //send mail to the SP attached to the serviceRequestId
+            sendQuoteAcceptedMailToSp(request);
+
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("quote has been created");}};
             response.setData(responseMessage);
@@ -56,6 +66,30 @@ public class AcceptQuoteService {
             response.getError().put("title", e.getMessage());
             return response;
         }
+    }
+
+
+
+    public void sendQuoteAcceptedMailToSp(AcceptQuoteRequest request) throws Exception {
+        ServiceProviderQuoteAcceptedEvent event = new ServiceProviderQuoteAcceptedEvent();
+        ServiceRequest serivceRequest = ServiceRequestRepository.findById(request.getServiceRequestId());
+        event.setConfirmedDate(serivceRequest.getConfirmedDate());
+        //vehicle info
+        Vehicle vehicle = VehicleRepository.findById(serivceRequest.getVehicleId());
+        if(vehicle == null) {
+            throw new Exception("vehicle could not be found for service request");
+        }
+        event.setVehicleMakeModel(vehicle.getMake()+" "+vehicle.getModel());
+        //sp user info
+        User spUser = UserRepository.findByUniqueId(request.getConfirmedServiceProviderId());
+        event.setServiceProviderUser(spUser);
+        //member info
+        User member = UserRepository.findByUniqueId(serivceRequest.getMemberId());
+        event.setCustomerFullName(member.getFirstName()+" "+ member.getLastName());
+        event.setServiceProviderName(spUser.getFirstName());
+        //quote info
+        Quote quote = QuoteRepository.findById(request.getAcceptedQuoteId());
+        event.setQuoteCreatedDate(quote.getCreatedDate());
     }
 }
 

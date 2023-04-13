@@ -87,10 +87,8 @@ public class QuoteRepository {
     }
 
 
-    public static Quote findById(long id) {
-        if (id == -1) {
-            return null;
-        }
+    public static Quote findById(String id) {
+
         return (Quote) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 QuoteRepository::buildRecord);

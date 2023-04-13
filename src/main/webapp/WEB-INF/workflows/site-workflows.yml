@@ -21,6 +21,20 @@
       subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow'
       template: 'carfix/service-provider-reminder'
 
+- id: service-provider-quote-accepted
+  vars:
+    customerFullName: '{{ event.customerFullName }}'
+    vehicleMakeModel: '{{event.vehicleMakeModel}}'
+    spName: '{{event.serviceProviderName}}'
+    confirmedDate: '{{event.confirmedDate}}'
+    quoteCreatedDate: '{{event.quoteCreatedDate}}'
+    spUser: '{{event.serviceProviderUser}}'
+  workflow:
+    - email:
+      to-user: '{{ user.id }}'
+      subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow'
+      template: 'carfix/service-provider-reminder'
+
 - id: user-invited
   vars:
     user: '{{ event.user }}'
