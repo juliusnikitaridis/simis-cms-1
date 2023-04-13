@@ -33,7 +33,7 @@
     - email:
       to-user: '{{ user.id }}'
       subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow'
-      template: 'carfix/service-provider-reminder'
+      template: 'carfix/service-provider-quote-accepted'
 
 - id: user-invited
   vars:

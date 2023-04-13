@@ -135,10 +135,10 @@ public class EmailTask implements Work {
             //this is only needed if reminders are being sent to the SP
             if (displayString != null && spName != null) {
                 ctx.setVariable("spName", spName);
-                ctx.setVariable("displayString", displayString);
+                ctx.setVariable("displayString", displayString); //send this through as sperate variables  ?
             }
             //this is used to send notifications to SPs once a quote has been accepted
-            if(confirmedDate != null && customerFullName_!= null) {
+            if(confirmedDate != null && customerFullName!= null && vehicleMakeModel != null) {
                 ctx.setVariable("spName",spNameQuoteAccepted);
                 ctx.setVariable("quoteCreatedDate",quoteCreatedDate);
                 ctx.setVariable("vehicleMakeModel",vehicleMakeModel);
