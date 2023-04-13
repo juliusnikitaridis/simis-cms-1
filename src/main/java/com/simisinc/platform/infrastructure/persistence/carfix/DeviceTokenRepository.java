@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -18,6 +19,10 @@ public class DeviceTokenRepository {
     private static String[] PRIMARY_KEY = new String[]{"unique_id"};
 
     public static DeviceToken add(DeviceToken deviceToken) throws Exception {
+        if(checkIfTokenPairExists(deviceToken.getToken(),deviceToken.getUniqueId())) {
+            LOG.info("Token was not added to DB as it already exists in device_token table ");
+            return deviceToken;
+        }
             SqlUtils insertValue = new SqlUtils();
 
             insertValue
@@ -64,6 +69,28 @@ public class DeviceTokenRepository {
             LOG.error("exception when building device token item record");
             throwables.printStackTrace();
             return null;
+        }
+    }
+
+    public static boolean checkIfTokenPairExists(String token, String uniqueId) throws Exception {
+        //select count (*) as ans from carfix.device_token where token = '' and unique_id = '';
+        String sql = "select count (*) as ans from carfix.device_token where token = ? and unique_id = ?";
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,token);
+            pstmt.setString(2,uniqueId);
+            ResultSet rs = pstmt.executeQuery();
+             int count = -1;
+            while(rs.next()) {
+                count = Integer.valueOf(rs.getString("ans"));
+            }
+            if(count == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch(Exception e) {
+            throw e;
         }
     }
 }
