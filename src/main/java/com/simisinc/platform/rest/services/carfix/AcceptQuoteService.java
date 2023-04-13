@@ -11,6 +11,7 @@ import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
+import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import lombok.Data;
@@ -90,6 +91,7 @@ public class AcceptQuoteService {
         //quote info
         Quote quote = QuoteRepository.findById(request.getAcceptedQuoteId());
         event.setQuoteCreatedDate(quote.getCreatedDate());
+        WorkflowManager.triggerWorkflowForEvent(event);
     }
 }
 
