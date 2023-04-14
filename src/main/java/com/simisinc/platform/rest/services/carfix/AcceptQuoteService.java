@@ -57,7 +57,7 @@ public class AcceptQuoteService {
             sendQuoteAcceptedMailToSp(request);
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("quote has been created");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add("quote has been Accepted");}};
             response.setData(responseMessage);
             return response;
 

@@ -21,7 +21,7 @@ public class DeviceTokenRepository {
     public static DeviceToken add(DeviceToken deviceToken) throws Exception {
         if(checkIfTokenPairExists(deviceToken.getToken(),deviceToken.getUniqueId())) {
             LOG.info("Token was not added to DB as it already exists in device_token table ");
-            return deviceToken;
+            return deviceToken; //do not add the token
         }
             SqlUtils insertValue = new SqlUtils();
 

@@ -31,9 +31,9 @@
     spUser: '{{event.serviceProviderUser}}'
   workflow:
     - email:
-      to-user: '{{ user.id }}'
-      subject: '{{ site.name }} - Reminder - your CarFiX appointment tomorrow'
-      template: 'carfix/service-provider-quote-accepted'
+      to-user: '{{ spUser.id }}'
+      subject: '{{ site.name }} - Quote has been accepted by CarFiX member
+      template: 'carfix/service-provider-quote-accept-notification'
 
 - id: user-invited
   vars:

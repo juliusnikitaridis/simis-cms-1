@@ -32,6 +32,11 @@ public class UpdateQuoteItemStatusService {
             //TODO check if the item was actually found
             QuoteRepository.updateQuoteItemStatus(request.getQuoteId(),request.getQuoteItemId(),request.getStatus());
 
+
+            if (request.getStatus().contains("ACCEPTED")) {
+                //todo send email is status changed to ACCEPTED
+            }
+
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("Quote item status been updated");}};
             response.setData(responseMessage);
