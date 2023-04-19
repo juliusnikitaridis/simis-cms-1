@@ -44,6 +44,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.StringTokenizer;
@@ -341,11 +342,12 @@ public class RestRequestFilter implements Filter {
     // Create a 30-day token
     String loginToken = "API-" + UUID.randomUUID().toString() + user.getId();
     long tokenExpirationInSeconds = 30 * 24 * 60 * 60;
+    long expiresMillis = System.currentTimeMillis() + (tokenExpirationInSeconds * 1000);
     UserToken userToken = new UserToken();
     userToken.setUserId(user.getId());
     userToken.setLoginId(userLogin.getId());
     userToken.setToken(loginToken);
-    userToken.setExpires(new Timestamp(System.currentTimeMillis() + (tokenExpirationInSeconds * 1000)));
+    userToken.setExpires(new Timestamp(expiresMillis));
     UserTokenRepository.add(userToken);
 
     // Make a response
@@ -354,6 +356,7 @@ public class RestRequestFilter implements Filter {
         "\"access_token\":\"" + loginToken + "\",\n" +
         "\"token_type\":\"bearer\",\n" +
         "\"expires_in\":" + tokenExpirationInSeconds + ",\n" +
+        "\"expires\":" + expiresMillis + ",\n" +
         //        "\"refresh_token\":\"IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk\",\n" +
         "\"name\":\"" + JsonCommand.toJson(UserCommand.name(user)) + "\",\n" +
         "\"first_name\":\"" + JsonCommand.toJson(user.getFirstName()) + "\",\n" +
