@@ -235,6 +235,7 @@ Content-Type: application/json
   "requestForServiceId":"2343243254",
   "serviceProviderId":"234234543",
   "quotationTotal": "5000.00",
+  "vat": "",
   "serviceProviderName": "serviceProviderName1",
   "quotationItems":[
     {

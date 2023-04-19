@@ -28,6 +28,8 @@ public class Quote extends Entity {
     private String CreatedDate;
     private String bookingDate;
     private String serviceProviderName;
+    private String vat;
+    private String subtotal;
 
 }
 

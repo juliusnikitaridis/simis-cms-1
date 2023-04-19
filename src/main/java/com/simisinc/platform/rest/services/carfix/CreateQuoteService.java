@@ -2,6 +2,7 @@ package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.carfix.Quote;
+import com.simisinc.platform.domain.model.carfix.QuoteItem;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
@@ -36,6 +37,21 @@ public class CreateQuoteService {
             ObjectMapper mapper = new ObjectMapper();
             Quote quote = mapper.readValue(context.getJsonRequest(), Quote.class);
             quote.setId(quoteId);
+            //calculate values server side
+            double vat =0;
+            double subTotal = 0;
+            double total = 0;
+
+            for(QuoteItem quoteItem : quote.getQuotationItems()) {
+                subTotal+=Double.valueOf(quoteItem.getItemTotalPrice());
+            }
+
+            vat = subTotal*0.15;
+            total += (subTotal + vat); //TODO this vat rate should be configured somewhere
+
+            quote.setQuotationTotal(String.valueOf(total));
+            quote.setSubtotal(String.valueOf(subTotal));
+            quote.setVat(String.valueOf(vat));
 
             QuoteRepository.add(quote);
 

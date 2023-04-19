@@ -69,6 +69,8 @@ public class QuoteRepository {
                 .add("created_date", String.valueOf(System.currentTimeMillis()))
                 .add("booking_date",record.getBookingDate())
                 .add("status", "CREATED")
+                .add("vat",record.getVat())
+                .add("sub_total",record.getSubtotal())
                 .add("total", record.getQuotationTotal());
 
         try (Connection connection = DB.getConnection();
@@ -123,6 +125,9 @@ public class QuoteRepository {
             quote.setQuotationTotal(rs.getString("total"));
             quote.setBookingDate(rs.getString("booking_date"));
             quote.setCreatedDate(rs.getString("created_date"));
+            quote.setVat(rs.getString("vat"));
+            quote.setSubtotal(rs.getString("sub_total"));
+            quote.setQuotationTotal(rs.getString("total"));
 
             //get the line items for this record
             SqlUtils select = new SqlUtils();
@@ -190,17 +195,22 @@ public class QuoteRepository {
 
         //add up all the items that have a valid accepted status
         System.out.print(quoteItems);
-        double newTotal = 0;
+        double total = 0;
+        double vat = 0 ;
+        double subTotal = 0;
         for(QuoteItem item : quoteItems) {
 
-            newTotal+=Double.parseDouble(item.getItemTotalPrice());
+            subTotal += Double.parseDouble(item.getItemTotalPrice());
         }
-
-        String sql = "update carfix.quote set total = ? where id = ?";
+        vat = subTotal * 0.15;
+        total += (subTotal + vat) //TODO this vat rate should be configured somewhere
+        String sql = "update carfix.quote set total = ?,vat = ?, sub_total = ?, where id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, Double.toString(newTotal));
-            pstmt.setString(2, quoteId);
+            pstmt.setString(1, Double.toString(total));
+            pstmt.setString(2, Double.toString(vat));
+            pstmt.setString(3, Double.toString(subTotal));
+            pstmt.setString(4, quoteId);
             pstmt.execute();
         } catch (Exception e) {
             throw e;
