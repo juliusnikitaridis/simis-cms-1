@@ -203,7 +203,7 @@ public class QuoteRepository {
             subTotal += Double.parseDouble(item.getItemTotalPrice());
         }
         vat = subTotal * 0.15;
-        total += (subTotal + vat) //TODO this vat rate should be configured somewhere
+        total += (subTotal + vat); //TODO this vat rate should be configured somewhere
         String sql = "update carfix.quote set total = ?,vat = ?, sub_total = ?, where id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

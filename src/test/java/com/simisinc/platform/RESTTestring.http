@@ -241,13 +241,15 @@ Content-Type: application/json
     {
       "partDescription":"labour",
       "labourTotal": "2500.00",
-      "quantity": "1"
+      "quantity": "1",
+      "itemTotalPrice": 2500
     },
     {
       "partNumber":"3323ASD",
       "partDescription":"oil",
       "partsTotal": "200.00",
-      "quantity": "4"
+      "quantity": "4",
+      "itemTotalPrice": 800
     }
   ]
 }
