@@ -23,6 +23,7 @@
   <service method="get" endpoint="categories/{collectionUniqueId}" class="com.simisinc.platform.rest.services.items.CategoryListService" />
   <service method="get" endpoint="items/{collectionUniqueId}?category=value&amp;query=value" class="com.simisinc.platform.rest.services.items.ItemListService" />
   <service method="get" endpoint="item/{itemUniqueId}" class="com.simisinc.platform.rest.services.items.ItemService" />
+
   <service method="get" endpoint="carfix/VehicleListService" class="com.simisinc.platform.rest.services.carfix.VehicleListService" />
   <service method="post" endpoint="carfix/CreateVehicleService" class="com.simisinc.platform.rest.services.carfix.CreateVehicleService" />
   <service method="post" endpoint="carfix/CreateRFSService" class="com.simisinc.platform.rest.services.carfix.CreateRFSService" />
@@ -51,5 +52,11 @@
   <service method="post" endpoint="carfix/RegisterDeviceToken" class="com.simisinc.platform.rest.services.carfix.RegisterDeviceToken"/>
   <service method="get" endpoint="carfix/FetchDeviceTokenService" class="com.simisinc.platform.rest.services.carfix.FetchDeviceTokenService" />
   <service method="get" endpoint="carfix/GetPaymentStatusService" class="com.simisinc.platform.rest.services.carfix.GetPaymentStatusService"/>
+
+  <service method="post" endpoint="cannacomply/CreateCropService" class="com.simisinc.platform.rest.services.cannacomply.CreateCropService"/>
+  <service method="post" endpoint="cannacomply/CreateFarmService" class="com.simisinc.platform.rest.services.cannacomply.CreateFarmService"/>
+  <service method="get" endpoint="cannacomply/CropListService" class="com.simisinc.platform.rest.services.cannacomply.CropListService"/>
+  <service method="get" endpoint="cannacomply/FarmListService" class="com.simisinc.platform.rest.services.cannacomply.FarmListService"/>
+  <service method="post" endpoint="cannacomply/RegisterUserService" class="com.simisinc.platform.rest.services.cannacomply.RegisterUserService"/>
 
 </services>
