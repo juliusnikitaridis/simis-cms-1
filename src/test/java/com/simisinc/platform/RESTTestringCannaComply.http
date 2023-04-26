@@ -6,6 +6,81 @@ Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRm
 ###
 
 
+###
+POST http://localhost:8080/api/cannacomply/CreateFarmService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "name": "New test farm",
+  "latitude": "23.4543",
+  "longitude": "-33.4432",
+  "logoData": "year",
+  "type": "NORMAL FARM"
+}
+###
+
+###
+GET http://localhost:8080/api/cannacomply/FarmListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+   "id": "51b89fd6-830e-4a58-b153-02f9b41878a8"
+}
+###
+
+###
+POST http://localhost:8080/api/cannacomply/CreateCropService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "cropType": "CROP TYPE",
+  "blockLocation": "location",
+  "growthStage": "FLOWERING",
+  "status": "planted",
+  "strainName": "buddleCush",
+  "seedCompany": "sensi seeds",
+  "farmId": "",
+  "userId": "",
+  "cropLabel": "348923",
+  "startingPlantData": "some staring data"
+
+
+}
+###
+
+###
+GET http://localhost:8080/api/cannacomply/CropListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "id": "7ae57d3d-a67c-4964-95e7-cad2b2e6b4b9"
+}
+###
+
+POST http://localhost:8080/api/cannacomply/RegisterUserService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "firstName":"Dean",
+  "lastName":"Richmond",
+  "email":"juliusniki21@gmail.com",
+  "username":"juliusniki21@gmail.com",
+  "idnum": "1996",
+  "roleId": "5",
+  "contactNo": "3423423452"
+}
+###
+
 
 
 

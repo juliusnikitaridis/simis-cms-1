@@ -16,8 +16,6 @@ import java.util.UUID;
 
 
 /**
- * Description
- * Service that will create Quotes from service providers that are responding to service requests.
  * @author Julius Nikitaridis
  * @created 18/11/22 11:28 AM
  */
@@ -50,5 +48,3 @@ public class CreateFarmService {
         }
     }
 }
-
-// updateQuoteTotalPrice
