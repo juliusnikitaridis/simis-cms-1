@@ -101,7 +101,6 @@ public class SaveUserCommand {
       } else {
         user.setPassword(userBean.getPassword());
       }
-      user.setValidated(userBean.getValidated()); //todo remove me
       user.setCreatedBy(userBean.getCreatedBy());
       user.setCreated(userBean.getCreated());
     }

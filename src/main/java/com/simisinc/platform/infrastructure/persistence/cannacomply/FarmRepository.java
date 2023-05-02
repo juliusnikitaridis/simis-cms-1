@@ -24,7 +24,9 @@ public class FarmRepository {
                 .add("latitude", record.getLatitude())
                 .add("longitude", record.getLongitude())
                 .add("type",record.getType())
-                .add("logo_data",record.getLogoData());
+                .add("location_data",record.getLocationData())
+                .add("logo_data",record.getLogoData())
+                .add("address",record.getAddress());
 
         try (Connection connection = DB.getConnection();
              AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -47,7 +49,9 @@ public class FarmRepository {
                 .addIfExists("latitude", record.getLatitude())
                 .addIfExists("longitude", record.getLongitude())
                 .addIfExists("type",record.getType())
-                .addIfExists("logo_data",record.getLogoData());
+                .addIfExists("logo_data",record.getLogoData())
+                .addIfExists("location_data",record.getLocationData())
+                .addIfExists("address",record.getAddress());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -105,6 +109,8 @@ public class FarmRepository {
             farm.setLogoData(rs.getString("logo_data"));
             farm.setName(rs.getString("name"));
             farm.setType(rs.getString("type"));
+            farm.setAddress(rs.getString("address"));
+            farm.setLocationData(rs.getString("location_data"));
             return farm;
         } catch (Exception e) {
             LOG.error("exception when building record for farm" + e.getMessage());

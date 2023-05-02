@@ -29,6 +29,7 @@ public class CropRepository {
                 .add("farm_id",record.getFarmId())
                 .add("user_id",record.getUserId())
                 .add("crop_label",record.getCropLabel())
+                .add("created_date",record.getCreatedDate())
                 .add("starting_plant_data",record.getStartingPlantData());
 
         try (Connection connection = DB.getConnection();
@@ -119,6 +120,7 @@ public class CropRepository {
             crop.setFarmId(rs.getString("farm_id"));
             crop.setUserId(rs.getString("user_id"));
             crop.setCropLabel(rs.getString("crop_label"));
+            crop.setCreatedDate(rs.getString("created_date"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;
         } catch (Exception e) {

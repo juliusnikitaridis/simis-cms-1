@@ -73,8 +73,8 @@ Content-Type: application/json
 {
   "firstName":"Dean",
   "lastName":"Richmond",
-  "email":"juliusniki21@gmail.com",
-  "username":"juliusniki21@gmail.com",
+  "email":"juliusniki21aaa@gmail.com",
+  "username":"juliusniki21aaa@gmail.com",
   "idnum": "1996",
   "roleId": "5",
   "contactNo": "3423423452"

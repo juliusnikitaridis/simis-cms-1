@@ -26,6 +26,9 @@ public class Farm extends Entity {
     private String longitude;
     private String logoData;
     private String type;
+    private String locationData;
+    private String address;
+
 }
 
 
