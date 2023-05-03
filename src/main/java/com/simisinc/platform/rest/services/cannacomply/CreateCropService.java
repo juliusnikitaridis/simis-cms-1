@@ -30,12 +30,13 @@ public class CreateCropService {
 
             ObjectMapper mapper = new ObjectMapper();
             Crop crop = mapper.readValue(context.getJsonRequest(), Crop.class);
-            crop.setId(UUID.randomUUID().toString());
+            String cropId = UUID.randomUUID().toString();
+            crop.setId(cropId);
 
             CropRepository.add(crop);
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("crop has been created");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add(cropId);}};
             response.setData(responseMessage);
             return response;
 
