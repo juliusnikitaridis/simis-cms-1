@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 /**
  * Julius Nikitaridis
- *class that will represent a farm object
  */
 
 @Getter
