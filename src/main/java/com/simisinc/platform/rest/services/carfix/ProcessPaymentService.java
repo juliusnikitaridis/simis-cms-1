@@ -69,7 +69,7 @@ public class ProcessPaymentService {
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setAmount(serviceRequest.getAmount());
         paymentRequest.setMerchantTransactionId(uniqueTransactionNo);
-        paymentRequest.setShopperResultUrl("https://member.carfixsa.com/home/service/"+"/"+uniqueTransactionNo);
+        paymentRequest.setShopperResultUrl("https://member.carfixsa.com/home/service/"+uniqueTransactionNo);
 
         generateSignatureForRequest(paymentRequest);
         String redirectUrl = invokePeachPaymentsAPI(paymentRequest, serviceRequest);
