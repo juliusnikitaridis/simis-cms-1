@@ -53,6 +53,9 @@ public class AcceptQuoteService {
             ////need to update which service providers quote has been accepted for this service request
             QuoteRepository.updateAcceptedServiceProviderId(request.getConfirmedServiceProviderId(), request.getServiceRequestId());
 
+            //find all other quotes for this SR and set the status to rejected.
+            QuoteRepository.declineOtherQuotes(request.getServiceRequestId(),request.getAcceptedQuoteId(),"REJECTED");
+
             //send mail to the SP attached to the serviceRequestId
             sendQuoteAcceptedMailToSp(request);
 
