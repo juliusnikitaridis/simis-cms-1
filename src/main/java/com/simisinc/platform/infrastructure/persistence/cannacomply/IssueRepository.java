@@ -76,7 +76,7 @@ public class IssueRepository {
     }
 
 
-    public static DataResult query(ActivitySpecification specification, DataConstraints constraints) {
+    public static DataResult query(IssueSpecification specification, DataConstraints constraints) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();

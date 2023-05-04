@@ -81,6 +81,107 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:8080/api/cannacomply/RegisterUserService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "firstName":"Dean",
+  "lastName":"Richmond",
+  "email":"juliusniki21aaa@gmail.com",
+  "username":"juliusniki21aaa@gmail.com",
+  "idnum": "1996",
+  "roleId": "5",
+  "contactNo": "3423423452"
+}
+###
+
+
+POST http://localhost:8080/api/cannacomply/RegisterUserService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "firstName":"Dean",
+  "lastName":"Richmond",
+  "email":"juliusniki21aaa@gmail.com",
+  "username":"juliusniki21aaa@gmail.com",
+  "idnum": "1996",
+  "roleId": "5",
+  "contactNo": "3423423452"
+}
+###
+
+POST http://localhost:8080/api/cannacomply/CreateActivityService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "cropId":"394857539487",
+  "type":"Richmond",
+  "activityData":"[{},{},{},{}]",
+  "userId":"9872387987234",
+  "farmId": "farm-id-2",
+  "date": "04-05-2023",
+  "status": "CREATED"
+}
+###
+
+GET http://localhost:8080/api/cannacomply/ActivityListService?activityId=971d7cef-fd9e-44e3-81dd-e036f6f15d31
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+###
+
+POST http://localhost:8080/api/cannacomply/CreateIssueService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "cropId":"394857539487",
+  "title":"some title",
+  "description":"some description",
+  "severity":"4",
+  "assignedTo": "dean richmond",
+  "comment": "dome comments",
+  "attachments": "file_data_",
+  "farmId":"some-farm-id"
+}
+###
+
+GET http://localhost:8080/api/cannacomply/IssueListService?id=f26dc7d1-3b60-41bb-98f9-86955ad4e6c
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+###d
+
+POST http://localhost:8080/api/cannacomply/CreateScheduleService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "farmId":"some-farm-id",
+  "status":"some status",
+  "startingDate":"01-12-2023",
+  "endingDate":"01-01-2023",
+  "title": "some title",
+  "type": "some type",
+  "assignedTo": "assigned to name",
+  "description":"description"
+}
+###
+
+
+GET http://localhost:8080/api/cannacomply/ScheduleListService?id=e5c4d870-9e53-45b7-884f-47ff499852f7
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+###
 
 
 

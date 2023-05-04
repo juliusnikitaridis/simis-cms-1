@@ -58,5 +58,12 @@
   <service method="get" endpoint="cannacomply/CropListService" class="com.simisinc.platform.rest.services.cannacomply.CropListService"/>
   <service method="get" endpoint="cannacomply/FarmListService" class="com.simisinc.platform.rest.services.cannacomply.FarmListService"/>
   <service method="post" endpoint="cannacomply/RegisterUserService" class="com.simisinc.platform.rest.services.cannacomply.RegisterUserService"/>
+  <service method="post" endpoint="cannacomply/ActivityListService" class="com.simisinc.platform.rest.services.cannacomply.ActivityListService"/>
+  <service method="post" endpoint="cannacomply/CreateActivityService" class="com.simisinc.platform.rest.services.cannacomply.CreateActivityService"/>
+  <service method="post" endpoint="cannacomply/CreateIssueService" class="com.simisinc.platform.rest.services.cannacomply.CreateIssueService"/>
+  <service method="post" endpoint="cannacomply/CreateScheduleService" class="com.simisinc.platform.rest.services.cannacomply.CreateScheduleService"/>
+  <service method="post" endpoint="cannacomply/IssueListService" class="com.simisinc.platform.rest.services.cannacomply.IssueListService"/>
+  <service method="post" endpoint="cannacomply/ScheduleListService" class="com.simisinc.platform.rest.services.cannacomply.ScheduleListService"/>
+
 
 </services>

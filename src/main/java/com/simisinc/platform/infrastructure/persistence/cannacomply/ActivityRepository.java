@@ -26,8 +26,6 @@ public class ActivityRepository {
                 .add("user_id",record.getUserId())
                 .add("farm_id",record.getFarmId())
                 .add("date",record.getDate())
-                .add("farm_id",record.getFarmId())
-                .add("date",record.getDate())
                 .add("status",record.getStatus());
 
         try (Connection connection = DB.getConnection();
@@ -51,8 +49,6 @@ public class ActivityRepository {
                 .addIfExists("type", record.getType())
                 .addIfExists("activity_data", record.getActivityData())
                 .addIfExists("user_id",record.getUserId())
-                .addIfExists("farm_id",record.getFarmId())
-                .addIfExists("date",record.getDate())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("date",record.getDate())
                 .addIfExists("status",record.getStatus());
