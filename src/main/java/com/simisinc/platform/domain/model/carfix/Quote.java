@@ -30,6 +30,7 @@ public class Quote extends Entity {
     private String serviceProviderName;
     private String vat;
     private String subtotal;
+    private String status;
 
 }
 

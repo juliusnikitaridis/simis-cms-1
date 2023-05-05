@@ -126,6 +126,7 @@ public class QuoteRepository {
             quote.setBookingDate(rs.getString("booking_date"));
             quote.setCreatedDate(rs.getString("created_date"));
             quote.setVat(rs.getString("vat"));
+            quote.setStatus(rs.getString("status"));
             quote.setSubtotal(rs.getString("sub_total"));
             quote.setQuotationTotal(rs.getString("total"));
 
