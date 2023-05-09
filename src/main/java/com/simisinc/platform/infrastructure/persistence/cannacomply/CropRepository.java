@@ -90,7 +90,8 @@ public class CropRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("farm_id = ?", specification.getFarmId());
 
         }
         return DB.selectAllFrom(

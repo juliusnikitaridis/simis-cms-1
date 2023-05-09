@@ -11,4 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ScheduleSpecification {
     private String id = null;
+    private String farmId = null;
 }

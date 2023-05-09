@@ -26,10 +26,15 @@ public class ScheduleListService {
 
         try {
             String scheduleId = context.getParameter("scheduleId");
+            String farmId = context.getParameter("farmId");
 
             ScheduleSpecification specification = new ScheduleSpecification();
             if(null!= scheduleId) {
                 specification.setId(scheduleId);
+            }
+            if(null != farmId) {
+                specification.setFarmId(farmId);
+
             }
             List<Schedule> farmList = (List<Schedule>) ScheduleRepository.query(specification, null).getRecords();
 

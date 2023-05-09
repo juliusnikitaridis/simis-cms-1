@@ -26,10 +26,14 @@ public class ActivityListService {
 
         try {
             String activityId = context.getParameter("activityId");
+            String farmId = context.getParameter("farmId");
 
             ActivitySpecification specification = new ActivitySpecification();
             if(null!= activityId) {
                 specification.setId(activityId);
+            }
+            if(null!= farmId) {
+                specification.setFarmId(farmId);
             }
             List<Activity> activityList = (List<Activity>) ActivityRepository.query(specification, null).getRecords();
 

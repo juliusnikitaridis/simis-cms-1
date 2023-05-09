@@ -27,11 +27,15 @@ public class CropListService {
 
         try {
             String cropId = context.getParameter("cropId");
+            String farmId = context.getParameter("farmId");
 
             CropSpecification specification = new CropSpecification();
 
             if(null!= cropId) {
                 specification.setId(cropId);
+            }
+            if(null != farmId) {
+                specification.setFarmId(farmId);
             }
             List<Crop> cropList = (List<Crop>) CropRepository.query(specification, null).getRecords();
 

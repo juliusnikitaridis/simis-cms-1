@@ -1,0 +1,18 @@
+
+### dcd673bb-6f82-43c5-979c-df30da062562
+POST https://cannacomply.connectmobiles24.com/api/oauth2/authorize
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+### API-ad757670-f1f8-4bcc-b879-3d511fbdc7b73
+
+###
+GET https://cannacomply.connectmobiles24.com/api/cannacomply/CropListService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-ad757670-f1f8-4bcc-b879-3d511fbdc7b73
+Content-Type: application/json
+
+{
+  "id": "7ae57d3d-a67c-4964-95e7-cad2b2e6b4b9"
+}
+###
+
