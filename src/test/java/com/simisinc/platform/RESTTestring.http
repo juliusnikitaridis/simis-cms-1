@@ -12,7 +12,6 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 ###
 
 
-
 ###
 GET http://localhost:8080/api/carfix/VehicleListService?memberId=julius-niki
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
@@ -270,9 +269,9 @@ Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
 Content-Type: application/json
 ###
 
-GET http://localhost:8080/api/carfix/QuoteListService?quoteId=81e1e347-50f3-41e8-8be1-31774cddf0e0
+GET http://localhost:8080/api/carfix/QuoteListService?quoteId=1eb2f8b1-5d6c-41fc-9bc1-27876e7b72c2
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
+Authorization:Bearer API-86f4c33d-bf35-4773-966c-99188cf59f141
 ###
 
 GET http://localhost:8080/api/carfix/CategoryListService

@@ -45,9 +45,11 @@ Content-Type: application/json
   "status": "planted",
   "strainName": "buddleCush",
   "seedCompany": "sensi seeds",
+  "createdDate": "5-05-2023",
   "farmId": "",
   "userId": "",
   "cropLabel": "348923",
+  "barcodeData": "[xxx]",
   "startingPlantData": "some staring data"
 
 
