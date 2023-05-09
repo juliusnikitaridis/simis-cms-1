@@ -64,6 +64,11 @@
   <service method="post" endpoint="cannacomply/CreateScheduleService" class="com.simisinc.platform.rest.services.cannacomply.CreateScheduleService"/>
   <service method="post" endpoint="cannacomply/IssueListService" class="com.simisinc.platform.rest.services.cannacomply.IssueListService"/>
   <service method="post" endpoint="cannacomply/ScheduleListService" class="com.simisinc.platform.rest.services.cannacomply.ScheduleListService"/>
+  <service method="post" endpoint="cannacomply/UpdateActivityService" class="com.simisinc.platform.rest.services.cannacomply.UpdateActivityService"/>
+  <service method="post" endpoint="cannacomply/UpdateCropService" class="com.simisinc.platform.rest.services.cannacomply.UpdateCropService"/>
+  <service method="post" endpoint="cannacomply/UpdateFarmService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFarmService"/>
+  <service method="post" endpoint="cannacomply/UpdateIssueService" class="com.simisinc.platform.rest.services.cannacomply.UpdateIssueService"/>
+  <service method="post" endpoint="cannacomply/UpdateScheduleService" class="com.simisinc.platform.rest.services.cannacomply.UpdateScheduleService"/>
 
 
 </services>

@@ -45,7 +45,6 @@ public class ScheduleRepository {
 
     public static void update(Schedule record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("status", record.getStatus())
                 .addIfExists("starting_date", record.getStartingDate())
