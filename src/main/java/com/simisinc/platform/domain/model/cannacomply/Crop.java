@@ -30,6 +30,7 @@ public class Crop extends Entity {
     private String startingPlantData;
     private String createdDate;
     private String barcodeData;
+    private String blockId;
 }
 
 

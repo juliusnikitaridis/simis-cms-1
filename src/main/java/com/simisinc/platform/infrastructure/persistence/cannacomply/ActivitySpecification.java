@@ -12,4 +12,5 @@ import lombok.Setter;
 public class ActivitySpecification {
     private String id = null;
     private String farmId;
+    private String blockId;
 }

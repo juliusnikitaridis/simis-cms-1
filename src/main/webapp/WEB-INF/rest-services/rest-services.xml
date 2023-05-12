@@ -69,6 +69,8 @@
   <service method="post" endpoint="cannacomply/UpdateFarmService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFarmService"/>
   <service method="post" endpoint="cannacomply/UpdateIssueService" class="com.simisinc.platform.rest.services.cannacomply.UpdateIssueService"/>
   <service method="post" endpoint="cannacomply/UpdateScheduleService" class="com.simisinc.platform.rest.services.cannacomply.UpdateScheduleService"/>
-
+  <service method="post" endpoint="cannacomply/CreateBlockService" class="com.simisinc.platform.rest.services.cannacomply.CreateBlockService"/>
+  <service method="post" endpoint="cannacomply/BlockListService" class="com.simisinc.platform.rest.services.cannacomply.BlockListService"/>
 
 </services>
+

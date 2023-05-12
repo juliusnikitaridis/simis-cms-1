@@ -9,8 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CropSpecification {
+public class BlockSpecification {
     private String id = null;
-    private String farmId = null;
-    private String blockId = null;
+    private String farmId;
 }
