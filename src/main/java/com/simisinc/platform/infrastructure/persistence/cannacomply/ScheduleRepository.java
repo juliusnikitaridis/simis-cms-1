@@ -45,7 +45,6 @@ public class ScheduleRepository {
 
     public static void update(Schedule record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("status", record.getStatus())
                 .addIfExists("starting_date", record.getStartingDate())
@@ -83,7 +82,8 @@ public class ScheduleRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("farm_id = ?",specification.getFarmId());
 
         }
         return DB.selectAllFrom(

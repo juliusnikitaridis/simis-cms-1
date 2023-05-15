@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ScheduleSpecification {
+public class BlockSpecification {
     private String id = null;
-    private String farmId = null;
+    private String farmId;
 }

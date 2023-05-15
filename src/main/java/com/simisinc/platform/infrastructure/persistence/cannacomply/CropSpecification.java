@@ -11,4 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CropSpecification {
     private String id = null;
+    private String farmId = null;
+    private String blockId = null;
 }

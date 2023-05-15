@@ -21,13 +21,14 @@ public class CropRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("crop_type", record.getCropType())
-                .add("block_location", record.getBlockLocation())
                 .add("growth_stage", record.getGrowthStage())
+                .add("block_id",record.getBlockId())
                 .add("status",record.getStatus())
                 .add("strain_name",record.getStrainName())
                 .add("seed_company",record.getSeedCompany())
                 .add("farm_id",record.getFarmId())
                 .add("user_id",record.getUserId())
+                .add("barcode_data",record.getBarcodeData())
                 .add("crop_label",record.getCropLabel())
                 .add("created_date",record.getCreatedDate())
                 .add("starting_plant_data",record.getStartingPlantData());
@@ -50,12 +51,13 @@ public class CropRepository {
     public static void update(Crop record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("crop_type", record.getCropType())
-                .addIfExists("block_location", record.getBlockLocation())
                 .addIfExists("growth_stage", record.getGrowthStage())
+                .addIfExists("block_id",record.getBlockId())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("strain_name",record.getStrainName())
                 .addIfExists("seed_company",record.getSeedCompany())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("crop_label",record.getCropLabel())
                 .addIfExists("starting_plant_data",record.getStartingPlantData());
@@ -88,7 +90,9 @@ public class CropRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("farm_id = ?", specification.getFarmId())
+                    .addIfExists("block_id = ?",specification.getBlockId());
 
         }
         return DB.selectAllFrom(
@@ -112,7 +116,6 @@ public class CropRepository {
         try {
             crop.setId(rs.getString("id"));
             crop.setCropType(rs.getString("crop_type"));
-            crop.setBlockLocation(rs.getString("block_location"));
             crop.setGrowthStage(rs.getString("growth_stage"));
             crop.setStatus(rs.getString("status"));
             crop.setStrainName(rs.getString("strain_name"));
@@ -120,7 +123,9 @@ public class CropRepository {
             crop.setFarmId(rs.getString("farm_id"));
             crop.setUserId(rs.getString("user_id"));
             crop.setCropLabel(rs.getString("crop_label"));
+            crop.setBarcodeData(rs.getString("barcode_data"));
             crop.setCreatedDate(rs.getString("created_date"));
+            crop.setBlockId(rs.getString("block_id"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;
         } catch (Exception e) {

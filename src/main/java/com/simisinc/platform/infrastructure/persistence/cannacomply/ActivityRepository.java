@@ -26,6 +26,7 @@ public class ActivityRepository {
                 .add("user_id",record.getUserId())
                 .add("farm_id",record.getFarmId())
                 .add("date",record.getDate())
+                .add("block_id",record.getBlockId())
                 .add("status",record.getStatus());
 
         try (Connection connection = DB.getConnection();
@@ -51,6 +52,7 @@ public class ActivityRepository {
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("date",record.getDate())
+                .addIfExists("block_id",record.getBlockId())
                 .addIfExists("status",record.getStatus());
 
             try (Connection connection = DB.getConnection();
@@ -81,7 +83,9 @@ public class ActivityRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("block_id = ?",specification.getBlockId())
+                    .addIfExists("farm_id = ?",specification.getFarmId());
 
         }
         return DB.selectAllFrom(
@@ -110,6 +114,7 @@ public class ActivityRepository {
               activity.setType(rs.getString("type"));
               activity.setUserId(rs.getString("user_id"));
               activity.setCropId(rs.getString("crop_id"));
+              activity.setBlockId(rs.getString("block_id"));
               activity.setDate(rs.getString("date"));
 
             return activity;

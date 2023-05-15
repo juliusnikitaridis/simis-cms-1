@@ -11,4 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ActivitySpecification {
     private String id = null;
+    private String farmId;
+    private String blockId;
 }
