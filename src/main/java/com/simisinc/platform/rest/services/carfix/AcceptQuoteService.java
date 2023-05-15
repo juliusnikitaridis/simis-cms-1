@@ -45,7 +45,7 @@ public class AcceptQuoteService {
             QuoteRepository.updateQuoteStatus(request.getAcceptedQuoteId(), "ACCEPTED");
 
             //updaete service request status once a quote has been accepted - also update confirmed date here
-            QuoteRepository.updateServiceRequestStatus(request.getServiceRequestId(),"ACCEPTED");
+            QuoteRepository.updateServiceRequestStatus(request.getServiceRequestId(),"ACCEPTED", request.getConfirmedDate());
 
             //insert the quoteId of the accepted quote into the service request table
             QuoteRepository.updateServiceRequestAcceptedQuoteId(request.getAcceptedQuoteId(),request.getServiceRequestId());

@@ -220,12 +220,12 @@ public class QuoteRepository {
 
 
     //updaete service request status once a quote has been accepted
-    public static void updateServiceRequestStatus(String serviceRequestId, String status) throws Exception {
+    public static void updateServiceRequestStatus(String serviceRequestId, String status,String confirmedDate) throws Exception {
         String sql = "update carfix.service_request set status = ?,confirmed_date = ? where id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);
-            pstmt.setString(2, String.valueOf(System.currentTimeMillis()));
+            pstmt.setString(2, confirmedDate);
             pstmt.setString(3, serviceRequestId);
             pstmt.execute();
         } catch (Exception e) {
