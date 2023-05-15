@@ -205,7 +205,7 @@ public class QuoteRepository {
         }
         vat = subTotal * 0.15;
         total += (subTotal + vat); //TODO this vat rate should be configured somewhere
-        String sql = "update carfix.quote set total = ?,vat = ?, sub_total = ?, where id = ?";
+        String sql = "update carfix.quote set total = ?,vat = ?, sub_total = ? where id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, Double.toString(total));
