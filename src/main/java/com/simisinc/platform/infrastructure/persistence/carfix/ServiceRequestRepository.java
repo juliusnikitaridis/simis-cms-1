@@ -100,6 +100,40 @@ public class ServiceRequestRepository {
         }
     }
 
+    public static ServiceRequest update(ServiceRequest record) throws Exception {
+
+        SqlUtils updateValues = new SqlUtils()
+                .addIfExists("created_date", String.valueOf(System.currentTimeMillis()))
+                .addIfExists("type", record.getType())
+                .addIfExists("vehicle_id", record.getVehicleId())
+                .addIfExists("member_id", record.getMemberId())
+                .addIfExists("radius", record.getRadius())
+                .addIfExists("status", record.getStatus())
+                .addIfExists("current_odo_reading", record.getCurrentOdoReading())
+                .addIfExists("picture_data", record.getPictureData())
+                .addIfExists("additional_description", record.getAdditionalDescription())
+                .addIfExists("last_service_date", record.getLastServiceDate())
+                .addIfExists("vehicle_brand_id",record.getVehicleBrandId())
+                .addIfExists("preferred_date",record.getPreferredDate())
+                .addIfExists("customer_reference",record.getCustomerReference())
+                .addIfExists("service_advisor",record.getServiceAdvisor())
+                .addIfExists("technician",record.getTechnician());
+
+        try (Connection connection = DB.getConnection();
+             AutoStartTransaction a = new AutoStartTransaction(connection);
+             AutoRollback transaction = new AutoRollback(connection)) {
+            // In a transaction (use the existing connection)
+            DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
+            addItems(record,connection);
+            transaction.commit();
+            return record;
+
+        } catch (Exception se) {
+            LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
+        }
+    }
+
 
 
 
