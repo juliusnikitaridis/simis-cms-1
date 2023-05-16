@@ -324,10 +324,12 @@ public class QuoteRepository {
 
 
     public static void declineOtherQuotes(String serviceRequestId, String acceptedQuoteId,String status) throws Exception {
-        String sql = "update cartfix.quote set status = '"+status+"' where id <> '" + acceptedQuoteId + "' and request_for_service_id = '" + serviceRequestId + "'";
+        String sql = "update carfix.quote set status = ? where id <> ? and request_for_service_id = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, serviceRequestId);
+            pstmt.setString(1, status);
+            pstmt.setString(2,acceptedQuoteId);
+            pstmt.setString(3,serviceRequestId);
             pstmt.execute();
         } catch (Exception e) {
             throw e;

@@ -29,11 +29,15 @@ public class FarmListService {
 
         try {
             String farmId = context.getParameter("farmId");
+            String userId = context.getParameter("userId");
 
             FarmSpecification specification = new FarmSpecification();
 
             if(null!= farmId) {
                 specification.setId(farmId);
+            }
+            if(null!= userId) {
+                specification.setUserId(userId);
             }
             List<Farm> farmList = (List<Farm>) FarmRepository.query(specification, null).getRecords();
 

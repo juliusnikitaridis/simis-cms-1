@@ -26,7 +26,8 @@ public class FarmRepository {
                 .add("type",record.getType())
                 .add("location_data",record.getLocationData())
                 .add("logo_data",record.getLogoData())
-                .add("address",record.getAddress());
+                .add("address",record.getAddress())
+                .add("user_id",record.getUserId());
 
         try (Connection connection = DB.getConnection();
              AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -51,6 +52,7 @@ public class FarmRepository {
                 .addIfExists("type",record.getType())
                 .addIfExists("logo_data",record.getLogoData())
                 .addIfExists("location_data",record.getLocationData())
+                .addIfExists("user_id",record.getUserId())
                 .addIfExists("address",record.getAddress());
 
             try (Connection connection = DB.getConnection();
@@ -81,7 +83,8 @@ public class FarmRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("userId = ?",specification.getUserId());
 
         }
         return DB.selectAllFrom(
@@ -110,6 +113,7 @@ public class FarmRepository {
             farm.setName(rs.getString("name"));
             farm.setType(rs.getString("type"));
             farm.setAddress(rs.getString("address"));
+            farm.setUserId(rs.getString("user_id"));
             farm.setLocationData(rs.getString("location_data"));
             return farm;
         } catch (Exception e) {

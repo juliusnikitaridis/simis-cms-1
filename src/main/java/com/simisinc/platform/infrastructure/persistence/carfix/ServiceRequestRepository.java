@@ -81,7 +81,9 @@ public class ServiceRequestRepository {
                 .add("vehicle_brand_id",record.getVehicleBrandId())
                 .add("category_hash",requestItemsCategoryHash.toString())
                 .add("preferred_date",record.getPreferredDate())
-                .add("customer_reference",record.getCustomerReference());
+                .add("customer_reference",record.getCustomerReference())
+                .addIfExists("service_advisor",record.getServiceAdvisor())
+                .addIfExists("technician",record.getTechnician());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -178,6 +180,8 @@ public class ServiceRequestRepository {
             request.setConfirmedDate(rs.getString("confirmed_date"));
             request.setPreferredDate(rs.getString("preferred_date"));
             request.setCustomerReference(rs.getString("customer_reference"));
+            request.setServiceAdvisor(rs.getString("service_advisor"));
+            request.setTechnician(rs.getString("technician"));
 
             //now also need to get all the service request items
             ArrayList<ServiceRequestItem> serviceRequestItems = (ArrayList<ServiceRequestItem>) DB.selectAllFrom(TABLE_NAME_ITEMS,new SqlUtils(),new SqlUtils().add("service_request_id = ?",rs.getString("id")),null,null,ServiceRequestRepository::buildRecordServiceRequestItems).getRecords();
@@ -245,6 +249,31 @@ public class ServiceRequestRepository {
             throw e;
         }
     }
+
+    public static void updateTechnician(String technician, String serviceRequestId) throws Exception {
+        String sql = "update carfix.service_request set technician = ? where id = ?";
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);){
+            pstmt.setString(1,technician);
+            pstmt.setString(2,serviceRequestId);
+            pstmt.execute();
+        } catch(Exception e) {
+            throw e;
+        }
+    }
+
+    public static void updateServiceAdvisor(String serviceAdvisor, String serviceRequestId) throws Exception {
+        String sql = "update carfix.service_request set service_advisor = ? where id = ?";
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);){
+            pstmt.setString(1,serviceAdvisor);
+            pstmt.setString(2,serviceRequestId);
+            pstmt.execute();
+        } catch(Exception e) {
+            throw e;
+        }
+    }
+
     public static void addJobNumber(String job_num, String serviceRequestId) throws Exception {
         String sql = "update carfix.service_request set job_num = ? where id = ?";
         try(Connection conn = DB.getConnection();

@@ -11,4 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FarmSpecification {
     private String id = null;
+    private String userId;
 }

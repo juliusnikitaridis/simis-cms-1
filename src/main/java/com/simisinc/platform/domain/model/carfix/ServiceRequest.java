@@ -35,6 +35,8 @@ public class ServiceRequest extends Entity {
     private String preferredDate;
     private String confirmedDate;
     private String customerReference;
+    private String technician;
+    private String serviceAdvisor;
 }
 
 

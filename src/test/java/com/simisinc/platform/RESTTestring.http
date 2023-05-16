@@ -286,13 +286,14 @@ Authorization:Bearer API-111bddec-1137-49fb-822b-522530cf51a51
 
 POST http://localhost:8080/api/carfix/AcceptQuoteService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-3926aa28-473c-4128-bf81-51ba70e8ec301
+Authorization:Bearer API-d4c5bde0-3234-4e83-acaa-937e32eec4461
 Content-Type: application/json
 
 {
   "serviceRequestId": "a6a823d7-a435-4422-949a-d4d66b469e80",
-  "acceptedQuoteId": "34969987-abaa-494f-8575-4449e07674bf",
-  "confirmedServiceProviderId":"julius-niki"
+  "acceptedQuoteId": "5ea184c5-4bd2-466d-8e36-7a3d989b20bf",
+  "confirmedServiceProviderId":"wefix-wefix",
+  "confirmedDate": "2023-05-19T00:00:00.000Z"
 }
 ###
 

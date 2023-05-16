@@ -23,10 +23,19 @@ public class AddJobNumberService {
         try {
             ObjectMapper mapper = new ObjectMapper();
             AddJobNumberRequest request = mapper.readValue(context.getJsonRequest(), AddJobNumberRequest.class);
-            ServiceRequestRepository.addJobNumber(request.getJobNumber(),request.getServiceRequestId());
+            //todo should move this into an updateQuoteService
+            if(request.getJobNumber() != null) {
+                ServiceRequestRepository.addJobNumber(request.getJobNumber(),request.getServiceRequestId());
+            }
+            if(request.getServiceAdvisor() != null) {
+                ServiceRequestRepository.updateServiceAdvisor(request.getServiceAdvisor(),request.getServiceRequestId());
+            }
+            if(request.getTechnician() != null){
+                ServiceRequestRepository.updateTechnician(request.getTechnician(),request.getServiceRequestId());
+            }
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service Job Number has been updated ");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add("service request has been updated ");}};
             response.setData(responseMessage);
             return response;
 
@@ -43,5 +52,7 @@ public class AddJobNumberService {
 class AddJobNumberRequest {
     private String serviceRequestId;
     private String jobNumber;
+    private String technician;
+    private String serviceAdvisor;
 }
 
