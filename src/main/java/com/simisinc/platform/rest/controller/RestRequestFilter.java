@@ -23,8 +23,10 @@ import com.simisinc.platform.application.json.JsonCommand;
 import com.simisinc.platform.application.login.AuthenticateLoginCommand;
 import com.simisinc.platform.domain.model.App;
 import com.simisinc.platform.domain.model.User;
+import com.simisinc.platform.domain.model.cannacomply.Users;
 import com.simisinc.platform.domain.model.login.UserLogin;
 import com.simisinc.platform.domain.model.login.UserToken;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.UsersRepository;
 import com.simisinc.platform.infrastructure.persistence.login.UserLoginRepository;
 import com.simisinc.platform.infrastructure.persistence.login.UserTokenRepository;
 import com.simisinc.platform.presentation.controller.ContextConstants;
@@ -350,6 +352,12 @@ public class RestRequestFilter implements Filter {
     userToken.setExpires(new Timestamp(expiresMillis));
     UserTokenRepository.add(userToken);
 
+    //see what farm this user belongs to if canna comply user
+    String farmProfileString = "";
+    if(user.getUserType()!= null && user.getUserType().toUpperCase().contains("CANNACOMPLY")) {
+      String cannaComplyUserId = UsersRepository.findById(user.getUniqueId()).getSysUniqueUserId();
+      farmProfileString = "\"farm_profile_id\":\"" + JsonCommand.toJson(cannaComplyUserId) + "\",\n" ;
+    }
     // Make a response
     // https://tools.ietf.org/html/rfc6750
     String json = "{\n" +
@@ -363,6 +371,7 @@ public class RestRequestFilter implements Filter {
         "\"last_name\":\"" + JsonCommand.toJson(user.getLastName()) + "\",\n" +
         "\"unique_id\":\"" + JsonCommand.toJson(user.getUniqueId()) + "\",\n" +
         "\"user_type\":\"" + JsonCommand.toJson(user.getUserType()) + "\",\n" +
+         farmProfileString +
         "\"scope\":\"create\"\n" +
         "}";
     response.setContentType("application/json");
