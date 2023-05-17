@@ -39,7 +39,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/cannacomply/FarmListService
+GET http://localhost:8080/api/cannacomply/FarmListService?userId=julius-niki2
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
 Content-Type: application/json

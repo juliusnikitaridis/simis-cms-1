@@ -124,7 +124,6 @@ public class ServiceRequestRepository {
              AutoRollback transaction = new AutoRollback(connection)) {
             // In a transaction (use the existing connection)
             DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
-            addItems(record,connection);
             transaction.commit();
             return record;
 

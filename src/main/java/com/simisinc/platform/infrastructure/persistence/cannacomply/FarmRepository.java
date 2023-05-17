@@ -84,7 +84,7 @@ public class FarmRepository {
         if (specification != null) {
             where
                     .addIfExists("id = ?", specification.getId())
-                    .addIfExists("userId = ?",specification.getUserId());
+                    .addIfExists("user_id = ?",specification.getUserId());
 
         }
         return DB.selectAllFrom(

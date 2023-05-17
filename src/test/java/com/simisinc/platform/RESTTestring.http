@@ -308,6 +308,17 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:8080/api/carfix/UpdateServiceRequestService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-7112fd2e-a7aa-48b4-92bb-0d7d07d048bd1
+Content-Type: application/json
+
+{
+  "id": "d5495a1a-4b49-4bd1-a680-d720133c4b22",
+  "status": "SOME AMAZING status"
+}
+###
+
 
 
 
