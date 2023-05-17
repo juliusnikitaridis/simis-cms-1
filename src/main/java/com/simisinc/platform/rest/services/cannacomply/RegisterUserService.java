@@ -7,8 +7,10 @@ import com.simisinc.platform.domain.events.cms.UserSignedUpEvent;
 import com.simisinc.platform.domain.model.Group;
 import com.simisinc.platform.domain.model.Role;
 import com.simisinc.platform.domain.model.User;
+import com.simisinc.platform.domain.model.cannacomply.Users;
 import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.UsersRepository;
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
@@ -17,6 +19,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RegisterUserService {
     private static Log LOG = LogFactory.getLog(RegisterUserService.class);
@@ -27,12 +30,13 @@ public class RegisterUserService {
         try {
 
             ObjectMapper mapper = new ObjectMapper();
-            User newUser = mapper.readValue(context.getJsonRequest(), User.class);
-            addUser(newUser, context.getUserId());
-
+            Users newUser = mapper.readValue(context.getJsonRequest(), Users.class);
+            String newSysUserId = addUser(newUser, context.getUserId());
+            newUser.setSysUniqueUserId(newSysUserId);
+            UsersRepository.add(newUser);
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{
-                add("User has been registered");
+                add("canna comply users object has been registered");
             }};
             response.setData(responseMessage);
             return response;
@@ -47,10 +51,10 @@ public class RegisterUserService {
 
 
     //this should add a user - same as the logic in UserFormWidget
-    public void addUser(User user, long modifiedById) throws Exception {
+    public String addUser(User user, long modifiedById) throws Exception {
 
         user.setModifiedBy(modifiedById);
-        user.setUserType("USER");
+        user.setUserType("USER-CANNACOMPLY");
 
         // Populate the roles
         if (user.getRoleId() != null) {
@@ -89,5 +93,6 @@ public class RegisterUserService {
         // Trigger events - send the registration verification email.
         WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));
         WorkflowManager.triggerWorkflowForEvent(new UserSignedUpEvent(savedUser));
+        return savedUser.getUniqueId();
     }
 }
