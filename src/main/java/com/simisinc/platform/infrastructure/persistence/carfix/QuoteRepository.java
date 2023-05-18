@@ -153,7 +153,7 @@ public class QuoteRepository {
             User memberUser = UserRepository.findByUniqueId(serviceRequest.getMemberId());
             quote.setCustomerFirstName(memberUser.getFirstName());
             quote.setCustomerLastName(memberUser.getLastName());
-            quote.setCustomerLocation(memberUser.getCity()+" "+memberUser.getState());
+            quote.setCustomerLocation(memberUser.getCity()); //when registering members , address line is stored in here
             return quote;
         } catch (Exception throwables) {
             LOG.error("exception when building quote item record");
