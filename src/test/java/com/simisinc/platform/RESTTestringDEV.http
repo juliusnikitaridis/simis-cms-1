@@ -213,4 +213,16 @@ X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Bearer API-d765b107-4cd0-476e-abc1-e578e06c5d035
 ###
 
+POST https://carfix.connectmobiles24.com/api/carfix/UpdateServiceRequestService
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-d0c34c1e-d993-4aa2-b15a-c6e1ee525d3c5
+Content-Type: application/json
+
+{
+  "id": "0b927ba6-f1aa-4ada-856d-ff9ae95750d3",
+  "confirmedDate": "12-12-2024",
+  "preferredDate": "12-12-2024"
+}
+###
+
 

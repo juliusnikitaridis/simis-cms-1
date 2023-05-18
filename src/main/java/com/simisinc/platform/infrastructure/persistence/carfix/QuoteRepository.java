@@ -1,8 +1,12 @@
 package com.simisinc.platform.infrastructure.persistence.carfix;
 
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.Quote;
 import com.simisinc.platform.domain.model.carfix.QuoteItem;
+import com.simisinc.platform.domain.model.carfix.ServiceRequest;
+import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -137,6 +141,19 @@ public class QuoteRepository {
             where.add("quote_id = ?", rs.getString("id"));
             ArrayList<QuoteItem> quoteItems = (ArrayList<QuoteItem>) (DB.selectAllFrom(TABLE_NAME_ITEMS, select, where, null, null, QuoteRepository::buildRecordQuoteItem)).getRecords();
             quote.setQuotationItems(quoteItems);
+            //get service request for this quote
+            ServiceRequest serviceRequest = ServiceRequestRepository.findById(quote.getRequestForServiceId());
+            //get vehicle for SR
+            Vehicle quoteVehicle = VehicleRepository.findById(serviceRequest.getVehicleId());
+            quote.setVehicleMake(quoteVehicle.getMake());
+            quote.setVehicleModel(quoteVehicle.getModel());
+            quote.setVehicleRegistration(quoteVehicle.getRegistration());
+            quote.setVehicleYear(quoteVehicle.getYear());
+            //get member user for SR
+            User memberUser = UserRepository.findByUniqueId(serviceRequest.getMemberId());
+            quote.setCustomerFirstName(memberUser.getFirstName());
+            quote.setCustomerLastName(memberUser.getLastName());
+            quote.setCustomerLocation(memberUser.getCity()+" "+memberUser.getState());
             return quote;
         } catch (Exception throwables) {
             LOG.error("exception when building quote item record");

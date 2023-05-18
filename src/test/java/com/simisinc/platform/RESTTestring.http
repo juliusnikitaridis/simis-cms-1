@@ -269,7 +269,7 @@ Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
 Content-Type: application/json
 ###
 
-GET http://localhost:8080/api/carfix/QuoteListService?quoteId=1eb2f8b1-5d6c-41fc-9bc1-27876e7b72c2
+GET http://localhost:8080/api/carfix/QuoteListService?quoteId=34969987-abaa-494f-8575-4449e07674bf
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-86f4c33d-bf35-4773-966c-99188cf59f141
 ###
@@ -314,8 +314,10 @@ Authorization:Bearer API-7112fd2e-a7aa-48b4-92bb-0d7d07d048bd1
 Content-Type: application/json
 
 {
-  "id": "d5495a1a-4b49-4bd1-a680-d720133c4b22",
-  "status": "SOME AMAZING status"
+  "id": "ca8ef300-e1da-412e-aca8-369c4f263aac",
+  "status": "SOME AMAZING status",
+  "confirmedDate": "12-12-2024",
+  "preferredDate": "12-12-2024"
 }
 ###
 

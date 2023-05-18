@@ -1,6 +1,7 @@
 package com.simisinc.platform.domain.model.carfix;
 
 import com.simisinc.platform.domain.model.Entity;
+import com.simisinc.platform.domain.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,15 @@ public class Quote extends Entity {
     private String vat;
     private String subtotal;
     private String status;
+
+    //additional enrichment done from vehicle and customer tables
+   private String vehicleModel;
+   private String vehicleYear;
+   private String vehicleMake;
+   private String vehicleRegistration;
+   private String customerFirstName;
+   private String customerLastName;
+   private String customerLocation;
 
 }
 
