@@ -100,6 +100,7 @@ public class BlockRepository {
               block.setBarcodeData(rs.getString("barcode_data"));
               block.setFarmId(rs.getString("farm_id"));
               block.setDate(rs.getString("date"));
+              block.setId(rs.getString("id"));
 
             return block;
         } catch (Exception e) {

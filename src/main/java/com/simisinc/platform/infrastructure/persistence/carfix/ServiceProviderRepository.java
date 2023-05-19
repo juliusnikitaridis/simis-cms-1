@@ -37,6 +37,11 @@ public class ServiceProviderRepository {
                     .add("operating_year",serviceProvider.getOperatingYear())
                     .add("operating_hours",serviceProvider.getOperatingHours())
                     .add("drop_off",serviceProvider.getDropOff())
+                    .add("account_firstname",serviceProvider.getAccountFirstName())
+                    .add("account_lastname",serviceProvider.getAccountLastName())
+                    .add("account_no",serviceProvider.getAccountNo())
+                    .add("account_branch",serviceProvider.getAccountBranch())
+                    .add("account_bank",serviceProvider.getAccountBank())
                     .add("rmi",serviceProvider.getRMI());
 
                 try (Connection connection = DB.getConnection();
@@ -87,6 +92,11 @@ public class ServiceProviderRepository {
             serviceProvider.setRMI(rs.getString("rmi"));
             serviceProvider.setOperatingYear(rs.getString("operating_year"));
             serviceProvider.setOperatingHours(rs.getString("operating_hours"));
+            serviceProvider.setAccountBank(rs.getString("account_bank"));
+            serviceProvider.setAccountNo(rs.getString("account_no"));
+            serviceProvider.setAccountBranch(rs.getString("account_branch"));
+            serviceProvider.setAccountFirstName(rs.getString("account_firstname"));
+            serviceProvider.setAccountLastName(rs.getString("account_lastname"));
             return serviceProvider;
         } catch (Throwable throwables) {
             LOG.error("error when building record for service provider "+throwables.getMessage());
@@ -124,7 +134,12 @@ public class ServiceProviderRepository {
                 .addIfExists("logo_data", record.getLogoData())
                 .addIfExists("supported_categories", record.getSupportedCategoriesAsString())
                 .addIfExists("accreditations", record.getAccreditations())
-                .addIfExists("operating_hours",record.getOperatingHours());
+                .addIfExists("operating_hours",record.getOperatingHours())
+                .addIfExists("account_firstname",record.getAccountFirstName())
+                .addIfExists("account_lastname",record.getAccountLastName())
+                .addIfExists("account_no",record.getAccountNo())
+                .addIfExists("account_branch",record.getAccountBranch())
+                .addIfExists("account_bank",record.getAccountBank());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);

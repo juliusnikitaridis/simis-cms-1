@@ -1,5 +1,6 @@
 package com.simisinc.platform.rest.services.carfix;
 
+import com.simisinc.platform.domain.model.Entity;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
 import com.simisinc.platform.infrastructure.database.DataResult;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
@@ -38,10 +39,10 @@ public class ServiceProviderListService {
             }
 
             DataResult result = ServiceProviderRepository.query(specification,null);
-            List<ServiceRequest> serviceRequestList = (List<ServiceRequest>) result.getRecords();
+            List<Entity> serviceProviderList = (List<Entity>) result.getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
-            response.setData(serviceRequestList);
+            response.setData(serviceProviderList);
             return response;
 
         } catch (Exception e) {

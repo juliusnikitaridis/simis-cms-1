@@ -38,6 +38,11 @@ public class ServiceProvider extends User {
     private String RMI;
     private String operatingYear;
     private String operatingHours;
+    private String accountFirstName;
+    private String accountLastName;
+    private String accountNo;
+    private String accountBranch;
+    private String accountBank;
 
     public String getSupportedBrandsAsJSONString() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
