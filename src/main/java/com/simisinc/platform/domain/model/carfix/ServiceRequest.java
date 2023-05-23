@@ -37,6 +37,11 @@ public class ServiceRequest extends Entity {
     private String customerReference;
     private String technician;
     private String serviceAdvisor;
+
+    //additional enrichment
+    private String userFirstName;
+    private String userLastName;
+
 }
 
 

@@ -2,21 +2,18 @@ package com.simisinc.platform.infrastructure.persistence.carfix;
 
 import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.*;
-import com.simisinc.platform.domain.model.mailinglists.Email;
 import com.simisinc.platform.infrastructure.database.*;
 import com.simisinc.platform.infrastructure.persistence.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Julius Nikitaridis
@@ -162,7 +159,7 @@ public class ServiceRequestRepository {
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, ServiceRequestRepository::buildRecord);
     }
-    public static DataResult AcceptedSPQuotes(String ServiceProviderId,DataConstraints constraints){
+    public static List<ServiceRequest> AcceptedSPQuotes(String ServiceProviderId, DataConstraints constraints){
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
@@ -170,8 +167,15 @@ public class ServiceRequestRepository {
         where.add("confirmed_service_provider_id = ?",ServiceProviderId)
                 .add("status != ?","CREATED");
 
-        return DB.selectAllFrom(
-                TABLE_NAME, select, where, orderBy, constraints, ServiceRequestRepository::buildRecord);
+        List<ServiceRequest> acceptedServiceRequests = (List<ServiceRequest>) DB.selectAllFrom(
+                TABLE_NAME, select, where, orderBy, constraints, ServiceRequestRepository::buildRecord).getRecords();
+        //first and last name of the customer
+        acceptedServiceRequests.forEach(serviceRequest -> {
+            User memberUserForServiceRequest = UserRepository.findByUniqueId(serviceRequest.getMemberId());
+            serviceRequest.setUserFirstName(memberUserForServiceRequest.getFirstName());
+            serviceRequest.setUserLastName(memberUserForServiceRequest.getLastName());
+        });
+        return acceptedServiceRequests;
 
     }
 

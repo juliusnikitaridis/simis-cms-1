@@ -20,8 +20,7 @@ public class AcceptedRFSListService {
             final String serviceProviderUniqueId = context.getParameter("serviceProviderUniqueId");
             ServiceRequestSpecification specification = new ServiceRequestSpecification();
             specification.setServiceProviderId(serviceProviderUniqueId);
-            DataResult result = ServiceRequestRepository.AcceptedSPQuotes(serviceProviderUniqueId,null);
-            List<ServiceRequest> serviceRequestList = (List<ServiceRequest>) result.getRecords();
+            List<ServiceRequest> serviceRequestList = ServiceRequestRepository.AcceptedSPQuotes(serviceProviderUniqueId,null);
 
             ServiceResponse response = new ServiceResponse(200);
             response.setData(serviceRequestList);
