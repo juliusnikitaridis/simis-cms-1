@@ -155,7 +155,7 @@ public class RestRequestFilter implements Filter {
     if (StringUtils.isEmpty(apiKey)) {
       LOG.debug("No key");
       HttpServletResponse response = (HttpServletResponse) servletResponse;
-      RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized, no key");
+      RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized[1], no key");
       return;
     }
     // Validate the app's key
@@ -171,7 +171,7 @@ public class RestRequestFilter implements Filter {
 
       // Unauthorized
       HttpServletResponse response = (HttpServletResponse) servletResponse;
-      RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized");
+      RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized[2]");
       return;
     }
     request.setAttribute(RequestConstants.REST_APP, thisApp);
@@ -443,7 +443,7 @@ public class RestRequestFilter implements Filter {
     LOG.debug("Returning 401...");
     HttpServletResponse response = (HttpServletResponse) servletResponse;
     response.setHeader("WWW-Authenticate", "Basic realm=\"Protected\"");
-    RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized");
+    RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized[3]");
   }
 
   private void doExpiredToken(ServletResponse servletResponse) throws IOException {
@@ -453,7 +453,7 @@ public class RestRequestFilter implements Filter {
         "Bearer realm=\"Protected\", " +
             "error=\"invalid_token\", " +
             "error_description=\"The access token expired\"");
-    RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized");
+    RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized[4]");
   }
 
   private void do301(ServletResponse servletResponse, String redirectLocation) throws IOException {

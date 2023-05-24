@@ -33,5 +33,4 @@ public class AcceptedRFSListService {
             return response;
         }
     }
-
-    }
+}

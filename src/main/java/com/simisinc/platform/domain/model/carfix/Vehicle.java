@@ -45,4 +45,5 @@ public class Vehicle extends Entity {
     private String memberId = null;
     private String maintenancePlan;
     private String serviceHistory;
+    private String pictureData = null;
 }

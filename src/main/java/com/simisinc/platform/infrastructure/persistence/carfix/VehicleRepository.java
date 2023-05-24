@@ -31,6 +31,7 @@ public class VehicleRepository {
                 .add("member_id", record.getMemberId())
                 .add("service_history", record.getServiceHistory())
                 .add("maintenance_plan", record.getMaintenancePlan())
+                .add("picture_data",record.getPictureData())
                 .add("engine_code", record.getEngineCode());
 
 
@@ -64,6 +65,7 @@ public class VehicleRepository {
                 .addIfExists("member_id", record.getMemberId())
                 .addIfExists("engine_code", record.getEngineCode())
                 .addIfExists("maintenance_plan", record.getMaintenancePlan())
+                .addIfExists("picture_data",record.getPictureData())
                 .addIfExists("service_history", record.getServiceHistory());
 
 
@@ -128,6 +130,7 @@ public class VehicleRepository {
             vehicle.setTransmission(rs.getString("transmission"));
             vehicle.setVinNumber(rs.getString("vin_number"));
             vehicle.setYear(rs.getString("year"));
+            vehicle.setPictureData(rs.getString("picture_data"));
             vehicle.setMaintenancePlan(rs.getString("maintenance_plan"));
             vehicle.setServiceHistory(rs.getString("service_history"));
             vehicle.setMemberId(rs.getString("member_id"));
