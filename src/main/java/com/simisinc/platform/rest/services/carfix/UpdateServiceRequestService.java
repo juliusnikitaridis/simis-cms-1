@@ -31,6 +31,10 @@ public class UpdateServiceRequestService {
             ObjectMapper mapper = new ObjectMapper();
             ServiceRequest serviceRequest = mapper.readValue(context.getJsonRequest(), ServiceRequest.class);
 
+            if(serviceRequest.getPictureData() != null) {
+                String newFileName = ServiceUtils.writeDataToFile(serviceRequest.getPictureData());
+                serviceRequest.setPictureData(newFileName);
+            }
             ServiceRequestRepository.update(serviceRequest);
 
             ServiceResponse response = new ServiceResponse(200);

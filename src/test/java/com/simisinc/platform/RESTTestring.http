@@ -22,7 +22,7 @@ Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
 
 POST http://localhost:8080/api/carfix/CreateVehicleService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-49366db3-a792-42a6-acd1-a73aa44e6c2f1
+Authorization:Bearer API-e06a334a-df94-492c-a84b-0e1c81b3ae7b1
 Content-Type: application/json
 
 {
@@ -37,7 +37,8 @@ Content-Type: application/json
   "engineCode": "3043",
   "memberId": "julius-niki",
   "serviceHistory": "false",
-  "maintenancePlan": "false"
+  "maintenancePlan": "false",
+  "pictureData" : "[{},{},{},{},{}]"
 }
 ###
 
@@ -79,7 +80,7 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/carfix/CreateRFSService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-51653205-c123-4cc9-9e36-2b9f56e29dc11
+Authorization:Bearer API-0adadee3-3573-43c4-bd8a-98d6794116da1
 Content-Type: application/json
 
 {
@@ -94,7 +95,7 @@ Content-Type: application/json
   "lastServiceDate": "10-10-2021",
   "vehicleBrandId": "b8367ced-5395-465a-8012-b55779285ea2",
   "serviceRequestItems": [{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b11","itemDescription": "front shocks"},{"itemCategoryId": "6ea8bc58-e17d-48c7-9ef7-d6746e6a9b71","itemDescription": "rear shocks"}],
-  "preferred_date": "1676641315237"
+  "preferredDate": "1676641315237"
 }
 ###
 
@@ -119,9 +120,9 @@ Authorization:Bearer API-7c480096-1cfb-40c0-acba-e701f115d7b61
 
 
 ###
-GET http://localhost:8080/api/carfix/RFSListService?serviceRequestId=303a67af-f8da-4030-9144-90c56bfc3caf
+GET http://localhost:8080/api/carfix/RFSListService?serviceRequestId=2ab44435-151a-4a6b-ba7b-5e645f379da6
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6874454d-c179-41e3-b205-1ce898c84da01
+Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
 ###
 
 ###

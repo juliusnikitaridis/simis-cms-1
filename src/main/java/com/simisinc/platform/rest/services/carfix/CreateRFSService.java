@@ -44,6 +44,8 @@ public class CreateRFSService {
             serviceRequest.setId(serviceRequestId);
             serviceRequest.setCustomerReference(new RandomToken(6).nextString());
 
+            String fileName = ServiceUtils.writeDataToFile(serviceRequest.getPictureData());
+            serviceRequest.setPictureData(fileName);
             ServiceRequestRepository.add(serviceRequest);
 
             ServiceResponse response = new ServiceResponse(200);
