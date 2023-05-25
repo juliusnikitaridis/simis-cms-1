@@ -386,10 +386,12 @@ public class RestRequestFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     String authHeader = request.getHeader("Authorization");
     if (authHeader == null) {
+      LOG.debug("Auth header is null !!");
       return null;
     }
     StringTokenizer st = new StringTokenizer(authHeader);
     if (!st.hasMoreTokens()) {
+      LOG.debug("auth deader has blank value");
       return null;
     }
     String basic = st.nextToken();
@@ -408,6 +410,7 @@ public class RestRequestFilter implements Filter {
       // Attempt the login
       String email = credentials.substring(0, p).trim().toLowerCase();
       String password = credentials.substring(p + 1).trim();
+      LOG.debug("checking basic auth with "+email+" "+password);
       try {
         return AuthenticateLoginCommand.getAuthenticatedUser(email, password, request.getRemoteAddr());
       } catch (DataException | LoginException e) {

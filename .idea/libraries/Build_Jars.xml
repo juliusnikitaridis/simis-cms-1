@@ -31,6 +31,7 @@
       <root url="file://$PROJECT_DIR$/lib/build/easy-flows" />
       <root url="file://$PROJECT_DIR$/lib/build/bucket4j" />
       <root url="file://$PROJECT_DIR$/lib/build/classgraph" />
+      <root url="file://$PROJECT_DIR$/lib/build/okhttp" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -56,6 +57,7 @@
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/jsoup" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/jstl" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/libphonenumber" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/build/okhttp" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/postgresql" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/pushy" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/restfb" recursive="false" />

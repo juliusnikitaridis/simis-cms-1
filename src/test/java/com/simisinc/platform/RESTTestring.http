@@ -126,9 +126,17 @@ Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
 ###
 
 ###
+POST http://localhost:8080/api/carfix/ProcessServiceProvidersPayments
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
+###
+
+
+
+###
 GET http://localhost:8080/api/carfix/RFSListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-fedf5757-f32c-48d7-bb6d-3169e2911e231
+Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
 ###
 
 

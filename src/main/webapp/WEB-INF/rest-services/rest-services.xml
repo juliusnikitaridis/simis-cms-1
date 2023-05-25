@@ -52,6 +52,7 @@
   <service method="get" endpoint="carfix/FetchDeviceTokenService" class="com.simisinc.platform.rest.services.carfix.FetchDeviceTokenService" />
   <service method="get" endpoint="carfix/GetPaymentStatusService" class="com.simisinc.platform.rest.services.carfix.GetPaymentStatusService"/>
   <service method="post" endpoint="carfix/UpdateServiceRequestService" class="com.simisinc.platform.rest.services.carfix.UpdateServiceRequestService"/>
+  <service method="post" endpoint="carfix/ProcessServiceProvidersPayments" class="com.simisinc.platform.rest.services.carfix.ProcessServiceProvidersPayments"/>
 
   <service method="post" endpoint="cannacomply/CreateCropService" class="com.simisinc.platform.rest.services.cannacomply.CreateCropService"/>
   <service method="post" endpoint="cannacomply/CreateFarmService" class="com.simisinc.platform.rest.services.cannacomply.CreateFarmService"/>

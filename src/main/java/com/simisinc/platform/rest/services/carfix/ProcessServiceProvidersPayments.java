@@ -8,6 +8,7 @@ import com.simisinc.platform.domain.model.carfix.ProcessPaymentServiceRequest;
 import com.simisinc.platform.infrastructure.persistence.carfix.PaymentRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import okhttp3.*;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -45,8 +46,8 @@ public class ProcessServiceProvidersPayments {
     public ServiceResponse post(ServiceContext context) {
 
         try {
-
-
+            System.out.println("here");
+            invokePeachPaymentsAPI();
 
         } catch (Exception e) {
             LOG.error("Error in ProcessPaymentService", e);
@@ -57,87 +58,56 @@ public class ProcessServiceProvidersPayments {
         return null;
     }
 
-    public static void main (String[] srgs) {
-        invokePeachPaymentsAPI();
-    }
 
 
+    private static okhttp3.Response  invokePeachPaymentsAPI()  throws Exception {
 
-
-    private static String invokePeachPaymentsAPI()  {
-
-        String authenticationEntityId="062199b6-1460-4feb-a3df-699808377e07";
-        String xmlRequest = "<APIPaymentsRequest>\n" +
-                " <Header>\n" +
-                "  <PsVer>2.0.1</PsVer>\n" +
-                "  <Client>ZER001</Client>\n" +
-                "  <DueDate>20200625</DueDate>\n" +
-                "  <Service>Creditors</Service>\n" +
-                "  <ServiceType>1day</ServiceType>\n" +
-                "  <Reference>Example Batch</Reference>\n" +
-                "  <CallBackUrl>https://example.com/Callback</CallBackUrl>\n" +
-                " </Header>\n" +
-                " <Payments>\n" +
-                "  <FileContents>\n" +
-                "   <Initials>EX</Initials>\n" +
-                "   <FirstNames>Example</FirstNames>\n" +
-                "   <Surname>Recipient</Surname>\n" +
-                "   <BranchCode>632009</BranchCode>\n" +
-                "   <AccountNumber>123456789</AccountNumber>\n" +
-                "   <FileAmount>549.01</FileAmount>\n" +
-                "   <AccountType>0</AccountType>\n" +
-                "   <AmountMultiplier>1</AmountMultiplier>\n" +
-                "   <CustomerCode>EXA9292</CustomerCode>\n" +
-                "   <Reference>Example Reference</Reference>\n" +
-                "  </FileContents>\n" +
-                " </Payments>\n" +
-                " <Totals>\n" +
-                "  <Records>1</Records>\n" +
-                "  <Amount>549.01</Amount>\n" +
-                "  <BranchHash>632009</BranchHash>\n" +
-                "  <AccountHash>123456789</AccountHash>\n" +
-                " </Totals>\n" +
-                "</APIPaymentsRequest>";
-
-        String url = "https://test.peachpay.co.za/API/Payments?key="+authenticationEntityId;
-
-        String remoteContent = "NO VALUE";
-        StatusLine statusLine = null;
-
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpPost httpPost = new HttpPost(url);
-            httpPost.setHeader("Content-Type", "text/xml");
-            httpPost.setEntity(new StringEntity(xmlRequest));
-
-            CloseableHttpResponse response = client.execute(httpPost);
-
-            if (response == null) {
-                throw new Exception("Response from peach API [https://testsecure.peachpayments.com/checkout/initiate] is null ");
-            }
-
-            HttpEntity entity = response.getEntity();
-            if (entity == null) {
-                throw new Exception("response entity is null");
-            }
-
-            // Check for content
-            remoteContent = EntityUtils.toString(entity);
-            if (StringUtils.isBlank(remoteContent)) {
-                throw new Exception("HttpPost Remote content is empty");
-            }
-            LOG.debug("REMOTE TEXT: " + remoteContent);
-
-            // Check for errors... HTTP/1.1 405 Method Not Allowed
-            statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() > 299) {
-                throw new Exception("HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent);
-            }
-            //everything ok to this point, record the payment in DB
-            return remoteContent;
-        } catch (Throwable e) {
-            LOG.error("Exception from peach payments API " + e+" "+remoteContent);
-            return null;
-        }
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("request","<APIPaymentsRequest>\n" +
+                        "                        <Header>\n" +
+                        "                <PsVer>2.0.1</PsVer>\n" +
+                        "<Client>PEA001</Client>\n" +
+                        "<Service>Creditors</Service>\n" +
+                        "<ServiceType>SDV</ServiceType>\n" +
+                        "<DueDate>20200917</DueDate>\n" +
+                        "<CallbackUrl>https://www.example.com/</CallbackUrl>\n" +
+                        "<Reference>202009170001</Reference>\n" +
+                        "</Header>\n" +
+                        "<Payments>\n" +
+                        "<FileContents>\n" +
+                        "<Initial>JS</Initial>\n" +
+                        "<FirstName>Smith</FirstName>\n" +
+                        "<Surname>Smith</Surname>\n" +
+                        "<BranchCode>157852</BranchCode>\n" +
+                        "<AccountNumber>1203389809</AccountNumber>\n" +
+                        "<FileAmount>1.00</FileAmount>\n" +
+                        "<AccountType>0</AccountType>\n" +
+                        "<AmountMultiplier>1</AmountMultiplier>\n" +
+                        "<Reference>PeachPayments</Reference>\n" +
+                        "<ExternalLinks>\n" +
+                        "<ExternalLink>\n" +
+                        "<Label>Invoice</Label>\n" +
+                        "<URL>https://www.google.com/</URL>\n" +
+                        "</ExternalLink>\n" +
+                        "</ExternalLinks>\n" +
+                        "</FileContents>\n" +
+                        "</Payments>\n" +
+                        "<Totals>\n" +
+                        "<Records>1</Records>\n" +
+                        "<Amount>1.00</Amount>\n" +
+                        "<BranchHash>157852</BranchHash>\n" +
+                        "<AccountHash>1203389809</AccountHash>\n" +
+                        "</Totals>\n" +
+                        "</APIPaymentsRequest>")
+                .build();
+        Request request = new Request.Builder()
+                .url("https://test.peachpay.co.za/API/Payments?key=062199b6-1460-4feb-a3df-699808377e07")
+                .method("POST", body)
+                .build();
+        okhttp3.Response response = client.newCall(request).execute();
+        return response;
     }
 }
 

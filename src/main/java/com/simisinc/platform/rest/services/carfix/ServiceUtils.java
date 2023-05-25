@@ -33,6 +33,9 @@ public class ServiceUtils {
 
 
     public static String readDataFromFile(String fileName) throws Exception {
+        if(fileName == null) {
+            return null;
+        }
         String serverRootPath = FileSystemCommand.getFileServerRootPath();
         String serverCompletePath = serverRootPath + "/carfixPictureData/";
         File pictureFile = new File(serverCompletePath + fileName);
