@@ -1,13 +1,12 @@
 package com.simisinc.platform.rest.services.carfix;
 
 import com.simisinc.platform.application.filesystem.FileSystemCommand;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 /**
  * Julius Nikitaridis
@@ -45,4 +44,13 @@ public class ServiceUtils {
         return fileData;
     }
 
+    public static void uploadImageFile(HttpServletRequest request) throws Exception {
+
+        if (request.getPart("serviceRequestImage") != null && request.getHeader("Content-Type").contains("multipart/form-data")) {
+            InputStream is = request.getPart("serviceRequestImage").getInputStream();
+            BufferedImage uploadImage = ImageIO.read(new ByteArrayInputStream(is.readAllBytes()));
+            //ImageIO.write(uploadImage, "jpg", new File("/home/webapps/connect/ROOT/images/carfixImages","snap.jpg"));
+            ImageIO.write(uploadImage, "jpg", new File("/home/julius","snap.jpg"));
+        }
+    }
 }

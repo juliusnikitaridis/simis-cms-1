@@ -34,6 +34,7 @@ public class CreateRFSService {
 
 
         try {
+            ServiceUtils.uploadImageFile(context.getRequest());
 
             final String serviceRequestId = UUID.randomUUID().toString();
             ObjectMapper mapper = new ObjectMapper();
@@ -43,6 +44,8 @@ public class CreateRFSService {
             }
             serviceRequest.setId(serviceRequestId);
             serviceRequest.setCustomerReference(new RandomToken(6).nextString());
+
+            ServiceUtils.uploadImageFile(context.getRequest());
 
             String fileName = ServiceUtils.writeDataToFile(serviceRequest.getPictureData());
             serviceRequest.setPictureData(fileName);

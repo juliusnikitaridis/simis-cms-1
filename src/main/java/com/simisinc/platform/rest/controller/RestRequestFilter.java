@@ -42,10 +42,8 @@ import javax.security.auth.login.LoginException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import javax.servlet.http.Part;
+import java.io.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -279,13 +277,30 @@ public class RestRequestFilter implements Filter {
       String contentType = httpServletRequest.getHeader("Content-Type");
       if(contentType != null && contentType.contains("json")) {
         String line = null;
-        BufferedReader reader = request.getReader();
+        InputStream is = new ByteArrayInputStream(request.getInputStream().readAllBytes());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
         StringBuffer jb = new StringBuffer();
 
         while ((line = reader.readLine()) != null) {
           jb.append(line);
         }
        request.setAttribute(RequestConstants.JSON_DATA,jb.toString());
+      }
+      //uploading files and JSON data
+      if(contentType.contains("multipart/form-data")) {
+        String line ;
+        if(httpServletRequest.getPart("jsonRequest") != null) {
+          InputStream is = new ByteArrayInputStream(httpServletRequest.getPart("jsonRequest").getInputStream().readAllBytes());
+          BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+          StringBuffer jb = new StringBuffer();
+
+          while ((line = reader.readLine()) != null) {
+            jb.append(line);
+          }
+          request.setAttribute(RequestConstants.JSON_DATA,jb.toString());
+        }
       }
 
 
