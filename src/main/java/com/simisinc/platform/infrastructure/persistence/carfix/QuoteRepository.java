@@ -75,6 +75,7 @@ public class QuoteRepository {
                 .add("status", "CREATED")
                 .add("vat", record.getVat())
                 .add("sub_total", record.getSubtotal())
+                .addIfExists("date_type",record.getDateType())
                 .add("total", record.getQuotationTotal());
 
         try (Connection connection = DB.getConnection();
@@ -129,6 +130,7 @@ public class QuoteRepository {
             quote.setQuotationTotal(rs.getString("total"));
             quote.setBookingDate(rs.getString("booking_date"));
             quote.setCreatedDate(rs.getString("created_date"));
+            quote.setDateType(rs.getString("date_type"));
             quote.setVat(rs.getString("vat"));
             quote.setStatus(rs.getString("status"));
             quote.setSubtotal(rs.getString("sub_total"));

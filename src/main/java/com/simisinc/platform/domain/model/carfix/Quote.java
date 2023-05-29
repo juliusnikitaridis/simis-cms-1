@@ -32,6 +32,7 @@ public class Quote extends Entity {
     private String vat;
     private String subtotal;
     private String status;
+    private String dateType;
 
     //additional enrichment done from vehicle and customer tables
    private String vehicleModel;
