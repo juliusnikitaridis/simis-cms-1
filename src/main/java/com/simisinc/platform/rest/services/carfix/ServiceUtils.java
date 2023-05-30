@@ -1,5 +1,6 @@
 package com.simisinc.platform.rest.services.carfix;
 
+import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
 import com.simisinc.platform.application.filesystem.FileSystemCommand;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -44,13 +45,22 @@ public class ServiceUtils {
         return fileData;
     }
 
-    public static void uploadImageFile(HttpServletRequest request) throws Exception {
+    public static String uploadImageFile(HttpServletRequest request) throws Exception {
 
-        if (request.getPart("serviceRequestImage") != null && request.getHeader("Content-Type").contains("multipart/form-data")) {
+        if  (request.getHeader("Content-Type").contains("multipart/form-data") && request.getPart("serviceRequestImage") != null) {
             InputStream is = request.getPart("serviceRequestImage").getInputStream();
             BufferedImage uploadImage = ImageIO.read(new ByteArrayInputStream(is.readAllBytes()));
-            //ImageIO.write(uploadImage, "jpg", new File("/home/webapps/connect/ROOT/images/carfixImages","snap.jpg"));
-            ImageIO.write(uploadImage, "jpg", new File("/home/julius","snap.jpg"));
+            String imageFileName = UUID.randomUUID()+".jpg";
+            String imageDirPath = LoadSitePropertyCommand.loadByName("site.carfix.images.base.dir");
+            String siteUrl = LoadSitePropertyCommand.loadByName("site.registration.confirm.link");
+            if(siteUrl == null || imageDirPath == null) {
+                throw new Exception("[site.registration.confirm.link] and [site.carfix.images.base.dir] has not been set in properties table");
+            }
+            ImageIO.write(uploadImage, "jpg", new File(imageDirPath,imageFileName));
+            //images are rendered through the following path : https://carfix.connectmobiles24.com/images/apple-touch-icon.png
+            return siteUrl+"/images/"+imageFileName;
+        } else {
+            return null; //means that this SR is created without images.
         }
     }
 }

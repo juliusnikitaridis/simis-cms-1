@@ -41,7 +41,7 @@ public class RegisterServiceProviderService {
 
             // Trigger events - send the registration verification email.
             WorkflowManager.triggerWorkflowForEvent(new UserSignedUpEvent(userProviderUser));
-            WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(userProviderUser,userProviderUser));
+           // WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(userProviderUser,userProviderUser));
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add("Service Provider has been registered");}};

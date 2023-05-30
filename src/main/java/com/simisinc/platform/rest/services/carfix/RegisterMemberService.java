@@ -98,7 +98,7 @@ public class RegisterMemberService {
             throw new Exception("user could not be saved when calling RegisterMemberService");
         }
         // Trigger events - send the registration verification email.
-        WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));
+       // WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));
         WorkflowManager.triggerWorkflowForEvent(new UserSignedUpEvent(savedUser));
     }
 }

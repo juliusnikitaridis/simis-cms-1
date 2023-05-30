@@ -159,9 +159,8 @@ public class EmailTask implements Work {
                     // Set user specific site links
                     User thisUser = (User) entry.getValue();
                     if (thisUser != null && StringUtils.isNotBlank(thisUser.getAccountToken())) {
-                        //https://carfix.connectmobiles24.com
-                        String siteUrlTemp = "https://carfix.connectmobiles24.com"; //TODO set this up in site.properties table , cant set siteUrl var
-                        ctx.setVariable("validateAccountUrl", siteUrlTemp + "/validate-account?confirmation=" + UrlCommand.encodeUri(thisUser.getAccountToken()));
+                        String validataionEmailLinkPrefix = LoadSitePropertyCommand.loadByName("site.registration.confirm.link");
+                        ctx.setVariable("validateAccountUrl", validataionEmailLinkPrefix + "/validate-account?confirmation=" + UrlCommand.encodeUri(thisUser.getAccountToken()));
                     }
                 }
             }
