@@ -18,32 +18,32 @@ import javax.imageio.ImageIO;
 
 public class ServiceUtils {
 
-    public static String writeDataToFile(String base64PictureData) throws Exception {
-        String fileName = UUID.randomUUID().toString()+".txt";
-        String serverRootPath = FileSystemCommand.getFileServerRootPath();
-        String serverCompletePath = serverRootPath + "/carfixPictureData/";
+//    public static String writeDataToFile(String base64PictureData) throws Exception {
+//        String fileName = UUID.randomUUID().toString()+".txt";
+//        String serverRootPath = FileSystemCommand.getFileServerRootPath();
+//        String serverCompletePath = serverRootPath + "/carfixPictureData/";
+//
+//        File pictureFile = new File(serverCompletePath + fileName);
+//        FileOutputStream fos = new FileOutputStream(pictureFile);
+//        fos.write(base64PictureData.getBytes(StandardCharsets.UTF_8));
+//        fos.close();
+//
+//        return fileName;
+//    }
 
-        File pictureFile = new File(serverCompletePath + fileName);
-        FileOutputStream fos = new FileOutputStream(pictureFile);
-        fos.write(base64PictureData.getBytes(StandardCharsets.UTF_8));
-        fos.close();
 
-        return fileName;
-    }
-
-
-    public static String readDataFromFile(String fileName) throws Exception {
-        if(fileName == null) {
-            return null;
-        }
-        String serverRootPath = FileSystemCommand.getFileServerRootPath();
-        String serverCompletePath = serverRootPath + "/carfixPictureData/";
-        File pictureFile = new File(serverCompletePath + fileName);
-        FileInputStream fis = new FileInputStream(pictureFile);
-        String fileData = new String(fis.readAllBytes());
-        fis.close();
-        return fileData;
-    }
+//    public static String readDataFromFile(String fileName) throws Exception {
+//        if(fileName == null) {
+//            return null;
+//        }
+//        String serverRootPath = FileSystemCommand.getFileServerRootPath();
+//        String serverCompletePath = serverRootPath + "/carfixPictureData/";
+//        File pictureFile = new File(serverCompletePath + fileName);
+//        FileInputStream fis = new FileInputStream(pictureFile);
+//        String fileData = new String(fis.readAllBytes());
+//        fis.close();
+//        return fileData;
+//    }
 
     public static String uploadImageFile(HttpServletRequest request) throws Exception {
 
