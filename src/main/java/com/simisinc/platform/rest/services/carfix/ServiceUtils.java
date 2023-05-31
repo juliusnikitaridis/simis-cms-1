@@ -58,7 +58,7 @@ public class ServiceUtils {
             }
             ImageIO.write(uploadImage, "jpg", new File(imageDirPath,imageFileName));
             //images are rendered through the following path : https://carfix.connectmobiles24.com/images/apple-touch-icon.png
-            return siteUrl+"/images/"+imageFileName;
+            return siteUrl+"images/carfixImages/"+imageFileName; //todo configure the /images/carfixImages prefix
         } else {
             return null; //means that this SR is created without images.
         }

@@ -210,8 +210,7 @@ public class ServiceRequestRepository {
             request.setRadius(rs.getString("radius"));
             request.setStatus(rs.getString("status"));
             request.setCurrentOdoReading(rs.getString("current_odo_reading"));
-            request.setPictureData(ServiceUtils.readDataFromFile(rs.getString("picture_data")));
-            //request.setPictureData(rs.getString("picture_data"));
+            request.setPictureData(rs.getString("picture_data"));
             request.setAdditionalDescription(rs.getString("additional_description"));
             request.setLastServiceDate(rs.getString("last_service_date"));
             request.setConfirmedServiceProvider(rs.getString("confirmed_service_provider_id"));
