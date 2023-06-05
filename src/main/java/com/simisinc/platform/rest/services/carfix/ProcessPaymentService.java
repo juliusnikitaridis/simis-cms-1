@@ -21,7 +21,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -67,7 +70,24 @@ public class ProcessPaymentService {
         String uniqueTransactionNo = serviceRequest.getServiceRequestId()+"/"+System.currentTimeMillis();
 
         PaymentRequest paymentRequest = new PaymentRequest();
-        paymentRequest.setAmount(serviceRequest.getAmount());
+
+        double invoiceAmount = Double.valueOf(serviceRequest.getInvoiceAmount());
+        paymentRequest.setInvoiceAmount(serviceRequest.getInvoiceAmount());
+
+        //commission is 12.5 percent of the pre-vat invoice amount
+        paymentRequest.setCommissionAmount(String.valueOf(Double.valueOf(serviceRequest.getInvoiceAmount())*0.125));
+
+        //vat_amount = 15 % of invoice_amount
+        double vatAmount = 0.15 * Double.valueOf(serviceRequest.getInvoiceAmount());
+        paymentRequest.setVatAmount(String.valueOf(vatAmount));
+
+        //transaction_amount = invoice_amount + vat_amount
+        paymentRequest.setAmount(String.format("%.2f",invoiceAmount + vatAmount).replace(",","."));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        paymentRequest.setDate(sdf.format(new Date()));
+        paymentRequest.setTimeStamp(String.valueOf(System.currentTimeMillis()));
+
         paymentRequest.setMerchantTransactionId(uniqueTransactionNo);
         paymentRequest.setShopperResultUrl("https://member.carfixsa.com/home/service/"+uniqueTransactionNo);
 

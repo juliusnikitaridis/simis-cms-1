@@ -16,6 +16,12 @@ import lombok.Data;
 @Data
 public class PaymentRequest {
     private String amount;
+    @JsonIgnore
+    private String invoiceAmount;
+
+    @JsonIgnore
+    private String commissionAmount;
+
     private String authenticationEntityId="8ac7a4c98694e687018696fe5bdd024f";
     private String currency="ZAR";
     private String merchantTransactionId;
@@ -23,6 +29,15 @@ public class PaymentRequest {
     private String paymentType="DB";
     private String shopperResultUrl;
     private String signature;
+
+    @JsonIgnore
+    private String timeStamp;
+
+    @JsonIgnore
+    private String date;
+
+    @JsonIgnore
+    private String vatAmount;
 
     @JsonIgnore
     public String getConcetenatedString() {

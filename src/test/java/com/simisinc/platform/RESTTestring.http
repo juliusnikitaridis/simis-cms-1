@@ -368,11 +368,11 @@ Content-Type: application/json
 ###
 POST http://localhost:8080/api/carfix/ProcessPaymentService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-f3bc699d-23a0-4b0f-aefa-4569d4e8566e1
+Authorization:Bearer API-c638195e-e4fd-4ad2-b8c2-5b18b32630281
 Content-Type: application/json
 
 {
-  "amount":"1455.69",
+  "invoiceAmount":"1000.00",
   "serviceRequestId":"SR4857774677AAAAAAAAqq",
   "memberId": "julius-niki",
   "serviceProviderId": "amazing-amazing-something-2"

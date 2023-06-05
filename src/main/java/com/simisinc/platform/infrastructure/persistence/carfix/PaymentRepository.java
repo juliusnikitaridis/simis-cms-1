@@ -23,7 +23,12 @@ public class PaymentRepository {
 
     public static void add(ProcessPaymentServiceRequest paymentServiceRequest, PaymentRequest paymentRequest, String errorStack) throws Exception {
         SqlUtils insertValues = new SqlUtils()
-                .add("amount", paymentServiceRequest.getAmount())
+                .add("transaction_amount", paymentRequest.getAmount())
+                .add("date",paymentRequest.getDate())
+                .add("sysdate",paymentRequest.getTimeStamp())
+                .add("invoice_amount",paymentRequest.getInvoiceAmount())
+                .add("commission_amount",paymentRequest.getCommissionAmount())
+                .add("vat_amount",paymentRequest.getVatAmount())
                 .add("merchant_transaction_no", paymentRequest.getMerchantTransactionId())
                 .add("member_id", paymentServiceRequest.getMemberId())
                 .add("service_provider_id", paymentServiceRequest.getServiceProviderId())
