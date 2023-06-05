@@ -3,9 +3,7 @@ package com.simisinc.platform.rest.services.carfix;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.granule.json.JSONObject;
-import com.simisinc.platform.domain.model.carfix.PaymentRequest;
-import com.simisinc.platform.domain.model.carfix.ProcessPaymentServiceRequest;
-import com.simisinc.platform.infrastructure.persistence.carfix.PaymentRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.PaymentHistoryRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import lombok.Data;
@@ -17,13 +15,9 @@ import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
-import javax.json.JsonObject;
 
 /**
  * Description
@@ -116,7 +110,7 @@ public class GetPaymentStatusService {
                 throw new Exception("HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent);
             }
             //update status in payments history table
-            PaymentRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
+            PaymentHistoryRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
 
             JSONObject jsonObject = new JSONObject(remoteContent);
             String transStatus = jsonObject.getString("result.description");
@@ -133,7 +127,7 @@ public class GetPaymentStatusService {
         } catch (Throwable e) {
             LOG.error("Exception from API when checking payment status" + e);
             try {
-                PaymentRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
+                PaymentHistoryRepository.updatePaymentHistory(request.getMerchantTransactionId(), remoteContent);
             } catch (Throwable ee) {
                 //horrific error , cant write to db
                 LOG.error("error when writing to table(" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent + "::" + ee.getMessage());

@@ -1,6 +1,7 @@
 package com.simisinc.platform.domain.model.carfix;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.simisinc.platform.domain.model.Entity;
 import lombok.Data;
 
 /**
@@ -14,7 +15,8 @@ import lombok.Data;
  *     amount10.00 authentication.entityId8ac7a4ca7802ed8e0178176ca52222dc currency ZAR merchantTransactionIdPeachTest noncePeachTest paymentTypeDB shopperResultUrlhttps://httpbin.org/post
  */
 @Data
-public class PaymentRequest {
+public class PaymentRequest extends Entity {
+    private String id;
     private String amount;
     @JsonIgnore
     private String invoiceAmount;
@@ -29,7 +31,7 @@ public class PaymentRequest {
     private String paymentType="DB";
     private String shopperResultUrl;
     private String signature;
-
+    private String serviceProviderId;
     @JsonIgnore
     private String timeStamp;
 

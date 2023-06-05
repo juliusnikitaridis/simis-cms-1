@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.granule.json.JSONObject;
 import com.simisinc.platform.domain.model.carfix.PaymentRequest;
 import com.simisinc.platform.domain.model.carfix.ProcessPaymentServiceRequest;
-import com.simisinc.platform.infrastructure.persistence.carfix.PaymentRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.PaymentHistoryRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import org.apache.commons.codec.digest.HmacUtils;
@@ -21,7 +21,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -147,13 +146,13 @@ public class ProcessPaymentService {
                 throw new Exception("HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent);
             }
             //everything ok to this point, record the payment in DB
-            PaymentRepository.add(serviceRequest, request, "NO ERROR-OK");
+            PaymentHistoryRepository.add(serviceRequest, request, "NO ERROR-OK");
             remoteContent = new JSONObject(remoteContent).append("transactionId",request.getMerchantTransactionId()).toString();
             return remoteContent;
         } catch (Throwable e) {
             LOG.error("Exception from peach payments API " + e);
             try {
-                PaymentRepository.add(serviceRequest, request, "HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent + "::" + e.getMessage());
+                PaymentHistoryRepository.add(serviceRequest, request, "HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent + "::" + e.getMessage());
             } catch (Throwable ee) {
                 //horrific error , cant write to db
                 LOG.error("cent even write error to payments table->>HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent + "::" + ee.getMessage());

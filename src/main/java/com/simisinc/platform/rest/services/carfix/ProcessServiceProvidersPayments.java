@@ -1,35 +1,18 @@
 package com.simisinc.platform.rest.services.carfix;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.granule.json.JSONObject;
+
 import com.simisinc.platform.domain.model.carfix.PaymentRequest;
-import com.simisinc.platform.domain.model.carfix.ProcessPaymentServiceRequest;
-import com.simisinc.platform.infrastructure.persistence.carfix.PaymentRepository;
+import com.simisinc.platform.domain.model.carfix.ServiceProvider;
+import com.simisinc.platform.infrastructure.persistence.carfix.PaymentHistoryRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.PaymentHistorySpecification;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import okhttp3.*;
-import org.apache.commons.codec.digest.HmacUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
-
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,8 +29,18 @@ public class ProcessServiceProvidersPayments {
     public ServiceResponse post(ServiceContext context) {
 
         try {
-            System.out.println("here");
-            invokePeachPaymentsAPI();
+            PaymentHistorySpecification specification = new PaymentHistorySpecification();
+            specification.setBatchPaymentStatus("NOT_PROCESSED");
+            List<PaymentRequest> pendingPaymentRequests = (List<PaymentRequest>) PaymentHistoryRepository.query(specification,null).getRecords();
+
+            for (PaymentRequest pendingPaymentRequest : pendingPaymentRequests) {
+                //get the account details.
+                ServiceProviderSpecification serviceProviderSpecification = new ServiceProviderSpecification();
+                serviceProviderSpecification.setServiceProviderId(pendingPaymentRequest.getServiceProviderId());
+                ServiceProvider serviceProvider = (ServiceProvider) ServiceProviderRepository.query(serviceProviderSpecification,null).getRecords().get(0);
+                invokePeachPaymentsAPI(serviceProvider.getAccountNo(),pendingPaymentRequest);
+                System.out.println("Batch transaction has been processed "+pendingPaymentRequest.getId());
+            }
 
         } catch (Exception e) {
             LOG.error("Error in ProcessPaymentService", e);
@@ -60,7 +53,8 @@ public class ProcessServiceProvidersPayments {
 
 
 
-    private static okhttp3.Response  invokePeachPaymentsAPI()  throws Exception {
+
+    private static okhttp3.Response  invokePeachPaymentsAPI(String accountNo,PaymentRequest batchPayment)  throws Exception {
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("text/plain");
@@ -81,11 +75,11 @@ public class ProcessServiceProvidersPayments {
                         "<FirstName>Smith</FirstName>\n" +
                         "<Surname>Smith</Surname>\n" +
                         "<BranchCode>157852</BranchCode>\n" +
-                        "<AccountNumber>1203389809</AccountNumber>\n" +
-                        "<FileAmount>1.00</FileAmount>\n" +
+                        "<AccountNumber>"+accountNo+"</AccountNumber>\n" +
+                        "<FileAmount>"+batchPayment.getAmount()+"</FileAmount>\n" +
                         "<AccountType>0</AccountType>\n" +
                         "<AmountMultiplier>1</AmountMultiplier>\n" +
-                        "<Reference>PeachPayments</Reference>\n" +
+                        "<Reference>SP COMM PAYMENT - "+batchPayment.getId()+"</Reference>\n" +
                         "<ExternalLinks>\n" +
                         "<ExternalLink>\n" +
                         "<Label>Invoice</Label>\n" +
@@ -96,9 +90,9 @@ public class ProcessServiceProvidersPayments {
                         "</Payments>\n" +
                         "<Totals>\n" +
                         "<Records>1</Records>\n" +
-                        "<Amount>1.00</Amount>\n" +
+                        "<Amount>"+batchPayment.getAmount()+"</Amount>\n" +
                         "<BranchHash>157852</BranchHash>\n" +
-                        "<AccountHash>1203389809</AccountHash>\n" +
+                        "<AccountHash>"+accountNo+"</AccountHash>\n" +
                         "</Totals>\n" +
                         "</APIPaymentsRequest>")
                 .build();
