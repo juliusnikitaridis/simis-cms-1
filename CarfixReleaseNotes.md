@@ -25,11 +25,12 @@ the following need to be set in the site_properties table
 * site.carfix.images.base.dir = /home/webapps/connect/ROOT/images/carfixImages
 
 * peachpayments.paymentlinks.api.url = https://testsecure.peachpayments.com/checkout/initiate
-* peachpayments.paymentlinks.api.authenticationEntityId = 8ac7a4c98694e687018696fe5bdd024f 
+* peachpayments.paymentlinks.api.authenticationEntityId = 8ac7a4c98694e687018696fe5bdd024f
+* peachpayments.paymentlinks.api.hmackey = 8ac7a4c98694e687018696fe5bdd024f
 * peachpayments.payment.api.url = https://test.peachpay.co.za/API/Payments
 * peachpayments.payment.api.key = 062199b6-1460-4feb-a3df-699808377e07
-
 * peachpayments.paymentstatus.api.url = https://testsecure.peachpayments.com/status
+* peachpayments.paymentstatus.api.hmackey = 8ac7a4c98694e687018696fe5bdd024f
 
 
 
