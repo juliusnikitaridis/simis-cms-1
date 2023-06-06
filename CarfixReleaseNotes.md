@@ -34,15 +34,37 @@ the following need to be set in the site_properties table
 
 
 ### ADDITIONAL TOMCAT SERVER CONFIGURATION
-```aidl
-<servlet>
-    <servlet-name>images</servlet-name>
-    <servlet-class>com.example.images.ImageServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>images</servlet-name>
-    <url-pattern>/images/*</url-pattern>
-</servlet-mapping>
+edit service section in the /usr/java/tomcat/conf/server.xml. add a <Context docBase="/opt/simis/files/images/carfixImages/" path="/images2"/>
+```
+ <Service name="ConnectApps">
+        <Connector port="80" protocol="HTTP/1.1" maxThreads="150" scheme="http" clientAuth="false" />
+        <Connector port="443" protocol="HTTP/1.1" SSLEnabled="true" maxThreads="150" scheme="https" secure="true" keystoreFile="/root/.keystore" keystorePass="Indigo@18." clientAuth="false" sslProtocol="TLS" />
+        <Engine name="ConnectEngine" defaultHost="localhost">
+            <Realm className="org.apache.catalina.realm.LockOutRealm">
+                <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase" />
+            </Realm>
+            <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="access_log." suffix=".txt" pattern="%h %l %v %t &quot;%r&quot; %s %b" resolveHosts="false" />
+
+            <Host name="localhost"  appBase="/home/webapps/connect"
+                        unpackWARs="true" autoDeploy="true"
+                        xmlValidation="false" xmlNamespaceAware="false">
+                <Context path="/contrib" docBase="contrib" debug="0" />
+                <Context docBase="/opt/simis/files/images/carfixImages/" path="/images2"/>
+            </Host>
+
+            <!-- <Host name="name-manager.onsocialcloud.com"  appBase="/home/webapps/manager"
+                unpackWARs="true" autoDeploy="true"
+                xmlValidation="false" xmlNamespaceAware="false">
+            </Host> -->
+
+            <!-- <Host name="localhost"  appBase="/home/webapps/crm"
+                unpackWARs="true" autoDeploy="true"
+                xmlValidation="false" xmlNamespaceAware="false">
+            </Host> -->
+
+        </Engine>
+    </Service>
+
 
 ```
 
