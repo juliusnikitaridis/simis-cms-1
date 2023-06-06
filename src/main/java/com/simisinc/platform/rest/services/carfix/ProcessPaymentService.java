@@ -145,9 +145,9 @@ public class ProcessPaymentService {
             if (statusLine.getStatusCode() > 299) {
                 throw new Exception("HttpPost Error for URL (" + url + "): " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase() + "Remote content" + remoteContent);
             }
-            //everything ok to this point, record the payment in DB
-            PaymentHistoryRepository.add(serviceRequest, request, "NO ERROR-OK");
             remoteContent = new JSONObject(remoteContent).append("transactionId",request.getMerchantTransactionId()).toString();
+            //everything ok to this point, record the payment in DB
+            PaymentHistoryRepository.add(serviceRequest, request, remoteContent);
             return remoteContent;
         } catch (Throwable e) {
             LOG.error("Exception from peach payments API " + e);

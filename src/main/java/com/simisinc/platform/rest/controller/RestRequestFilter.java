@@ -275,6 +275,9 @@ public class RestRequestFilter implements Filter {
       // Let the REST service process this request
       //@todo : is this the best place to do this
       String contentType = httpServletRequest.getHeader("Content-Type");
+      if(contentType == null) {
+        LOG.warn("Content Type header has not been set !!!");
+      }
       if(contentType != null && contentType.contains("json")) {
         String line = null;
         InputStream is = new ByteArrayInputStream(request.getInputStream().readAllBytes());
@@ -288,7 +291,7 @@ public class RestRequestFilter implements Filter {
        request.setAttribute(RequestConstants.JSON_DATA,jb.toString());
       }
       //uploading files and JSON data
-      if(contentType.contains("multipart/form-data")) {
+      if(contentType != null && contentType.contains("multipart/form-data")) {
         String line ;
         if(httpServletRequest.getPart("jsonRequest") != null) {
           InputStream is = new ByteArrayInputStream(httpServletRequest.getPart("jsonRequest").getInputStream().readAllBytes());

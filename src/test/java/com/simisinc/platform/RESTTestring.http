@@ -123,12 +123,14 @@ Authorization:Bearer API-7c480096-1cfb-40c0-acba-e701f115d7b61
 GET http://localhost:8080/api/carfix/RFSListService?serviceRequestId=2ab44435-151a-4a6b-ba7b-5e645f379da6
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
+Content-Type: application/json
 ###
 
 ###
 POST http://localhost:8080/api/carfix/ProcessServiceProvidersPayments
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
+Authorization:Bearer API-fc3886bc-54ed-45d1-8749-235e289530c21
+Content-Type: application/json
 ###
 
 
