@@ -74,12 +74,13 @@ public class ServiceRequestRepository {
                 .add("radius", record.getRadius())
                 .add("status", record.getStatus())
                 .add("current_odo_reading", record.getCurrentOdoReading())
-                .add("picture_data", record.getPictureData())
+                //.addIfExists("picture_data", record.getPictureData())
                 .add("additional_description", record.getAdditionalDescription())
                 .add("last_service_date", record.getLastServiceDate())
                 .add("vehicle_brand_id",record.getVehicleBrandId())
                 .add("category_hash",requestItemsCategoryHash.toString())
                 .add("preferred_date",record.getPreferredDate())
+                .addIfExists("job_number",record.getJobNumber())
                 .add("customer_reference",record.getCustomerReference())
                 .addIfExists("service_advisor",record.getServiceAdvisor())
                 .addIfExists("technician",record.getTechnician());
@@ -117,6 +118,7 @@ public class ServiceRequestRepository {
                 .addIfExists("preferred_date",record.getPreferredDate())
                 .addIfExists("customer_reference",record.getCustomerReference())
                 .addIfExists("service_advisor",record.getServiceAdvisor())
+                .addIfExists("job_number",record.getJobNumber())
                 .addIfExists("technician",record.getTechnician());
 
         try (Connection connection = DB.getConnection();

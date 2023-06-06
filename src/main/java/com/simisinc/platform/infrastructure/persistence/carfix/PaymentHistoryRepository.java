@@ -23,6 +23,7 @@ public class PaymentHistoryRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("transaction_amount", paymentRequest.getAmount())
                 .add("date", paymentRequest.getDate())
+                .add("batch_payment_status","NOT_PROCESSED")
                 .add("sysdate", paymentRequest.getTimeStamp())
                 .add("invoice_amount", paymentRequest.getInvoiceAmount())
                 .add("commission_amount", paymentRequest.getCommissionAmount())
