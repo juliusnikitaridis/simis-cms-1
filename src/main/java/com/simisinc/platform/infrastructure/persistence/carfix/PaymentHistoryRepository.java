@@ -93,6 +93,20 @@ public class PaymentHistoryRepository {
             throw e;
         }
     }
+
+    public static void updatePaymentHistoryBatchStatus(String id, String status) throws Exception {
+
+        String sql = "update carfix.payment_history set batch_payment_status = ? where id = ?";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            pstmt.setString(2, id);
+            pstmt.execute();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
+
 
 

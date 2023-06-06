@@ -106,7 +106,7 @@ public class ServiceProviderRepository {
     }
 
     public static void rate(int rating, String serviceProviderId) throws Exception {
-        String sql = "update carfix.service_provider set rating = rating+?, count=count+1 where id = ?";
+        String sql = "update carfix.service_provider set rating = rating+?, count=count+1 where user_id = ?";
         try(Connection conn = DB.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,rating);
