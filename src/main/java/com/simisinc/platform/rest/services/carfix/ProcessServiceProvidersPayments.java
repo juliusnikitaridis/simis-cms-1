@@ -76,7 +76,7 @@ public class ProcessServiceProvidersPayments {
                             "<ServiceType>SDV</ServiceType>\n" +
                             "<DueDate>20200917</DueDate>\n" + //todo check this
                             "<CallbackUrl>https://www.example.com/</CallbackUrl>\n" +
-                            "<Reference>202009170001</Reference>\n" + //todo check this
+                            "<Reference>CarFix SP Payment - "+batchPayment.getId()+"</Reference>\n" +
                             "</Header>\n" +
                             "<Payments>\n" +
                             "<FileContents>\n" +
@@ -85,7 +85,7 @@ public class ProcessServiceProvidersPayments {
                             "<Surname>Smith</Surname>\n" + //todo check this
                             "<BranchCode>157852</BranchCode>\n" + //todo check this
                             "<AccountNumber>" + accountNo + "</AccountNumber>\n" +
-                            "<FileAmount>" + batchPayment.getCommissionAmount() + "</FileAmount>\n" +
+                            "<FileAmount>" + batchPayment.getBatchPaymentAmount() + "</FileAmount>\n" +
                             "<AccountType>0</AccountType>\n" +
                             "<AmountMultiplier>1</AmountMultiplier>\n" +
                             "<Reference>SP COMM PAYMENT - " + batchPayment.getId() + "</Reference>\n" +
@@ -99,7 +99,7 @@ public class ProcessServiceProvidersPayments {
                             "</Payments>\n" +
                             "<Totals>\n" +
                             "<Records>1</Records>\n" +
-                            "<Amount>" + batchPayment.getCommissionAmount() + "</Amount>\n" +
+                            "<Amount>" + batchPayment.getBatchPaymentAmount() + "</Amount>\n" +
                             "<BranchHash>157852</BranchHash>\n" +
                             "<AccountHash>" + accountNo + "</AccountHash>\n" +
                             "</Totals>\n" +

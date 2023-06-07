@@ -28,6 +28,7 @@ public class PaymentHistoryRepository {
                 .add("invoice_amount", paymentRequest.getInvoiceAmount())
                 .add("commission_amount", paymentRequest.getCommissionAmount())
                 .add("vat_amount", paymentRequest.getVatAmount())
+                .add("batch_payment_amount",paymentRequest.getBatchPaymentAmount())
                 .add("merchant_transaction_no", paymentRequest.getMerchantTransactionId())
                 .add("member_id", paymentServiceRequest.getMemberId())
                 .add("service_provider_id", paymentServiceRequest.getServiceProviderId())
@@ -69,6 +70,7 @@ public class PaymentHistoryRepository {
             paymentRequest.setCommissionAmount(resultSet.getString("commission_amount"));
             paymentRequest.setAmount(resultSet.getString("transaction_amount"));
             paymentRequest.setTimeStamp(resultSet.getString("sysdate"));
+            paymentRequest.setBatchPaymentAmount(resultSet.getString("batch_payment_amount"));
             paymentRequest.setVatAmount(resultSet.getString("vat_amount"));
             paymentRequest.setInvoiceAmount(resultSet.getString("invoice_amount"));
             paymentRequest.setServiceProviderId(resultSet.getString("service_provider_id"));

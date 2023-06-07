@@ -74,7 +74,8 @@ public class ProcessPaymentService {
         paymentRequest.setInvoiceAmount(serviceRequest.getInvoiceAmount());
 
         //commission is 12.5 percent of the pre-vat invoice amount
-        paymentRequest.setCommissionAmount(String.valueOf(Double.valueOf(serviceRequest.getInvoiceAmount())*0.125));
+        double commissionAmount = Double.valueOf(serviceRequest.getInvoiceAmount()) * 0.125;
+        paymentRequest.setCommissionAmount(String.valueOf(commissionAmount));
 
         //vat_amount = 15 % of invoice_amount
         double vatAmount = 0.15 * Double.valueOf(serviceRequest.getInvoiceAmount());
@@ -82,6 +83,10 @@ public class ProcessPaymentService {
 
         //transaction_amount = invoice_amount + vat_amount
         paymentRequest.setAmount(String.format("%.2f",invoiceAmount + vatAmount).replace(",","."));
+
+        //amount that is paid to the SP = invoice_amount - commission_amount
+        double batchPaymentAmount = invoiceAmount - commissionAmount;
+        paymentRequest.setBatchPaymentAmount(String.valueOf(batchPaymentAmount));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         paymentRequest.setDate(sdf.format(new Date()));

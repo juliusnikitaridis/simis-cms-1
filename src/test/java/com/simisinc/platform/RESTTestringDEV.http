@@ -5,6 +5,13 @@ X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
 Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOjEyMzQ1Njc4
 ###
 
+###
+POST https://carfix.connectmobiles24.com/api/carfix/ProcessServiceProvidersPayments
+X-API-Key:2ada9fbb-4478-4733-bb10-b96119c6c695
+Authorization:Bearer API-ac4ee3cb-ba87-46eb-93b8-53976d76297d5
+Content-Type: application/json
+###
+
 
 
 

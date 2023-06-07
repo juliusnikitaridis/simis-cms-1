@@ -42,6 +42,9 @@ public class PaymentRequest extends Entity {
     private String vatAmount;
 
     @JsonIgnore
+    private String batchPaymentAmount;
+
+    @JsonIgnore
     public String getConcetenatedString() {
         return "amount"+amount+"authentication.entityId"+authenticationEntityId+"currency"+currency+"merchantTransactionId"+merchantTransactionId+"nonce"+nonce+"paymentType"+paymentType+"shopperResultUrl"+shopperResultUrl;
     }
