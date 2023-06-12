@@ -74,7 +74,7 @@ public class ServiceRequestRepository {
                 .add("radius", record.getRadius())
                 .add("status", record.getStatus())
                 .add("current_odo_reading", record.getCurrentOdoReading())
-                //.addIfExists("picture_data", record.getPictureData())
+                .addIfExists("picture_data", record.getPictureData())
                 .add("additional_description", record.getAdditionalDescription())
                 .add("last_service_date", record.getLastServiceDate())
                 .add("vehicle_brand_id",record.getVehicleBrandId())

@@ -47,6 +47,7 @@ import java.io.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Enumeration;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
@@ -273,6 +274,15 @@ public class RestRequestFilter implements Filter {
       }
 
       // Let the REST service process this request
+      ////////////////////////////////////////////////////////////////////////////////////////////
+//      Enumeration<String> headers = httpServletRequest.getHeaderNames();
+//      System.out.println("headers that are setxxxxxxxx");
+//      while(headers.hasMoreElements()){
+//        String currentHeader = headers.nextElement();
+//        System.out.println("header"+currentHeader);
+//        System.out.println("header value "+httpServletRequest.getHeader(currentHeader));
+//      }
+      ////////////////////////////////////////////////////////////////////////////////////////////
       //@todo : is this the best place to do this
       String contentType = httpServletRequest.getHeader("Content-Type");
       if(contentType == null) {
@@ -289,6 +299,8 @@ public class RestRequestFilter implements Filter {
           jb.append(line);
         }
        request.setAttribute(RequestConstants.JSON_DATA,jb.toString());
+       // System.out.println("request with json in content type");
+       // System.out.println(jb);
       }
       //uploading files and JSON data
       if(contentType != null && contentType.contains("multipart/form-data")) {
@@ -303,6 +315,13 @@ public class RestRequestFilter implements Filter {
             jb.append(line);
           }
           request.setAttribute(RequestConstants.JSON_DATA,jb.toString());
+          //System.out.println("request with multipart/form-data in content type");
+
+//          if(httpServletRequest.getPart("serviceRequestImage") != null) {
+//            System.out.println("PART serviceRequestImage has been detected. size");
+//            System.out.println(httpServletRequest.getPart("serviceRequestImage").getSize());
+//          }
+       //   System.out.println(jb);
         }
       }
 

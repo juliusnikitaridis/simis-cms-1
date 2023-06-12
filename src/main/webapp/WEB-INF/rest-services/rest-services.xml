@@ -73,6 +73,8 @@
   <service method="post" endpoint="cannacomply/CreateBlockService" class="com.simisinc.platform.rest.services.cannacomply.CreateBlockService"/>
   <service method="get" endpoint="cannacomply/BlockListService" class="com.simisinc.platform.rest.services.cannacomply.BlockListService"/>
   <service method="post" endpoint="cannacomply/UpdateBlockService" class="com.simisinc.platform.rest.services.cannacomply.UpdateBlockService"/>
+  <service method="post" endpoint="cannacomply/CreateRoomService" class="com.simisinc.platform.rest.services.cannacomply.CreateRoomService"/>
+  <service method="get" endpoint="cannacomply/RoomListService" class="com.simisinc.platform.rest.services.cannacomply.RoomListService"/>
 
 </services>
 

@@ -300,5 +300,34 @@ Content-Type: application/json
 ###
 
 
+###
+POST http://localhost:8080/api/cannacomply/CreateRoomService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-ed8f0b3b-bb31-43fd-80d4-e7c5c4375e201
+Content-Type: application/json
+
+{
+  "roomName": "Test Room 1",
+  "roomDescription": "some amazing room for curing ",
+  "locationData": "[{},{}]",
+  "farmId": "29384792837483",
+  "roomColour": "green"
+}
+###
+
+
+GET http://localhost:8080/api/cannacomply/RoomListService?farmId=29384792837483
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-ed8f0b3b-bb31-43fd-80d4-e7c5c4375e201
+Content-Type: application/json
+###
+
+GET http://localhost:8080/api/cannacomply/RoomListService?id=5384f4aa-1992-4f7b-b057-0cd955816b1f
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-ed8f0b3b-bb31-43fd-80d4-e7c5c4375e201
+Content-Type: application/json
+###
+
+
 
 
