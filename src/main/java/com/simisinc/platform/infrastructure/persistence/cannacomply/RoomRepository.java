@@ -43,7 +43,6 @@ public class RoomRepository {
 
     public static void update(Room record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
                 .addIfExists("room_name", record.getRoomName())
                 .addIfExists("room_description", record.getRoomDescription())
                 .addIfExists("room_color", record.getRoomColour())

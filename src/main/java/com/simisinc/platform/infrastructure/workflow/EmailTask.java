@@ -160,7 +160,7 @@ public class EmailTask implements Work {
                     User thisUser = (User) entry.getValue();
                     if (thisUser != null && StringUtils.isNotBlank(thisUser.getAccountToken())) {
                         String validataionEmailLinkPrefix = LoadSitePropertyCommand.loadByName("site.registration.confirm.link");
-                        ctx.setVariable("validateAccountUrl", validataionEmailLinkPrefix + "/validate-account?confirmation=" + UrlCommand.encodeUri(thisUser.getAccountToken()));
+                        ctx.setVariable("validateAccountUrl", validataionEmailLinkPrefix + "validate-account?confirmation=" + UrlCommand.encodeUri(thisUser.getAccountToken()));
                     }
                 }
             }
