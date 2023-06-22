@@ -4,10 +4,8 @@ import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.*;
 import com.simisinc.platform.infrastructure.database.*;
 import com.simisinc.platform.infrastructure.persistence.UserRepository;
-import com.simisinc.platform.rest.services.carfix.ServiceUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,6 +81,8 @@ public class ServiceRequestRepository {
                 .addIfExists("job_number",record.getJobNumber())
                 .add("customer_reference",record.getCustomerReference())
                 .addIfExists("service_advisor",record.getServiceAdvisor())
+                .add("latitude",record.getLatitude())
+                .add("longitude",record.getLongitude())
                 .addIfExists("technician",record.getTechnician());
 
             try (Connection connection = DB.getConnection();
@@ -119,6 +119,8 @@ public class ServiceRequestRepository {
                 .addIfExists("customer_reference",record.getCustomerReference())
                 .addIfExists("service_advisor",record.getServiceAdvisor())
                 .addIfExists("job_number",record.getJobNumber())
+                .addIfExists("latitude",record.getLatitude())
+                .addIfExists("longitude",record.getLongitude())
                 .addIfExists("technician",record.getTechnician());
 
         try (Connection connection = DB.getConnection();
@@ -223,6 +225,8 @@ public class ServiceRequestRepository {
             request.setPreferredDate(rs.getString("preferred_date"));
             request.setCustomerReference(rs.getString("customer_reference"));
             request.setServiceAdvisor(rs.getString("service_advisor"));
+            request.setLatitude(rs.getString("latitude"));
+            request.setLongitude(rs.getString("longitude"));
             request.setTechnician(rs.getString("technician"));
 
             //now also need to get all the service request items

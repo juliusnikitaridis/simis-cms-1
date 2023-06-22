@@ -10,7 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ActivitySpecification {
-    private String id = null;
+    private String id;
     private String farmId;
     private String blockId;
+    private String cropId;
 }

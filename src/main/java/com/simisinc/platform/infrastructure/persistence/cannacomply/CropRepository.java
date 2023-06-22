@@ -31,6 +31,7 @@ public class CropRepository {
                 .add("barcode_data",record.getBarcodeData())
                 .add("crop_label",record.getCropLabel())
                 .add("created_date",record.getCreatedDate())
+                .add("room_id",record.getRoomId())
                 .add("starting_plant_data",record.getStartingPlantData());
 
         try (Connection connection = DB.getConnection();
@@ -60,6 +61,7 @@ public class CropRepository {
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("crop_label",record.getCropLabel())
+                .addIfExists("room_id",record.getRoomId())
                 .addIfExists("starting_plant_data",record.getStartingPlantData());
 
             try (Connection connection = DB.getConnection();
@@ -92,6 +94,7 @@ public class CropRepository {
             where
                     .addIfExists("id = ?", specification.getId())
                     .addIfExists("farm_id = ?", specification.getFarmId())
+                    .addIfExists("room_id",specification.getRoomId())
                     .addIfExists("block_id = ?",specification.getBlockId());
 
         }
@@ -122,6 +125,7 @@ public class CropRepository {
             crop.setSeedCompany(rs.getString("seed_company"));
             crop.setFarmId(rs.getString("farm_id"));
             crop.setUserId(rs.getString("user_id"));
+            crop.setRoomId(rs.getString("room_id"));
             crop.setCropLabel(rs.getString("crop_label"));
             crop.setBarcodeData(rs.getString("barcode_data"));
             crop.setCreatedDate(rs.getString("created_date"));

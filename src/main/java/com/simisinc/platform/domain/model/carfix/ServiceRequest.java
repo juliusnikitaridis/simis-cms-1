@@ -38,6 +38,9 @@ public class ServiceRequest extends Entity {
     private String technician;
     private String serviceAdvisor;
     private String jobNumber;
+    private String latitude;
+    private String longitude;
+    private String distanceFromSp; //distance from service provider and where SR was created
 
     //additional enrichment
     private String userFirstName;

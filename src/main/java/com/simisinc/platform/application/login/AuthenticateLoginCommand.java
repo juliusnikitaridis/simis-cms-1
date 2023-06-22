@@ -56,12 +56,12 @@ public class AuthenticateLoginCommand {
     // - One username trying to be logged into by multiple IP addresses (enforce limit)
     // - Many usernames (valid or not) trying to be logged into by one IP address
     // - Many usernames (valid or not) trying to be logged into by multiple IP addresses
-    if (!RateLimitCommand.isUsernameAllowedRightNow(username, false)) {
-      throw new LoginException(RateLimitCommand.INVALID_ATTEMPTS);
-    }
-    if (!RateLimitCommand.isIpAllowedRightNow(ipAddress, false)) {
-      throw new LoginException(RateLimitCommand.INVALID_ATTEMPTS);
-    }
+//    if (!RateLimitCommand.isUsernameAllowedRightNow(username, false)) {
+//      throw new LoginException(RateLimitCommand.INVALID_ATTEMPTS);
+//    }
+//    if (!RateLimitCommand.isIpAllowedRightNow(ipAddress, false)) {
+//      throw new LoginException(RateLimitCommand.INVALID_ATTEMPTS);
+//    }
 
     // See if a user exists
     User user = LoadUserCommand.loadUser(username);
@@ -69,9 +69,9 @@ public class AuthenticateLoginCommand {
       LOG.debug("Account not found");
       // Check and enforce rate limiting
       // Limit the number of attempts per ip accessing different usernames
-      if (!RateLimitCommand.isIpAllowedRightNow(ipAddress, true)) {
-        throw new LoginException(RateLimitCommand.INVALID_ATTEMPTS);
-      }
+//      if (!RateLimitCommand.isIpAllowedRightNow(ipAddress, true)) {
+//        throw new LoginException(RateLimitCommand.INVALID_ATTEMPTS);
+//      }
       throw new LoginException(INVALID_CREDENTIALS);
     }
     if (user.isNotValidated()) {

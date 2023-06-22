@@ -13,4 +13,5 @@ public class CropSpecification {
     private String id = null;
     private String farmId = null;
     private String blockId = null;
+    private String roomId = null;
 }
