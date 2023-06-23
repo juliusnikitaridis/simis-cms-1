@@ -1,10 +1,15 @@
 package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.Quote;
 import com.simisinc.platform.domain.model.carfix.QuoteItem;
+import com.simisinc.platform.domain.model.carfix.ServiceProvider;
 import com.simisinc.platform.domain.model.carfix.ServiceRequest;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
+import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderSpecification;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceRequestRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
@@ -52,7 +57,7 @@ public class CreateQuoteService {
             quote.setQuotationTotal(String.valueOf(total));
             quote.setSubtotal(String.valueOf(subTotal));
             quote.setVat(String.valueOf(vat));
-
+            quote.setDistanceFromSp(String.valueOf(calculateDistanceFromSp(quote)));
             QuoteRepository.add(quote);
 
             ServiceResponse response = new ServiceResponse(200);
@@ -66,6 +71,29 @@ public class CreateQuoteService {
             response.getError().put("title", e.getMessage());
             return response;
         }
+    }
+
+
+
+    //set distance between the SP of the quote and the member of the quote
+    public static double calculateDistanceFromSp(Quote quote) throws Exception {
+        //get the SP
+        ServiceProviderSpecification specification = new ServiceProviderSpecification();
+        specification.setServiceProviderId(quote.getServiceProviderId());
+        ServiceProvider sp = (ServiceProvider) ServiceProviderRepository.query(specification,null).getRecords().get(0);
+
+        //get the related SR
+        ServiceRequest sr = ServiceRequestRepository.findById(quote.getRequestForServiceId());
+        if(sr.getLatitude() == null || sr.getLongitude() == null) {
+            throw new Exception("lat or Long is not set for serviceRequest");
+        }
+        if(sp.getLatitude() == 0.0 || sp.getLongitude() == 0.0) {
+            throw new Exception("lat or long is not set for serviceProvicer");
+        }
+
+        double distance = GeoUtils.distanceInKilometers(sp.getLatitude(),sp.getLongitude(),Double.valueOf(sr.getLatitude()),Double.valueOf(sr.getLongitude()));
+        LOG.debug("distance has been calcualted for Quote "+distance);
+        return distance;
     }
 }
 

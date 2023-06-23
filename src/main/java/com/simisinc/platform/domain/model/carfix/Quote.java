@@ -42,6 +42,7 @@ public class Quote extends Entity {
    private String customerFirstName;
    private String customerLastName;
    private String customerLocation;
+   private String distanceFromSp;
 
 }
 

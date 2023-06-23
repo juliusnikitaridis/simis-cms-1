@@ -408,6 +408,8 @@ public class RestRequestFilter implements Filter {
         "\"last_name\":\"" + JsonCommand.toJson(user.getLastName()) + "\",\n" +
         "\"unique_id\":\"" + JsonCommand.toJson(user.getUniqueId()) + "\",\n" +
         "\"user_type\":\"" + JsonCommand.toJson(user.getUserType()) + "\",\n" +
+        "\"latitude\":\"" + JsonCommand.toJson(String.valueOf(user.getLatitude())) + "\",\n" +
+        "\"longitude\":\"" + JsonCommand.toJson(String.valueOf(user.getLongitude())) + "\",\n" +
          farmProfileString +
         "\"scope\":\"create\"\n" +
         "}";

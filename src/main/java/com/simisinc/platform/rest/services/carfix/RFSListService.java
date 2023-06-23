@@ -153,7 +153,6 @@ public class RFSListService {
             double distance =  GeoUtils.distanceInKilometers(Double.valueOf(request.getLatitude()),Double.valueOf(request.getLongitude()),serviceProviderUser.getLatitude(),serviceProviderUser.getLongitude());
             //this request has radius - check above distance is less than this radius
             if(distance <= Double.valueOf(request.getRadius())){
-                request.setDistanceFromSp(String.valueOf(distance));
                 finalMatchingServiceRequestsWithinRadius.add(request);
             }
         }

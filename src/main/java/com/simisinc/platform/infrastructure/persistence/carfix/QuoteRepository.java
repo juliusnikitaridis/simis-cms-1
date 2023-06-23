@@ -74,6 +74,7 @@ public class QuoteRepository {
                 .add("booking_date", record.getBookingDate())
                 .add("status", "CREATED")
                 .add("vat", record.getVat())
+                .add("distance_from_sp",record.getDistanceFromSp())
                 .add("sub_total", record.getSubtotal())
                 .addIfExists("date_type",record.getDateType())
                 .add("total", record.getQuotationTotal());
@@ -135,6 +136,7 @@ public class QuoteRepository {
             quote.setStatus(rs.getString("status"));
             quote.setSubtotal(rs.getString("sub_total"));
             quote.setQuotationTotal(rs.getString("total"));
+            quote.setDistanceFromSp(rs.getString("distance_from_sp"));
 
             //get the line items for this record
             SqlUtils select = new SqlUtils();
