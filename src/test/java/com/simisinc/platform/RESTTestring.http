@@ -254,12 +254,12 @@ Authorization:Bearer API-eb63c9db-195f-43ab-b4d6-02da76dfd1f71
 
 POST http://localhost:8080/api/carfix/CreateQuoteService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-8ded99c1-0f4c-414b-9ebe-9786af7ac7ad1
+Authorization:Bearer API-625b1dee-1570-4b3b-87bb-9c36a65abc821
 Content-Type: application/json
 
 {
-  "requestForServiceId":"2343243254",
-  "serviceProviderId":"234234543",
+  "requestForServiceId":"5fa0a90d-0b6c-42d1-9465-a2ab37f976ec",
+  "serviceProviderId":"julius-niki",
   "quotationTotal": "5000.00",
   "vat": "",
   "serviceProviderName": "serviceProviderName1",
@@ -296,9 +296,9 @@ Authorization:Bearer API-0d46e02c-89f7-472b-8ee5-6a5cab7f43de1
 Content-Type: application/json
 ###
 
-GET http://localhost:8080/api/carfix/QuoteListService?quoteId=34969987-abaa-494f-8575-4449e07674bf
+GET http://localhost:8080/api/carfix/QuoteListService?quoteId=407855cf-3240-4b8b-abd7-6f35bacc9eb6
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-86f4c33d-bf35-4773-966c-99188cf59f141
+Authorization:Bearer API-625b1dee-1570-4b3b-87bb-9c36a65abc821
 ###
 
 GET http://localhost:8080/api/carfix/CategoryListService

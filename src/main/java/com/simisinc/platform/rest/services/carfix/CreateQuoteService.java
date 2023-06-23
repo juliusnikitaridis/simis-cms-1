@@ -78,11 +78,9 @@ public class CreateQuoteService {
     //set distance between the SP of the quote and the member of the quote
     public static double calculateDistanceFromSp(Quote quote) throws Exception {
         //get the SP
-        ServiceProviderSpecification specification = new ServiceProviderSpecification();
-        specification.setServiceProviderId(quote.getServiceProviderId());
-        ServiceProvider sp = (ServiceProvider) ServiceProviderRepository.query(specification,null).getRecords().get(0);
+        User sp = UserRepository.findByUniqueId(quote.getServiceProviderId());
 
-        //get the related SR
+        //get the related SR -
         ServiceRequest sr = ServiceRequestRepository.findById(quote.getRequestForServiceId());
         if(sr.getLatitude() == null || sr.getLongitude() == null) {
             throw new Exception("lat or Long is not set for serviceRequest");
