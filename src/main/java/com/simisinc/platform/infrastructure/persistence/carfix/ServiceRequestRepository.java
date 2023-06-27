@@ -342,6 +342,7 @@ public class ServiceRequestRepository {
             while(rs.next()) {
                 EmailReminderInfo info = new EmailReminderInfo(rs.getString("confirmed_service_provider_id"));
                 info.setCustomerReference(rs.getString("customer_reference"));
+                info.setConfirmedDate(rs.getString("confirmed_date"));
                 info.setServiceRequestAdditionalDescription(rs.getString("additional_description"));
                 info.setVehicleId(rs.getString("vehicle_id"));
                 serviceRequestConfirmedServiceProviderIdList.add(info);
@@ -374,6 +375,8 @@ public class ServiceRequestRepository {
 
     public static class EmailReminderInfo {
         private  String customerReference;
+
+        private  String confirmedDate;
         private  String vehicleModel;
         private  String vehicleMake;
         private  String vehicleRegistration;
@@ -381,7 +384,16 @@ public class ServiceRequestRepository {
         private  String serviceProviderUniqueId;
         private  String serviceRequestAdditionalDescription;
         private  User   serviceProviderUser;
-        private String vehicleId;
+        private  String vehicleId;
+
+
+        public String getConfirmedDate() {
+            return confirmedDate;
+        }
+
+        public void setConfirmedDate(String confirmedDate) {
+            this.confirmedDate = confirmedDate;
+        }
 
         EmailReminderInfo(String serviceProviderUniqueId) {
             this.serviceProviderUniqueId = serviceProviderUniqueId;

@@ -37,6 +37,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import javax.servlet.ServletContext;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +75,7 @@ public class EmailTask implements Work {
     public static final String vehicleMakeModel_ = "vehicleMakeModel";
     public static final String spName_ = "spName";
     public static final String spUser_ = "spUser";
-    public static final String confirmedDate_ = "confirmedDate";
+    public static final String CONFIRMED_DATE = "confirmedDate";
     public static final String quoteCreatedDate_ = "quoteCreatedDate";
 
     @Override
@@ -94,7 +96,7 @@ public class EmailTask implements Work {
         String customerFullName = (String) workContext.get(customerFullName_);
         String vehicleMakeModel = (String) workContext.get(vehicleMakeModel_);
         String spNameQuoteAccepted = (String) workContext.get(spName_);
-        String confirmedDate = (String) workContext.get(confirmedDate_);
+        String confirmedDate = (String) workContext.get(CONFIRMED_DATE);
         String quoteCreatedDate = (String) workContext.get(quoteCreatedDate_);
 
         // Validate the requirements
@@ -135,6 +137,11 @@ public class EmailTask implements Work {
             //this is only needed if reminders are being sent to the SP
             if (displayString != null && spName != null) {
                 ctx.setVariable("spName", spName);
+                Date confirmedDateDate = new Date( Long.valueOf(confirmedDate));
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy @ HH:mm");
+                String finalDate = sdf.format(confirmedDateDate);
+
+                ctx.setVariable("confirmedDate22",finalDate);
                 ctx.setVariable("displayString", displayString); //send this through as sperate variables  ?
             }
             //this is used to send notifications to SPs once a quote has been accepted
@@ -142,7 +149,11 @@ public class EmailTask implements Work {
                 ctx.setVariable("spName",spNameQuoteAccepted);
                 ctx.setVariable("quoteCreatedDate",quoteCreatedDate);
                 ctx.setVariable("vehicleMakeModel",vehicleMakeModel);
-                ctx.setVariable("confirmedDate",confirmedDate);
+
+                Date confirmedDateDate = new Date( Long.valueOf(confirmedDate));
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+                String finalDate22 = sdf.format(confirmedDateDate);
+                ctx.setVariable("confirmedDate",finalDate22);
                 ctx.setVariable("customerFullName",customerFullName);
             }
 

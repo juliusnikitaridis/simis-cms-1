@@ -46,6 +46,7 @@ public class SendReminderToServiceProviderJob {
       ServiceProviderReminderEvent event = new ServiceProviderReminderEvent(emailNotification.getServiceProviderUser());
       String displayListString = emailNotification.getVehicleMake() + " " + emailNotification.getVehicleModel() + "\nReg No:" + emailNotification.getVehicleRegistration() + "\nJob Description:" + emailNotification.getServiceRequestAdditionalDescription() + "\nReference no:" + emailNotification.getCustomerReference() + "\n";
       event.setBookingListDisplayString(displayListString);
+      event.setConfirmedDate(emailNotification.getConfirmedDate());
       event.setServiceProviderName(emailNotification.getServiceProviderName());
       WorkflowManager.triggerWorkflowForEvent(event);
     }

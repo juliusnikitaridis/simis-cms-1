@@ -35,6 +35,7 @@ public class ServiceProviderReminderEvent extends Event {
 
     private String bookingListDisplayString;
     private String serviceProviderName;
+    private String confirmedDate;
     private User user = null;
     public static final String ID = "service-provider-reminder";
 
@@ -45,6 +46,14 @@ public class ServiceProviderReminderEvent extends Event {
 
     public void setBookingListDisplayString(String bookingListDisplayString) {
         this.bookingListDisplayString = bookingListDisplayString;
+    }
+
+    public String getConfirmedDate() {
+        return confirmedDate;
+    }
+
+    public void setConfirmedDate(String confirmedDate) {
+        this.confirmedDate = confirmedDate;
     }
 
     public String getServiceProviderName() {
