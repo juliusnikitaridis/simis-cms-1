@@ -137,6 +137,8 @@ Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
 Content-Type: application/json
 ###
 
+
+
 ###
 POST http://localhost:8080/api/carfix/ProcessServiceProvidersPayments
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
@@ -150,6 +152,14 @@ Content-Type: application/json
 GET http://localhost:8080/api/carfix/RFSListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-1a5b9cc4-64d4-416b-9a02-4fe2b78598d21
+###
+
+
+###
+GET http://localhost:8080/api/carfix/MemberListService?memberId=romeo-williams
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-34f5b57d-216c-46b4-a4e2-1d29d0749ae51
+Content-Type: application/json
 ###
 
 
@@ -168,6 +178,28 @@ Content-Type: application/json
 "contactNo": "3423423452"
 }
 ###
+
+POST http://localhost:8080/api/carfix/UpdateMemberService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-34f5b57d-216c-46b4-a4e2-1d29d0749ae51
+Content-Type: application/json
+
+{
+  "firstName":"Dean",
+  "uniqueId": "romeo-williams",
+  "lastName":"Richmond",
+  "organization":"test org",
+  "email":"juliusniki77@gmail.com",
+  "username":"juliusniki77@gmail.com",
+  "title": "Mr",
+  "state": "Western Cape",
+  "city": "Cape Town",
+  "country": "1 Nemesia Street, bellville",
+  "postalCode": "7530"
+}
+###
+
+
 
 POST http://localhost:8080/api/carfix/RegisterServiceProviderService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
