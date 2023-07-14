@@ -68,7 +68,7 @@ public class AccountValidationWidget extends GenericWidget {
       return context;
     }
 
-    // User needs to change their password to login
+    // User needs to change their password to loginfarm
     if ("new".equals(user.getPassword()) || StringUtils.isNotBlank(user.getAccountToken())) {
       context.getRequest().setAttribute("doPassword", "true");
       context.getRequest().setAttribute("confirmation", confirmation);

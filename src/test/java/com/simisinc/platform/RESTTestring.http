@@ -43,6 +43,9 @@ Content-Type: application/json
 ###
 
 
+
+
+
 POST http://localhost:8080/api/carfix/UpdateVehicleService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-6b1bf111-e864-4f4a-8efa-ae4918e622fe1
@@ -165,14 +168,14 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/carfix/RegisterMemberService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-0a1c1f67-8b77-43f4-83d3-5060d3c6f9811
+Authorization:Bearer API-2ae6b3e9-d9c2-4101-ab2a-478f703b1e141
 Content-Type: application/json
 
 {
 "firstName":"Dean",
 "lastName":"Richmond",
-"email":"juliusniki@gmail.com",
-"username":"juliusniki@gmail.com",
+"email":"juliusniki666@gmail.com",
+"username":"juliusniki666@gmail.com",
 "idnum": "1996",
 "roleId": "5",
 "contactNo": "3423423452"
@@ -192,10 +195,12 @@ Content-Type: application/json
   "email":"juliusniki77@gmail.com",
   "username":"juliusniki77@gmail.com",
   "title": "Mr",
+  "contactNo": "344444444111111111111111111111111111111",
+  "idnum": "333333333333",
   "state": "Western Cape",
   "city": "Cape Town",
-  "country": "1 Nemesia Street, bellville",
-  "postalCode": "7530"
+  "country": "1 Nemesia Street, bellville"
+
 }
 ###
 
@@ -203,14 +208,14 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/carfix/RegisterServiceProviderService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-3075778d-c183-4fba-90f0-abfa7502caea1
+Authorization:Bearer API-2ae6b3e9-d9c2-4101-ab2a-478f703b1e141
 Content-Type: application/json
 
 {
   "firstName":"Willies Services",
   "lastName":"Willies Services",
-  "email":"willie51@test.com",
-  "username":"willie51@test.com",
+  "email":"willie51111111111111@test.com",
+  "username":"willie5111111111@test.com",
   "idnum": "1996",
   "roleId": "5",
   "certifications": "certifications format?",
@@ -234,7 +239,7 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/carfix/UpdateServiceProviderService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-f5039f38-ec38-4db0-97a8-cfd27fb69c3f1
+Authorization:Bearer API-2ae6b3e9-d9c2-4101-ab2a-478f703b1e141
 Content-Type: application/json
 
 {
@@ -290,7 +295,7 @@ Authorization:Bearer API-625b1dee-1570-4b3b-87bb-9c36a65abc821
 Content-Type: application/json
 
 {
-  "requestForServiceId":"5fa0a90d-0b6c-42d1-9465-a2ab37f976ec",
+  "requestForServiceId":"3913c379-8869-4909-83bf-9c32a86d5a6c",
   "serviceProviderId":"julius-niki",
   "quotationTotal": "5000.00",
   "vat": "",
@@ -345,14 +350,14 @@ Authorization:Bearer API-111bddec-1137-49fb-822b-522530cf51a51
 
 POST http://localhost:8080/api/carfix/AcceptQuoteService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-d4c5bde0-3234-4e83-acaa-937e32eec4461
+Authorization:Bearer API-54a9e612-fb7f-454a-800e-4d171b2192391
 Content-Type: application/json
 
 {
-  "serviceRequestId": "a6a823d7-a435-4422-949a-d4d66b469e80",
-  "acceptedQuoteId": "5ea184c5-4bd2-466d-8e36-7a3d989b20bf",
-  "confirmedServiceProviderId":"wefix-wefix",
-  "confirmedDate": "2023-05-19T00:00:00.000Z"
+  "serviceRequestId": "3913c379-8869-4909-83bf-9c32a86d5a6c",
+  "acceptedQuoteId": "6e3522e7-fed0-4771-8a9b-ff57aada5c46",
+  "confirmedServiceProviderId":"julius-niki",
+  "confirmedDate": "1687957416000"
 }
 ###
 

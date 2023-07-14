@@ -32,6 +32,7 @@
       <root url="file://$PROJECT_DIR$/lib/build/bucket4j" />
       <root url="file://$PROJECT_DIR$/lib/build/classgraph" />
       <root url="file://$PROJECT_DIR$/lib/build/okhttp" />
+      <root url="file://$PROJECT_DIR$/lib/build/xstream" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -68,5 +69,6 @@
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/thymeleaf" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/timeago" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/uniVocity-parsers" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/build/xstream" recursive="false" />
   </library>
 </component>

@@ -22,3 +22,10 @@ Authorization:Bearer API-ad757670-f1f8-4bcc-b879-3d511fbdc7b73
 Content-Type: application/json
 ###
 
+
+GET https://cannacomply.connectmobiles24.com/api/cannacomply/ActivityListService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-1276a41e-de9c-45ed-bd8c-5b482f864c4c3
+Content-Type: application/json
+###
+

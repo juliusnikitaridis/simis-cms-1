@@ -127,6 +127,7 @@ public class EmailTask implements Work {
             templateEngine.setTemplateResolver(templateResolver);
 
             // Values for the email
+
             String siteUrl = LoadSitePropertyCommand.loadByName("site.url");
             String ecommerceFromName = LoadSitePropertyCommand.loadByName("ecommerce.from.name");
             String ecommerceFromEmail = LoadSitePropertyCommand.loadByName("ecommerce.from.email");
@@ -147,13 +148,18 @@ public class EmailTask implements Work {
             //this is used to send notifications to SPs once a quote has been accepted
             if(confirmedDate != null && customerFullName!= null && vehicleMakeModel != null) {
                 ctx.setVariable("spName",spNameQuoteAccepted);
-                ctx.setVariable("quoteCreatedDate",quoteCreatedDate);
+
+                Date createdDateD = new Date( Long.valueOf(quoteCreatedDate));
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy @ HH:mm");
+                String finalDate222 = sdf.format(createdDateD);
+                ctx.setVariable("quoteCreatedDate77",finalDate222);
+
                 ctx.setVariable("vehicleMakeModel",vehicleMakeModel);
 
                 Date confirmedDateDate = new Date( Long.valueOf(confirmedDate));
-                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+
                 String finalDate22 = sdf.format(confirmedDateDate);
-                ctx.setVariable("confirmedDate",finalDate22);
+                ctx.setVariable("confirmedDate77",finalDate22);
                 ctx.setVariable("customerFullName",customerFullName);
             }
 

@@ -257,6 +257,7 @@ public class UserRepository {
                 .add("username", StringUtils.trimToNull(record.getUsername()))
                 .add("title", StringUtils.trimToNull(record.getTitle()))
                 .add("department", StringUtils.trimToNull(record.getDepartment()))
+                .add("contact_no",StringUtils.trimToNull(record.getContactNo()))
                 .add("timezone", StringUtils.trimToNull(record.getTimeZone()))
                 .add("city", StringUtils.trimToNull(record.getCity()))
                 .add("state", StringUtils.trimToNull(record.getState()))
@@ -306,11 +307,13 @@ public class UserRepository {
                 .addIfExists("organization", record.getOrganization())
                 .addIfExists("nickname", record.getNickname())
                 .addIfExists("email", record.getEmail())
+                .addIfExists("contact_no",record.getContactNo())
                 .addIfExists("username", record.getUsername())
                 .addIfExists("title", record.getTitle())
                 .addIfExists("department", record.getDepartment())
                 .addIfExists("timezone", record.getTimeZone())
                 .addIfExists("city", record.getCity())
+                .addIfExists("id_number",record.getIdnum())
                 .addIfExists("state", record.getState())
                 .addIfExists("country", record.getCountry()) //this will actually store the whole address string , 1 Nemesia street etc...
                 .addIfExists("postal_code", record.getPostalCode());
@@ -353,6 +356,8 @@ public class UserRepository {
                 .add("country", StringUtils.trimToNull(record.getCountry()))
                 .add("postal_code", StringUtils.trimToNull(record.getPostalCode()))
                 .add("modified_by", record.getModifiedBy(), -1)
+                .add("id_number",record.getIdnum())
+                .addIfExists("contact_no",record.getContactNo())
                 .add("modified", new Timestamp(System.currentTimeMillis()));
         if (record.hasGeoPoint()) {
             updateValues.add("latitude", record.getLatitude());
@@ -504,6 +509,7 @@ public class UserRepository {
             record.setEnabled(rs.getBoolean("enabled"));
             record.setCreated(rs.getTimestamp("created"));
             record.setModified(rs.getTimestamp("modified"));
+            record.setContactNo(rs.getString("contact_no"));
             record.setAccountToken(rs.getString("account_token"));
             record.setValidated(rs.getTimestamp("validated"));
             record.setCreatedBy(rs.getLong("created_by"));
@@ -512,6 +518,7 @@ public class UserRepository {
             record.setDepartment(rs.getString("department"));
             record.setTimeZone(rs.getString("timezone"));
             record.setCity(rs.getString("city"));
+            record.setIdnum(rs.getString("id_number"));
             record.setState(rs.getString("state"));
             record.setCountry(rs.getString("country"));
             record.setPostalCode(rs.getString("postal_code"));
@@ -526,6 +533,7 @@ public class UserRepository {
 
 
     //when returning users through the API, return smaller set of fields
+    //timestamps can not be serialized without causing errors in the RestServlet.java
     private static User buildRecordMinimal(ResultSet rs) {
         try {
             User record = new User();
@@ -534,9 +542,11 @@ public class UserRepository {
             record.setUserType(rs.getString("user_type"));
             record.setFirstName(rs.getString("first_name"));
             record.setLastName(rs.getString("last_name"));
+            record.setContactNo(rs.getString("contact_no"));
             record.setOrganization(rs.getString("organization"));
             record.setNickname(rs.getString("nickname"));
             record.setEmail(rs.getString("email"));
+            record.setIdnum(rs.getString("id_number"));
             record.setUsername(rs.getString("username"));
             // record.setPassword(rs.getString("password"));
             record.setEnabled(rs.getBoolean("enabled"));

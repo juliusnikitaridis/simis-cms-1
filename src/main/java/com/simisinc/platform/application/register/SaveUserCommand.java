@@ -149,7 +149,8 @@ public class SaveUserCommand {
     user.setGroupList(userBean.getGroupList());
     user.setTimeZone(userBean.getTimeZone());
     user.setUserType(userBean.getUserType());
-   // user.setIdnum(userBean.getIdnum());
+    user.setContactNo(userBean.getContactNo());
+    user.setIdnum(userBean.getIdnum());
     return UserRepository.save(user);
   }
 

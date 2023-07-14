@@ -21,7 +21,53 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:8080/api/cannacomply/CreateYieldService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-957e93dc-30e9-4511-a3d6-3e95f0cd0f151
+Content-Type: application/json
+
+{
+  "quantity": "300",
+  "loss": "12",
+  "notes": "some notes",
+  "harvestBatchId": "234234234",
+  "farmId": "23423456",
+  "location": "location",
+  "cropId": "543452453245",
+  "strain": "Madusas magic",
+  "date": "11112332"
+}
 ###
+
+###
+GET http://localhost:8080/api/cannacomply/YieldListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-957e93dc-30e9-4511-a3d6-3e95f0cd0f151
+Content-Type: application/json
+###
+
+###
+GET http://localhost:8080/api/cannacomply/BlogListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-6774641f-2ad2-4d30-be0e-ea281b88a7ff1
+Content-Type: application/json
+###
+
+
+
+GET http://localhost:8080/api/cannacomply/YieldListService?cropId=543452453245
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-957e93dc-30e9-4511-a3d6-3e95f0cd0f151
+Content-Type: application/json
+###
+
+GET http://localhost:8080/api/cannacomply/YieldListService?yieldId=543452453245
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-957e93dc-30e9-4511-a3d6-3e95f0cd0f151
+Content-Type: application/json
+###
+
+
 POST http://localhost:8080/api/cannacomply/UpdateFarmService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
@@ -191,9 +237,9 @@ Content-Type: application/json
 ###
 
 
-GET http://localhost:8080/api/cannacomply/ActivityListService?activityId=971d7cef-fd9e-44e3-81dd-e036f6f15d31
+GET http://localhost:8080/api/cannacomply/ActivityListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Authorization:Bearer API-3052d214-3744-4446-b7f4-db3084a476891
 Content-Type: application/json
 ###
 

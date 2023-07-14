@@ -20,5 +20,6 @@
   Your account is now setup
 </h4>
 <p>
-  <a href="${ctx}/login" class="button success radius no-gap">Login <i class="fa fa-angle-right"></i></a>
+  <!--<a href="${ctx}/login" class="button success radius no-gap">Login <i class="fa fa-angle-right"></i></a>-->
+  <a href="https://carfixsa.com" class="button success radius no-gap">Login <i class="fa fa-angle-right"></i></a>
 </p>
