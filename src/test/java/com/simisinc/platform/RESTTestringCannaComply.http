@@ -96,28 +96,41 @@ Content-Type: application/json
 ###
 
 ###
-POST http://localhost:8080/api/cannacomply/CreateCropService
+POST http://localhost:8080/api/cannacomply/CreateTreatmentProductService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
 Content-Type: application/json
 
 {
-  "cropType": "CROP TYPE",
-  "growthStage": "FLOWERING",
-  "status": "planted",
-  "strainName": "buddleCush",
-  "seedCompany": "sensi seeds",
-  "createdDate": "5-05-2023",
-  "farmId": "",
-  "userId": "",
-  "cropLabel": "348923",
-  "barcodeData": "[xxx]",
-  "startingPlantData": "some staring data",
-  "blockId": "234234234234324"
-
+  "productName": "testProduct",
+  "container": "container",
+  "mass": "100",
+  "quantity": "100",
+  "farmId": "12345667",
+  "productId": "5-05-2023",
+  "activeIngredients": "",
+  "expiryDate": "12-12-2020",
+  "instructions": "[xxx]",
+  "purpose": "some data"
 
 }
 ###
+
+###
+GET http://localhost:8080/api/cannacomply/TreatmentProductListService?farmId=a357b542-0309-4c52-b8e4-2a7a0d6bfc07
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Content-Type: application/json
+
+###
+###
+GET http://localhost:8080/api/cannacomply/TreatmentProductListService?productId=5-05-2023
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Content-Type: application/json
+
+###
+
 
 ###
 POST http://localhost:8080/api/cannacomply/UpdateCropService

@@ -19,6 +19,7 @@ public class ScheduleRepository {
     public static Schedule add(Schedule record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
+                .add("repeat",record.getRepeat())
                 .add("farm_id", record.getFarmId())
                 .add("status", record.getStatus())
                 .add("starting_date", record.getStartingDate())
@@ -51,6 +52,7 @@ public class ScheduleRepository {
                 .addIfExists("ending_date",record.getEndingDate())
                 .addIfExists("title",record.getTitle())
                 .addIfExists("type",record.getType())
+                .addIfExists("repeat",record.getRepeat())
                 .addIfExists("assigned_to",record.getAssignedTo())
                 .addIfExists("description",record.getDescription());
 
@@ -112,6 +114,7 @@ public class ScheduleRepository {
             schedule.setEndingDate(rs.getString("ending_date"));
             schedule.setTitle(rs.getString("title"));
             schedule.setType(rs.getString("type"));
+            schedule.setRepeat(rs.getString("repeat"));
             schedule.setAssignedTo(rs.getString("assigned_to"));
             schedule.setDescription(rs.getString("description"));
 

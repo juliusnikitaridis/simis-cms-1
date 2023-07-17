@@ -119,7 +119,7 @@ public class TreatmentProductRepository {
             product.setImageData(rs.getString("image_data"));
             product.setProductId(rs.getString("product_id"));
             product.setActiveIngredients(rs.getString("active_ingredients"));
-            product.setExpiryDate(rs.getString("expiry_data"));
+            product.setExpiryDate(rs.getString("expiry_date"));
             product.setInstructions(rs.getString("instructions"));
             product.setPurpose(rs.getString("purpose"));
 

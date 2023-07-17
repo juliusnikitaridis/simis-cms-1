@@ -485,7 +485,7 @@ public class RestRequestFilter implements Filter {
     LOG.debug("Returning 401...");
     HttpServletResponse response = (HttpServletResponse) servletResponse;
     response.setHeader("WWW-Authenticate", "Basic realm=\"Protected\"");
-    RestServlet.sendError(response, SC_UNAUTHORIZED, "Unauthorized[3]");
+    RestServlet.sendError(response, SC_UNAUTHORIZED, "Incorrect Username or Password. Please Try again.");
   }
 
   private void doExpiredToken(ServletResponse servletResponse) throws IOException {

@@ -34,7 +34,7 @@ public class TreatmentProductListService {
             response.setData(optionsList);
             return response;
         } catch (Throwable e) {
-            LOG.error("Error in CategoryListService", e);
+            LOG.error("Error in TreatmentProductListService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;

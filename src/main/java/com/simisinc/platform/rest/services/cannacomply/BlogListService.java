@@ -3,13 +3,17 @@ package com.simisinc.platform.rest.services.cannacomply;
 
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.controller.ServiceResponseCommand;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import lombok.Getter;
+import lombok.Setter;
 import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,9 +38,19 @@ public class BlogListService {
             xstream.ignoreUnknownElements();
             rss channelList = (rss)xstream.fromXML(xmlContentFromOneView);
 
+            channel chennel = channelList.getChannel();
+            List<BlogServiceResponse> blogs = new ArrayList<>();
+            chennel.getItem().stream().forEach(x-> {
+                BlogServiceResponse item = new BlogServiceResponse();
+                item.setContent(x.getDescription());
+                item.setLink(x.getLink());
+                item.setTitle(x.getTitle());
+                blogs.add(item);
+            });
+
             ServiceResponse response = new ServiceResponse(200);
-           // ServiceResponseCommand.addMeta(response, "Block List", blockList, null);
-           // response.setData(blockList);
+            ServiceResponseCommand.addMeta(response, "Blogs List", blogs, null);
+            response.setData(blogs);
             return response;
         } catch (Throwable e) {
             LOG.error("Error in BlogListService", e);
@@ -60,10 +74,14 @@ public class BlogListService {
 }
 
 
+@Getter
+@Setter
 class content {
     public String url;
 }
 
+@Getter
+@Setter
 class item {
     public String title;
     public String link;
@@ -75,6 +93,8 @@ class item {
     public List<content> content;
 }
 
+@Getter
+@Setter
 class channel {
     public String title;
     public String link;
@@ -86,6 +106,8 @@ class channel {
 }
 
 
+@Getter
+@Setter
 @XStreamAlias("rss")
 class rss {
     public channel channel;
@@ -94,5 +116,14 @@ class rss {
     public String dc;
     public double version;
     public String text;
+}
+
+@Getter
+@Setter
+class BlogServiceResponse {
+    String title;
+    String content;
+    String description;
+    String link;
 }
 
