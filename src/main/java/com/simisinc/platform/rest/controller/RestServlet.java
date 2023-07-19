@@ -245,6 +245,7 @@ public class RestServlet extends HttpServlet {
             hasValues = true;
           }
           String data = jsonb.toJson(result.getData());
+          data = data.replaceAll("\\P{Print}", ""); //unicode characters in the DB ??
           sb.append("\"data\": ").append(data);
         }
         if (!result.getLinks().isEmpty()) {

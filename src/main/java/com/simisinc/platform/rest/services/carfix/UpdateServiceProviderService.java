@@ -1,8 +1,10 @@
 package com.simisinc.platform.rest.services.carfix;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.carfix.ServiceProvider;
 import com.simisinc.platform.domain.model.carfix.Vehicle;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.ServiceProviderRepository;
 import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
@@ -31,6 +33,9 @@ public class UpdateServiceProviderService {
 
             ObjectMapper mapper = new ObjectMapper();
             ServiceProvider newServiceProvider = mapper.readValue(context.getJsonRequest(), ServiceProvider.class);
+            //update stuff in user table
+            ServiceProvider existingServiceProvider = ServiceProviderRepository.findById(newServiceProvider.getServiceProviderId());
+            UserRepository.updateLatAndLong(existingServiceProvider.getUniqueId(),newServiceProvider.getLatitude(),newServiceProvider.getLongitude());
             //TODO should check if the SP exists - check if the record was actually updated
             ServiceProviderRepository.update(newServiceProvider);
 

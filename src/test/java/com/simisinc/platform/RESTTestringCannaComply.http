@@ -117,7 +117,7 @@ Content-Type: application/json
 ###
 
 ###
-GET http://localhost:8080/api/cannacomply/TreatmentProductListService?farmId=a357b542-0309-4c52-b8e4-2a7a0d6bfc07
+GET http://localhost:8080/api/cannacomply/TreatmentProductListService?farmId=12345667
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
 Content-Type: application/json

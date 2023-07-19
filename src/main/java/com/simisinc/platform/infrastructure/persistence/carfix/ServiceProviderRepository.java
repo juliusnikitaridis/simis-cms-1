@@ -58,6 +58,13 @@ public class ServiceProviderRepository {
             }
     }
 
+    public static ServiceProvider findById(String id) {
+
+        return (ServiceProvider) DB.selectRecordFrom(
+                TABLE_NAME, new SqlUtils().add("id = ?", id),
+                ServiceProviderRepository::buildRecord);
+    }
+
     //get all the service providers
     public static DataResult query(ServiceProviderSpecification specification, DataConstraints constraints) {
         SqlUtils select = new SqlUtils();
@@ -78,6 +85,7 @@ public class ServiceProviderRepository {
             ObjectMapper mapper = new ObjectMapper();
             ServiceProvider serviceProvider = new ServiceProvider();
             serviceProvider.setName(rs.getString("name"));
+            serviceProvider.setUniqueId(rs.getString("user_id"));
             serviceProvider.setSupportedBrands(mapper.readValue(rs.getString("supported_brands"), Brand[].class));
             serviceProvider.setSupportedCategories(mapper.readValue(rs.getString("supported_categories"), Category[].class));
             serviceProvider.setServices(rs.getString("services"));

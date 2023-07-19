@@ -243,12 +243,14 @@ Authorization:Bearer API-2ae6b3e9-d9c2-4101-ab2a-478f703b1e141
 Content-Type: application/json
 
 {
-  "serviceProviderId": "a7dfc4d8-85e3-45ec-9c81-8a3b3827019c",
+  "serviceProviderId": "30041224-dbc0-4ef7-829a-1e023d8a38a1",
   "roleId": "5",
   "certifications": "certifications format?",
   "supportedBrands": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285aa2"}],
   "supportedCategories": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285ab2"}],
   "name": "UPDATEDNAME",
+  "latitude": "200",
+  "longitude": "200",
   "address": "1 Lobelia close bellville 7540",
   "aboutUs": "some information about the SP",
   "logoData": "encoded_logo_data",
@@ -275,13 +277,13 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/carfix/ServiceProviderListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-3075778d-c183-4fba-90f0-abfa7502caea1
+Authorization:Bearer API-015d2843-af30-4264-9f5e-306cdcac20c01
 ###
 
 ###
-GET http://localhost:8080/api/carfix/ServiceProviderListService?serviceProviderUniqueId=willies-workshop-willies-workshop
+GET http://localhost:8080/api/carfix/ServiceProviderListService?serviceProviderUniqueId=julius-niki
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-eb63c9db-195f-43ab-b4d6-02da76dfd1f71
+Authorization:Bearer API-015d2843-af30-4264-9f5e-306cdcac20c01
 ###
 
 

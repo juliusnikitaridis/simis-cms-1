@@ -88,7 +88,7 @@ public class TreatmentProductRepository {
         if (specification != null) {
             where
                     .addIfExists("product_id = ?", specification.getProductId())
-                    .addIfExists("farm_id",specification.getFarmId());
+                    .addIfExists("farm_id = ?",specification.getFarmId());
 
         }
         return DB.selectAllFrom(

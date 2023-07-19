@@ -426,6 +426,17 @@ public class UserRepository {
         return null;
     }
 
+
+    public static void updateLatAndLong(String uniqueId, double latitude, double longitude) {
+        SqlUtils updateValues = new SqlUtils()
+                .add("latitude",latitude)
+                .add("longitude", longitude);
+        SqlUtils where = new SqlUtils()
+                .add("unique_id = ?", uniqueId);
+        DB.update(TABLE_NAME, updateValues, where);
+    }
+
+
     public static User createAccountToken(User record) {
         String newToken = UUID.randomUUID().toString();
         SqlUtils updateValues = new SqlUtils()
