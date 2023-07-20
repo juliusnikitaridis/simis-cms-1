@@ -36,15 +36,19 @@ public class BlogListService {
             xstream.processAnnotations(rss.class);
             xstream.allowTypesByWildcard(new String[]{"com.simisinc.platform.rest.services.cannacomply.**"});
             xstream.ignoreUnknownElements();
+            xstream.useAttributeFor(Media.class, "url");
             rss channelList = (rss)xstream.fromXML(xmlContentFromOneView);
 
             channel chennel = channelList.getChannel();
             List<BlogServiceResponse> blogs = new ArrayList<>();
             chennel.getItem().stream().forEach(x-> {
                 BlogServiceResponse item = new BlogServiceResponse();
-                item.setContent(x.getDescription());
+                item.setContent(x.getContent());
+                item.setDescription(x.getDescription());
                 item.setLink(x.getLink());
                 item.setTitle(x.getTitle());
+                item.setDate(x.getDate());
+                item.setPublishedDate(x.getPubDate());
                 blogs.add(item);
             });
 
@@ -74,11 +78,10 @@ public class BlogListService {
 }
 
 
-@Getter
-@Setter
-class content {
-    public String url;
+class Media {
+    String url;
 }
+
 
 @Getter
 @Setter
@@ -86,11 +89,15 @@ class item {
     public String title;
     public String link;
     public String description;
-    //public Date pubDate;
+    public String pubDate;
     public String guid;
-   // public Date date;
+    public String date;
     public String encoded;
-    public List<content> content;
+    @XStreamAlias("content:encoded")
+    public String content;
+    @XStreamAlias("media:content")
+    @XStreamImplicit
+    public List<Media> media;
 }
 
 @Getter
@@ -125,5 +132,7 @@ class BlogServiceResponse {
     String content;
     String description;
     String link;
+    String date;
+    String publishedDate;
 }
 
