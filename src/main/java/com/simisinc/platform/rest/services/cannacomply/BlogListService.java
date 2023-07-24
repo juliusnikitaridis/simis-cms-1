@@ -47,6 +47,7 @@ public class BlogListService {
                 item.setDescription(x.getDescription());
                 item.setLink(x.getLink());
                 item.setTitle(x.getTitle());
+                item.setMediaList(x.getMedia());
                 item.setDate(x.getDate());
                 item.setPublishedDate(x.getPubDate());
                 blogs.add(item);
@@ -78,6 +79,9 @@ public class BlogListService {
 }
 
 
+
+@Getter
+@Setter
 class Media {
     String url;
 }
@@ -134,5 +138,6 @@ class BlogServiceResponse {
     String link;
     String date;
     String publishedDate;
+    List<Media> mediaList;
 }
 
