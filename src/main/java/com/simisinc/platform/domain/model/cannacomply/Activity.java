@@ -17,4 +17,6 @@ public class Activity extends Entity {
     private String date;
     private String status;
     private String blockId;
+    private String itemType;
+    private String itemId;
 }
