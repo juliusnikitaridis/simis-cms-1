@@ -29,6 +29,8 @@ public class YieldRepository {
                 .add("stage",record.getStage())
                 .add("strain", record.getStrain())
                 .add("from_block_id",record.getFromBlockId())
+                .add("wet_weight",record.getWetWeight())
+                .add("user_id",record.getUserId())
                 .add("date", record.getDate());
 
         try (Connection connection = DB.getConnection();
@@ -57,6 +59,8 @@ public class YieldRepository {
                 .addIfExists("location", record.getLocation())
                 .addIfExists("crop_id", record.getCropId())
                 .addIfExists("strain", record.getStrain())
+                .addIfExists("wet_weight",record.getWetWeight())
+                .addIfExists("user_id",record.getUserId())
                 .addIfExists("stage",record.getStage())
                 .addIfExists("from_block_id",record.getFromBlockId())
                 .addIfExists("date", record.getDate());
@@ -119,6 +123,8 @@ public class YieldRepository {
             record.setLoss(rs.getString("loss"));
             record.setStage(rs.getString("stage"));
             record.setNotes(rs.getString("notes"));
+            record.setWetWeight(rs.getString("wet_weight"));
+            record.setUserId(rs.getString("user_id"));
             record.setHarvestBatchId(rs.getString("harvest_batch_id"));
             record.setLocation(rs.getString("location"));
             record.setCropId(rs.getString("crop_id"));

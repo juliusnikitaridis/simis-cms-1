@@ -130,6 +130,41 @@ Content-Type: application/json
 ###
 
 ###
+POST http://localhost:8080/api/cannacomply/CreatePackageService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Content-Type: application/json
+
+{
+  "packageTag": "some tag",
+  "item": "item",
+  "quantity": "300",
+  "farmId": "34234234",
+  "location": "location",
+  "status": "SOME STATUS",
+  "date": "date",
+  "harvestId": "harvestId"
+}
+###
+
+###
+GET http://localhost:8080/api/cannacomply/PackagingListService?id=c6ce8140-bb1e-41b0-ae52-32a4419e2091
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Content-Type: application/json
+
+###
+
+###
+GET http://localhost:8080/api/cannacomply/PackagingListService?farmId=c6ce8140-bb1e-41b0-ae52-32a4419e2091
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Content-Type: application/json
+
+###
+
+
+###
 POST http://localhost:8080/api/cannacomply/UpdateComplianceUserService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681

@@ -29,4 +29,6 @@ public class Yield extends Entity {
     private String notes = null;
     private String stage = null;
     private String fromBlockId = null;
+    private String wetWeight = null;
+    private String userId;
 }

@@ -36,7 +36,7 @@ public class RegisterUserService {
             UsersRepository.add(newUser);
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{
-                add("canna comply users object has been registered");
+                add(newSysUserId);
             }};
             response.setData(responseMessage);
             return response;
