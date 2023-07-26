@@ -39,29 +39,16 @@ import org.apache.commons.logging.LogFactory;
 import com.simisinc.platform.ApplicationInfo;
 import com.simisinc.platform.application.admin.DatabaseCommand;
 import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
+import com.simisinc.platform.application.filesystem.FileSystemCommand;
 import com.simisinc.platform.application.maps.GeoIPCommand;
 import com.simisinc.platform.domain.model.cms.Content;
 import com.simisinc.platform.infrastructure.cache.CacheManager;
 import com.simisinc.platform.infrastructure.database.DataSource;
+import com.simisinc.platform.infrastructure.instance.InstanceManager;
 import com.simisinc.platform.infrastructure.persistence.cms.ContentRepository;
 import com.simisinc.platform.infrastructure.scheduler.SchedulerManager;
 import com.simisinc.platform.infrastructure.scheduler.cms.LoadSystemFilesJob;
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.jsp.jstl.core.Config;
-import java.io.File;
-import java.io.InputStream;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import static com.simisinc.platform.infrastructure.cache.CacheManager.CONTENT_UNIQUE_ID_CACHE;
 
 /**
  * Description
@@ -85,6 +72,9 @@ public class ContextListener implements ServletContextListener {
     // Monitor the success
     boolean isSuccessful = true;
 
+    // Determine the instance type
+    InstanceManager.init();
+
     // Show the system's timezone
     LocalDateTime now = LocalDateTime.now();
     ZoneId serverZoneId = ZoneId.systemDefault();
@@ -94,7 +84,8 @@ public class ContextListener implements ServletContextListener {
     // Startup the database first
     // @todo create and use a separate Rest DataSource pool
     Properties databaseProperties = new Properties();
-    try (InputStream is = servletContextEvent.getServletContext().getResourceAsStream("/WEB-INF/classes/database.properties")) {
+    try (InputStream is = servletContextEvent.getServletContext()
+        .getResourceAsStream("/WEB-INF/classes/database.properties")) {
       LOG.info("Starting up the web database connection pool...");
       // Use the default properties
       databaseProperties.load(is);
@@ -136,14 +127,15 @@ public class ContextListener implements ServletContextListener {
     LOG.info("Startup the cache manager...");
     CacheManager.startup();
 
-    // Verify the database filesystem entry
-    LOG.info("Checking the file server...");
-    String serverRootPath = LoadSitePropertyCommand.loadByName("system.filepath");
+    // Verify the filesystem entry
+    String serverRootPath = FileSystemCommand.getFileServerRootPath();
     if (StringUtils.isBlank(serverRootPath)) {
       LOG.error("Missing system.filepath");
       isSuccessful = false;
-      servletContextEvent.getServletContext().setAttribute(ContextConstants.STARTUP_FAILED, "missing system.filepath in database");
+      servletContextEvent.getServletContext().setAttribute(ContextConstants.STARTUP_FAILED,
+          "missing system.filepath in database");
     } else {
+      LOG.info("Checking the file path: " + serverRootPath);
       File directory = new File(serverRootPath);
       if (!directory.exists()) {
         LOG.info("Creating directory at: " + serverRootPath);
@@ -152,7 +144,8 @@ public class ContextListener implements ServletContextListener {
       if (!directory.isDirectory()) {
         isSuccessful = false;
         LOG.error("Check system.filepath, directory was not found: " + serverRootPath);
-        servletContextEvent.getServletContext().setAttribute(ContextConstants.STARTUP_FAILED, "system.filepath setting exists but the directory '" + serverRootPath + "' was not found");
+        servletContextEvent.getServletContext().setAttribute(ContextConstants.STARTUP_FAILED,
+            "system.filepath setting exists but the directory '" + serverRootPath + "' was not found");
       }
     }
 
@@ -196,7 +189,7 @@ public class ContextListener implements ServletContextListener {
     SchedulerManager.startup(servletContextEvent.getServletContext());
 
     // Give the go ahead
-    servletContextEvent.getServletContext().setAttribute("STARTUP_SUCCESSFUL", "true");
+    servletContextEvent.getServletContext().setAttribute(ContextConstants.STARTUP_SUCCESSFUL, "true");
   }
 
   @Override

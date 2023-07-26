@@ -16,7 +16,42 @@
 
 package com.simisinc.platform.rest.controller;
 
-import com.simisinc.platform.application.*;
+import static com.simisinc.platform.presentation.controller.UserSession.API_SOURCE;
+import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
+import static javax.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Base64;
+import java.util.StringTokenizer;
+import java.util.UUID;
+
+import javax.security.auth.login.LoginException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.hc.core5.net.InetAddressUtils;
+
+import com.simisinc.platform.application.CreateSessionCommand;
+import com.simisinc.platform.application.DataException;
+import com.simisinc.platform.application.LoadAppCommand;
+import com.simisinc.platform.application.RateLimitCommand;
+import com.simisinc.platform.application.SaveSessionCommand;
+import com.simisinc.platform.application.UserCommand;
 import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
 import com.simisinc.platform.application.cms.HostnameCommand;
 import com.simisinc.platform.application.json.JsonCommand;
@@ -98,15 +133,19 @@ public class RestRequestFilter implements Filter {
       return;
     }
 
+    boolean isLocal = "localhost".equals(request.getServerName()) || "127.0.0.1".equals(request.getServerName());
+
     // Check if IP is rate limited
-    if (!RateLimitCommand.isIpAllowedRightNow(ipAddress, false)) {
+    if (!isLocal && !RateLimitCommand.isIpAllowedRightNow(ipAddress, false)) {
       do429(servletResponse);
       return;
     }
 
     // Redirect to SSL
     if (requireSSL && !"https".equalsIgnoreCase(scheme)) {
-      if (!"localhost".equals(request.getServerName()) && !InetAddressUtils.isIPv4Address(request.getServerName())
+      // Only redirect if a hostname was used (skip for local dev)
+      if (!isLocal
+          && !InetAddressUtils.isIPv4Address(request.getServerName())
           && !InetAddressUtils.isIPv6Address(request.getServerName())) {
         String requestURL = ((HttpServletRequest) request).getRequestURL().toString();
         requestURL = StringUtils.replace(requestURL, "http://", "https://");
@@ -206,7 +245,7 @@ public class RestRequestFilter implements Filter {
       }
 
       // Limit the number of hits per minute based on the successful use of the api key
-      if (!RateLimitCommand.isAppAllowedRightNow(thisApp)) {
+      if (!isLocal && !RateLimitCommand.isAppAllowedRightNow(thisApp)) {
         do429(servletResponse);
         return;
       }
@@ -442,7 +481,7 @@ public class RestRequestFilter implements Filter {
       return null;
     }
     try {
-      String credentials = new String(Base64.decodeBase64(st.nextToken()), "UTF-8");
+      String credentials = new String(Base64.getDecoder().decode(st.nextToken()), "UTF-8");
       int p = credentials.indexOf(":");
       if (p == -1) {
         LOG.debug("Client did not specify credentials");

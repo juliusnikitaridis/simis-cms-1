@@ -16,24 +16,25 @@
 
 package com.simisinc.platform.presentation.widgets.mailinglists;
 
-import com.simisinc.platform.application.DataException;
-import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
-import com.simisinc.platform.application.cms.CaptchaCommand;
-import com.simisinc.platform.application.mailinglists.SaveEmailCommand;
-import com.simisinc.platform.domain.model.mailinglists.Email;
-import com.simisinc.platform.presentation.widgets.GenericWidget;
-import com.simisinc.platform.presentation.controller.WidgetContext;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.validator.routines.EmailValidator;
+import static java.util.stream.Collectors.toList;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.sanctionco.jmail.JMail;
+import com.simisinc.platform.application.DataException;
+import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
+import com.simisinc.platform.application.cms.CaptchaCommand;
+import com.simisinc.platform.application.mailinglists.SaveEmailCommand;
+import com.simisinc.platform.domain.model.mailinglists.Email;
+import com.simisinc.platform.presentation.controller.WidgetContext;
+import com.simisinc.platform.presentation.widgets.GenericWidget;
 
 /**
  * Description
@@ -47,7 +48,8 @@ public class EmailSubscribeWidget extends GenericWidget {
   protected static Log LOG = LogFactory.getLog(EmailSubscribeWidget.class);
 
   static String JSP = "/mailinglists/email-subscribe-simple-form.jsp";
-  static String INLINE_JSP = "/mailinglists/email-subscribe-inline-form.jsp";
+  static String INLINE_FORM_JSP = "/mailinglists/email-subscribe-inline-form.jsp";
+  static String VERTICAL_FORM_JSP = "/mailinglists/email-subscribe-vertical-form.jsp";
   static String WITH_NAME_JSP = "/mailinglists/email-subscribe-with-name-form.jsp";
   static String SUCCESS_JSP = "/mailinglists/email-subscribe-success.jsp";
 
@@ -56,21 +58,29 @@ public class EmailSubscribeWidget extends GenericWidget {
     String isSuccess = context.getSharedRequestValue(context.getUniqueId() + "emailSubscribeWidgetSuccess");
     if ("true".equals(isSuccess)) {
       context.getRequest().setAttribute("successTitle", context.getPreferences().get("successTitle"));
-      context.getRequest().setAttribute("successMessage", context.getPreferences().getOrDefault("successMessage", "You are now subscribed"));
+      context.getRequest().setAttribute("successMessage",
+          context.getPreferences().getOrDefault("successMessage", "You are now subscribed"));
       context.setJsp(SUCCESS_JSP);
       return context;
     }
 
     if ("inline".equals(context.getPreferences().get("view"))) {
-      context.setJsp(INLINE_JSP);
-    } else if ("true".equals(context.getPreferences().get("showName"))) {
-      context.setJsp(WITH_NAME_JSP);
+      context.setJsp(INLINE_FORM_JSP);
+    } else if ("vertical".equals(context.getPreferences().get("view"))) {
+      context.setJsp(VERTICAL_FORM_JSP);
     } else {
-      context.setJsp(JSP);
+      if ("true".equals(context.getPreferences().get("showName"))) {
+        context.setJsp(WITH_NAME_JSP);
+      } else {
+        context.setJsp(JSP);
+      }
     }
 
     // Preferences
     context.getRequest().setAttribute("buttonName", context.getPreferences().getOrDefault("buttonName", "Subscribe"));
+    context.getRequest().setAttribute("showName", context.getPreferences().getOrDefault("showName", "false"));
+    context.getRequest().setAttribute("introHtml", context.getPreferences().get("introHtml"));
+    context.getRequest().setAttribute("footerHtml", context.getPreferences().get("footerHtml"));
 
     // Standard request items
     context.getRequest().setAttribute("icon", context.getPreferences().get("icon"));
@@ -84,7 +94,7 @@ public class EmailSubscribeWidget extends GenericWidget {
     }
 
     // Previous post had error
-//    Email email = (Email) context.getRequestObject();
+    //    Email email = (Email) context.getRequestObject();
 
     // Show the JSP
     return context;
@@ -122,8 +132,7 @@ public class EmailSubscribeWidget extends GenericWidget {
 
     // Validate the parameters
     boolean isValid = true;
-    EmailValidator emailValidator = EmailValidator.getInstance(false);
-    if (!emailValidator.isValid(emailBean.getEmail())) {
+    if (!JMail.isValid(emailBean.getEmail())) {
       isValid = false;
       context.setWarningMessage("Please check the email address and try again");
     }
