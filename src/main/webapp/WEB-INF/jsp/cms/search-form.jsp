@@ -22,6 +22,7 @@
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <jsp:useBean id="placeholder" class="java.lang.String" scope="request"/>
+<jsp:useBean id="linkText" class="java.lang.String" scope="request"/>
 <jsp:useBean id="expand" class="java.lang.String" scope="request"/>
 <c:if test="${expand eq 'true'}">
 <style>
@@ -57,16 +58,17 @@
   <div class="input-group no-gap">
     <input id="input${widgetContext.uniqueId}" class="input-group-field" type="search"<c:if test="${expand ne 'true'}"> placeholder="<c:out value="${placeholder}" />"</c:if> name="query">
     <div class="input-group-button">
-      <button id="button${widgetContext.uniqueId}" type="submit" class="button search"><i id="icon${widgetContext.uniqueId}" class="fa fa-search"></i></button>
+      <button id="button${widgetContext.uniqueId}" type="submit" class="button search"><i id="icon${widgetContext.uniqueId}" class="fa fa-search"></i><c:out value="${linkText}" /></button>
     </div>
   </div>
 </form>
 <c:if test="${expand eq 'true'}">
 <script>
     $(document).ready(function () {
-        var button = $('#button${widgetContext.uniqueId}');
-        var input = $('#input${widgetContext.uniqueId}');
-        var icon = $('#icon${widgetContext.uniqueId}');
+        let form = $('#form${widgetContext.uniqueId}');
+        let button = $('#button${widgetContext.uniqueId}');
+        let input = $('#input${widgetContext.uniqueId}');
+        let icon = $('#icon${widgetContext.uniqueId}');
         function showSearchForm${widgetContext.uniqueId}() {
             input.addClass('isExpanded');
             input.attr("placeholder", "${js:escape(placeholder)}");
@@ -87,6 +89,11 @@
             setTimeout(function () {
                 hideSearchForm${widgetContext.uniqueId}();
             }, 150);
+        });
+        form.submit(function(e){
+            if (!input.val()) {
+                e.preventDefault(e);
+            }
         });
     });
 </script>

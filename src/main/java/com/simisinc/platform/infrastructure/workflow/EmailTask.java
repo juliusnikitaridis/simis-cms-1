@@ -34,11 +34,10 @@ import org.jeasy.flows.work.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 import javax.servlet.ServletContext;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -116,12 +115,13 @@ public class EmailTask implements Work {
                 return new DefaultWorkReport(WorkStatus.FAILED, workContext);
             }
 
-            ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
-            templateResolver.setTemplateMode(TemplateMode.HTML);
-            templateResolver.setPrefix("/WEB-INF/email-templates/");
-            templateResolver.setSuffix(".html");
-            templateResolver.setCacheTTLMs(Long.valueOf(3600000L));
-            templateResolver.setCacheable(true);
+      JavaxServletWebApplication application = JavaxServletWebApplication.buildApplication(servletContext);
+      WebApplicationTemplateResolver templateResolver = new WebApplicationTemplateResolver(application);
+      templateResolver.setTemplateMode(TemplateMode.HTML);
+      templateResolver.setPrefix("/WEB-INF/email-templates/");
+      templateResolver.setSuffix(".html");
+      templateResolver.setCacheTTLMs(Long.valueOf(3600000L));
+      templateResolver.setCacheable(true);
 
             TemplateEngine templateEngine = new TemplateEngine();
             templateEngine.setTemplateResolver(templateResolver);

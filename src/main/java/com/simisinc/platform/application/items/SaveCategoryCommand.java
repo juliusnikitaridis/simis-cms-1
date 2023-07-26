@@ -16,12 +16,13 @@
 
 package com.simisinc.platform.application.items;
 
-import com.simisinc.platform.application.DataException;
-import com.simisinc.platform.domain.model.items.Category;
-import com.simisinc.platform.infrastructure.persistence.items.CategoryRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.simisinc.platform.application.DataException;
+import com.simisinc.platform.domain.model.items.Category;
+import com.simisinc.platform.infrastructure.persistence.items.CategoryRepository;
 
 /**
  * Validates and saves a category object
@@ -32,6 +33,9 @@ import org.apache.commons.logging.LogFactory;
 public class SaveCategoryCommand {
 
   private static Log LOG = LogFactory.getLog(SaveCategoryCommand.class);
+
+  private static final String allowedChars = "abcdefghijklmnopqrstuvwyxz0123456789";
+  private static final String allowedFinalChars = "abcdefghijklmnopqrstuvwyxz0123456789-";
 
   public static Category saveCategory(Category categoryBean) throws DataException {
 
@@ -46,8 +50,16 @@ public class SaveCategoryCommand {
       throw new DataException("The user creating this category was not set");
     }
 
-    if (categoryBean.getId() == -1 && CategoryRepository.findByNameWithinCollection(categoryBean.getName(), categoryBean.getCollectionId()) != null) {
+    if (categoryBean.getId() == -1 && CategoryRepository.findByNameWithinCollection(categoryBean.getName(),
+        categoryBean.getCollectionId()) != null) {
       throw new DataException("A unique name is required");
+    }
+
+    // Validate the unique id
+    if (StringUtils.isNotBlank(categoryBean.getUniqueId())) {
+      if (!StringUtils.containsOnly(categoryBean.getUniqueId(), allowedFinalChars)) {
+        throw new DataException("The uniqueId contains invalid characters");
+      }
     }
 
     // Transform the fields and store...
@@ -63,6 +75,8 @@ public class SaveCategoryCommand {
       category = new Category();
     }
     category.setCollectionId(categoryBean.getCollectionId());
+    // @note set the uniqueId before setting the name
+    category.setUniqueId(GenerateCategoryUniqueIdCommand.generateUniqueId(category, categoryBean));
     category.setName(categoryBean.getName());
     category.setDescription(categoryBean.getDescription());
     category.setIcon(categoryBean.getIcon());
