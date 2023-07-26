@@ -40,7 +40,6 @@ public class ComplianceUserRepository {
 
     public static void update(ComplianceUser record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
                 .addIfExists("sys_unique_user_id",record.getSysUniqueUserId())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("user_role",record.getUserRole());

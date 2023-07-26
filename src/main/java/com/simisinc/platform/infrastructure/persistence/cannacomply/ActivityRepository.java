@@ -28,7 +28,6 @@ public class ActivityRepository {
                 .add("date",record.getDate())
                 .add("item_type",record.getItemType())
                 .add("block_id",record.getBlockId())
-                .add("item_type",record.getItemType())
                 .add("item_id",record.getItemType())
                 .add("status",record.getStatus());
 

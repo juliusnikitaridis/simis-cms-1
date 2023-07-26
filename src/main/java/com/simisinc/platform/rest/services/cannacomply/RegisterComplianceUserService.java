@@ -7,22 +7,19 @@ import com.simisinc.platform.domain.events.cms.UserSignedUpEvent;
 import com.simisinc.platform.domain.model.Group;
 import com.simisinc.platform.domain.model.Role;
 import com.simisinc.platform.domain.model.User;
-import com.simisinc.platform.domain.model.cannacomply.Users;
 import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.UsersRepository;
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class RegisterUserService {
-    private static Log LOG = LogFactory.getLog(RegisterUserService.class);
+
+public class RegisterComplianceUserService {
+    private static Log LOG = LogFactory.getLog(RegisterComplianceUserService.class);
 
     public ServiceResponse post(ServiceContext context) {
 
@@ -30,10 +27,9 @@ public class RegisterUserService {
         try {
 
             ObjectMapper mapper = new ObjectMapper();
-            Users newUser = mapper.readValue(context.getJsonRequest(), Users.class);
+            User newUser = mapper.readValue(context.getJsonRequest(), User.class);
             String newSysUserId = addUser(newUser, context.getUserId());
-            newUser.setSysUniqueUserId(newSysUserId);
-            UsersRepository.add(newUser);
+
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{
                 add(newSysUserId);
@@ -42,7 +38,7 @@ public class RegisterUserService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in Register User Service", e);
+            LOG.error("Error in RegisterComplianceUser Service", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;
@@ -88,7 +84,7 @@ public class RegisterUserService {
         User savedUser = null;
         savedUser = SaveUserCommand.saveUser(user);
         if (savedUser == null) {
-            throw new Exception("user could not be saved when calling RegisterUserService");
+            throw new Exception("user could not be saved when calling RegisterComplianceUserService");
         }
         // Trigger events - send the registration verification email.
         WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));

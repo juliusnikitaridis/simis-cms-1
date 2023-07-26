@@ -23,10 +23,8 @@ import com.simisinc.platform.application.json.JsonCommand;
 import com.simisinc.platform.application.login.AuthenticateLoginCommand;
 import com.simisinc.platform.domain.model.App;
 import com.simisinc.platform.domain.model.User;
-import com.simisinc.platform.domain.model.cannacomply.Users;
 import com.simisinc.platform.domain.model.login.UserLogin;
 import com.simisinc.platform.domain.model.login.UserToken;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.UsersRepository;
 import com.simisinc.platform.infrastructure.persistence.login.UserLoginRepository;
 import com.simisinc.platform.infrastructure.persistence.login.UserTokenRepository;
 import com.simisinc.platform.presentation.controller.ContextConstants;
@@ -390,11 +388,16 @@ public class RestRequestFilter implements Filter {
     UserTokenRepository.add(userToken);
 
     //see what farm this user belongs to if canna comply user
-    String farmProfileString = "";
-    if(user.getUserType()!= null && user.getUserType().toUpperCase().contains("CANNACOMPLY")) {
-      String cannaComplyUserId = UsersRepository.findById(user.getUniqueId()).getSysUniqueUserId();
-      farmProfileString = "\"farm_profile_id\":\"" + JsonCommand.toJson(cannaComplyUserId) + "\",\n" ;
-    }
+//    String farmProfileString = "";
+//    if(user.getUserType()!= null && user.getUserType().toUpperCase().contains("CANNACOMPLY")) {
+//      Users cannaComplyUser = UsersRepository.findById(user.getUniqueId());
+//      //cannc users cant register without being inserted into the cannacomply.users table anyway --//todo dont need this ??
+//      if(cannaComplyUser != null) {
+//        farmProfileString = "\"farm_profile_id\":\"" + JsonCommand.toJson(cannaComplyUser.getSysUniqueUserId()) + "\",\n" ;
+//      } else {
+//        farmProfileString = "\"farm_profile_id\":\"" + JsonCommand.toJson("user not found in cannacomple.users table") + "\",\n" ;
+//      }
+//    }
     // Make a response
     // https://tools.ietf.org/html/rfc6750
     String json = "{\n" +
@@ -410,7 +413,7 @@ public class RestRequestFilter implements Filter {
         "\"user_type\":\"" + JsonCommand.toJson(user.getUserType()) + "\",\n" +
         "\"latitude\":\"" + JsonCommand.toJson(String.valueOf(user.getLatitude())) + "\",\n" +
         "\"longitude\":\"" + JsonCommand.toJson(String.valueOf(user.getLongitude())) + "\",\n" +
-         farmProfileString +
+       //  farmProfileString +
         "\"scope\":\"create\"\n" +
         "}";
     response.setContentType("application/json");

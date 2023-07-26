@@ -60,7 +60,7 @@
   <service method="post" endpoint="cannacomply/CreateFarmService" class="com.simisinc.platform.rest.services.cannacomply.CreateFarmService"/>
   <service method="get" endpoint="cannacomply/CropListService" class="com.simisinc.platform.rest.services.cannacomply.CropListService"/>
   <service method="get" endpoint="cannacomply/FarmListService" class="com.simisinc.platform.rest.services.cannacomply.FarmListService"/>
-  <service method="post" endpoint="cannacomply/RegisterUserService" class="com.simisinc.platform.rest.services.cannacomply.RegisterUserService"/>
+  <service method="post" endpoint="cannacomply/RegisterUserService" class="com.simisinc.platform.rest.services.cannacomply.RegisterComplianceUserService"/>
   <service method="get" endpoint="cannacomply/ActivityListService" class="com.simisinc.platform.rest.services.cannacomply.ActivityListService"/>
   <service method="post" endpoint="cannacomply/CreateActivityService" class="com.simisinc.platform.rest.services.cannacomply.CreateActivityService"/>
   <service method="post" endpoint="cannacomply/CreateIssueService" class="com.simisinc.platform.rest.services.cannacomply.CreateIssueService"/>
