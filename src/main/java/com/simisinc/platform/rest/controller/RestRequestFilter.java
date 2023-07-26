@@ -65,27 +65,8 @@ import com.simisinc.platform.infrastructure.persistence.login.UserTokenRepositor
 import com.simisinc.platform.presentation.controller.ContextConstants;
 import com.simisinc.platform.presentation.controller.RequestConstants;
 import com.simisinc.platform.presentation.controller.UserSession;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.http.conn.util.InetAddressUtils;
-
-import javax.security.auth.login.LoginException;
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.*;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Enumeration;
-import java.util.StringTokenizer;
-import java.util.UUID;
 
-import static com.simisinc.platform.presentation.controller.UserSession.API_SOURCE;
-import static javax.servlet.http.HttpServletResponse.*;
 
 /**
  * Authorizes the REST request

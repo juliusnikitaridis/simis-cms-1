@@ -71,7 +71,6 @@ public class SchedulerManager {
   public static final String ORDER_MANAGEMENT_PROCESS_NEW_ORDERS_JOB = "OrderManagementProcessNewOrders";
   public static final String ORDER_MANAGEMENT_PROCESS_SHIPPING_UPDATES_JOB = "OrderManagementProcessShippingUpdates";
   public static final String PROCESS_MEDICINE_SCHEDULES_JOB = "ProcessMedicineSchedules";
-  public static final String LOAD_SYSTEM_FILES_JOB = "LoadSystemFiles";
   public static final String SEND_SP_REMINDERS_JOB = "sendSpReminders";
 
   // Jobs which can be run by multiple clients
