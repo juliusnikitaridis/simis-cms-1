@@ -56,37 +56,5 @@
   <service method="post" endpoint="carfix/UpdateMemberService" class="com.simisinc.platform.rest.services.carfix.UpdateMemberService"/>
   <service method="post" endpoint="carfix/MemberListService" class="com.simisinc.platform.rest.services.carfix.MemberListService"/>
 
-  <service method="post" endpoint="cannacomply/CreateCropService" class="com.simisinc.platform.rest.services.cannacomply.CreateCropService"/>
-  <service method="post" endpoint="cannacomply/CreateFarmService" class="com.simisinc.platform.rest.services.cannacomply.CreateFarmService"/>
-  <service method="get" endpoint="cannacomply/CropListService" class="com.simisinc.platform.rest.services.cannacomply.CropListService"/>
-  <service method="get" endpoint="cannacomply/FarmListService" class="com.simisinc.platform.rest.services.cannacomply.FarmListService"/>
-  <service method="post" endpoint="cannacomply/RegisterUserService" class="com.simisinc.platform.rest.services.cannacomply.RegisterComplianceUserService"/>
-  <service method="get" endpoint="cannacomply/ActivityListService" class="com.simisinc.platform.rest.services.cannacomply.ActivityListService"/>
-  <service method="post" endpoint="cannacomply/CreateActivityService" class="com.simisinc.platform.rest.services.cannacomply.CreateActivityService"/>
-  <service method="post" endpoint="cannacomply/CreateIssueService" class="com.simisinc.platform.rest.services.cannacomply.CreateIssueService"/>
-  <service method="post" endpoint="cannacomply/CreateScheduleService" class="com.simisinc.platform.rest.services.cannacomply.CreateScheduleService"/>
-  <service method="get" endpoint="cannacomply/IssueListService" class="com.simisinc.platform.rest.services.cannacomply.IssueListService"/>
-  <service method="post" endpoint="cannacomply/ScheduleListService" class="com.simisinc.platform.rest.services.cannacomply.ScheduleListService"/>
-  <service method="post" endpoint="cannacomply/UpdateActivityService" class="com.simisinc.platform.rest.services.cannacomply.UpdateActivityService"/>
-  <service method="post" endpoint="cannacomply/UpdateCropService" class="com.simisinc.platform.rest.services.cannacomply.UpdateCropService"/>
-  <service method="post" endpoint="cannacomply/UpdateFarmService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFarmService"/>
-  <service method="post" endpoint="cannacomply/UpdateIssueService" class="com.simisinc.platform.rest.services.cannacomply.UpdateIssueService"/>
-  <service method="post" endpoint="cannacomply/UpdateScheduleService" class="com.simisinc.platform.rest.services.cannacomply.UpdateScheduleService"/>
-  <service method="post" endpoint="cannacomply/CreateBlockService" class="com.simisinc.platform.rest.services.cannacomply.CreateBlockService"/>
-  <service method="get" endpoint="cannacomply/BlockListService" class="com.simisinc.platform.rest.services.cannacomply.BlockListService"/>
-  <service method="post" endpoint="cannacomply/UpdateBlockService" class="com.simisinc.platform.rest.services.cannacomply.UpdateBlockService"/>
-  <service method="post" endpoint="cannacomply/CreateRoomService" class="com.simisinc.platform.rest.services.cannacomply.CreateRoomService"/>
-  <service method="get" endpoint="cannacomply/RoomListService" class="com.simisinc.platform.rest.services.cannacomply.RoomListService"/>
-  <service method="get" endpoint="cannacomply/CreateYieldService" class="com.simisinc.platform.rest.services.cannacomply.CreateYieldService"/>
-  <service method="get" endpoint="cannacomply/YieldListService" class="com.simisinc.platform.rest.services.cannacomply.YieldListService"/>
-  <service method="get" endpoint="cannacomply/CreateTreatmentProductService" class="com.simisinc.platform.rest.services.cannacomply.CreateTreatmentProductService"/>
-  <service method="get" endpoint="cannacomply/TreatmentProductListService" class="com.simisinc.platform.rest.services.cannacomply.TreatmentProductListService"/>
-  <service method="get" endpoint="cannacomply/BlogListService" class="com.simisinc.platform.rest.services.cannacomply.BlogListService"/>
-  <service method="get" endpoint="cannacomply/CreateComplianceUserService" class="com.simisinc.platform.rest.services.cannacomply.CreateComplianceUserService"/>
-  <service method="get" endpoint="cannacomply/UpdateComplianceUserService" class="com.simisinc.platform.rest.services.cannacomply.UpdateComplianceUserService"/>
-  <service method="get" endpoint="cannacomply/ComplianceUserListService" class="com.simisinc.platform.rest.services.cannacomply.ComplianceUserListService"/>
-  <service method="get" endpoint="cannacomply/CreatePackageService" class="com.simisinc.platform.rest.services.cannacomply.CreatePackageService"/>
-  <service method="get" endpoint="cannacomply/PackagingListService" class="com.simisinc.platform.rest.services.cannacomply.PackagingListService"/>
-
 </services>
 
