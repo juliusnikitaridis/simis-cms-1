@@ -9,6 +9,9 @@ create table carfix.categories
 
 alter table carfix.categories owner to postgres;
 
+create unique index categories_id_uindex
+    on carfix.categories (id);
+
 create table carfix.brands
 (
     id varchar,
@@ -16,6 +19,9 @@ create table carfix.brands
 );
 
 alter table carfix.brands owner to postgres;
+
+create unique index brands_id_uindex
+    on carfix.brands (id);
 
 create table carfix.vehicles
 (
@@ -32,7 +38,8 @@ create table carfix.vehicles
     member_id varchar,
     service_history varchar,
     maintenance_plan varchar,
-    make_id varchar
+    make_id varchar,
+    picture_data varchar
 );
 
 alter table carfix.vehicles owner to postgres;
@@ -57,10 +64,39 @@ create table carfix.service_request
     preferred_date varchar,
     confirmed_date varchar,
     job_number varchar,
-    customer_reference varchar
+    customer_reference varchar,
+    technician varchar,
+    service_advisor integer,
+    picture_data_clob bytea,
+    latitude varchar,
+    longitude varchar
 );
 
 alter table carfix.service_request owner to postgres;
+
+create unique index service_request_id_uindex
+    on carfix.service_request (id);
+
+create index service_request_vehicle_id_uindex
+    on carfix.service_request (vehicle_id);
+
+create index service_request_vehicle_id_uindex2
+    on carfix.service_request (vehicle_id);
+
+create index service_request_member_id_uindex
+    on carfix.service_request (member_id);
+
+create index service_request_radius_uindex
+    on carfix.service_request (radius);
+
+create index service_request_status_uindex
+    on carfix.service_request (status);
+
+create index service_request_confirmed_service_provider_id_uindex
+    on carfix.service_request (confirmed_service_provider_id);
+
+create index service_request_vehicle_brand_id_uindex
+    on carfix.service_request (vehicle_brand_id);
 
 create table carfix.quote
 (
@@ -72,10 +108,23 @@ create table carfix.quote
     service_provider_name varchar,
     status varchar,
     quantity varchar,
-    created_date varchar
+    created_date varchar,
+    vat varchar,
+    sub_total varchar,
+    date_type varchar,
+    distance_from_sp varchar
 );
 
 alter table carfix.quote owner to postgres;
+
+create index brands_request_for_service_id_uindex
+    on carfix.quote (request_for_service_id);
+
+create index quote_request_for_service_id_uindex
+    on carfix.quote (request_for_service_id);
+
+create index quote_status_uindex
+    on carfix.quote (status);
 
 create table carfix.quotation_item
 (
@@ -96,6 +145,15 @@ create table carfix.quotation_item
 
 alter table carfix.quotation_item owner to postgres;
 
+create unique index quotation_item_id_uindex
+    on carfix.quotation_item (id);
+
+create index quotation_item_quote_id
+    on carfix.quotation_item (quote_id);
+
+create index quotation_item_item_status_uindex
+    on carfix.quotation_item (item_status);
+
 create table carfix.service_provider
 (
     id varchar,
@@ -114,10 +172,21 @@ create table carfix.service_provider
     drop_off varchar,
     rmi varchar,
     operating_year varchar,
-    operating_hours varchar
+    operating_hours varchar,
+    account_firstname varchar,
+    account_lastname varchar,
+    account_no varchar,
+    account_branch varchar,
+    account_bank varchar
 );
 
 alter table carfix.service_provider owner to postgres;
+
+create index service_provider_id_uindex
+    on carfix.service_provider (id);
+
+create index service_provider_user_id_uindex
+    on carfix.service_provider (user_id);
 
 create table carfix.service_request_items
 (
@@ -129,18 +198,11 @@ create table carfix.service_request_items
 
 alter table carfix.service_request_items owner to postgres;
 
-create table carfix.payment_history
-(
-    amount varchar,
-    merchant_transaction_no varchar,
-    member_id varchar,
-    service_provider_id varchar,
-    id varchar,
-    status varchar,
-    raw_request varchar
-);
+create unique index service_request_itemss_id_uindex
+    on carfix.service_request_items (id);
 
-alter table carfix.payment_history owner to postgres;
+create index service_request_items_service_request_id_uindex
+    on carfix.service_request_items (service_request_id);
 
 create table carfix.device_token
 (
@@ -150,7 +212,23 @@ create table carfix.device_token
 
 alter table carfix.device_token owner to postgres;
 
+create table carfix.payment_history
+(
+    transaction_amount varchar,
+    merchant_transaction_no varchar,
+    member_id varchar,
+    service_provider_id varchar,
+    id varchar,
+    status varchar,
+    raw_request varchar,
+    date varchar,
+    sysdate varchar,
+    invoice_amount varchar,
+    commission_amount varchar,
+    batch_payment_status varchar,
+    vat_amount varchar,
+    batch_payment_amount varchar
+);
 
+alter table carfix.payment_history owner to postgres;
 
---for disablinh users
-update users set username = concat(username,'OLD'),email = concat(email,'OLD'),unique_id=concat(unique_id,'OLD')where password = '$argon2i$v=19$m=65536,t=2,p=1$hH+MUSJwqG6XiF1B4QIjjg$jAiprPhfvTTwL4/imiKUmZis2//YGYcfxNzdm/z5zZw';
