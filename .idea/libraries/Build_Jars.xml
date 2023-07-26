@@ -33,6 +33,7 @@
       <root url="file://$PROJECT_DIR$/lib/build/classgraph" />
       <root url="file://$PROJECT_DIR$/lib/build/okhttp" />
       <root url="file://$PROJECT_DIR$/lib/build/xstream" />
+      <root url="file://$PROJECT_DIR$/lib/build/httpclient" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -51,6 +52,7 @@
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/granule" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/gson" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/hikaricp" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/build/httpclient" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/jackson" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/javamail" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/jobrunr" recursive="false" />
