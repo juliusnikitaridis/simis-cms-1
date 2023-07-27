@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.squareup:square:24.0.0.20220921">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/squareup/square/24.0.0.20220921/square-24.0.0.20220921.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/squareup/square/24.0.0.20220921/square-24.0.0.20220921-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/squareup/square/24.0.0.20220921/square-24.0.0.20220921-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
