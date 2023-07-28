@@ -14,11 +14,11 @@ public class ComplianceUserRepository {
 
     private static Log LOG = LogFactory.getLog(ComplianceUserRepository.class);
     private static String TABLE_NAME = "cannacomply.compliance_user";
-    private static String[] PRIMARY_KEY = new String[]{"id"};
+    private static String[] PRIMARY_KEY = new String[]{"uuid"};
 
     public static ComplianceUser add(ComplianceUser record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
-                .add("id", record.getId())
+                .add("uuid", record.getUuid())
                 .add("sys_unique_user_id",record.getSysUniqueUserId())
                 .add("farm_id",record.getFarmId())
                 .add("user_role",record.getUserRole());
@@ -49,7 +49,7 @@ public class ComplianceUserRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("uuid = ?", record.getId()));
                 transaction.commit();
 
         } catch (Exception se) {
@@ -62,7 +62,7 @@ public class ComplianceUserRepository {
     public static Activity findById(String id) {
 
         return (Activity) DB.selectRecordFrom(
-                TABLE_NAME, new SqlUtils().add("id = ?", id),
+                TABLE_NAME, new SqlUtils().add("uuid = ?", id),
                 ComplianceUserRepository::buildRecord);
     }
 
@@ -74,7 +74,7 @@ public class ComplianceUserRepository {
         if (specification != null) {
             where
                     .addIfExists("farm_id = ?",specification.getFarmId())
-                    .addIfExists("id = ?",specification.getId())
+                    .addIfExists("uuid = ?",specification.getId())
                     .addIfExists("unique_sys_user_id = ?",specification.getUniqueSysUserId());
 
 
@@ -86,7 +86,7 @@ public class ComplianceUserRepository {
 
     public static void delete(String activityId) throws Exception {
         try (Connection connection = DB.getConnection()) {
-            DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", activityId));
+            DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("uuid = ?", activityId));
             LOG.debug("activity has been deleted:>>" + activityId);
         } catch (Exception e) {
             throw e;
@@ -99,7 +99,7 @@ public class ComplianceUserRepository {
         ComplianceUser complianceUser = new ComplianceUser();
         try {
              complianceUser.setUserRole(rs.getString("user_role"));
-             complianceUser.setId(rs.getString("id"));
+             complianceUser.setUuid(rs.getString("uuid"));
              complianceUser.setFarmId(rs.getString("farm_id"));
              complianceUser.setSysUniqueUserId(rs.getString("sys_unique_user_id"));
 

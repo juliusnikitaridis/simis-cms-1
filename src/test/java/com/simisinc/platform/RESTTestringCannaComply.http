@@ -251,19 +251,21 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:8080/api/cannacomply/RegisterUserService
+POST http://localhost:8080/api/cannacomply/RegisterComplianceUserService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Authorization:Bearer API-653a20bf-a97c-458f-828b-ccbf4c49766e1
 Content-Type: application/json
 
 {
   "firstName":"Dean",
   "lastName":"Richmond",
-  "email":"juliusniki21aaa@gmail.com",
-  "username":"juliusniki21aaa@gmail.com",
+  "email":"juliusniki21aaa1111111@gmail.com",
+  "username":"juliusniki21aaa1111111@gmail.com",
   "idnum": "1996",
   "roleId": "5",
-  "contactNo": "3423423452"
+  "contactNo": "3423423452",
+  "farmId": "farm_id",
+  "userRole": "user_role"
 }
 ###
 

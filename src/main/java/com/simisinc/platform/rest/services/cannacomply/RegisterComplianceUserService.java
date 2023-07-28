@@ -7,8 +7,10 @@ import com.simisinc.platform.domain.events.cms.UserSignedUpEvent;
 import com.simisinc.platform.domain.model.Group;
 import com.simisinc.platform.domain.model.Role;
 import com.simisinc.platform.domain.model.User;
+import com.simisinc.platform.domain.model.cannacomply.ComplianceUser;
 import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.ComplianceUserRepository;
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
@@ -16,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class RegisterComplianceUserService {
@@ -27,8 +30,12 @@ public class RegisterComplianceUserService {
         try {
 
             ObjectMapper mapper = new ObjectMapper();
-            User newUser = mapper.readValue(context.getJsonRequest(), User.class);
+            ComplianceUser newUser = mapper.readValue(context.getJsonRequest(), ComplianceUser.class);
             String newSysUserId = addUser(newUser, context.getUserId());
+
+            newUser.setUuid(UUID.randomUUID().toString());
+            newUser.setSysUniqueUserId(newSysUserId);
+            ComplianceUserRepository.add(newUser);
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{

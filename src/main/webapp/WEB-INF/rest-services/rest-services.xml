@@ -82,7 +82,7 @@
   <service method="get" endpoint="cannacomply/CreateTreatmentProductService" class="com.simisinc.platform.rest.services.cannacomply.CreateTreatmentProductService"/>
   <service method="get" endpoint="cannacomply/TreatmentProductListService" class="com.simisinc.platform.rest.services.cannacomply.TreatmentProductListService"/>
   <service method="get" endpoint="cannacomply/BlogListService" class="com.simisinc.platform.rest.services.cannacomply.BlogListService"/>
-  <service method="get" endpoint="cannacomply/CreateComplianceUserService" class="com.simisinc.platform.rest.services.cannacomply.CreateComplianceUserService"/>
+  <service method="get" endpoint="cannacomply/RegisterComplianceUserService" class="com.simisinc.platform.rest.services.cannacomply.RegisterComplianceUserService"/>
   <service method="get" endpoint="cannacomply/UpdateComplianceUserService" class="com.simisinc.platform.rest.services.cannacomply.UpdateComplianceUserService"/>
   <service method="get" endpoint="cannacomply/ComplianceUserListService" class="com.simisinc.platform.rest.services.cannacomply.ComplianceUserListService"/>
   <service method="get" endpoint="cannacomply/CreatePackageService" class="com.simisinc.platform.rest.services.cannacomply.CreatePackageService"/>
