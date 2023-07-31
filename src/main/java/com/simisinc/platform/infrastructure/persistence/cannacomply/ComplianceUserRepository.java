@@ -19,7 +19,7 @@ public class ComplianceUserRepository {
     public static ComplianceUser add(ComplianceUser record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("uuid", record.getUuid())
-                .add("sys_unique_user_id",record.getSysUniqueUserId())
+                .add("unique_sys_user_id",record.getSysUniqueUserId())
                 .add("farm_id",record.getFarmId())
                 .add("user_role",record.getUserRole());
 
@@ -40,7 +40,7 @@ public class ComplianceUserRepository {
 
     public static void update(ComplianceUser record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("sys_unique_user_id",record.getSysUniqueUserId())
+                .addIfExists("unique_sys_user_id",record.getSysUniqueUserId())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("user_role",record.getUserRole());
 
@@ -101,7 +101,7 @@ public class ComplianceUserRepository {
              complianceUser.setUserRole(rs.getString("user_role"));
              complianceUser.setUuid(rs.getString("uuid"));
              complianceUser.setFarmId(rs.getString("farm_id"));
-             complianceUser.setSysUniqueUserId(rs.getString("sys_unique_user_id"));
+             complianceUser.setSysUniqueUserId(rs.getString("unique_sys_user_id"));
 
             return complianceUser;
         } catch (Exception e) {
