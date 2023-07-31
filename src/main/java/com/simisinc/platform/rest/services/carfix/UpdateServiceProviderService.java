@@ -35,7 +35,9 @@ public class UpdateServiceProviderService {
             ServiceProvider newServiceProvider = mapper.readValue(context.getJsonRequest(), ServiceProvider.class);
             //update stuff in user table
             ServiceProvider existingServiceProvider = ServiceProviderRepository.findById(newServiceProvider.getServiceProviderId());
-            UserRepository.updateLatAndLong(existingServiceProvider.getUniqueId(),newServiceProvider.getLatitude(),newServiceProvider.getLongitude());
+            if(newServiceProvider.getLongitude()!= 0.0 && newServiceProvider.getLatitude() != 0.0) {
+                UserRepository.updateLatAndLong(existingServiceProvider.getUniqueId(),newServiceProvider.getLatitude(),newServiceProvider.getLongitude());
+            }
             //TODO should check if the SP exists - check if the record was actually updated
             ServiceProviderRepository.update(newServiceProvider);
 

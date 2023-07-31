@@ -50,7 +50,6 @@ public class YieldRepository {
 
     public static void update(Yield record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
                 .addIfExists("quantity", record.getQuantity())
                 .addIfExists("loss", record.getLoss())
                 .addIfExists("notes", record.getNotes())

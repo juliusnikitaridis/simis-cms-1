@@ -243,19 +243,8 @@ Authorization:Bearer API-2ae6b3e9-d9c2-4101-ab2a-478f703b1e141
 Content-Type: application/json
 
 {
-  "serviceProviderId": "30041224-dbc0-4ef7-829a-1e023d8a38a1",
-  "roleId": "5",
-  "certifications": "certifications format?",
-  "supportedBrands": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285aa2"}],
-  "supportedCategories": [{"id": "b8367ced-5395-465a-8012-b55779285aa2"},{"id": "b8367ced-5395-465a-8012-b55779285ab2"}],
-  "name": "UPDATEDNAME",
-  "latitude": "200",
-  "longitude": "200",
-  "address": "1 Lobelia close bellville 7540",
-  "aboutUs": "some information about the SP",
-  "logoData": "encoded_logo_data",
-  "contactNo": "3423423452",
-  "accreditations": "acccreditation data"
+  "serviceProviderId": "2ee7492c-b344-4829-ba4f-3ddfadc3b9e7",
+  "name": "UPDATEDNAMEUPDATED2"
 }
 ###
 
