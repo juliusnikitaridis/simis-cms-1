@@ -38,7 +38,7 @@ public class MemberListService {
             ServiceResponse response = new ServiceResponse(200);
             List<User> userList = new ArrayList<>();
             userList.add(user);
-            ServiceResponseCommand.addMeta(response, "Vehicles List", userList, null);
+            ServiceResponseCommand.addMeta(response, "Member List", userList, null);
             response.setData(user);
             return response;
         } catch (Throwable e) {

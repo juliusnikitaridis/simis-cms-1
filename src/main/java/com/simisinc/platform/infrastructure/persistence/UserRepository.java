@@ -545,7 +545,7 @@ public class UserRepository {
 
     //when returning users through the API, return smaller set of fields
     //timestamps can not be serialized without causing errors in the RestServlet.java
-    private static User buildRecordMinimal(ResultSet rs) {
+    public static User buildRecordMinimal(ResultSet rs) {
         try {
             User record = new User();
             //record.setId(rs.getLong("user_id"));

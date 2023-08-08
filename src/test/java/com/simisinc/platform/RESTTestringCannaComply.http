@@ -53,6 +53,13 @@ Authorization:Bearer API-6774641f-2ad2-4d30-be0e-ea281b88a7ff1
 Content-Type: application/json
 ###
 
+###
+GET http://localhost:8080/api/cannacomply/UserListService?uniqueId=julius-niki
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-5960348c-76b2-49ff-8c14-b6f1bc87391c1
+Content-Type: application/json
+###
+
 
 
 GET http://localhost:8080/api/cannacomply/YieldListService?cropId=543452453245

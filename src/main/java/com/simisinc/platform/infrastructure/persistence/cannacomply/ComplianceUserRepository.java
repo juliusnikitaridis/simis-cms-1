@@ -1,12 +1,15 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
+import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.cannacomply.Activity;
 import com.simisinc.platform.domain.model.cannacomply.ComplianceUser;
 import com.simisinc.platform.infrastructure.database.*;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
@@ -59,10 +62,17 @@ public class ComplianceUserRepository {
     }
 
 
-    public static Activity findById(String id) {
+    public static ComplianceUser findById(String id) {
 
-        return (Activity) DB.selectRecordFrom(
+        return (ComplianceUser) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("uuid = ?", id),
+                ComplianceUserRepository::buildRecord);
+    }
+
+    public static ComplianceUser findByUniqueId(String uniqueId) {
+
+        return (ComplianceUser) DB.selectRecordFrom(
+                TABLE_NAME, new SqlUtils().add("unique_sys_user_id = ?", uniqueId),
                 ComplianceUserRepository::buildRecord);
     }
 
@@ -94,14 +104,50 @@ public class ComplianceUserRepository {
     }
 
 
+
+
+
     private static ComplianceUser buildRecord(ResultSet rs) {
 
-        ComplianceUser complianceUser = new ComplianceUser();
         try {
-             complianceUser.setUserRole(rs.getString("user_role"));
-             complianceUser.setUuid(rs.getString("uuid"));
-             complianceUser.setFarmId(rs.getString("farm_id"));
-             complianceUser.setSysUniqueUserId(rs.getString("unique_sys_user_id"));
+
+        //get base user info
+        User baseUser = (User) DB.selectRecordFrom(
+                "Users", new SqlUtils().add("unique_id = ?", rs.getString("unique_sys_user_id")),
+                UserRepository::buildRecordMinimal);
+
+        ComplianceUser complianceUser = new ComplianceUser();
+        complianceUser.setSysUniqueUserId(baseUser.getUniqueId());
+        complianceUser.setUserType(baseUser.getUserType());
+        complianceUser.setFirstName(baseUser.getFirstName());
+        complianceUser.setLastName(baseUser.getLastName());
+        complianceUser.setContactNo(baseUser.getContactNo());
+        complianceUser.setOrganization(baseUser.getOrganization());
+        complianceUser.setNickname(baseUser.getNickname());
+        complianceUser.setEmail(baseUser.getEmail());
+        complianceUser.setIdnum(baseUser.getIdnum());
+        complianceUser.setUsername(baseUser.getUsername());
+        // record.setPassword(rs.getString("password"));
+        // complianceUser.setEnabled(rs.getBoolean("enabled"));
+        //  record.setCreated(rs.getTimestamp("created"));
+        //  record.setModified(rs.getTimestamp("modified"));
+        //  record.setAccountToken(rs.getString("account_token"));
+        //   record.setValidated(rs.getTimestamp("validated"));
+        //  record.setCreatedBy(rs.getLong("created_by"));
+        //   record.setModifiedBy(rs.getLong("modified_by"));
+        //   complianceUser.setTitle(rs.getString("title"));
+        complianceUser.setDepartment(baseUser.getDepartment());
+        complianceUser.setTimeZone(baseUser.getTimeZone());
+        complianceUser.setCity(baseUser.getCity());
+        complianceUser.setState(baseUser.getState());
+        complianceUser.setCountry(baseUser.getCountry());
+        complianceUser.setPostalCode(baseUser.getPostalCode());
+        complianceUser.setLatitude(baseUser.getLatitude());
+        complianceUser.setLongitude(baseUser.getLongitude());
+        complianceUser.setUserRole(rs.getString("user_role"));
+        complianceUser.setUuid(rs.getString("uuid"));
+        complianceUser.setFarmId(rs.getString("farm_id"));
+        complianceUser.setSysUniqueUserId(rs.getString("unique_sys_user_id"));
 
             return complianceUser;
         } catch (Exception e) {
