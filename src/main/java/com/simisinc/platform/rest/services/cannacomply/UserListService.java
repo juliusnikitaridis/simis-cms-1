@@ -29,11 +29,17 @@ public class UserListService {
     public ServiceResponse get(ServiceContext context) {
 
         try {
-            String uniqueId = context.getParameter("uniqueId");
-
-            ComplianceUser user = (ComplianceUser) ComplianceUserRepository.findByUniqueId(uniqueId);
             List<User> userList = new ArrayList<>();
-            userList.add(user);
+            String uniqueId = context.getParameter("uniqueId");
+            String farmId = context.getParameter("farmId");
+
+            if(uniqueId != null) {
+                ComplianceUser user = ComplianceUserRepository.findByUniqueId(uniqueId);
+                userList.add(user);
+            } else if (farmId != null) {
+                userList.addAll(ComplianceUserRepository.findAllByFarmId(farmId));
+            }
+
 
             ServiceResponse response = new ServiceResponse(200);
             ServiceResponseCommand.addMeta(response, "User List", userList, null);

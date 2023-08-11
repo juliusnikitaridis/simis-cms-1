@@ -60,6 +60,13 @@ Authorization:Bearer API-5960348c-76b2-49ff-8c14-b6f1bc87391c1
 Content-Type: application/json
 ###
 
+###
+GET http://localhost:8080/api/cannacomply/UserListService?farmId=farm_id
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-5960348c-76b2-49ff-8c14-b6f1bc87391c1
+Content-Type: application/json
+###
+
 
 
 GET http://localhost:8080/api/cannacomply/YieldListService?cropId=543452453245
@@ -153,6 +160,28 @@ Content-Type: application/json
   "harvestId": "harvestId"
 }
 ###
+
+###
+POST http://localhost:8080/api/cannacomply/UpdatePackagingService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Content-Type: application/json
+
+{
+  "id": "c6ce8140-bb1e-41b0-ae52-32a4419e2091",
+  "packageTag": "some tag",
+  "item": "item",
+  "quantity": "300",
+  "farmId": "34234234",
+  "location": "location2",
+  "status": "SOME STATUS2",
+  "date": "date2",
+  "harvestId": "harvestId"
+}
+
+
+
+
 
 ###
 GET http://localhost:8080/api/cannacomply/PackagingListService?id=c6ce8140-bb1e-41b0-ae52-32a4419e2091

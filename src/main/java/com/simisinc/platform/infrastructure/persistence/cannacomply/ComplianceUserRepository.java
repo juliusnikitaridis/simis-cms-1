@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 
 public class ComplianceUserRepository {
@@ -74,6 +75,10 @@ public class ComplianceUserRepository {
         return (ComplianceUser) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("unique_sys_user_id = ?", uniqueId),
                 ComplianceUserRepository::buildRecord);
+    }
+
+    public static List<ComplianceUser> findAllByFarmId(String farmId) {
+        return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,new SqlUtils().add("farm_id = ?",farmId),null,ComplianceUserRepository::buildRecord).getRecords();
     }
 
 
