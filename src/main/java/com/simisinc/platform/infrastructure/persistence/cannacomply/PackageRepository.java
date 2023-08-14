@@ -24,6 +24,8 @@ public class PackageRepository {
                 .add("quantity", record.getQuantity())
                 .add("farm_id",record.getFarmId())
                 .add("location",record.getLocation())
+                .add("user_id",record.getUserId())
+                .add("last_updated",record.getLastUpdated())
                 .add("status",record.getStatus())
                 .add("date",record.getDate())
                 .add("harvest_id",record.getHarvestId());
@@ -50,6 +52,8 @@ public class PackageRepository {
                 .addIfExists("quantity", record.getQuantity())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("location",record.getLocation())
+                .addIfExists("last_updated",record.getLastUpdated())
+                .addIfExists("user_id",record.getUserId())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("date",record.getDate())
                 .addIfExists("harvest_id",record.getHarvestId());
@@ -107,7 +111,9 @@ public class PackageRepository {
             pack.setPackageTag(rs.getString("package_tag"));
             pack.setItem(rs.getString("item"));
             pack.setQuantity(rs.getString("quantity"));
+            pack.setUserId(rs.getString("user_id"));
             pack.setFarmId(rs.getString("farm_id"));
+            pack.setLastUpdated(rs.getString("last_updated"));
             pack.setLocation(rs.getString("location"));
             pack.setStatus(rs.getString("status"));
             pack.setDate(rs.getString("date"));

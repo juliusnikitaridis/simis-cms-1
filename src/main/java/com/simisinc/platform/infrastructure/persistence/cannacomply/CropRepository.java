@@ -32,6 +32,7 @@ public class CropRepository {
                 .add("crop_label",record.getCropLabel())
                 .add("created_date",record.getCreatedDate())
                 .add("room_id",record.getRoomId())
+                .add("last_updated",record.getLastUpdated())
                 .add("starting_plant_data",record.getStartingPlantData());
 
         try (Connection connection = DB.getConnection();
@@ -62,6 +63,7 @@ public class CropRepository {
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("crop_label",record.getCropLabel())
                 .addIfExists("room_id",record.getRoomId())
+                .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("starting_plant_data",record.getStartingPlantData());
 
             try (Connection connection = DB.getConnection();
@@ -130,6 +132,7 @@ public class CropRepository {
             crop.setBarcodeData(rs.getString("barcode_data"));
             crop.setCreatedDate(rs.getString("created_date"));
             crop.setBlockId(rs.getString("block_id"));
+            crop.setLastUpdated(rs.getString("last_updated"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;
         } catch (Exception e) {
