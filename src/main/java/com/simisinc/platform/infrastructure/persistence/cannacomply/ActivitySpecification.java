@@ -13,5 +13,5 @@ public class ActivitySpecification {
     private String id;
     private String farmId;
     private String blockId;
-    private String cropId;
+    private String itemId;
 }

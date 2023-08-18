@@ -89,7 +89,7 @@ public class ActivityRepository {
             where
                     .addIfExists("id = ?", specification.getId())
                     .addIfExists("block_id = ?",specification.getBlockId())
-                    .addIfExists("crop_id = ?",specification.getCropId())
+                    .addIfExists("item_id = ?",specification.getItemId())
                     .addIfExists("farm_id = ?",specification.getFarmId());
 
         }

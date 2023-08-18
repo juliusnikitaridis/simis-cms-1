@@ -11,4 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class IssueSpecification {
     private String id = null;
+    private String farmId;
 }

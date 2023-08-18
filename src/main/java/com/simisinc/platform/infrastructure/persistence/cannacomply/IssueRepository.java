@@ -19,6 +19,7 @@ public class IssueRepository {
     public static Issue add(Issue record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
+                .add("created_date",record.getCreatedDate())
                 .add("crop_id", record.getCropId())
                 .add("title", record.getTitle())
                 .add("description", record.getDescription())
@@ -46,6 +47,7 @@ public class IssueRepository {
     public static void update(Issue record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("crop_id", record.getCropId())
+                .addIfExists("created_date",record.getCreatedDate())
                 .addIfExists("title", record.getTitle())
                 .addIfExists("description", record.getDescription())
                 .addIfExists("severity",record.getSeverity())
@@ -82,7 +84,8 @@ public class IssueRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("farm_id = ?",specification.getFarmId());
 
         }
         return DB.selectAllFrom(
@@ -106,6 +109,7 @@ public class IssueRepository {
         try {
             issue.setId(rs.getString("id"));
             issue.setCropId(rs.getString("crop_id"));
+            issue.setCreatedDate(rs.getString("created_date"));
             issue.setTitle(rs.getString("title"));
             issue.setDescription(rs.getString("description"));
             issue.setSeverity(rs.getString("severity"));

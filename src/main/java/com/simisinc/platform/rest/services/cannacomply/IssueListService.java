@@ -29,11 +29,15 @@ public class IssueListService {
 
         try {
             String id = context.getParameter("issueId");
+            String farmId = context.getParameter("farmId");
 
             IssueSpecification specification = new IssueSpecification();
 
             if(null!= id) {
                 specification.setId(id);
+            }
+            if(farmId != null){
+                specification.setFarmId(farmId);
             }
             List<Issue> issueList = (List<Issue>) IssueRepository.query(specification, null).getRecords();
 
