@@ -7,7 +7,6 @@ import lombok.Setter;
 
 /**
  * Description
- * This will represent a yield
  * @author Julius Nikitaridis
  * @created 17/07/23 9:28 AM
  */

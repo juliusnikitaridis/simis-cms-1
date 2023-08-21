@@ -91,7 +91,9 @@
   <service method="get" endpoint="cannacomply/UpdateYieldService" class="com.simisinc.platform.rest.services.cannacomply.UpdateYieldService"/>
   <service method="get" endpoint="cannacomply/UserListService" class="com.simisinc.platform.rest.services.cannacomply.UserListService"/>
   <service method="get" endpoint="cannacomply/UpdatePackagingService" class="com.simisinc.platform.rest.services.cannacomply.UpdatePackagingService"/>
-
+  <service method="post" endpoint="cannacomply/CreateSupplierService" class="com.simisinc.platform.rest.services.cannacomply.CreateSupplierService"/>
+  <service method="get" endpoint= "cannacomply/SupplierListService" class="com.simisinc.platform.rest.services.cannacomply.SupplierListService"/>
+  <service method="post" endpoint="cannacomply/UpdateSupplierService" class="com.simisinc.platform.rest.services.cannacomply.UpdateSupplierService"/>
 
 </services>
 
