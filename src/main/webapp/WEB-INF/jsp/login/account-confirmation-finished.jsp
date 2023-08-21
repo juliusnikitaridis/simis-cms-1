@@ -17,9 +17,9 @@
 <jsp:useBean id="userSession" class="com.simisinc.platform.presentation.controller.UserSession" scope="session"/>
 <jsp:useBean id="widgetContext" class="com.simisinc.platform.presentation.controller.WidgetContext" scope="request"/>
 <h4>
-  Your account is now setup
+  Your account is now setup.Please go back on the app and login, or login on the web browser below.
 </h4>
 <p>
   <!--<a href="${ctx}/login" class="button success radius no-gap">Login <i class="fa fa-angle-right"></i></a>-->
-  <a href="https://simis.carfixsa.com" class="button success radius no-gap">Login <i class="fa fa-angle-right"></i></a>
+  <a href="https://www.carfixsa.com" class="button success radius no-gap">Login <i class="fa fa-angle-right"></i></a>
 </p>
