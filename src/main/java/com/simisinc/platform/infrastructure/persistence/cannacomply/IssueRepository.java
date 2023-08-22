@@ -26,6 +26,7 @@ public class IssueRepository {
                 .add("severity",record.getSeverity())
                 .add("assigned_to",record.getAssignedTo())
                 .add("comment",record.getComment())
+                .add("last_updated",record.getLastUpdated())
                 .add("attachments",record.getAttachments())
                 .add("farm_id",record.getFarmId());
 
@@ -54,6 +55,7 @@ public class IssueRepository {
                 .addIfExists("assigned_to",record.getAssignedTo())
                 .addIfExists("comment",record.getComment())
                 .addIfExists("attachments",record.getAttachments())
+                .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("farm_id",record.getFarmId());
 
             try (Connection connection = DB.getConnection();
@@ -116,6 +118,7 @@ public class IssueRepository {
             issue.setAssignedTo(rs.getString("assigned_to"));
             issue.setComment(rs.getString("comment"));
             issue.setAttachments(rs.getString("attachments"));
+            issue.setLastUpdated(rs.getString("last_updated"));
             issue.setFarmId(rs.getString("farm_id"));
 
             return issue;

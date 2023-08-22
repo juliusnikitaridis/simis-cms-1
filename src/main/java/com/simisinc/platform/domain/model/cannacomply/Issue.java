@@ -18,4 +18,5 @@ public class Issue extends Entity {
     private String attachments;
     private String farmId;
     private String createdDate;
+    private String lastUpdated;
 }
