@@ -22,10 +22,14 @@ public class IssueRepository {
                 .add("created_date",record.getCreatedDate())
                 .add("crop_id", record.getCropId())
                 .add("title", record.getTitle())
+                .add("type",record.getType())
                 .add("description", record.getDescription())
                 .add("severity",record.getSeverity())
                 .add("assigned_to",record.getAssignedTo())
                 .add("comment",record.getComment())
+                .add("solution",record.getSolution())
+                .add("status",record.getStatus())
+                .add("due_date",record.getDueDate())
                 .add("last_updated",record.getLastUpdated())
                 .add("attachments",record.getAttachments())
                 .add("farm_id",record.getFarmId());
@@ -52,8 +56,12 @@ public class IssueRepository {
                 .addIfExists("title", record.getTitle())
                 .addIfExists("description", record.getDescription())
                 .addIfExists("severity",record.getSeverity())
+                .addIfExists("type",record.getType())
                 .addIfExists("assigned_to",record.getAssignedTo())
                 .addIfExists("comment",record.getComment())
+                .addIfExists("solution",record.getSolution())
+                .addIfExists("status",record.getStatus())
+                .addIfExists("due_date",record.getDueDate())
                 .addIfExists("attachments",record.getAttachments())
                 .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("farm_id",record.getFarmId());
@@ -117,6 +125,10 @@ public class IssueRepository {
             issue.setSeverity(rs.getString("severity"));
             issue.setAssignedTo(rs.getString("assigned_to"));
             issue.setComment(rs.getString("comment"));
+            issue.setStatus(rs.getString("status"));
+            issue.setSolution(rs.getString("solution"));
+            issue.setDueDate(rs.getString("due_date"));
+            issue.setType(rs.getString("type"));
             issue.setAttachments(rs.getString("attachments"));
             issue.setLastUpdated(rs.getString("last_updated"));
             issue.setFarmId(rs.getString("farm_id"));

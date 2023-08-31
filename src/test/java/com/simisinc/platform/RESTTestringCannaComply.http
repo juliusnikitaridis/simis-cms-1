@@ -432,7 +432,7 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/cannacomply/CreateIssueService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Authorization:Bearer API-df90c02d-5159-4d4d-8bc3-fc9e509b9af91
 Content-Type: application/json
 
 {
@@ -443,7 +443,10 @@ Content-Type: application/json
   "assignedTo": "dean richmond",
   "comment": "dome comments",
   "attachments": "file_data_",
-  "farmId":"some-farm-id"
+  "farmId":"some-farm-id",
+  "dueDate": "due_date",
+  "solution": "solution",
+  "status": "status"
 }
 ###
 

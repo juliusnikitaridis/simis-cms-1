@@ -24,6 +24,7 @@ public class RoomRepository {
                 .add("room_description", record.getRoomDescription())
                 .add("room_color", record.getRoomColour())
                 .add("farm_id",record.getFarmId())
+                .add("purpose",record.getPurpose())
                 .add("location_data",record.getLocationData());
 
         try (Connection connection = DB.getConnection();
@@ -47,6 +48,7 @@ public class RoomRepository {
                 .addIfExists("room_description", record.getRoomDescription())
                 .addIfExists("room_color", record.getRoomColour())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("purpose",record.getPurpose())
                 .addIfExists("location_data",record.getLocationData());
 
         try (Connection connection = DB.getConnection();
@@ -101,6 +103,7 @@ public class RoomRepository {
         Room room = new Room();
         try {
               room.setId(rs.getString("id"));
+              room.setPurpose(rs.getString("purpose"));
               room.setRoomName(rs.getString("room_name"));
               room.setFarmId(rs.getString("farm_id"));
               room.setRoomDescription(rs.getString("room_description"));

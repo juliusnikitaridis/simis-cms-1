@@ -86,7 +86,8 @@ public class PackageRepository {
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
-                    .addIfExists("id = ?", specification.getId());
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("farm_id = ?" ,specification.getFarmId());
         }
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, PackageRepository::buildRecord);

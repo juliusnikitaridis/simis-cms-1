@@ -23,6 +23,7 @@ public class Room extends Entity {
     private String roomName;
     private String roomDescription;
     private String locationData;
+    private String purpose;
 }
 
 

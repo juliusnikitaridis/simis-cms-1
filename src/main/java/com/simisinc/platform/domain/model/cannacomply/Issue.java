@@ -19,4 +19,8 @@ public class Issue extends Entity {
     private String farmId;
     private String createdDate;
     private String lastUpdated;
+    private String type;
+    private String status;
+    private String solution;
+    private String dueDate;
 }
