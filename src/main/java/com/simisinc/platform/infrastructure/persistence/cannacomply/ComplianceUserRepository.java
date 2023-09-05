@@ -53,7 +53,7 @@ public class ComplianceUserRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("uuid = ?", record.getId()));
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("uuid = ?", record.getUuid()));
                 transaction.commit();
 
         } catch (Exception se) {
