@@ -2,46 +2,47 @@ package com.simisinc.platform.rest.services.cannacomply.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.cannacomply.ApiAccessRecord;
 import com.simisinc.platform.domain.model.cannacomply.ComplianceUser;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.APIAccessRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.ComplianceUserRepository;
-
+import com.simisinc.platform.rest.controller.ServiceContext;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Locale;
+
 
 public class ValidateApiAccessHelper {
 
 
-    public static boolean validateAccess(String apiName, User user) throws Exception {
-        //get list of roles from compliance user table
-        //todo - also pass int he farm id to find the correct ONE compliance user and NOT a list
-        List<ComplianceUser> complianceUserList = ComplianceUserRepository.findAllByUniqueId(user.getUniqueId());
-        ArrayList<String> complianceUserRoleList = new ArrayList<String>();
-        complianceUserList.forEach(x->{
-            complianceUserRoleList.add(x.getUserRole());
-        });
-
+    public static boolean validateAccess(String apiName, ServiceContext context) throws Exception {
+        //get the role from compliance user table based on unique_id and the current farm persona
+        String farmId = context.getRequest().getHeader("Farm-Id");
+        if (farmId == null) {
+            throw new Exception("Farm-Id header must be set for all API requests");
+        }
+        ComplianceUser complianceUser = ComplianceUserRepository.findByUniqueIdAndFarmId(context.getUser().getUniqueId(), farmId);
+        if(complianceUser == null) {
+            throw new Exception("Compliance user not found !!");
+        }
         //get list of allowed roles from api_access table
         ObjectMapper mapper = new ObjectMapper();
-        ApiAccessRecord apiAccessRecord = APIAccessRepository.findByApiName(apiName);
+        ApiAccessRecord apiAccessRecord = APIAccessRepository.findByApiName(apiName.substring(apiName.lastIndexOf(".")+1));
+        if (apiAccessRecord == null) {
+            throw new Exception("API permissions not defined in api_access table");
+        }
         JsonNode jsonNode = mapper.readTree(apiAccessRecord.getAllowedRoles());
         Iterator<JsonNode> elements = jsonNode.elements();
         ArrayList<String> allowedRolesForApiList = new ArrayList<String>();
-        while(elements.hasNext()) {
+        while (elements.hasNext()) {
             JsonNode element = elements.next();
-            allowedRolesForApiList.add(element.asText());
+            allowedRolesForApiList.add(element.asText().toUpperCase(Locale.ROOT));
         }
 
-        //go through the compliance user list and see if we can match at least one role with the api_access list. This is not
-        //ideal as we should also pass a farm ID into this method to know which farm/role combo we are dealing with specifically
-        for(String role :complianceUserRoleList) {
-            if(allowedRolesForApiList.contains(role)){
-                return true;
-            }
+        if (allowedRolesForApiList.contains(complianceUser.getUserRole().toUpperCase())) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }

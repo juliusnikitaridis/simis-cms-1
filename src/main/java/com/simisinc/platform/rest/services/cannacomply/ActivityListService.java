@@ -27,7 +27,9 @@ public class ActivityListService {
     public ServiceResponse get(ServiceContext context) {
 
         try {
-            ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context.getUser());
+            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+                throw new Exception("User does not have required roles to access API");
+            }
 
             String activityId = context.getParameter("activityId");
             String farmId = context.getParameter("farmId");

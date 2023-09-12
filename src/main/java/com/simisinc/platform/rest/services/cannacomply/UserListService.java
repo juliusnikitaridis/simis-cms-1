@@ -34,8 +34,9 @@ public class UserListService {
             String farmId = context.getParameter("farmId");
 
             if(uniqueId != null) {
-                ComplianceUser user = ComplianceUserRepository.findByUniqueId(uniqueId);
-                userList.add(user);
+                //todo check this - is now a list of users
+                List<ComplianceUser> users = ComplianceUserRepository.findAllByUniqueId(uniqueId);
+                userList.addAll(users);
             } else if (farmId != null) {
                 userList.addAll(ComplianceUserRepository.findAllByFarmId(farmId));
             }
