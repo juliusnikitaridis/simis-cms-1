@@ -9,8 +9,10 @@ import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmSpecific
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
+import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.helper.Validate;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class ActivityListService {
     public ServiceResponse get(ServiceContext context) {
 
         try {
+            ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context.getUser());
+
             String activityId = context.getParameter("activityId");
             String farmId = context.getParameter("farmId");
             String blockId = context.getParameter("blockId");

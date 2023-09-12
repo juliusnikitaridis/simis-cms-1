@@ -70,12 +70,11 @@ public class ComplianceUserRepository {
                 ComplianceUserRepository::buildRecord);
     }
 
-    public static ComplianceUser findByUniqueId(String uniqueId) {
+    public static List<ComplianceUser> findAllByUniqueId(String uniqueId) {
 
-        return (ComplianceUser) DB.selectRecordFrom(
-                TABLE_NAME, new SqlUtils().add("unique_sys_user_id = ?", uniqueId),
-                ComplianceUserRepository::buildRecord);
+        return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,new SqlUtils().add("unique_sys_user_id = ?",uniqueId),null,ComplianceUserRepository::buildRecord).getRecords();
     }
+
 
     public static List<ComplianceUser> findAllByFarmId(String farmId) {
         return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,new SqlUtils().add("farm_id = ?",farmId),null,ComplianceUserRepository::buildRecord).getRecords();
