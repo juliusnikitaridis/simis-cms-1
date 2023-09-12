@@ -8,6 +8,7 @@ import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmReposito
 import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -28,6 +29,9 @@ public class CreateFarmService {
     public ServiceResponse post(ServiceContext context) {
 
         try {
+            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+                throw new Exception("User does not have required roles to access API");
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             Farm farm = mapper.readValue(context.getJsonRequest(), Farm.class);

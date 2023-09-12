@@ -7,6 +7,7 @@ import com.simisinc.platform.infrastructure.persistence.cannacomply.CropReposito
 import com.simisinc.platform.infrastructure.persistence.cannacomply.PackageRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,6 +28,9 @@ public class UpdatePackagingService {
     public ServiceResponse post(ServiceContext context) {
 
         try {
+            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+                throw new Exception("User does not have required roles to access API");
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             Packaging item = mapper.readValue(context.getJsonRequest(), Packaging.class);

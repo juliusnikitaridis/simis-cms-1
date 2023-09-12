@@ -5,6 +5,7 @@ import com.simisinc.platform.domain.model.carfix.TreatmentProduct;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.TreatmentProductRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -19,7 +20,9 @@ public class CreateTreatmentProductService {
     public ServiceResponse post(ServiceContext context) {
 
         try {
-
+            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+                throw new Exception("User does not have required roles to access API");
+            }
             ObjectMapper mapper = new ObjectMapper();
             TreatmentProduct product = mapper.readValue(context.getJsonRequest(), TreatmentProduct.class);
             product.setId(UUID.randomUUID().toString());

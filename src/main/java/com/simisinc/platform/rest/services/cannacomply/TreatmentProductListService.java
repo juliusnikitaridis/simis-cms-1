@@ -6,6 +6,7 @@ import com.simisinc.platform.infrastructure.persistence.carfix.TreatmentProductS
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
+import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -20,6 +21,9 @@ public class TreatmentProductListService {
 
 
         try {
+            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+                throw new Exception("User does not have required roles to access API");
+            }
             TreatmentProductSpecification specification = new TreatmentProductSpecification();
             if(context.getParameter("farmId")!= null) {
                 specification.setFarmId(context.getParameter("farmId"));
