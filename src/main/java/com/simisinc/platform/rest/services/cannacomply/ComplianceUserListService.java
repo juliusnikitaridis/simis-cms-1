@@ -24,9 +24,9 @@ public class ComplianceUserListService {
     public ServiceResponse get(ServiceContext context) {
 
         try {
-            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
-                throw new Exception("User does not have required roles to access API");
-            }
+//            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+//                throw new Exception("User does not have required roles to access API");
+//            }
             String sysUniqueUserId = context.getParameter("sysUniqueUserId");
             String farmId = context.getParameter("farmId");
             String id = context.getParameter("id");

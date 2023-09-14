@@ -13,4 +13,5 @@ public class ComplianceUser extends User {
     private String sysUniqueUserId;
     private String farmId;
     private String userRole;
+    private String status;
 }

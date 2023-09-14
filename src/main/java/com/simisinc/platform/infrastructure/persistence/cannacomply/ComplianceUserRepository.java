@@ -25,6 +25,7 @@ public class ComplianceUserRepository {
                 .add("uuid", record.getUuid())
                 .add("unique_sys_user_id",record.getSysUniqueUserId())
                 .add("farm_id",record.getFarmId())
+                .add("status",record.getStatus())
                 .add("user_role",record.getUserRole());
 
         try (Connection connection = DB.getConnection();
@@ -46,6 +47,7 @@ public class ComplianceUserRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("unique_sys_user_id",record.getSysUniqueUserId())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("status",record.getStatus())
                 .addIfExists("user_role",record.getUserRole());
 
 
@@ -70,15 +72,20 @@ public class ComplianceUserRepository {
                 ComplianceUserRepository::buildRecord);
     }
 
+
     public static List<ComplianceUser> findAllByUniqueId(String uniqueId) {
 
-        return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,new SqlUtils().add("unique_sys_user_id = ?",uniqueId),null,ComplianceUserRepository::buildRecord).getRecords();
+        SqlUtils where = new SqlUtils();
+        where.add("unique_sys_user_id = ?",uniqueId);
+        where.add("status = ?","Active");
+        return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,where,null,ComplianceUserRepository::buildRecord).getRecords();
     }
 
     public static ComplianceUser findByUniqueIdAndFarmId(String uniqueId,String farmId) {
         SqlUtils where = new SqlUtils();
         where.add("unique_sys_user_id = ?",uniqueId);
         where.add("farm_id = ?",farmId);
+        where.add("status = ?","Active");
 
         return (ComplianceUser) DB.selectRecordFrom(
                 TABLE_NAME, where,
@@ -87,7 +94,10 @@ public class ComplianceUserRepository {
 
 
     public static List<ComplianceUser> findAllByFarmId(String farmId) {
-        return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,new SqlUtils().add("farm_id = ?",farmId),null,ComplianceUserRepository::buildRecord).getRecords();
+        SqlUtils where= new SqlUtils();
+        where.add("status = ?","Active");
+        where.add("farm_id = ?",farmId);
+        return (List<ComplianceUser>) DB.selectAllFrom(TABLE_NAME,where,null,ComplianceUserRepository::buildRecord).getRecords();
     }
 
 
@@ -158,6 +168,7 @@ public class ComplianceUserRepository {
         complianceUser.setPostalCode(baseUser.getPostalCode());
         complianceUser.setLatitude(baseUser.getLatitude());
         complianceUser.setLongitude(baseUser.getLongitude());
+        complianceUser.setStatus(rs.getString("status"));
         complianceUser.setUserRole(rs.getString("user_role"));
         complianceUser.setUuid(rs.getString("uuid"));
         complianceUser.setFarmId(rs.getString("farm_id"));
