@@ -395,6 +395,7 @@ POST http://localhost:8080/api/cannacomply/CreateActivityService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-4d25debc-4016-45c1-aced-2aa9c69e2a8a1
 Content-Type: application/json
+Farm-id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
   "cropId":"394857539487",
@@ -435,6 +436,7 @@ POST http://localhost:8080/api/cannacomply/CreateIssueService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-df90c02d-5159-4d4d-8bc3-fc9e509b9af91
 Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
   "cropId":"394857539487",

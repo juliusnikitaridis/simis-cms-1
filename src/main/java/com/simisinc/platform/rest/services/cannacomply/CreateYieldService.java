@@ -26,7 +26,7 @@ public class CreateYieldService {
     public ServiceResponse post(ServiceContext context) {
 
         try {
-            if(!ValidateApiAccessHelper.validateAccess(ActivityListService.class.getName(),context)) {
+            if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
                 throw new Exception("User does not have required roles to access API");
             }
 

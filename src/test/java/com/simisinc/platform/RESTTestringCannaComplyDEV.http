@@ -33,3 +33,20 @@ Authorization:Bearer API-1276a41e-de9c-45ed-bd8c-5b482f864c4c3
 Content-Type: application/json
 ###
 
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/CreateActivityService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-7d87245c-63bf-4880-a32b-add93cd312db3
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "cropId":"394857539487",
+  "type":"Richmond",
+  "activityData":"[{},{},{},{}]",
+  "userId":"9872387987234",
+  "farmId": "farm-id-2",
+  "date": "04-05-2023",
+  "status": "CREATED"
+}
+###
+
