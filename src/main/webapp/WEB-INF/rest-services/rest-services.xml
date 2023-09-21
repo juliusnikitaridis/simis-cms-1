@@ -94,6 +94,10 @@
   <service method="post" endpoint="cannacomply/CreateSupplierService" class="com.simisinc.platform.rest.services.cannacomply.CreateSupplierService"/>
   <service method="get" endpoint= "cannacomply/SupplierListService" class="com.simisinc.platform.rest.services.cannacomply.SupplierListService"/>
   <service method="post" endpoint="cannacomply/UpdateSupplierService" class="com.simisinc.platform.rest.services.cannacomply.UpdateSupplierService"/>
+  <service method="post" endpoint="cannacomply/CreateReadingService" class="com.simisinc.platform.rest.services.cannacomply.CreateReadingService"/>
+  <service method="post" endpoint="cannacomply/ReadingListService" class="com.simisinc.platform.rest.services.cannacomply.ReadingListService"/>
+  <service method="post" endpoint="cannacomply/CreateDeviceService" class="com.simisinc.platform.rest.services.cannacomply.CreateDeviceService"/>
+  <service method="post" endpoint="cannacomply/DeviceListService" class="com.simisinc.platform.rest.services.cannacomply.DeviceListService"/>
 
 </services>
 

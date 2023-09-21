@@ -1,0 +1,124 @@
+package com.simisinc.platform.infrastructure.persistence.cannacomply;
+
+import com.simisinc.platform.domain.model.cannacomply.Issue;
+import com.simisinc.platform.domain.model.cannacomply.Reading;
+import com.simisinc.platform.infrastructure.database.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+
+
+public class ReadingRepository {
+
+    private static Log LOG = LogFactory.getLog(ReadingRepository.class);
+    private static String TABLE_NAME = "cannacomply.reading";
+    private static String[] PRIMARY_KEY = new String[]{"id"};
+
+    public static Reading add(Reading record) throws Exception {
+        SqlUtils insertValues = new SqlUtils()
+                .add("id", record.getId())
+                .add("date",record.getDate())
+                .add("device_id",record.getDeviceId())
+                .add("reading_type",record.getReadingType())
+                .add("reading_value",record.getReadingValue())
+                .add("status",record.getStatus())
+                .add("farm_id",record.getFarmId())
+                .add("action_taken",record.getActionTaken())
+                .add("user_id",record.getUserId());
+
+        try (Connection connection = DB.getConnection();
+             AutoStartTransaction a = new AutoStartTransaction(connection);
+             AutoRollback transaction = new AutoRollback(connection)) {
+            // In a transaction (use the existing connection)
+            DB.insertIntoWithStringPk(connection, TABLE_NAME, insertValues, PRIMARY_KEY);
+            transaction.commit();
+            return record;
+
+        } catch (Exception se) {
+            LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
+        }
+    }
+
+
+    public static void update(Reading record) throws Exception {
+        SqlUtils updateValues = new SqlUtils()
+                .addIfExists("id", record.getId())
+                .addIfExists("date",record.getDate())
+                .addIfExists("device_id",record.getDeviceId())
+                .addIfExists("reading_type",record.getReadingType())
+                .addIfExists("reading_value",record.getReadingValue())
+                .addIfExists("status",record.getStatus())
+                .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("action_taken",record.getActionTaken())
+                .addIfExists("user_id",record.getUserId());
+            try (Connection connection = DB.getConnection();
+                 AutoStartTransaction a = new AutoStartTransaction(connection);
+                 AutoRollback transaction = new AutoRollback(connection)) {
+                // In a transaction (use the existing connection)
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
+                transaction.commit();
+
+        } catch (Exception se) {
+            LOG.error("SQLException: " + se.getMessage());
+            throw new Exception(se.getMessage());
+        }
+    }
+
+
+    public static Issue findById(String id) {
+
+        return (Issue) DB.selectRecordFrom(
+                TABLE_NAME, new SqlUtils().add("id = ?", id),
+                ReadingRepository::buildRecord);
+    }
+
+
+    public static DataResult query(ReadingSpecification specification, DataConstraints constraints) {
+        SqlUtils select = new SqlUtils();
+        SqlUtils where = new SqlUtils();
+        SqlUtils orderBy = new SqlUtils();
+        if (specification != null) {
+            where
+                    .addIfExists("id = ?", specification.getId())
+                    .addIfExists("device_id = ?",specification.getDeviceId());
+
+        }
+        return DB.selectAllFrom(
+                TABLE_NAME, select, where, orderBy, constraints, ReadingRepository::buildRecord);
+    }
+
+
+    public static void delete(String issueId) throws Exception {
+        try (Connection connection = DB.getConnection()) {
+            DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", issueId));
+            LOG.debug("Reading has been deleted:>>" + issueId);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
+    private static Reading buildRecord(ResultSet rs) {
+
+        Reading reading = new Reading();
+        try {
+            reading.setId(rs.getString("id"));
+            reading.setDate(rs.getString("date"));
+            reading.setDeviceId(rs.getString("device_id"));
+            reading.setReadingType(rs.getString("reading_type"));
+            reading.setReadingValue(rs.getString("reading_value"));
+            reading.setStatus(rs.getString("status"));
+            reading.setFarmId(rs.getString("farm_id"));
+            reading.setActionTaken(rs.getString("action_taken"));
+            reading.setUserId(rs.getString("user_id"));
+            return reading;
+        } catch (Exception e) {
+            LOG.error("exception when building record for Reading" + e.getMessage());
+            return null;
+        }
+    }
+}
+

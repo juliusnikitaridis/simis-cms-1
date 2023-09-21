@@ -407,17 +407,7 @@ public class RestRequestFilter implements Filter {
     userToken.setExpires(new Timestamp(expiresMillis));
     UserTokenRepository.add(userToken);
 
-    //see what farm this user belongs to if canna comply user
-//    String farmProfileString = "";
-//    if(user.getUserType()!= null && user.getUserType().toUpperCase().contains("CANNACOMPLY")) {
-//      Users cannaComplyUser = UsersRepository.findById(user.getUniqueId());
-//      //cannc users cant register without being inserted into the cannacomply.users table anyway --//todo dont need this ??
-//      if(cannaComplyUser != null) {
-//        farmProfileString = "\"farm_profile_id\":\"" + JsonCommand.toJson(cannaComplyUser.getSysUniqueUserId()) + "\",\n" ;
-//      } else {
-//        farmProfileString = "\"farm_profile_id\":\"" + JsonCommand.toJson("user not found in cannacomple.users table") + "\",\n" ;
-//      }
-//    }
+
     // Make a response
     // https://tools.ietf.org/html/rfc6750
     String json = "{\n" +

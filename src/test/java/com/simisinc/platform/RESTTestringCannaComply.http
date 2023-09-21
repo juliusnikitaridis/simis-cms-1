@@ -244,6 +244,20 @@ Content-Type: application/json
 ###
 
 ###
+POST http://localhost:8080/api/cannacomply/CreateReadingService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-5e499090-49bf-4021-bcf8-af4477eeb32c1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "temp": "22.6",
+  "ph": "6",
+  "humidity": "75",
+  "roomId": "sdfgsdfgeertwert"
+}
+
+###
 POST http://localhost:8080/api/cannacomply/UpdateSupplierService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
@@ -267,11 +281,104 @@ Content-Type: application/json
 
 
 ###
+GET http://localhost:8080/api/cannacomply/ReadingListService?id=aaab52a8-5d75-49d6-b8dc-1565b8b9388e
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+###
+GET http://localhost:8080/api/cannacomply/DeviceListService?farmId=3242324
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+###
+GET http://localhost:8080/api/cannacomply/DeviceListService?deviceId=78f43f95-6f1c-4c07-8ffb-499a2b415f85
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+###
+GET http://localhost:8080/api/cannacomply/DeviceListService?locationId=234234
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+
+
+###
+POST http://localhost:8080/api/cannacomply/CreateReadingService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{ "date": "12-12-2023",
+  "deviceId": "234234",
+  "readingType": "Temp",
+  "readingValue": "23.3",
+  "status": "test",
+  "farmId": "3242324",
+  "actionTaken": "none",
+  "userId": "234234"
+}
+
+###
+
+POST http://localhost:8080/api/cannacomply/CreateDeviceService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{ "deviceType": "Thermometer",
+  "locationType": "room",
+  "locationId": "234234",
+  "date": "12-12-2023",
+  "status": "testing",
+  "farmId": "3242324",
+  "usage": "none",
+  "lastUpdated": "12-12-2021"
+}
+
+###
+
+
+###
+GET http://localhost:8080/api/cannacomply/ReadingListService?deviceId=234234
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+GET http://localhost:8080/api/cannacomply/ReadingListService?readingId=3e7f6250-4ba7-4f5e-815a-7059e37719a7
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+
 GET http://localhost:8080/api/cannacomply/ComplianceUserListService?id=aaab52a8-5d75-49d6-b8dc-1565b8b9388e
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
 Content-Type: application/json
-
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 ###
 
 ###
@@ -410,8 +517,9 @@ Farm-id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 POST http://localhost:8080/api/cannacomply/UpdateActivityService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Authorization:Bearer API-4d25debc-4016-45c1-aced-2aa9c69e2a8a1
 Content-Type: application/json
+Farm-id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
   "id": "971d7cef-fd9e-44e3-81dd-e036f6f15d31",

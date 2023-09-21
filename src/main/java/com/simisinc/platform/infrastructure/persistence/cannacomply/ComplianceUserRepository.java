@@ -151,6 +151,7 @@ public class ComplianceUserRepository {
         complianceUser.setEmail(baseUser.getEmail());
         complianceUser.setIdnum(baseUser.getIdnum());
         complianceUser.setUsername(baseUser.getUsername());
+        complianceUser.setUserType(baseUser.getUserType());
         // record.setPassword(rs.getString("password"));
         // complianceUser.setEnabled(rs.getBoolean("enabled"));
         //  record.setCreated(rs.getTimestamp("created"));

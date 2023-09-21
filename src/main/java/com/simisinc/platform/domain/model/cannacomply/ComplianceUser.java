@@ -14,4 +14,5 @@ public class ComplianceUser extends User {
     private String farmId;
     private String userRole;
     private String status;
+    private String userTYpe;
 }

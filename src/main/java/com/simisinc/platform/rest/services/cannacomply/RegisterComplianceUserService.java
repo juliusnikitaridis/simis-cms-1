@@ -57,7 +57,7 @@ public class RegisterComplianceUserService {
     public String addUser(User user, long modifiedById) throws Exception {
 
         user.setModifiedBy(modifiedById);
-        user.setUserType("USER-CANNACOMPLY");
+        user.setUserType(user.getUserType());
 
         // Populate the roles
         if (user.getRoleId() != null) {
