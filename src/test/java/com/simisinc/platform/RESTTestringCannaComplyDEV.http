@@ -50,3 +50,25 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 }
 ###
 
+
+###
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/UpdateSupplierService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-d4fb9a02-8e00-4f6b-92f2-f37b646c75e13
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "9fc4dcd0-cd0b-487b-a9a5-c6e5df06b3ac",
+  "farmId": "julius-nikiA23",
+  "supplierName": "test supplier23",
+  "productName": "test product23",
+  "quantity": "20023",
+  "expiryDate": "2022-12-12/23",
+  "receipt":"test reciept3",
+  "lotNumber": "lotNumber23",
+  "container": "container23",
+  "mass": "mass23"
+}
+###
+

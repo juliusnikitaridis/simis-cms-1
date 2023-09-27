@@ -21,6 +21,8 @@ public class BlockRepository {
                 .add("id", record.getId())
                 .add("block_location", record.getBlockLocation())
                 .add("barcode_data", record.getBarcodeData())
+                .add("location_id",record.getLocationId())
+                .add("location_type",record.getLocationType())
                 .add("farm_id", record.getFarmId())
                 .add("date",record.getDate());
 
@@ -43,6 +45,8 @@ public class BlockRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("block_location", record.getBlockLocation())
                 .addIfExists("barcode_data", record.getBarcodeData())
+                .addIfExists("location_id",record.getLocationId())
+                .addIfExists("location_type",record.getLocationType())
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("date",record.getDate());
             try (Connection connection = DB.getConnection();
@@ -99,6 +103,8 @@ public class BlockRepository {
               block.setBlockLocation(rs.getString("block_location"));
               block.setBarcodeData(rs.getString("barcode_data"));
               block.setFarmId(rs.getString("farm_id"));
+              block.setLocationType(rs.getString("location_type"));
+              block.setLocationId(rs.getString("location_id"));
               block.setDate(rs.getString("date"));
               block.setId(rs.getString("id"));
 

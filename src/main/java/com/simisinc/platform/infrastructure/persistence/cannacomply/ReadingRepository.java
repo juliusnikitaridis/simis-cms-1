@@ -45,7 +45,6 @@ public class ReadingRepository {
 
     public static void update(Reading record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
                 .addIfExists("date",record.getDate())
                 .addIfExists("device_id",record.getDeviceId())
                 .addIfExists("reading_type",record.getReadingType())
@@ -83,6 +82,7 @@ public class ReadingRepository {
         if (specification != null) {
             where
                     .addIfExists("id = ?", specification.getId())
+                    .addIfExists("farm_id = ?",specification.getFarmId())
                     .addIfExists("device_id = ?",specification.getDeviceId());
 
         }

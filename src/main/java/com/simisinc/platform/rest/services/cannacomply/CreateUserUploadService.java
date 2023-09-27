@@ -2,18 +2,16 @@ package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.cannacomply.Block;
-import com.simisinc.platform.domain.model.cannacomply.Reading;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.BlockRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.ReadingRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.text.SimpleDateFormat;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -23,9 +21,9 @@ import java.util.UUID;
  */
 
 
-public class CreateReadingService {
+public class CreateUserUploadService {
 
-    private static Log LOG = LogFactory.getLog(CreateReadingService.class);
+    private static Log LOG = LogFactory.getLog(CreateUserUploadService.class);
 
     public ServiceResponse post(ServiceContext context) {
 
@@ -33,23 +31,28 @@ public class CreateReadingService {
             if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
                 throw new Exception("User does not have required roles to access API");
             }
+            File uploadDir = new File("/home/julius");
 
-            ObjectMapper mapper = new ObjectMapper();
-            Reading reading = mapper.readValue(context.getJsonRequest(), Reading.class);
-            String readingId = UUID.randomUUID().toString();
-            reading.setId(readingId);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            reading.setDate(sdf.format(new Date()));
+            for(Part part : context.getRequest().getParts()) {
+                String fileName = part.getName();
+                System.out.println(fileName);
+            }
 
-            ReadingRepository.add(reading);
-
-            ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add(readingId);}};
-            response.setData(responseMessage);
-            return response;
+//            ObjectMapper mapper = new ObjectMapper();
+//            Block block = mapper.readValue(context.getJsonRequest(), Block.class);
+//            String blockId = UUID.randomUUID().toString();
+//            block.setId(blockId);
+//
+//            BlockRepository.add(block);
+//
+//            ServiceResponse response = new ServiceResponse(200);
+//            ArrayList<String> responseMessage = new ArrayList<String>(){{add(blockId);}};
+//            response.setData(responseMessage);
+//            return response;
+              return null;
 
         } catch (Exception e) {
-            LOG.error("Error in CreateReadingService", e);
+            LOG.error("Error in CreateUserUploadService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;

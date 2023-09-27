@@ -48,16 +48,16 @@ public class SupplierRepository {
 
     public static void update(Supplier record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .add("farm_id", record.getFarmId())
-                .add("supplier_name", record.getSupplierName())
-                .add("product_name", record.getProductName())
-                .add("quantity",record.getQuantity())
-                .add("expiry_date", record.getExpiryDate())
-                .add("receipt", record.getReceipt())
-                .add("type", record.getType())
-                .add("lot_number",record.getLotNumber())
-                .add("container",record.getContainer())
-                .add("mass",record.getMass());
+                .addIfExists("farm_id", record.getFarmId())
+                .addIfExists("supplier_name", record.getSupplierName())
+                .addIfExists("product_name", record.getProductName())
+                .addIfExists("quantity",record.getQuantity())
+                .addIfExists("expiry_date", record.getExpiryDate())
+                .addIfExists("receipt", record.getReceipt())
+                .addIfExists("type", record.getType())
+                .addIfExists("lot_number",record.getLotNumber())
+                .addIfExists("container",record.getContainer())
+                .addIfExists("mass",record.getMass());
 
 
         try (Connection connection = DB.getConnection();

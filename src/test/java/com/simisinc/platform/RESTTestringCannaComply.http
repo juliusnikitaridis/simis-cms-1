@@ -260,20 +260,21 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 ###
 POST http://localhost:8080/api/cannacomply/UpdateSupplierService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
 Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
-  "id": "cf7a3f70-9a10-451f-8e50-f09439fcfbad",
+  "id": "929a6128-685f-4535-9a1b-78cb1d6b4d36",
   "farmId": "julius-nikiA2",
   "supplierName": "test supplier2",
   "productName": "test product2",
   "quantity": "2002",
   "expiryDate": "2022-12-12/2",
   "receipt":"test reciept",
-  "lotNumber": "lotNumber",
-  "container": "container",
-  "mass": "mass"
+  "lotNumber": "lotNumber2",
+  "container": "container2",
+  "mass": "mass2"
 }
 ###
 

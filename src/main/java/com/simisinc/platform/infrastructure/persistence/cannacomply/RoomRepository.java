@@ -25,6 +25,7 @@ public class RoomRepository {
                 .add("room_color", record.getRoomColour())
                 .add("farm_id",record.getFarmId())
                 .add("purpose",record.getPurpose())
+                .add("optimal_readings",record.getOptimalReadings())
                 .add("location_data",record.getLocationData());
 
         try (Connection connection = DB.getConnection();
@@ -48,6 +49,7 @@ public class RoomRepository {
                 .addIfExists("room_description", record.getRoomDescription())
                 .addIfExists("room_color", record.getRoomColour())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("optimal_readings",record.getOptimalReadings())
                 .addIfExists("purpose",record.getPurpose())
                 .addIfExists("location_data",record.getLocationData());
 
@@ -108,6 +110,7 @@ public class RoomRepository {
               room.setFarmId(rs.getString("farm_id"));
               room.setRoomDescription(rs.getString("room_description"));
               room.setRoomColour(rs.getString("room_color"));
+              room.setOptimalReadings(rs.getString("optimal_readings"));
               room.setLocationData(rs.getString("location_data"));
 
             return room;
