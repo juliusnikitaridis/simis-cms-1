@@ -1,9 +1,11 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
 import com.simisinc.platform.domain.model.cannacomply.Block;
 import com.simisinc.platform.domain.model.cannacomply.UserUpload;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.BlockRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.UserUploadRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
@@ -37,7 +39,11 @@ public class CreateUserUploadService {
             if (!ValidateApiAccessHelper.validateAccess(this.getClass().getName(), context)) {
                 throw new Exception("User does not have required roles to access API");
             }
-            String uploadDir = "/home/julius/ccUploads";
+
+            String uploadDir = LoadSitePropertyCommand.loadByName("useruploads.upload.dir");
+            if(uploadDir == null) {
+                throw new Exception("useruploads.upload.dir has not been configure in site properties table");
+            }
 
             Part jsonPart = context.getRequest().getPart("json");
             if(jsonPart == null) {
@@ -58,6 +64,7 @@ public class CreateUserUploadService {
                     String filePath = uploadDir + "/" + part.getSubmittedFileName();
                     part.write(filePath);
                     UserUpload userUpload = createUserUploadRecord(userUploadRequest, part, filePath);
+                    UserUploadRepository.add(userUpload);
                     counter++;
                 }
             }
@@ -91,7 +98,7 @@ public class CreateUserUploadService {
         userUploadEntry.setFilePath(currentFilePath);
         userUploadEntry.setDescription(uploadRequest.getDescription());
         userUploadEntry.setFileSize(String.valueOf(currentPart.getSize()));
-        userUploadEntry.setFileType(uploadRequest.getFileType());
+        userUploadEntry.setFileType(currentPart.getContentType());
         userUploadEntry.setId(UUID.randomUUID().toString());
 
         return userUploadEntry;

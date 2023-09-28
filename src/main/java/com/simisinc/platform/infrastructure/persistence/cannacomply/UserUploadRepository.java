@@ -2,6 +2,7 @@ package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Activity;
 import com.simisinc.platform.domain.model.cannacomply.Block;
+import com.simisinc.platform.domain.model.cannacomply.UserUpload;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,18 +14,20 @@ import java.sql.ResultSet;
 public class UserUploadRepository {
 
     private static Log LOG = LogFactory.getLog(UserUploadRepository.class);
-    private static String TABLE_NAME = "cannacomply.block";
+    private static String TABLE_NAME = "cannacomply.user_upload";
     private static String[] PRIMARY_KEY = new String[]{"id"};
 
-    public static Block add(Block record) throws Exception {
+    public static UserUpload add(UserUpload record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
-                .add("block_location", record.getBlockLocation())
-                .add("barcode_data", record.getBarcodeData())
-                .add("location_id",record.getLocationId())
-                .add("location_type",record.getLocationType())
-                .add("farm_id", record.getFarmId())
-                .add("date",record.getDate());
+                .add("name", record.getName())
+                .add("file_name", record.getFileName())
+                .add("file_path",record.getFilePath())
+                .add("file_type",record.getFileType())
+                .add("created_by", record.getCreatedBy())
+                .add("created_date",record.getCreatedDate())
+                .add("file_size",record.getFileSize())
+                .add("description",record.getDescription());
 
         try (Connection connection = DB.getConnection();
              AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -41,14 +44,16 @@ public class UserUploadRepository {
     }
 
 
-    public static void update(Block record) throws Exception {
+    public static void update(UserUpload record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("block_location", record.getBlockLocation())
-                .addIfExists("barcode_data", record.getBarcodeData())
-                .addIfExists("location_id",record.getLocationId())
-                .addIfExists("location_type",record.getLocationType())
-                .addIfExists("farm_id", record.getFarmId())
-                .addIfExists("date",record.getDate());
+                .addIfExists("name", record.getName())
+                .addIfExists("file_name", record.getFileName())
+                .addIfExists("file_path",record.getFilePath())
+                .addIfExists("file_type",record.getFileType())
+                .addIfExists("created_by", record.getCreatedBy())
+                .addIfExists("created_date",record.getCreatedDate())
+                .addIfExists("file_size",record.getFileSize())
+                .addIfExists("description",record.getDescription());
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
@@ -71,14 +76,14 @@ public class UserUploadRepository {
     }
 
 
-    public static DataResult query(BlockSpecification specification, DataConstraints constraints) {
+    public static DataResult query(UserUploadSpecification specification, DataConstraints constraints) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
         if (specification != null) {
             where
                     .addIfExists("id = ?", specification.getId())
-                    .addIfExists("farm_id = ?",specification.getFarmId());
+                    .addIfExists("created_by = ?",specification.getCreatedBy());
 
         }
         return DB.selectAllFrom(
@@ -89,28 +94,30 @@ public class UserUploadRepository {
     public static void delete(String blockId) throws Exception {
         try (Connection connection = DB.getConnection()) {
             DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", blockId));
-            LOG.debug("block has been deleted:>>" + blockId);
+            LOG.debug("User upload has been deleted:>>" + blockId);
         } catch (Exception e) {
             throw e;
         }
     }
 
 
-    private static Block buildRecord(ResultSet rs) {
+    private static UserUpload buildRecord(ResultSet rs) {
 
-        Block block = new Block();
+        UserUpload userUpload = new UserUpload();
         try {
-              block.setBlockLocation(rs.getString("block_location"));
-              block.setBarcodeData(rs.getString("barcode_data"));
-              block.setFarmId(rs.getString("farm_id"));
-              block.setLocationType(rs.getString("location_type"));
-              block.setLocationId(rs.getString("location_id"));
-              block.setDate(rs.getString("date"));
-              block.setId(rs.getString("id"));
+              userUpload.setId(rs.getString("id"));
+              userUpload.setName(rs.getString("name"));
+              userUpload.setFileName(rs.getString("file_name"));
+              userUpload.setFilePath(rs.getString("file_path"));
+              userUpload.setFileType(rs.getString("file_type"));
+              userUpload.setCreatedBy(rs.getString("created_by"));
+              userUpload.setCreatedDate(rs.getString("created_date"));
+              userUpload.setFileSize(rs.getString("file_size"));
+              userUpload.setDescription(rs.getString("description"));
 
-            return block;
+            return userUpload;
         } catch (Exception e) {
-            LOG.error("exception when building record for block" + e.getMessage());
+            LOG.error("exception when building record for User Upload" + e.getMessage());
             return null;
         }
     }
