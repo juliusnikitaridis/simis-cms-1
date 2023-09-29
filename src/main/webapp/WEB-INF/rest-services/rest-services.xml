@@ -98,7 +98,7 @@
   <service method="post" endpoint="cannacomply/ReadingListService" class="com.simisinc.platform.rest.services.cannacomply.ReadingListService"/>
   <service method="post" endpoint="cannacomply/CreateDeviceService" class="com.simisinc.platform.rest.services.cannacomply.CreateDeviceService"/>
   <service method="post" endpoint="cannacomply/DeviceListService" class="com.simisinc.platform.rest.services.cannacomply.DeviceListService"/>
-  <service method="post" endpoint="cannacomply/CreateUserUploadService" class="com.simisinc.platform.rest.services.cannacomply.CreateUserUploadService"/>
+  <service method="post" endpoint="cannacomply/UserUploadListService" class="com.simisinc.platform.rest.services.cannacomply.UserUploadListService"/>
 
 </services>
 

@@ -11,5 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserUploadSpecification {
     private String id = null;
-    private String createdBy;
+    private String userId;
+    private String farmId;
+    private String name; // type ?
+
 }

@@ -83,7 +83,9 @@ public class UserUploadRepository {
         if (specification != null) {
             where
                     .addIfExists("id = ?", specification.getId())
-                    .addIfExists("created_by = ?",specification.getCreatedBy());
+                    .addIfExists("name = ?",specification.getName()) //this really is a type for the upload
+                    .addIfExists("farm_id = ?",specification.getFarmId())
+                    .addIfExists("created_by = ?",specification.getUserId());
 
         }
         return DB.selectAllFrom(
