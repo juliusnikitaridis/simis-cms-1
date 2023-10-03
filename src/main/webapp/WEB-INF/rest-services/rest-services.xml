@@ -75,8 +75,8 @@
   <service method="post" endpoint="cannacomply/CreateBlockService" class="com.simisinc.platform.rest.services.cannacomply.CreateBlockService"/>
   <service method="get" endpoint="cannacomply/BlockListService" class="com.simisinc.platform.rest.services.cannacomply.BlockListService"/>
   <service method="post" endpoint="cannacomply/UpdateBlockService" class="com.simisinc.platform.rest.services.cannacomply.UpdateBlockService"/>
-  <service method="post" endpoint="cannacomply/CreateRoomService" class="com.simisinc.platform.rest.services.cannacomply.CreateRoomService"/>
-  <service method="get" endpoint="cannacomply/RoomListService" class="com.simisinc.platform.rest.services.cannacomply.RoomListService"/>
+  <service method="post" endpoint="cannacomply/CreateLocationService" class="com.simisinc.platform.rest.services.cannacomply.CreateLocationService"/>
+  <service method="get" endpoint="cannacomply/LocationListService" class="com.simisinc.platform.rest.services.cannacomply.LocationListService"/>
   <service method="get" endpoint="cannacomply/CreateYieldService" class="com.simisinc.platform.rest.services.cannacomply.CreateYieldService"/>
   <service method="get" endpoint="cannacomply/YieldListService" class="com.simisinc.platform.rest.services.cannacomply.YieldListService"/>
   <service method="get" endpoint="cannacomply/CreateTreatmentProductService" class="com.simisinc.platform.rest.services.cannacomply.CreateTreatmentProductService"/>

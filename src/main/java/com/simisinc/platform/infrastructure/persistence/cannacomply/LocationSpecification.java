@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RoomSpecification {
+public class LocationSpecification {
     private String id = null;
     private String farmId;
 }

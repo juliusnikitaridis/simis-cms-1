@@ -1,8 +1,7 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Activity;
-import com.simisinc.platform.domain.model.cannacomply.Block;
-import com.simisinc.platform.domain.model.cannacomply.Room;
+import com.simisinc.platform.domain.model.cannacomply.Location;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,21 +10,22 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 
-public class RoomRepository {
+public class LocationRepository {
 
-    private static Log LOG = LogFactory.getLog(RoomRepository.class);
-    private static String TABLE_NAME = "cannacomply.room";
+    private static Log LOG = LogFactory.getLog(LocationRepository.class);
+    private static String TABLE_NAME = "cannacomply.location";
     private static String[] PRIMARY_KEY = new String[]{"id"};
 
-    public static Room add(Room record) throws Exception {
+    public static Location add(Location record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
-                .add("room_name", record.getRoomName())
-                .add("room_description", record.getRoomDescription())
-                .add("room_color", record.getRoomColour())
+                .add("location_name", record.getLocationName())
+                .add("room_description", record.getLocationDescription())
+                .add("location_color", record.getRoomColour())
                 .add("farm_id",record.getFarmId())
                 .add("purpose",record.getPurpose())
                 .add("optimal_readings",record.getOptimalReadings())
+                .add("type",record.getType())
                 .add("location_data",record.getLocationData());
 
         try (Connection connection = DB.getConnection();
@@ -43,14 +43,15 @@ public class RoomRepository {
     }
 
 
-    public static void update(Room record) throws Exception {
+    public static void update(Location record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("room_name", record.getRoomName())
-                .addIfExists("room_description", record.getRoomDescription())
+                .addIfExists("location_name", record.getLocationName())
+                .addIfExists("location_description", record.getLocationDescription())
                 .addIfExists("room_color", record.getRoomColour())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("optimal_readings",record.getOptimalReadings())
                 .addIfExists("purpose",record.getPurpose())
+                .addIfExists("type",record.getType())
                 .addIfExists("location_data",record.getLocationData());
 
         try (Connection connection = DB.getConnection();
@@ -71,11 +72,11 @@ public class RoomRepository {
 
         return (Activity) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
-                RoomRepository::buildRecord);
+                LocationRepository::buildRecord);
     }
 
 
-    public static DataResult query(RoomSpecification specification, DataConstraints constraints) {
+    public static DataResult query(LocationSpecification specification, DataConstraints constraints) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
@@ -86,36 +87,37 @@ public class RoomRepository {
 
         }
         return DB.selectAllFrom(
-                TABLE_NAME, select, where, orderBy, constraints, RoomRepository::buildRecord);
+                TABLE_NAME, select, where, orderBy, constraints, LocationRepository::buildRecord);
     }
 
 
     public static void delete(String blockId) throws Exception {
         try (Connection connection = DB.getConnection()) {
             DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", blockId));
-            LOG.debug("Room has been deleted:>>" + blockId);
+            LOG.debug("Location has been deleted:>>" + blockId);
         } catch (Exception e) {
             throw e;
         }
     }
 
 
-    private static Room buildRecord(ResultSet rs) {
+    private static Location buildRecord(ResultSet rs) {
 
-        Room room = new Room();
+        Location location = new Location();
         try {
-              room.setId(rs.getString("id"));
-              room.setPurpose(rs.getString("purpose"));
-              room.setRoomName(rs.getString("room_name"));
-              room.setFarmId(rs.getString("farm_id"));
-              room.setRoomDescription(rs.getString("room_description"));
-              room.setRoomColour(rs.getString("room_color"));
-              room.setOptimalReadings(rs.getString("optimal_readings"));
-              room.setLocationData(rs.getString("location_data"));
+              location.setId(rs.getString("id"));
+              location.setPurpose(rs.getString("purpose"));
+              location.setLocationName(rs.getString("location_name"));
+              location.setFarmId(rs.getString("farm_id"));
+              location.setLocationDescription(rs.getString("location_description"));
+              location.setRoomColour(rs.getString("room_color"));
+              location.setType(rs.getString("type"));
+              location.setOptimalReadings(rs.getString("optimal_readings"));
+              location.setLocationData(rs.getString("location_data"));
 
-            return room;
+            return location;
         } catch (Exception e) {
-            LOG.error("exception when building record for room" + e.getMessage());
+            LOG.error("exception when building record for Location" + e.getMessage());
             return null;
         }
     }

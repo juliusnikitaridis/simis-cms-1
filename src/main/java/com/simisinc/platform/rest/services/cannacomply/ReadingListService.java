@@ -1,11 +1,8 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Reading;
-import com.simisinc.platform.domain.model.cannacomply.Room;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.ReadingRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.ReadingSpecification;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.RoomRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.RoomSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;

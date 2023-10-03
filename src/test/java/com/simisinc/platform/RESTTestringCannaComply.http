@@ -32,7 +32,7 @@ Content-Type: application/json
   "notes": "some notes",
   "harvestBatchId": "234234234",
   "farmId": "23423456",
-  "location": "location",
+  "location": "Location",
   "cropId": "543452453245",
   "strain": "Madusas magic",
   "date": "11112332"
@@ -154,7 +154,7 @@ Content-Type: application/json
   "item": "item",
   "quantity": "300",
   "farmId": "34234234",
-  "location": "location",
+  "location": "Location",
   "status": "SOME STATUS",
   "date": "date",
   "harvestId": "harvestId"
@@ -295,7 +295,7 @@ GET http://localhost:8080/api/cannacomply/CalculateAverageForReadingsService?rea
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
 Content-Type: application/json
-Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4java -version
 
 ###
 
@@ -366,7 +366,7 @@ Content-Type: application/json
 Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 { "deviceType": "Thermometer",
-  "locationType": "room",
+  "locationType": "Location",
   "locationId": "234234",
   "date": "12-12-2023",
   "status": "testing",
@@ -639,7 +639,7 @@ Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
 Content-Type: application/json
 
 {
-  "blockLocation": "block location",
+  "blockLocation": "block Location",
   "barcodeData": "[]",
   "farmId": "some-test-farm",
   "date": "12-12-2023"
@@ -676,8 +676,8 @@ Authorization:Bearer API-ed8f0b3b-bb31-43fd-80d4-e7c5c4375e201
 Content-Type: application/json
 
 {
-  "roomName": "Test Room 1",
-  "roomDescription": "some amazing room for curing ",
+  "roomName": "Test Location 1",
+  "roomDescription": "some amazing Location for curing ",
   "locationData": "[{},{}]",
   "farmId": "29384792837483",
   "roomColour": "green"

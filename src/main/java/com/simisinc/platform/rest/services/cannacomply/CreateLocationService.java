@@ -1,10 +1,8 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.cannacomply.Block;
-import com.simisinc.platform.domain.model.cannacomply.Room;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.BlockRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.RoomRepository;
+import com.simisinc.platform.domain.model.cannacomply.Location;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.LocationRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
@@ -21,9 +19,9 @@ import java.util.UUID;
  */
 
 
-public class CreateRoomService {
+public class CreateLocationService {
 
-    private static Log LOG = LogFactory.getLog(CreateRoomService.class);
+    private static Log LOG = LogFactory.getLog(CreateLocationService.class);
 
     public ServiceResponse post(ServiceContext context) {
 
@@ -33,11 +31,11 @@ public class CreateRoomService {
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            Room room = mapper.readValue(context.getJsonRequest(), Room.class);
+            Location location = mapper.readValue(context.getJsonRequest(), Location.class);
             String blockId = UUID.randomUUID().toString();
-            room.setId(blockId);
+            location.setId(blockId);
 
-            RoomRepository.add(room);
+            LocationRepository.add(location);
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>(){{add(blockId);}};
@@ -45,7 +43,7 @@ public class CreateRoomService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in CreateRoomService", e);
+            LOG.error("Error in CreateLocationService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;

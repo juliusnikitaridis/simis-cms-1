@@ -1,11 +1,8 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
-import com.simisinc.platform.domain.model.cannacomply.Crop;
-import com.simisinc.platform.domain.model.cannacomply.Room;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.CropRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.CropSpecification;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.RoomRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.RoomSpecification;
+import com.simisinc.platform.domain.model.cannacomply.Location;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.LocationRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.LocationSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
@@ -20,9 +17,9 @@ import java.util.List;
  * @author Julius Nikitaridis
  * @created 25/04/23 11:28 AM
  */
-public class RoomListService {
+public class LocationListService {
 
-    private static Log LOG = LogFactory.getLog(RoomListService.class);
+    private static Log LOG = LogFactory.getLog(LocationListService.class);
 
     public ServiceResponse get(ServiceContext context) {
 
@@ -33,7 +30,7 @@ public class RoomListService {
             String farmId = context.getParameter("farmId");
             String id = context.getParameter("id");
 
-            RoomSpecification specification = new RoomSpecification();
+            LocationSpecification specification = new LocationSpecification();
 
             if(null!= id) {
                 specification.setId(id);
@@ -42,14 +39,14 @@ public class RoomListService {
                 specification.setFarmId(farmId);
             }
 
-            List<Room> roomList = (List<Room>) RoomRepository.query(specification, null).getRecords();
+            List<Location> locationList = (List<Location>) LocationRepository.query(specification, null).getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
-            ServiceResponseCommand.addMeta(response, "Room List", roomList, null);
-            response.setData(roomList);
+            ServiceResponseCommand.addMeta(response, "Location List", locationList, null);
+            response.setData(locationList);
             return response;
         } catch (Throwable e) {
-            LOG.error("Error in RoomListService", e);
+            LOG.error("Error in LocationListService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;
