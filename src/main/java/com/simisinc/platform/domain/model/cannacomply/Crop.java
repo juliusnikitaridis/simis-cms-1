@@ -34,7 +34,8 @@ public class Crop extends Entity {
     private String createdDate;
     private String barcodeData;
     private String blockId;
-    private String roomId;
+    private String locationType;
+    private String locationId;
     private String lastUpdated;
 }
 

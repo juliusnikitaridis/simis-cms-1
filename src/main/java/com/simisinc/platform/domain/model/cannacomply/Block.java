@@ -13,6 +13,5 @@ public class Block extends Entity {
     private String barcodeData;
     private String farmId;
     private String date;
-    private String locationType;
     private String locationId;
 }

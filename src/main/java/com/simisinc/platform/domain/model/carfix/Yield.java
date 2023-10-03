@@ -21,7 +21,6 @@ public class Yield extends Entity {
     private String quantity = null;
     private String loss = null;
     private String harvestBatchId = null;
-    private String location = null;
     private String cropId = null;
     private String strain = null;
     private String date = null;
@@ -33,4 +32,5 @@ public class Yield extends Entity {
     private String userId;
     private String harvestedItem;
     private String lastUpdated;
+    private String locationId;
 }

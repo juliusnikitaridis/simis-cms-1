@@ -24,6 +24,7 @@ public class DeviceRepository {
                 .add("location_type",record.getLocationType())
                 .add("location_id",record.getLocationId())
                 .add("date",record.getDate())
+                .add("comments",record.getComments())
                 .add("status",record.getStatus())
                 .add("farm_id",record.getFarmId())
                 .add("usage",record.getUsage())
@@ -51,6 +52,7 @@ public class DeviceRepository {
                 .addIfExists("location_type",record.getLocationType())
                 .addIfExists("location_id",record.getLocationId())
                 .addIfExists("date",record.getDate())
+                .addIfExists("comments",record.getComments())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("usage",record.getUsage())
@@ -116,6 +118,7 @@ public class DeviceRepository {
             device.setStatus(rs.getString("status"));
             device.setFarmId(rs.getString("farm_id"));
             device.setUsage(rs.getString("usage"));
+            device.setComments(rs.getString("comments"));
             device.setLastUpdated(rs.getString("last_updated"));
             return device;
         } catch (Exception e) {

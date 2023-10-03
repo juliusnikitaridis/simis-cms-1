@@ -17,4 +17,5 @@ public class Device extends Entity {
    private String farmId;
    private String usage;
    private String lastUpdated;
+   private String comments;
 }

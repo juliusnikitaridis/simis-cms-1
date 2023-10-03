@@ -24,7 +24,7 @@ public class YieldRepository {
                 .add("notes", record.getNotes())
                 .add("farm_id",record.getFarmId())
                 .add("harvest_batch_id", record.getHarvestBatchId())
-                .add("location", record.getLocation())
+                .add("location_id", record.getLocationId())
                 .add("crop_id", record.getCropId())
                 .add("stage",record.getStage())
                 .add("last_updated",record.getLastUpdated())
@@ -57,7 +57,7 @@ public class YieldRepository {
                 .addIfExists("notes", record.getNotes())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("harvest_batch_id", record.getHarvestBatchId())
-                .addIfExists("location", record.getLocation())
+                .addIfExists("location_id", record.getLocationId())
                 .addIfExists("crop_id", record.getCropId())
                 .addIfExists("strain", record.getStrain())
                 .addIfExists("last_updated",record.getLastUpdated())
@@ -129,8 +129,9 @@ public class YieldRepository {
             record.setWetWeight(rs.getString("wet_weight"));
             record.setUserId(rs.getString("user_id"));
             record.setHarvestBatchId(rs.getString("harvest_batch_id"));
-            record.setLocation(rs.getString("location"));
+            record.setLocationId(rs.getString("location_id"));
             record.setCropId(rs.getString("crop_id"));
+            record.setDate(rs.getString("date"));
             record.setLastUpdated(rs.getString("last_updated"));
             record.setHarvestedItem(rs.getString("harvested_item"));
             record.setFarmId(rs.getString("farm_id"));
