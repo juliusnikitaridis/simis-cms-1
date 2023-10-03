@@ -58,7 +58,7 @@ public class CalculateAverageForReadingsService {
             response.setData(result);
             return response;
         } catch (Throwable e) {
-            LOG.error("Error in ReadingListService", e);
+            LOG.error("Error in CalculateAverageForReadingsService", e);
             ServiceResponse response = new ServiceResponse(400);
             response.getError().put("title", e.getMessage());
             return response;
