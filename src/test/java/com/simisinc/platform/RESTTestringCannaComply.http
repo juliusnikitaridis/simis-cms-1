@@ -291,6 +291,15 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 ###
 
 ###
+GET http://localhost:8080/api/cannacomply/CalculateAverageForReadingsService?readingType=temperature&locationId=234234&farmId=3242324
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+
+###
 GET http://localhost:8080/api/cannacomply/UserUploadListService?farmId=33
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-f8bdd97e-4f62-4af4-9f36-bdbf05a9f5f61

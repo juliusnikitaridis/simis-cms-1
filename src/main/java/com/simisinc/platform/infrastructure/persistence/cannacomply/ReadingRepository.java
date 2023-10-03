@@ -7,7 +7,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ReadingRepository {
@@ -19,14 +22,14 @@ public class ReadingRepository {
     public static Reading add(Reading record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
-                .add("date",record.getDate())
-                .add("device_id",record.getDeviceId())
-                .add("reading_type",record.getReadingType())
-                .add("reading_value",record.getReadingValue())
-                .add("status",record.getStatus())
-                .add("farm_id",record.getFarmId())
-                .add("action_taken",record.getActionTaken())
-                .add("user_id",record.getUserId());
+                .add("date", record.getDate())
+                .add("device_id", record.getDeviceId())
+                .add("reading_type", record.getReadingType())
+                .add("reading_value", record.getReadingValue())
+                .add("status", record.getStatus())
+                .add("farm_id", record.getFarmId())
+                .add("action_taken", record.getActionTaken())
+                .add("user_id", record.getUserId());
 
         try (Connection connection = DB.getConnection();
              AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -45,20 +48,20 @@ public class ReadingRepository {
 
     public static void update(Reading record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("date",record.getDate())
-                .addIfExists("device_id",record.getDeviceId())
-                .addIfExists("reading_type",record.getReadingType())
-                .addIfExists("reading_value",record.getReadingValue())
-                .addIfExists("status",record.getStatus())
-                .addIfExists("farm_id",record.getFarmId())
-                .addIfExists("action_taken",record.getActionTaken())
-                .addIfExists("user_id",record.getUserId());
-            try (Connection connection = DB.getConnection();
-                 AutoStartTransaction a = new AutoStartTransaction(connection);
-                 AutoRollback transaction = new AutoRollback(connection)) {
-                // In a transaction (use the existing connection)
-                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
-                transaction.commit();
+                .addIfExists("date", record.getDate())
+                .addIfExists("device_id", record.getDeviceId())
+                .addIfExists("reading_type", record.getReadingType())
+                .addIfExists("reading_value", record.getReadingValue())
+                .addIfExists("status", record.getStatus())
+                .addIfExists("farm_id", record.getFarmId())
+                .addIfExists("action_taken", record.getActionTaken())
+                .addIfExists("user_id", record.getUserId());
+        try (Connection connection = DB.getConnection();
+             AutoStartTransaction a = new AutoStartTransaction(connection);
+             AutoRollback transaction = new AutoRollback(connection)) {
+            // In a transaction (use the existing connection)
+            DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
+            transaction.commit();
 
         } catch (Exception se) {
             LOG.error("SQLException: " + se.getMessage());
@@ -82,12 +85,52 @@ public class ReadingRepository {
         if (specification != null) {
             where
                     .addIfExists("id = ?", specification.getId())
-                    .addIfExists("farm_id = ?",specification.getFarmId())
-                    .addIfExists("device_id = ?",specification.getDeviceId());
+                    .addIfExists("farm_id = ?", specification.getFarmId())
+                    .addIfExists("device_id = ?", specification.getDeviceId());
 
         }
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, constraints, ReadingRepository::buildRecord);
+    }
+
+    public static List<String> getAllDevicesForLocation(String farmId, String deviceType, String locationId) throws Exception {
+        List<String> deviceList = new ArrayList<>();
+        String sql = "select id from cannacomply.device" +
+                " where location_id = ?" +
+                " and farm_id = ?" +
+                " and status = 'on' and device_type= ?";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setString(1, locationId);
+            pstmt.setString(2, farmId);
+            pstmt.setString(3, deviceType);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                deviceList.add(rs.getString("id"));
+            }
+            return deviceList;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
+    public static double getLatestReadingForDevice(String deviceId, String readingType) throws Exception {
+        String sql = "select * from cannacomply.reading where device_id = ? and reading_type = ? order by date desc limit 1";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, deviceId);
+            pstmt.setString(2, readingType);
+            ResultSet rs = pstmt.executeQuery();
+            double reading = 0.0;
+            while (rs.next()) {
+                reading = Double.valueOf(rs.getString("reading_value"));
+            }
+            return reading;
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
