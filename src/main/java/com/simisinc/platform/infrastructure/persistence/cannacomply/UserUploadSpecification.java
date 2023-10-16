@@ -14,5 +14,6 @@ public class UserUploadSpecification {
     private String userId;
     private String farmId;
     private String name; // type ?
+    private String referenceId;
 
 }

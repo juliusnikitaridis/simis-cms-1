@@ -17,4 +17,6 @@ public class UserUpload extends Entity {
     private String createdDate;
     private String fileSize;
     private String description;
+    private String farmId;
+    private String referenceId; //this is issue_id or activity_id - link to pictures
 }

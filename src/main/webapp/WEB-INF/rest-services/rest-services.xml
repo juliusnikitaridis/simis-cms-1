@@ -101,6 +101,7 @@
   <service method="post" endpoint="cannacomply/UserUploadListService" class="com.simisinc.platform.rest.services.cannacomply.UserUploadListService"/>
   <service method="post" endpoint="cannacomply/CreateUserUploadService" class="com.simisinc.platform.rest.services.cannacomply.CreateUserUploadService"/>
   <service method="post" endpoint="cannacomply/CalculateAverageForReadingsService" class="com.simisinc.platform.rest.services.cannacomply.CalculateAverageForReadingsService"/>
+  <service method="post" endpoint="cannacomply/UpdateDeviceService" class="com.simisinc.platform.rest.services.cannacomply.UpdateDeviceService"/>
 
 </services>
 

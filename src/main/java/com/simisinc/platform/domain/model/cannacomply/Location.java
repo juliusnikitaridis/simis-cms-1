@@ -19,13 +19,14 @@ public class Location extends Entity {
 
     private String id;
     private String farmId;
-    private String roomColour;
+    private String locationColour;
     private String locationName;
     private String locationDescription;
     private String locationData;
     private String purpose;
     private String optimalReadings;
     private String type;
+    private String dimensions;
 }
 
 

@@ -18,4 +18,8 @@ public class Device extends Entity {
    private String usage;
    private String lastUpdated;
    private String comments;
+   private String wareHouseItemId;
+   private String deviceName;
+   private String barcode;
+
 }

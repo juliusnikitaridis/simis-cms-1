@@ -20,9 +20,10 @@ public class LocationRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("location_name", record.getLocationName())
-                .add("room_description", record.getLocationDescription())
-                .add("location_color", record.getRoomColour())
+                .add("location_description", record.getLocationDescription())
+                .add("location_color", record.getLocationColour())
                 .add("farm_id",record.getFarmId())
+                .add("dimensions",record.getDimensions())
                 .add("purpose",record.getPurpose())
                 .add("optimal_readings",record.getOptimalReadings())
                 .add("type",record.getType())
@@ -47,10 +48,11 @@ public class LocationRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("location_name", record.getLocationName())
                 .addIfExists("location_description", record.getLocationDescription())
-                .addIfExists("room_color", record.getRoomColour())
+                .addIfExists("location_color", record.getLocationColour())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("optimal_readings",record.getOptimalReadings())
                 .addIfExists("purpose",record.getPurpose())
+                .addIfExists("dimensions",record.getDimensions())
                 .addIfExists("type",record.getType())
                 .addIfExists("location_data",record.getLocationData());
 
@@ -109,8 +111,9 @@ public class LocationRepository {
               location.setPurpose(rs.getString("purpose"));
               location.setLocationName(rs.getString("location_name"));
               location.setFarmId(rs.getString("farm_id"));
+              location.setDimensions(rs.getString("dimensions"));
               location.setLocationDescription(rs.getString("location_description"));
-              location.setRoomColour(rs.getString("room_color"));
+              location.setLocationColour(rs.getString("location_color"));
               location.setType(rs.getString("type"));
               location.setOptimalReadings(rs.getString("optimal_readings"));
               location.setLocationData(rs.getString("location_data"));

@@ -32,7 +32,16 @@ public class CreateComplianceUserService {
             ObjectMapper mapper = new ObjectMapper();
             ComplianceUser complianceUser = mapper.readValue(context.getJsonRequest(), ComplianceUser.class);
             String id = UUID.randomUUID().toString();
-
+            if(complianceUser.getStatus() == null) {
+                throw new Exception("compliance user status value is null");
+            }
+            if(complianceUser.getFarmId() == null) {
+                throw new Exception("compliance user farm id is null");
+            }
+            if(complianceUser.getUserRole() == null) {
+                throw new Exception("compliance user role is null");
+            }
+            complianceUser.setUuid(id);
             ComplianceUserRepository.add(complianceUser);
 
             ServiceResponse response = new ServiceResponse(200);

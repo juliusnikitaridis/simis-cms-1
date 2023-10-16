@@ -27,4 +27,9 @@ public class Supplier extends Entity {
     private String lotNumber;
     private String container;
     private String mass;
+    private String address;
+    private String email;
+    private String contactNo;
+    private String contactTitle;
+    private String site;
 }

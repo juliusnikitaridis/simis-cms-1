@@ -24,6 +24,9 @@ public class DeviceRepository {
                 .add("location_type",record.getLocationType())
                 .add("location_id",record.getLocationId())
                 .add("date",record.getDate())
+                .add("warehouse_item_id",record.getWareHouseItemId())
+                .add("device_name",record.getDeviceName())
+                .add("barcode",record.getBarcode())
                 .add("comments",record.getComments())
                 .add("status",record.getStatus())
                 .add("farm_id",record.getFarmId())
@@ -54,6 +57,9 @@ public class DeviceRepository {
                 .addIfExists("date",record.getDate())
                 .addIfExists("comments",record.getComments())
                 .addIfExists("status",record.getStatus())
+                .addIfExists("warehouse_item_id",record.getWareHouseItemId())
+                .addIfExists("device_name",record.getDeviceName())
+                .addIfExists("barcode",record.getBarcode())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("usage",record.getUsage())
                 .addIfExists("last_updated",record.getLastUpdated());
@@ -116,6 +122,9 @@ public class DeviceRepository {
             device.setLocationId(rs.getString("location_id"));
             device.setDate(rs.getString("date"));
             device.setStatus(rs.getString("status"));
+            device.setDeviceName(rs.getString("device_name"));
+            device.setWareHouseItemId(rs.getString("warehouse_item_id"));
+            device.setBarcode(rs.getString("barcode"));
             device.setFarmId(rs.getString("farm_id"));
             device.setUsage(rs.getString("usage"));
             device.setComments(rs.getString("comments"));

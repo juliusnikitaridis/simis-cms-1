@@ -32,6 +32,7 @@ public class UserUploadListService {
             String id = context.getParameter("id");
             String userId = context.getParameter("userId");
             String farmId = context.getParameter("farmId");
+            String referenceId = context.getParameter("referenceId");
 
             UserUploadSpecification specification = new UserUploadSpecification();
             if(null!= farmId) {
@@ -42,6 +43,9 @@ public class UserUploadListService {
             }
             if(null != userId) {
                 specification.setUserId(userId);
+            }
+            if(null != referenceId) {
+                specification.setReferenceId(referenceId);
             }
             List<UserUpload> farmList = (List<UserUpload>) UserUploadRepository.query(specification, null).getRecords();
 

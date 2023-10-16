@@ -21,6 +21,10 @@ public class SupplierRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("farm_id", record.getFarmId())
+                .add("contact_no",record.getContactNo())
+                .add("contact_title",record.getContactTitle())
+                .add("email",record.getEmail())
+                .add("site",record.getSite())
                 .add("supplier_name", record.getSupplierName())
                 .add("product_name", record.getProductName())
                 .add("quantity",record.getQuantity())
@@ -52,6 +56,10 @@ public class SupplierRepository {
                 .addIfExists("supplier_name", record.getSupplierName())
                 .addIfExists("product_name", record.getProductName())
                 .addIfExists("quantity",record.getQuantity())
+                .addIfExists("contact_no",record.getContactNo())
+                .addIfExists("contact_title",record.getContactTitle())
+                .addIfExists("email",record.getEmail())
+                .addIfExists("site",record.getSite())
                 .addIfExists("expiry_date", record.getExpiryDate())
                 .addIfExists("receipt", record.getReceipt())
                 .addIfExists("type", record.getType())
@@ -119,6 +127,10 @@ public class SupplierRepository {
             record.setQuantity(rs.getString("quantity"));
             record.setExpiryDate(rs.getString("expiry_date"));
             record.setReceipt(rs.getString("receipt"));
+            record.setContactNo(rs.getString("contact_no"));
+            record.setContactTitle(rs.getString("contact_title"));
+            record.setEmail(rs.getString("email"));
+            record.setSite(rs.getString("site"));
             record.setType(rs.getString("type"));
             record.setLotNumber(rs.getString("lot_number"));
             record.setContainer(rs.getString("container"));

@@ -58,6 +58,11 @@ public class CreateUserUploadService {
             ObjectMapper mapper = new ObjectMapper();
             UserUpload userUploadRequest = mapper.readValue(sb.toString(), UserUpload.class);
 
+            if(userUploadRequest.getFarmId() != null && userUploadRequest.getReferenceId() != null) {
+                //user upload should belong to a farm OR and activity/issue - not both.
+                //we want to use user uploads for images aswell
+                throw new Exception("farm_id and reference_id can not both be set");
+            }
             int counter = 0;
             for (Part part : context.getRequest().getParts()) {
                 if (part.getName().equalsIgnoreCase("FILE")) {
@@ -94,12 +99,14 @@ public class CreateUserUploadService {
         userUploadEntry.setCreatedBy(uploadRequest.getCreatedBy());
         userUploadEntry.setName(uploadRequest.getName());
         userUploadEntry.setCreatedDate(createdDate);
+        userUploadEntry.setReferenceId(uploadRequest.getReferenceId());
         userUploadEntry.setFileName(currentPart.getSubmittedFileName());
         userUploadEntry.setFilePath(currentFilePath);
         userUploadEntry.setDescription(uploadRequest.getDescription());
         userUploadEntry.setFileSize(String.valueOf(currentPart.getSize()));
         userUploadEntry.setFileType(currentPart.getContentType());
         userUploadEntry.setId(UUID.randomUUID().toString());
+        userUploadEntry.setFarmId(uploadRequest.getFarmId());
 
         return userUploadEntry;
     }

@@ -22,6 +22,7 @@ public class BlockRepository {
                 .add("block_location", record.getBlockLocation())
                 .add("barcode_data", record.getBarcodeData())
                 .add("location_id",record.getLocationId())
+                .add("dimensions",record.getDimensions())
                 .add("farm_id", record.getFarmId())
                 .add("date",record.getDate());
 
@@ -46,6 +47,7 @@ public class BlockRepository {
                 .addIfExists("barcode_data", record.getBarcodeData())
                 .addIfExists("location_id",record.getLocationId())
                 .addIfExists("farm_id", record.getFarmId())
+                .addIfExists("dimensions",record.getDimensions())
                 .addIfExists("date",record.getDate());
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -100,6 +102,7 @@ public class BlockRepository {
         try {
               block.setBlockLocation(rs.getString("block_location"));
               block.setBarcodeData(rs.getString("barcode_data"));
+              block.setDimensions(rs.getString("dimensions"));
               block.setFarmId(rs.getString("farm_id"));
               block.setLocationId(rs.getString("location_id"));
               block.setDate(rs.getString("date"));

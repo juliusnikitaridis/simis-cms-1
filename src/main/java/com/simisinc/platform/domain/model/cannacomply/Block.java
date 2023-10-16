@@ -14,4 +14,5 @@ public class Block extends Entity {
     private String farmId;
     private String date;
     private String locationId;
+    private String dimensions;
 }

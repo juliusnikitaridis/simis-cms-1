@@ -27,6 +27,7 @@ public class UserUploadRepository {
                 .add("created_by", record.getCreatedBy())
                 .add("created_date",record.getCreatedDate())
                 .add("file_size",record.getFileSize())
+                .addIfExists("reference_id",record.getReferenceId())
                 .add("description",record.getDescription());
 
         try (Connection connection = DB.getConnection();
@@ -85,6 +86,7 @@ public class UserUploadRepository {
                     .addIfExists("id = ?", specification.getId())
                     .addIfExists("name = ?",specification.getName()) //this really is a type for the upload
                     .addIfExists("farm_id = ?",specification.getFarmId())
+                    .addIfExists("reference_id = ?",specification.getReferenceId()) //does this upload belong to an activity or issue ?
                     .addIfExists("created_by = ?",specification.getUserId());
 
         }
@@ -115,6 +117,8 @@ public class UserUploadRepository {
               userUpload.setCreatedBy(rs.getString("created_by"));
               userUpload.setCreatedDate(rs.getString("created_date"));
               userUpload.setFileSize(rs.getString("file_size"));
+              userUpload.setFarmId(rs.getString("farm_id"));
+              userUpload.setReferenceId(rs.getString("reference_id"));
               userUpload.setDescription(rs.getString("description"));
 
             return userUpload;
