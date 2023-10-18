@@ -308,6 +308,19 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 ###
 
+###
+POST http://localhost:8080/api/cannacomply/DeleteUserUploadService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-ccdde073-e4f6-4c20-b3cb-65b178c39a381
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "uploadId": "0fdba811-4b06-45ec-98ed-27843b8f3f55"
+}
+
+###
+
 
 
 

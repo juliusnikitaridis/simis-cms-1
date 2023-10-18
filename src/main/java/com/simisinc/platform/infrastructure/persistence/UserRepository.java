@@ -299,7 +299,7 @@ public class UserRepository {
         return null;
     }
 
-    //method that is only used by carfix to update member profiles.
+    //method that is only used by carfix/ cannacomply to update member profiles.
     public static void updateUserDetails(User record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("first_name", record.getFirstName())

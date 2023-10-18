@@ -7,6 +7,7 @@ import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -24,6 +25,7 @@ public class UserUploadRepository {
                 .add("file_name", record.getFileName())
                 .add("file_path",record.getFilePath())
                 .add("file_type",record.getFileType())
+                .addIfExists("farm_id",record.getFarmId())
                 .add("created_by", record.getCreatedBy())
                 .add("created_date",record.getCreatedDate())
                 .add("file_size",record.getFileSize())
@@ -53,6 +55,7 @@ public class UserUploadRepository {
                 .addIfExists("file_type",record.getFileType())
                 .addIfExists("created_by", record.getCreatedBy())
                 .addIfExists("created_date",record.getCreatedDate())
+                .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("file_size",record.getFileSize())
                 .addIfExists("description",record.getDescription());
             try (Connection connection = DB.getConnection();
@@ -69,9 +72,9 @@ public class UserUploadRepository {
     }
 
 
-    public static Activity findById(String id) {
+    public static UserUpload findById(String id) {
 
-        return (Activity) DB.selectRecordFrom(
+        return (UserUpload) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 UserUploadRepository::buildRecord);
     }
@@ -95,10 +98,16 @@ public class UserUploadRepository {
     }
 
 
-    public static void delete(String blockId) throws Exception {
+    public static boolean delete(String uploadId, String filePath) throws Exception {
         try (Connection connection = DB.getConnection()) {
-            DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", blockId));
-            LOG.debug("User upload has been deleted:>>" + blockId);
+            DB.deleteFrom(connection, TABLE_NAME, new SqlUtils().add("id = ?", uploadId));
+
+            File fileToDelete = new File(filePath);
+            if(!fileToDelete.exists()) {
+                throw new Exception("file to delete not found on file system");
+            }
+            LOG.debug("User upload has been deleted:>>" + uploadId);
+            return fileToDelete.delete();
         } catch (Exception e) {
             throw e;
         }
