@@ -105,6 +105,9 @@
   <service method="post" endpoint="cannacomply/UpdateLocationService" class="com.simisinc.platform.rest.services.cannacomply.UpdateLocationService"/>
   <service method="post" endpoint="cannacomply/UpdateUserService" class="com.simisinc.platform.rest.services.cannacomply.UpdateUserService"/>
   <service method="post" endpoint="cannacomply/DeleteUserUploadService" class="com.simisinc.platform.rest.services.cannacomply.DeleteUserUploadService"/>
+  <service method="post" endpoint="cannacomply/GrowthCycleListService" class="com.simisinc.platform.rest.services.cannacomply.GrowthCycleListService"/>
+  <service method="post" endpoint="cannacomply/UpdateGrowthCycleService" class="com.simisinc.platform.rest.services.cannacomply.UpdateGrowthCycleService"/>
+  <service method="post" endpoint="cannacomply/CreateGrowthCycleService" class="com.simisinc.platform.rest.services.cannacomply.CreateGrowthCycleService"/>
 
 </services>
 
