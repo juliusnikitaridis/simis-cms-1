@@ -108,6 +108,9 @@
   <service method="post" endpoint="cannacomply/GrowthCycleListService" class="com.simisinc.platform.rest.services.cannacomply.GrowthCycleListService"/>
   <service method="post" endpoint="cannacomply/UpdateGrowthCycleService" class="com.simisinc.platform.rest.services.cannacomply.UpdateGrowthCycleService"/>
   <service method="post" endpoint="cannacomply/CreateGrowthCycleService" class="com.simisinc.platform.rest.services.cannacomply.CreateGrowthCycleService"/>
+  <service method="post" endpoint="cannacomply/CreateContractService" class="com.simisinc.platform.rest.services.cannacomply.CreateContractService"/>
+  <service method="post" endpoint="cannacomply/UpdateContractService" class="com.simisinc.platform.rest.services.cannacomply.UpdateContractService"/>
+  <service method="post" endpoint="cannacomply/ContractListService" class="com.simisinc.platform.rest.services.cannacomply.ContractListService"/>
 
 </services>
 

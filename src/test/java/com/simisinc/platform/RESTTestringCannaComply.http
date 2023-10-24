@@ -278,6 +278,51 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 }
 ###
 
+###
+POST http://localhost:8080/api/cannacomply/CreateGrowthCycleService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "plants": "julius-nikiA2",
+  "startDate": "test supplier2",
+  "endDate": "test product2",
+  "strain": "2002",
+  "farmId": "2022-12-12/2"
+}
+###
+
+###
+POST http://localhost:8080/api/cannacomply/CreateContractService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "strain": "strain",
+  "customerId": "customerId",
+  "farmId": "farmId",
+  "deliveryDate": "deiveryDate",
+  "type": "type",
+  "price": "price",
+  "quantity": "quantity",
+  "contractDate": "contractDate",
+  "growthCycleId": "gorwthCycleId"
+}
+###
+
+
+
+###
+GET http://localhost:8080/api/cannacomply/GrowthCycleListService?farmId=awerqwerqwer
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
 
 
 
