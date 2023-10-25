@@ -7,13 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GrowthCycle extends Entity {
+public class Customer extends Entity {
    private String id;
-   private String plants;
-   private String startDate;
-   private String endDate;
-   private String strain;
+   private String customerName;
+   private String country;
+   private String city;
+   private String contactNo;
+   private String email;
    private String farmId;
-   private String yield;
-   private String growthCycleName;
+   private String address;
 }
