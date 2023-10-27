@@ -313,6 +313,7 @@ public class UserRepository {
                 .addIfExists("department", record.getDepartment())
                 .addIfExists("timezone", record.getTimeZone())
                 .addIfExists("city", record.getCity())
+                .addIfExists("user_type", record.getUserType())
                 .addIfExists("id_number",record.getIdnum())
                 .addIfExists("state", record.getState())
                 .addIfExists("country", record.getCountry()) //this will actually store the whole address string , 1 Nemesia street etc...

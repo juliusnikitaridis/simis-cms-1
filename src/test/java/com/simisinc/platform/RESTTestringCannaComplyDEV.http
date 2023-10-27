@@ -72,3 +72,63 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 }
 ###
 
+
+###
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/UpdateUserService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-d4fb9a02-8e00-4f6b-92f2-f37b646c75e13
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "uniqueId": "9fc4dcd0-cd0b-487b-a9a5-c6e5df06b3ac",
+  "userType": "something2"
+
+}
+###
+
+
+
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/CreateCustomerService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-d4fb9a02-8e00-4f6b-92f2-f37b646c75e13
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "customerName": "customerName",
+  "country": "country",
+  "city": "city",
+  "contactNo": "contactNo",
+  "email": "email",
+  "farmId": "farmId",
+  "address": "address"
+}
+###
+
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/UpdateCustomerService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-d4fb9a02-8e00-4f6b-92f2-f37b646c75e13
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "19ae8b77-1551-4098-810e-d49d20ec4fef",
+  "customerName": "customerName2"
+}
+###
+
+###
+GET http://localhost:8080/api/cannacomply/CustomerListService?famrId=farmId
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+GET http://localhost:8080/api/cannacomply/ContractListService?farmId=27eca4ed-b247-4fbb-ab60-3834101116ed
+X-API-Key:b67e14c8-093d-4502-8b10-d13c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+

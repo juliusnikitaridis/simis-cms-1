@@ -116,7 +116,7 @@ public class ContractRepository {
           contract.setPrice(rs.getString("price"));
           contract.setQuantity(rs.getString("quantity"));
           contract.setContractDate(rs.getString("contract_date"));
-          contract.setGrowthCycleId(rs.getString("growth_cycle"));
+          contract.setGrowthCycleId(rs.getString("growth_cycle_id"));
           return contract;
         } catch (Exception e) {
             LOG.error("exception when building record for contract" + e.getMessage());

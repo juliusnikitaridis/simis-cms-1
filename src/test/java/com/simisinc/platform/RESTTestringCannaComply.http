@@ -314,6 +314,35 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 }
 ###
 
+POST http://localhost:8080/api/cannacomply/CreateCustomerService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "customerName": "customerName",
+  "country": "country",
+  "city": "city",
+  "contactNo": "contactNo",
+  "email": "email",
+  "farmId": "farmId",
+  "address": "address"
+}
+###
+GET http://localhost:8080/api/cannacomply/CustomerListService?famrId=farmId
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+###
+GET http://localhost:8080/api/cannacomply/ContractListService?famrId=27eca4ed-b247-4fbb-ab60-3834101116ed
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
 
 
 ###
@@ -658,6 +687,25 @@ Content-Type: application/json
   "farmId":"some-farm-id"
 }
 ###
+POST http://localhost:8080/api/cannacomply/UpdateUserService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Content-Type: application/json
+
+{
+  "id": "f26dc7d1-3b60-41bb-98f9-86955ad4e6cd",
+  "cropId":"394857539487",
+  "title":"some title4",
+  "description":"some description4",
+  "severity":"4",
+  "assignedTo": "dean richmond",
+  "comment": "dome comments",
+  "attachments": "file_data_",
+  "farmId":"some-farm-id"
+}
+###
+
+
 
 
 GET http://localhost:8080/api/cannacomply/IssueListService?id=f26dc7d1-3b60-41bb-98f9-86955ad4e6c
@@ -753,6 +801,20 @@ GET http://localhost:8080/api/cannacomply/RoomListService?id=5384f4aa-1992-4f7b-
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-ed8f0b3b-bb31-43fd-80d4-e7c5c4375e201
 Content-Type: application/json
+###
+
+###
+POST http://localhost:8080/api/cannacomply/UpdateUserService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-fb3efb23-0928-4acf-b895-2a2e3b92ec931
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "uniqueId": "test-t-16",
+  "userType": "something2"
+
+}
 ###
 
 
