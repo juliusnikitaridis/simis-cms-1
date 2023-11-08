@@ -37,7 +37,10 @@ public class CreateBlockService {
             Block block = mapper.readValue(context.getJsonRequest(), Block.class);
             String blockId = UUID.randomUUID().toString();
             block.setId(blockId);
-
+            Block existingBLock = BlockRepository.findByLocationAndFarmId(block.getBlockLocation(),block.getFarmId());
+            if(existingBLock != null) {
+                throw new Exception("Block with location_id"+block.getLocationId()+" already exists for farm"+block.getFarmId());
+            }
             BlockRepository.add(block);
 
             ServiceResponse response = new ServiceResponse(200);

@@ -63,10 +63,21 @@ public class BlockRepository {
     }
 
 
-    public static Activity findById(String id) {
+    public static Block findById(String id) {
 
-        return (Activity) DB.selectRecordFrom(
+        return (Block) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
+                BlockRepository::buildRecord);
+    }
+
+    public static Block findByLocationAndFarmId(String blockLocation,String farmId) {
+
+        SqlUtils sqlUtils = new SqlUtils();
+        sqlUtils.add("block_location = ?", blockLocation);
+        sqlUtils.add("farm_id = ?", farmId);
+
+        return (Block) DB.selectRecordFrom(
+                TABLE_NAME, sqlUtils,
                 BlockRepository::buildRecord);
     }
 

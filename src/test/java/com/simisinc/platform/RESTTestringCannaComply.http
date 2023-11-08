@@ -818,5 +818,48 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 ###
 
 
+###
+POST http://localhost:8080/api/cannacomply/UpdateApiAccessService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-fb3efb23-0928-4acf-b895-2a2e3b92ec931
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "uniqueId": "test-t-16",
+  "userType": "something2"
+
+}
+###
+
+###
+GET http://localhost:8080/api/cannacomply/ApiAccessListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-fb3efb23-0928-4acf-b895-2a2e3b92ec931
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+}
+###
+
+###
+POST http://localhost:8080/api/cannacomply/UpdateApiAccessService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-fb3efb23-0928-4acf-b895-2a2e3b92ec931
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "apiName": "ActivityListService",
+  "allowedRoles": "[test]"
+}
+###
+
+
+
+
+
+
 
 
