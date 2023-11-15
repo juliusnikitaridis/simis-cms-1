@@ -21,6 +21,7 @@ public class TreatmentProductRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("product_name", record.getProductName())
+                .add("units",record.getUnits())
                 .add("container", record.getContainer())
                 .add("mass", record.getMass())
                 .add("quantity",record.getQuantity())
@@ -56,6 +57,7 @@ public class TreatmentProductRepository {
                 .addIfExists("product_id",record.getProductId())
                 .addIfExists("active_ingredients",record.getActiveIngredients())
                 .addIfExists("expiry_date",record.getExpiryDate())
+                .addIfExists("units",record.getUnits())
                 .addIfExists("instructions",record.getInstructions())
                 .addIfExists("purpose",record.getPurpose());
 
@@ -114,6 +116,7 @@ public class TreatmentProductRepository {
             product.setProductName(rs.getString("product_name"));
             product.setContainer(rs.getString("container"));
             product.setMass(rs.getString("mass"));
+            product.setUnits(rs.getString("units"));
             product.setQuantity(rs.getString("quantity"));
             product.setFarmId(rs.getString("farm_id"));
             product.setImageData(rs.getString("image_data"));

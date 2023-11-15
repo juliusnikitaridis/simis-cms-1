@@ -7,6 +7,7 @@ import com.simisinc.platform.infrastructure.persistence.cannacomply.BlockReposit
 import com.simisinc.platform.infrastructure.persistence.cannacomply.ReadingRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,7 +32,7 @@ public class CreateReadingService {
 
         try {
             if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
-                throw new Exception("User does not have required roles to access API");
+                throw new Exception(ErrorMessageStatics.ERR_01);
             }
 
             ObjectMapper mapper = new ObjectMapper();

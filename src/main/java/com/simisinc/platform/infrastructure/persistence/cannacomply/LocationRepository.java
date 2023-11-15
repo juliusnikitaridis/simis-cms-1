@@ -92,6 +92,18 @@ public class LocationRepository {
                 TABLE_NAME, select, where, orderBy, constraints, LocationRepository::buildRecord);
     }
 
+    public static DataResult findByLocationNameAndFarm(String locationName, String farmId) {
+        SqlUtils select = new SqlUtils();
+        SqlUtils where = new SqlUtils();
+        SqlUtils orderBy = new SqlUtils();
+            where
+                    .add("location_name = ?", locationName)
+                    .addIfExists("farm_id = ?",farmId);
+
+        return DB.selectAllFrom(
+                TABLE_NAME, select, where, orderBy, null, LocationRepository::buildRecord);
+    }
+
 
     public static void delete(String blockId) throws Exception {
         try (Connection connection = DB.getConnection()) {

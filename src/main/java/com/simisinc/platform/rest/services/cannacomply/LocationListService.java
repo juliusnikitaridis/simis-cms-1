@@ -6,6 +6,7 @@ import com.simisinc.platform.infrastructure.persistence.cannacomply.LocationSpec
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
+import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,7 +26,7 @@ public class LocationListService {
 
         try {
             if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
-                throw new Exception("User does not have required roles to access API");
+                throw new Exception(ErrorMessageStatics.ERR_01);
             }
             String farmId = context.getParameter("farmId");
             String id = context.getParameter("id");

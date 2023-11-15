@@ -22,5 +22,6 @@ public class TreatmentProduct extends Entity {
    private String expiryDate = null;
    private String instructions = null;
    private String purpose = null;
+   private String units;
 
 }

@@ -30,7 +30,7 @@ public class FarmListService {
 
         try {
 //            if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
-//                throw new Exception("User does not have required roles to access API");
+//                throw new Exception(ErrorMessageStatics.ERR_01);
 //            }
 
             String farmId = context.getParameter("farmId");
