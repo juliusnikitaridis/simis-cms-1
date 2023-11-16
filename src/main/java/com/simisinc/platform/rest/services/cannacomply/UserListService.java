@@ -51,11 +51,9 @@ public class UserListService {
             ServiceResponseCommand.addMeta(response, "User List", userList, null);
             response.setData(userList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in UserListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

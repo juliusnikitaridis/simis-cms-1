@@ -50,11 +50,8 @@ public class ReadingListService {
             ServiceResponseCommand.addMeta(response, "Reading List", readingsList, null);
             response.setData(readingsList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in ReadingListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

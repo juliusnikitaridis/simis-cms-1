@@ -63,4 +63,6 @@ public class ServiceResponse implements Serializable {
   public Map<String, String> getError() {
     return error;
   }
+
+  public String stackStrace;
 }

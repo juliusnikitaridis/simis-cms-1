@@ -1,6 +1,13 @@
 package com.simisinc.platform.rest.services.cannacomply.util;
 
+import com.simisinc.platform.rest.controller.ServiceResponse;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class ErrorMessageStatics {
+
+    private static Log LOG = LogFactory.getLog(ErrorMessageStatics.class);
 
     public static String ERR_01 = "User does not have required roles to access API";
     //CalculateAverageForReadingService
@@ -28,4 +35,13 @@ public class ErrorMessageStatics {
 
     //RegisterComplianceUserSErvice
     public static String ERR_13 ="user could not be saved when calling RegisterComplianceUserService";
+
+
+    public static ServiceResponse handleException(Exception e, Class clazz) {
+        LOG.error("Error in "+clazz.getName(), e);
+        ServiceResponse response = new ServiceResponse(500);
+        response.getError().put("title", e.getMessage());
+        response.stackStrace = ExceptionUtils.getStackTrace(e);
+        return response;
+    }
 }

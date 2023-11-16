@@ -44,10 +44,8 @@ public class UpdateYieldService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in UpdateYieldService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

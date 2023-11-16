@@ -47,11 +47,9 @@ public class ScheduleListService {
             ServiceResponseCommand.addMeta(response, "Schedule List", farmList, null);
             response.setData(farmList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in ScheduleListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

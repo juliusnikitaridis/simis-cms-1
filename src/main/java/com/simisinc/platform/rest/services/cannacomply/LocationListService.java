@@ -46,11 +46,9 @@ public class LocationListService {
             ServiceResponseCommand.addMeta(response, "Location List", locationList, null);
             response.setData(locationList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in LocationListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

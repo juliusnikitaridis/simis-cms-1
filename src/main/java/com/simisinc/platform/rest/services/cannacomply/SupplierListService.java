@@ -44,11 +44,9 @@ public class SupplierListService {
             ServiceResponseCommand.addMeta(response, "Supplier List", issueList, null);
             response.setData(issueList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in SupplierListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

@@ -38,11 +38,9 @@ public class TreatmentProductListService {
             ServiceResponseCommand.addMeta(response, "Treatment Product List", optionsList, null);
             response.setData(optionsList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in TreatmentProductListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

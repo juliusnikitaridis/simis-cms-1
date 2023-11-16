@@ -56,11 +56,8 @@ public class CropListService {
             ServiceResponseCommand.addMeta(response, "Crop List", cropList, null);
             response.setData(cropList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in CropListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

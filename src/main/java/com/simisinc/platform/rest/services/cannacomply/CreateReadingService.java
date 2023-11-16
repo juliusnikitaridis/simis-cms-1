@@ -50,10 +50,7 @@ public class CreateReadingService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in CreateReadingService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

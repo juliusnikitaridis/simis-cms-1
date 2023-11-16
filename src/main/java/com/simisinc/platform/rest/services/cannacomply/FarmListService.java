@@ -9,6 +9,7 @@ import com.simisinc.platform.infrastructure.persistence.carfix.VehicleSpecificat
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
+import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,11 +51,9 @@ public class FarmListService {
             ServiceResponseCommand.addMeta(response, "Farm List", farmList, null);
             response.setData(farmList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in FarmListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

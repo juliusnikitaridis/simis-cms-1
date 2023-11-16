@@ -48,11 +48,9 @@ public class YieldListService {
             ServiceResponseCommand.addMeta(response, "Yield List", yieldList, null);
             response.setData(yieldList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in YieldListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

@@ -50,11 +50,8 @@ public class IssueListService {
             ServiceResponseCommand.addMeta(response, "Issue List", issueList, null);
             response.setData(issueList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in IssueListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

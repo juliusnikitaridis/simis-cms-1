@@ -36,11 +36,8 @@ public class ApiAccessListService {
             ServiceResponseCommand.addMeta(response, "API access List", accessList, null);
             response.setData(accessList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in ApiAccessListService", e);
-            ServiceResponse response = new ServiceResponse(400);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

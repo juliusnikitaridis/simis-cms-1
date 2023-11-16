@@ -50,11 +50,8 @@ public class CustomerListService {
             ServiceResponseCommand.addMeta(response, "CustomerList", cycleList, null);
             response.setData(cycleList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in CustomerListService", e);
-            ServiceResponse response = new ServiceResponse(400);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

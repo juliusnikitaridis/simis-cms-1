@@ -48,11 +48,8 @@ public class BlockListService {
             ServiceResponseCommand.addMeta(response, "Block List", blockList, null);
             response.setData(blockList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in BlockListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

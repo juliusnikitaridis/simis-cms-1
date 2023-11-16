@@ -56,11 +56,8 @@ public class ActivityListService {
             ServiceResponseCommand.addMeta(response, "Activity List", activityList, null);
             response.setData(activityList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in ActivityListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

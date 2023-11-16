@@ -54,11 +54,8 @@ public class ContractListService {
             ServiceResponseCommand.addMeta(response, "Contract List", cycleList, null);
             response.setData(cycleList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in ContractListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }

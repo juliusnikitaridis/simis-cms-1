@@ -44,10 +44,8 @@ public class CreateScheduleService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in CreateCropService", e);
-            ServiceResponse response = new ServiceResponse(400);
-            response.getError().put("title", e.getMessage());
-            return response;
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

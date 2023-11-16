@@ -42,10 +42,8 @@ public class UpdateApiAccessService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in UpdateApiAccessService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

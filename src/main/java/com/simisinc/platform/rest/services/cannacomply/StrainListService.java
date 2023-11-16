@@ -37,11 +37,9 @@ public class StrainListService {
             ServiceResponseCommand.addMeta(response, "Strain List", strainList, null);
             response.setData(strainList);
             return response;
-        } catch (Throwable e) {
-            LOG.error("Error in StrainListService", e);
-            ServiceResponse response = new ServiceResponse(500);
-            response.getError().put("title", e.getMessage());
-            return response;
+        } catch (Exception e) {
+            return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

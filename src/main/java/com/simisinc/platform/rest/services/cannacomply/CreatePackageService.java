@@ -45,10 +45,7 @@ public class CreatePackageService {
             return response;
 
         } catch (Exception e) {
-            LOG.error("Error in CreatePackageService", e);
-            ServiceResponse response = new ServiceResponse(400);
-            response.getError().put("title", e.getMessage());
-            return response;
+            return ErrorMessageStatics.handleException(e,this.getClass());
         }
     }
 }
