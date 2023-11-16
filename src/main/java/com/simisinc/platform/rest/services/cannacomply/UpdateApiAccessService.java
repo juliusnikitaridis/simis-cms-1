@@ -43,7 +43,7 @@ public class UpdateApiAccessService {
 
         } catch (Exception e) {
             LOG.error("Error in UpdateApiAccessService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

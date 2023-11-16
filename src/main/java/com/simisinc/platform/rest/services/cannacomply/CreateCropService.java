@@ -47,7 +47,7 @@ public class CreateCropService {
 
         } catch (Exception e) {
             LOG.error("Error in CreateCropService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

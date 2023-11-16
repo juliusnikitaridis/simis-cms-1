@@ -43,7 +43,7 @@ public class UpdateDeviceService {
 
         } catch (Exception e) {
             LOG.error("Error in UpdateDeviceService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

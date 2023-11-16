@@ -43,12 +43,12 @@ public class CreateUserUploadService {
 
             String uploadDir = LoadSitePropertyCommand.loadByName("useruploads.upload.dir");
             if(uploadDir == null) {
-                throw new Exception("useruploads.upload.dir has not been configure in site properties table");
+                throw new Exception(ErrorMessageStatics.ERR_08);
             }
 
             Part jsonPart = context.getRequest().getPart("json");
             if(jsonPart == null) {
-                throw new Exception("json part has not been set in request");
+                throw new Exception(ErrorMessageStatics.ERR_09);
             }
             BufferedReader br = new BufferedReader(new InputStreamReader(jsonPart.getInputStream()));
             StringBuilder sb = new StringBuilder();
@@ -75,7 +75,7 @@ public class CreateUserUploadService {
                 }
             }
             if(counter == 0) {
-                throw new Exception("no files detected in multipart request");
+                throw new Exception(ErrorMessageStatics.ERR_10);
             }
 
             ServiceResponse response = new ServiceResponse(200);

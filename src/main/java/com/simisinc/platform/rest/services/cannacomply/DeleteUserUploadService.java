@@ -46,11 +46,11 @@ public class DeleteUserUploadService {
             UserUpload upload = UserUploadRepository.findById(request.getUploadId());
 
             if(upload == null) {
-                throw new Exception("could not find user upload to delete");
+                throw new Exception(ErrorMessageStatics.ERR_11);
             }
 
             if(!UserUploadRepository.delete(request.getUploadId(), upload.getFilePath())) {
-                throw new Exception("user upload file could not be deleted");
+                throw new Exception(ErrorMessageStatics.ERR_12);
             }
 
             ServiceResponse response = new ServiceResponse(200);
@@ -60,7 +60,7 @@ public class DeleteUserUploadService {
 
         } catch (Exception e) {
             LOG.error("Error in DeleteUserUploadService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

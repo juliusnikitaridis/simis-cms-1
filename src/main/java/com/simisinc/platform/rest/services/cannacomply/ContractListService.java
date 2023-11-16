@@ -56,7 +56,7 @@ public class ContractListService {
             return response;
         } catch (Throwable e) {
             LOG.error("Error in ContractListService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

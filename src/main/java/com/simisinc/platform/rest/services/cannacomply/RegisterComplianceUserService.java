@@ -14,6 +14,7 @@ import com.simisinc.platform.infrastructure.persistence.cannacomply.ComplianceUs
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class RegisterComplianceUserService {
         User savedUser = null;
         savedUser = SaveUserCommand.saveUser(user);
         if (savedUser == null) {
-            throw new Exception("user could not be saved when calling RegisterComplianceUserService");
+            throw new Exception(ErrorMessageStatics.ERR_13);
         }
         // Trigger events - send the registration verification email.
         WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));

@@ -34,13 +34,13 @@ public class CreateComplianceUserService {
             ComplianceUser complianceUser = mapper.readValue(context.getJsonRequest(), ComplianceUser.class);
             String id = UUID.randomUUID().toString();
             if(complianceUser.getStatus() == null) {
-                throw new Exception("compliance user status value is null");
+                throw new Exception(ErrorMessageStatics.ERR_04);
             }
             if(complianceUser.getFarmId() == null) {
-                throw new Exception("compliance user farm id is null");
+                throw new Exception(ErrorMessageStatics.ERR_05);
             }
             if(complianceUser.getUserRole() == null) {
-                throw new Exception("compliance user role is null");
+                throw new Exception(ErrorMessageStatics.ERR_06);
             }
             complianceUser.setUuid(id);
             ComplianceUserRepository.add(complianceUser);
@@ -52,7 +52,7 @@ public class CreateComplianceUserService {
 
         } catch (Exception e) {
             LOG.error("Error in CreateComplianceUser service", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

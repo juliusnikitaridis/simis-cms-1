@@ -37,7 +37,7 @@ public class CreateLocationService {
 
             DataResult result = LocationRepository.findByLocationNameAndFarm(location.getLocationName(),location.getFarmId());
             if(result.getTotalRecordCount() > 0) {
-                throw new Exception("Location with name already exists");
+                throw new Exception(ErrorMessageStatics.ERR_07);
             }
             String blockId = UUID.randomUUID().toString();
             location.setId(blockId);
@@ -51,7 +51,7 @@ public class CreateLocationService {
 
         } catch (Exception e) {
             LOG.error("Error in CreateLocationService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

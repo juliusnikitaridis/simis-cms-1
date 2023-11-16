@@ -40,7 +40,7 @@ public class CreateBlockService {
             block.setId(blockId);
             Block existingBLock = BlockRepository.findByLocationAndFarmId(block.getBlockLocation(),block.getFarmId());
             if(existingBLock != null) {
-                throw new Exception("Block with location_id"+block.getLocationId()+" already exists for farm"+block.getFarmId());
+                throw new Exception(ErrorMessageStatics.ERR_03(blockId,block.getFarmId()));
             }
             BlockRepository.add(block);
 
@@ -51,7 +51,7 @@ public class CreateBlockService {
 
         } catch (Exception e) {
             LOG.error("Error in CreateBlockService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

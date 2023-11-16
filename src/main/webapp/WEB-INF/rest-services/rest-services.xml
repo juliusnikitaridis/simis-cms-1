@@ -116,6 +116,7 @@
   <service method="post" endpoint="cannacomply/UpdateCustomerService" class="com.simisinc.platform.rest.services.cannacomply.UpdateCustomerService"/>
   <service method="post" endpoint="cannacomply/ApiAccessListService" class="com.simisinc.platform.rest.services.cannacomply.ApiAccessListService"/>
   <service method="post" endpoint="cannacomply/UpdateApiAccessService" class="com.simisinc.platform.rest.services.cannacomply.UpdateApiAccessService"/>
+  <service method="post" endpoint="cannacomply/StrainListService" class="com.simisinc.platform.rest.services.cannacomply.StrainListService"/>
 
 
 </services>

@@ -844,15 +844,13 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 ###
 
 ###
-POST http://localhost:8080/api/cannacomply/UpdateApiAccessService
+GET http://localhost:8080/api/cannacomply/StrainListService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-fb3efb23-0928-4acf-b895-2a2e3b92ec931
+Authorization:Bearer API-dd6b62df-6bbf-4486-be79-17ac65ca67301
 Content-Type: application/json
 Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
-  "apiName": "ActivityListService",
-  "allowedRoles": "[test]"
 }
 ###
 

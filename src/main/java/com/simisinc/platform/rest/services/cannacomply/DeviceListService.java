@@ -55,7 +55,7 @@ public class DeviceListService {
             return response;
         } catch (Throwable e) {
             LOG.error("Error in DeviceListService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

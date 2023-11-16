@@ -47,7 +47,7 @@ public class CreateCustomerService {
 
         } catch (Exception e) {
             LOG.error("Error in CreateCustomerService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

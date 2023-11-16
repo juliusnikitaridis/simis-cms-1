@@ -33,7 +33,7 @@ public class CalculateAverageForReadingsService {
             String readingType = context.getParameter("readingType");
 
             if(!readingType.equalsIgnoreCase("temperature") && !readingType.equalsIgnoreCase("humidity")) {
-                throw new Exception("reading type not recognized. values are [temperature,humidity]");
+                throw new Exception(ErrorMessageStatics.ERR_02);
             }
             String deviceType = null;
             if(readingType.equalsIgnoreCase("temperature")) {
@@ -60,7 +60,7 @@ public class CalculateAverageForReadingsService {
             return response;
         } catch (Throwable e) {
             LOG.error("Error in CalculateAverageForReadingsService", e);
-            ServiceResponse response = new ServiceResponse(400);
+            ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }

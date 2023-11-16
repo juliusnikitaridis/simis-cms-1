@@ -1,54 +1,47 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.cannacomply.Crop;
 import com.simisinc.platform.domain.model.cannacomply.Packaging;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.CropRepository;
+import com.simisinc.platform.domain.model.cannacomply.Strain;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.PackageRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.PackagingSpecification;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.StrainRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
+import com.simisinc.platform.rest.controller.ServiceResponseCommand;
 import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
-
+import java.util.List;
 
 /**
- * Description
+ *
  * @author Julius Nikitaridis
- * @created 04/05/23 11:28 AM
+ * @created 01/07/23 11:28 AM
  */
+public class StrainListService {
 
+    private static Log LOG = LogFactory.getLog(StrainListService.class);
 
-public class UpdatePackagingService {
-
-    private static Log LOG = LogFactory.getLog(UpdatePackagingService.class);
-
-    public ServiceResponse post(ServiceContext context) {
+    public ServiceResponse get(ServiceContext context) {
 
         try {
             if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
                 throw new Exception(ErrorMessageStatics.ERR_01);
             }
 
-            ObjectMapper mapper = new ObjectMapper();
-            Packaging item = mapper.readValue(context.getJsonRequest(), Packaging.class);
-
-            PackageRepository.update(item);
+            List<Strain> strainList = (List<Strain>) StrainRepository.query().getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Packaging has been updated");}};
-            response.setData(responseMessage);
+            ServiceResponseCommand.addMeta(response, "Strain List", strainList, null);
+            response.setData(strainList);
             return response;
-
-        } catch (Exception e) {
-            LOG.error("Error in UpdatePackagingService", e);
+        } catch (Throwable e) {
+            LOG.error("Error in StrainListService", e);
             ServiceResponse response = new ServiceResponse(500);
             response.getError().put("title", e.getMessage());
             return response;
         }
     }
-
 }
