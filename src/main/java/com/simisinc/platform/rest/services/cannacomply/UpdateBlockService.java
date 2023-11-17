@@ -36,6 +36,13 @@ public class UpdateBlockService {
             ObjectMapper mapper = new ObjectMapper();
             Block block = mapper.readValue(context.getJsonRequest(), Block.class);
 
+            if(block.getBlockLocation() != null && block.getFarmId() != null){
+                Block existingBLock = BlockRepository.findByLocationAndFarmId(block.getBlockLocation(),block.getFarmId());
+                if(existingBLock != null) {
+                    throw new Exception(ErrorMessageStatics.ERR_14);
+                }
+            }
+
             BlockRepository.update(block);
 
             ServiceResponse response = new ServiceResponse(200);

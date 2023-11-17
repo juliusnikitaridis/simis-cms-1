@@ -35,6 +35,7 @@ public class ErrorMessageStatics {
 
     //RegisterComplianceUserSErvice
     public static String ERR_13 ="user could not be saved when calling RegisterComplianceUserService";
+    public static String ERR_14 = "Block already exists for farm";
 
 
     public static ServiceResponse handleException(Exception e, Class clazz) {
