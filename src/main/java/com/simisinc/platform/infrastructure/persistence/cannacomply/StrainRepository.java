@@ -23,8 +23,10 @@ public class StrainRepository {
                 .add("id", record.getId())
                 .add("strain_name", record.getStrainName())
                 .add("breeder", record.getBreeder())
+                .add("type",record.getType())
+                .add("grow_location",record.getGrowLocation())
                 .add("flowering", record.getFlowering())
-                .add("user_rating",record.getUserRating())
+                .add("potency",record.getPotency())
                 .add("yield",record.getYield());
 
         try (Connection connection = DB.getConnection();
@@ -44,11 +46,13 @@ public class StrainRepository {
 
     public static void update(Strain record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("strain_name", record.getStrainName())
-                .addIfExists("breeder", record.getBreeder())
-                .addIfExists("flowering", record.getFlowering())
-                .addIfExists("user_rating",record.getUserRating())
-                .addIfExists("yield",record.getYield());
+                .add("strain_name", record.getStrainName())
+                .add("breeder", record.getBreeder())
+                .add("type",record.getType())
+                .add("grow_location",record.getGrowLocation())
+                .add("flowering", record.getFlowering())
+                .add("potency",record.getPotency())
+                .add("yield",record.getYield());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -100,8 +104,10 @@ public class StrainRepository {
             pack.setStrainName(rs.getString("strain_name"));
             pack.setBreeder(rs.getString("breeder"));
             pack.setFlowering(rs.getString("flowering"));
-            pack.setUserRating(rs.getString("user_rating"));
+            pack.setType(rs.getString("type"));
             pack.setYield(rs.getString("yield"));
+            pack.setGrowLocation(rs.getString("grow_location"));
+            pack.setPotency(rs.getString("potency"));
 
             return pack;
         } catch (Exception e) {

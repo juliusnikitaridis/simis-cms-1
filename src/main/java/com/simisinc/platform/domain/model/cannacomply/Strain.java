@@ -12,6 +12,8 @@ public class Strain extends Entity {
    private String strainName;
    private String breeder;
    private String flowering;
-   private String userRating;
+   private String type;
    private String yield;
+   private String potency;
+   private String growLocation;
 }
