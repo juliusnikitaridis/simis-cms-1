@@ -75,6 +75,16 @@ public class StrainRepository {
                 StrainRepository::buildRecord);
     }
 
+    public static DataResult findByType(String type) {
+        SqlUtils select = new SqlUtils();
+        SqlUtils where = new SqlUtils();
+        SqlUtils orderBy = new SqlUtils();
+        where.add("type = ?",type);
+
+        return DB.selectAllFrom(
+                TABLE_NAME, select, where, orderBy, null, StrainRepository::buildRecord);
+    }
+
 
     public static DataResult query() {
         SqlUtils select = new SqlUtils();

@@ -31,7 +31,11 @@ public class StrainListService {
                 throw new Exception(ErrorMessageStatics.ERR_01);
             }
 
-            List<Strain> strainList = (List<Strain>) StrainRepository.query().getRecords();
+            if(context.getParameter("type") == null) {
+                throw new Exception("Type parameter must be set");
+            }
+
+            List<Strain> strainList = (List<Strain>) StrainRepository.findByType(context.getParameter("type")).getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
             ServiceResponseCommand.addMeta(response, "Strain List", strainList, null);

@@ -109,7 +109,7 @@ public class BlockRepository {
     }
 
 
-    private static Block buildRecord(ResultSet rs) {
+    private static Block buildRecord(ResultSet rs)  {
 
         Block block = new Block();
         try {
