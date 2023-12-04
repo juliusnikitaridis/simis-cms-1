@@ -12,4 +12,5 @@ import lombok.Setter;
 public class HygieneSpecification {
     private String locationId = null;
     private String userId;
+    private String farmId;
 }

@@ -35,6 +35,7 @@ public class HygieneListService {
 
             String locationId = context.getParameter("locationId");
             String userId = context.getParameter("userId");
+            String farmId = context.getParameter("farmId");
 
             HygieneSpecification specification = new HygieneSpecification();
 
@@ -43,6 +44,9 @@ public class HygieneListService {
             }
             if(null!= userId) {
                 specification.setUserId(userId);
+            }
+            if(null!= farmId) {
+                specification.setFarmId(farmId);
             }
             List<Hygiene> farmList = (List<Hygiene>) HygieneRepository.query(specification).getRecords();
 

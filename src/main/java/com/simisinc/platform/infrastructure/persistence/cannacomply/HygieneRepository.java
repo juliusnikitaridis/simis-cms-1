@@ -24,6 +24,8 @@ public class HygieneRepository {
                 .add("user_id", record.getUserId())
                 .add("location_id", record.getLocationId())
                 .add("type",record.getType())
+                .add("farm_id",record.getFarmId())
+                .add("date",record.getDate())
                 .add("form",record.getForm());
 
         try (Connection connection = DB.getConnection();
@@ -43,10 +45,12 @@ public class HygieneRepository {
 
     public static void update(Hygiene record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("id", record.getId())
+                .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("user_id", record.getUserId())
                 .addIfExists("location_id", record.getLocationId())
+                .addIfExists("user_id",record.getUserId())
                 .addIfExists("type",record.getType())
+                .addIfExists("date",record.getDate())
                 .addIfExists("form",record.getForm());
 
             try (Connection connection = DB.getConnection();
@@ -80,7 +84,8 @@ public class HygieneRepository {
         if (specification != null) {
             where
                     .addIfExists("location_id = ?", specification.getLocationId())
-                    .addIfExists("user_id = ?",specification.getUserId());
+                    .addIfExists("user_id = ?",specification.getUserId())
+                    .addIfExists("farm_id = ?",specification.getFarmId());
 
         }
 
@@ -106,6 +111,8 @@ public class HygieneRepository {
             hygiene.setId(rs.getString("id"));
             hygiene.setDate(rs.getString("date"));
             hygiene.setForm(rs.getString("form"));
+            hygiene.setFarmId(rs.getString("farm_id"));
+            hygiene.setUserId(rs.getString("user_id"));
             hygiene.setLocationId(rs.getString("location_id"));
             hygiene.setType(rs.getString("type"));
             return hygiene;

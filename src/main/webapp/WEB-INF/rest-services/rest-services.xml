@@ -119,6 +119,8 @@
   <service method="post" endpoint="cannacomply/StrainListService" class="com.simisinc.platform.rest.services.cannacomply.StrainListService"/>
   <service method="post" endpoint="cannacomply/CreateHygieneService" class="com.simisinc.platform.rest.services.cannacomply.CreateHygieneService"/>
   <service method="post" endpoint="cannacomply/HygieneListService" class="com.simisinc.platform.rest.services.cannacomply.HygieneListService"/>
+  <service method="post" endpoint="cannacomply/UpdateHygieneService" class="com.simisinc.platform.rest.services.cannacomply.UpdateHygieneService"/>
+  <service method="post" endpoint="cannacomply/GetPowerBiAuthTokenService" class="com.simisinc.platform.rest.services.cannacomply.GetPowerBiAuthTokenService"/>
 
 
 </services>

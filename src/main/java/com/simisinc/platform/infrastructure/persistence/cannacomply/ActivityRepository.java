@@ -29,6 +29,8 @@ public class ActivityRepository {
                 .add("item_type",record.getItemType())
                 .add("block_id",record.getBlockId())
                 .add("item_id",record.getItemId())
+                .add("location_type",record.getLocationType())
+                .add("location_id",record.getLocationId())
                 .add("status",record.getStatus());
 
         try (Connection connection = DB.getConnection();
@@ -57,6 +59,8 @@ public class ActivityRepository {
                 .addIfExists("item_type",record.getItemType())
                 .addIfExists("block_id",record.getBlockId())
                 .addIfExists("item_id",record.getItemId())
+                .addIfExists("location_type",record.getLocationType())
+                .addIfExists("location_id",record.getLocationId())
                 .addIfExists("status",record.getStatus());
 
             try (Connection connection = DB.getConnection();
@@ -122,6 +126,8 @@ public class ActivityRepository {
               activity.setCropId(rs.getString("crop_id"));
               activity.setItemId(rs.getString("item_id"));
               activity.setBlockId(rs.getString("block_id"));
+              activity.setLocationId(rs.getString("location_id"));
+              activity.setLocationType(rs.getString("location_type"));
               activity.setDate(rs.getString("date"));
 
             return activity;

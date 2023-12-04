@@ -132,3 +132,18 @@ Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
 Content-Type: application/json
 Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
+###
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/CreateHygieneService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-78b5502e-2c4a-4ac6-8ae0-52099f4c6bb93
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "farmId": "farmId",
+  "locationId": "locationId",
+  "date": "date",
+  "type": "type",
+  "form": "form",
+  "userId": "userId"
+}
