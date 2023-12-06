@@ -69,9 +69,9 @@ public class FarmRepository {
     }
 
 
-    public static Vehicle findById(String id) {
+    public static Farm findById(String id) {
 
-        return (Vehicle) DB.selectRecordFrom(
+        return (Farm) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 FarmRepository::buildRecord);
     }

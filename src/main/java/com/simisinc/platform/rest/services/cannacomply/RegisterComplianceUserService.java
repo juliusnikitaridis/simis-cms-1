@@ -8,9 +8,11 @@ import com.simisinc.platform.domain.model.Group;
 import com.simisinc.platform.domain.model.Role;
 import com.simisinc.platform.domain.model.User;
 import com.simisinc.platform.domain.model.cannacomply.ComplianceUser;
+import com.simisinc.platform.domain.model.cannacomply.Farm;
 import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.ComplianceUserRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmRepository;
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
@@ -32,7 +34,13 @@ public class RegisterComplianceUserService {
 
             ObjectMapper mapper = new ObjectMapper();
             ComplianceUser newUser = mapper.readValue(context.getJsonRequest(), ComplianceUser.class);
-            String newSysUserId = addUser(newUser, context.getUserId());
+            //get the farm name
+            Farm farm = FarmRepository.findById(newUser.getFarmId());
+            if(farm == null) {
+                throw new Exception("Farm could not be found when registering user");
+            }
+
+            String newSysUserId = addUser(newUser, context.getUserId(),farm.getName());
 
             newUser.setUuid(UUID.randomUUID().toString());
             newUser.setSysUniqueUserId(newSysUserId);
@@ -52,7 +60,7 @@ public class RegisterComplianceUserService {
 
 
     //this should add a user - same as the logic in UserFormWidget
-    public String addUser(User user, long modifiedById) throws Exception {
+    public String addUser(User user, long modifiedById, String farmName) throws Exception {
 
         user.setModifiedBy(modifiedById);
         user.setUserType(user.getUserType());
@@ -92,7 +100,7 @@ public class RegisterComplianceUserService {
             throw new Exception(ErrorMessageStatics.ERR_13);
         }
         // Trigger events - send the registration verification email.
-        WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser));
+        WorkflowManager.triggerWorkflowForEvent(new UserInvitedEvent(savedUser,savedUser,farmName));
         WorkflowManager.triggerWorkflowForEvent(new UserSignedUpEvent(savedUser));
         return savedUser.getUniqueId();
     }

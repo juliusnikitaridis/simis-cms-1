@@ -33,10 +33,18 @@ public class UserInvitedEvent extends Event {
 
   private User user = null;
   private User invitedBy = null;
+  private String farmName = null;
+
 
   public UserInvitedEvent(User user, User invitedBy) {
     this.user = user;
     this.invitedBy = invitedBy;
+  }
+
+  public UserInvitedEvent(User user, User invitedBy, String farmName) {
+    this.user = user;
+    this.invitedBy = invitedBy;
+    this.farmName = farmName;
   }
 
   @Override
@@ -58,5 +66,13 @@ public class UserInvitedEvent extends Event {
 
   public User getInvitedBy() {
     return invitedBy;
+  }
+
+  public String getFarmName() {
+    return farmName;
+  }
+
+  public void setFarmName(String farmName) {
+    this.farmName = farmName;
   }
 }
