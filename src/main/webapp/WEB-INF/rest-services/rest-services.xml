@@ -123,6 +123,7 @@
   <service method="post" endpoint="cannacomply/GetPowerBiAuthTokenService" class="com.simisinc.platform.rest.services.cannacomply.GetPowerBiAuthTokenService"/>
   <service method="post" endpoint="cannacomply/CreateWaterManagementService" class="com.simisinc.platform.rest.services.cannacomply.CreateWaterManagementService"/>
   <service method="post" endpoint="cannacomply/WaterManagementListService" class="com.simisinc.platform.rest.services.cannacomply.WaterManagementListService"/>
+  <service method="post" endpoint="cannacomply/UpdateWaterManagementService" class="com.simisinc.platform.rest.services.cannacomply.UpdateWaterManagementService"/>
 
 
 </services>
