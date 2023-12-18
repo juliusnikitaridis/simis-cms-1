@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public class Issue extends Entity {
     private String id;
-    private String cropId;
     private String title;
     private String description;
     private String severity;
@@ -23,4 +22,6 @@ public class Issue extends Entity {
     private String status;
     private String solution;
     private String dueDate;
+    private String itemType;
+    private String itemId;
 }

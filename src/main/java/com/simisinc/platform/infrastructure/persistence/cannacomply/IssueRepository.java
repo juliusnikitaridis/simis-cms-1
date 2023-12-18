@@ -20,7 +20,6 @@ public class IssueRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("created_date",record.getCreatedDate())
-                .add("crop_id", record.getCropId())
                 .add("title", record.getTitle())
                 .add("type",record.getType())
                 .add("description", record.getDescription())
@@ -30,6 +29,8 @@ public class IssueRepository {
                 .add("solution",record.getSolution())
                 .add("status",record.getStatus())
                 .add("due_date",record.getDueDate())
+                .add("item_type",record.getItemType())
+                .add("item_id",record.getItemId())
                 .add("last_updated",record.getLastUpdated())
                 .add("attachments",record.getAttachments())
                 .add("farm_id",record.getFarmId());
@@ -51,7 +52,8 @@ public class IssueRepository {
 
     public static void update(Issue record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("crop_id", record.getCropId())
+                .addIfExists("item_type", record.getItemType())
+                .addIfExists("item_id",record.getItemId())
                 .addIfExists("created_date",record.getCreatedDate())
                 .addIfExists("title", record.getTitle())
                 .addIfExists("description", record.getDescription())
@@ -60,6 +62,8 @@ public class IssueRepository {
                 .addIfExists("assigned_to",record.getAssignedTo())
                 .addIfExists("comment",record.getComment())
                 .addIfExists("solution",record.getSolution())
+                .addIfExists("item_type",record.getItemType())
+                .addIfExists("item_id",record.getItemId())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("due_date",record.getDueDate())
                 .addIfExists("attachments",record.getAttachments())
@@ -118,7 +122,8 @@ public class IssueRepository {
         Issue issue = new Issue();
         try {
             issue.setId(rs.getString("id"));
-            issue.setCropId(rs.getString("crop_id"));
+            issue.setItemId(rs.getString("item_id"));
+            issue.setItemType(rs.getString("item_type"));
             issue.setCreatedDate(rs.getString("created_date"));
             issue.setTitle(rs.getString("title"));
             issue.setDescription(rs.getString("description"));

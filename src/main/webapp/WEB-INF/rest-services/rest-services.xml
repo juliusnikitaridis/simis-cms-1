@@ -121,6 +121,8 @@
   <service method="post" endpoint="cannacomply/HygieneListService" class="com.simisinc.platform.rest.services.cannacomply.HygieneListService"/>
   <service method="post" endpoint="cannacomply/UpdateHygieneService" class="com.simisinc.platform.rest.services.cannacomply.UpdateHygieneService"/>
   <service method="post" endpoint="cannacomply/GetPowerBiAuthTokenService" class="com.simisinc.platform.rest.services.cannacomply.GetPowerBiAuthTokenService"/>
+  <service method="post" endpoint="cannacomply/CreateWaterManagementService" class="com.simisinc.platform.rest.services.cannacomply.CreateWaterManagementService"/>
+  <service method="post" endpoint="cannacomply/WaterManagementListService" class="com.simisinc.platform.rest.services.cannacomply.WaterManagementListService"/>
 
 
 </services>
