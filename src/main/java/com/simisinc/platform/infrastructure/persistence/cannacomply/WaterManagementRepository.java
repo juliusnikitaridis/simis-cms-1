@@ -141,7 +141,7 @@ public class WaterManagementRepository {
             waterManagement.setEndTime(rs.getString("end_time"));
             waterManagement.setMethodUsed(rs.getString("method_used"));
             waterManagement.setFlowRate(rs.getString("flow_rate"));
-            waterManagement.setPpmLevels(rs.getString("ppm_levals"));
+            waterManagement.setPpmLevels(rs.getString("ppm_levels"));
             waterManagement.setDeviceId(rs.getString("device_id"));
             waterManagement.setWaterTemp(rs.getString("water_temp"));
             waterManagement.setWaterQuantity(rs.getString("water_quantity"));

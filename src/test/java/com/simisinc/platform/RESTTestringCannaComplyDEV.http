@@ -72,6 +72,31 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 }
 ###
 
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/UpdateIssueService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-172941e7-eb56-4bbd-9d13-e882f051e7a03
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "3d0d7af2-1cca-409b-9491-6a14f778106f",
+  "title":"some title4",
+  "description":"some description53333333",
+  "severity":"4",
+  "assignedTo": "dean richmond",
+  "itemType": "test",
+  "comment": "dome comments",
+  "attachments": "file_data_",
+  "farmId":"some-farm-id"
+}
+###
+
+
+
+
+
+
+
 
 ###
 POST https://cannacomply.connectmobiles24.com/api/cannacomply/UpdateUserService

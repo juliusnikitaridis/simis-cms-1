@@ -62,8 +62,6 @@ public class IssueRepository {
                 .addIfExists("assigned_to",record.getAssignedTo())
                 .addIfExists("comment",record.getComment())
                 .addIfExists("solution",record.getSolution())
-                .addIfExists("item_type",record.getItemType())
-                .addIfExists("item_id",record.getItemId())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("due_date",record.getDueDate())
                 .addIfExists("attachments",record.getAttachments())

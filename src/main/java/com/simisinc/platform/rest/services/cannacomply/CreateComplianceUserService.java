@@ -43,6 +43,13 @@ public class CreateComplianceUserService {
                 throw new Exception(ErrorMessageStatics.ERR_06);
             }
             complianceUser.setUuid(id);
+
+            //cant have same compliance user in one farm with multiple roles
+            ComplianceUser existingComplianceUser = ComplianceUserRepository.findByUniqueIdAndFarmId(complianceUser.getSysUniqueUserId(), complianceUser.getFarmId());
+            if(existingComplianceUser != null) {
+                throw new Exception(ErrorMessageStatics.ERR_15);
+            }
+
             ComplianceUserRepository.add(complianceUser);
 
             ServiceResponse response = new ServiceResponse(200);

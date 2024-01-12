@@ -11,6 +11,7 @@ import com.simisinc.platform.domain.model.cannacomply.ComplianceUser;
 import com.simisinc.platform.domain.model.cannacomply.Farm;
 import com.simisinc.platform.infrastructure.persistence.GroupRepository;
 import com.simisinc.platform.infrastructure.persistence.RoleRepository;
+import com.simisinc.platform.infrastructure.persistence.UserRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.ComplianceUserRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmRepository;
 import com.simisinc.platform.infrastructure.workflow.WorkflowManager;
@@ -40,15 +41,29 @@ public class RegisterComplianceUserService {
                 throw new Exception("Farm could not be found when registering user");
             }
 
-            String newSysUserId = addUser(newUser, context.getUserId(),farm.getName());
+            String newSysUserUniqueId = null;
+            //if this user has already been created on the platform, skip registration
+            User existingUser = UserRepository.findByEmailAddress(newUser.getEmail());
+            if(existingUser == null) {
+                newSysUserUniqueId = addUser(newUser, context.getUserId(),farm.getName());
+            } else {
+                newSysUserUniqueId = existingUser.getUniqueId();
+            }
+
 
             newUser.setUuid(UUID.randomUUID().toString());
-            newUser.setSysUniqueUserId(newSysUserId);
+            newUser.setSysUniqueUserId(newSysUserUniqueId);
+            //cant have same compliance in one farm with multiple roles
+            ComplianceUser existingComplianceUser = ComplianceUserRepository.findByUniqueIdAndFarmId(newSysUserUniqueId,farm.getId());
+            if(existingComplianceUser != null) {
+                throw new Exception(ErrorMessageStatics.ERR_15);
+            }
             ComplianceUserRepository.add(newUser);
 
             ServiceResponse response = new ServiceResponse(200);
+            String finalNewSysUserUniqueId = newSysUserUniqueId;
             ArrayList<String> responseMessage = new ArrayList<String>() {{
-                add(newSysUserId);
+                add(finalNewSysUserUniqueId);
             }};
             response.setData(responseMessage);
             return response;

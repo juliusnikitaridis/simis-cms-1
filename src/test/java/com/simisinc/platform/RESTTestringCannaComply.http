@@ -672,14 +672,14 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 POST http://localhost:8080/api/cannacomply/UpdateIssueService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-cd246e7b-e4c3-4942-8caa-4cc490f1356e1
+Authorization:Bearer API-825ed5d7-e981-42c7-b879-de1701c301031
 Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
-  "id": "f26dc7d1-3b60-41bb-98f9-86955ad4e6cd",
-  "cropId":"394857539487",
+  "id": "79e022c8-a095-469a-bde6-6aa3688d3db9",
   "title":"some title4",
-  "description":"some description4",
+  "description":"some description53333333",
   "severity":"4",
   "assignedTo": "dean richmond",
   "comment": "dome comments",
