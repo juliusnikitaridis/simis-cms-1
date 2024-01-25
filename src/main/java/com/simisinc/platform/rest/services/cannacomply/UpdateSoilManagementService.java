@@ -13,16 +13,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
-import java.util.UUID;
+
 
 /**
- *
  * @author Julius Nikitaridis
- * @created 25/01/24 11:28 AM
+ * @created 25/04/23 11:28 AM
  */
-public class CreateSoilManagementService {
 
-    private static Log LOG = LogFactory.getLog(CreateSoilManagementService.class);
+
+public class UpdateSoilManagementService {
+
+    private static Log LOG = LogFactory.getLog(UpdateSoilManagementService.class);
 
     public ServiceResponse post(ServiceContext context) {
 
@@ -30,20 +31,19 @@ public class CreateSoilManagementService {
             if(!ValidateApiAccessHelper.validateAccess(this.getClass().getName(),context)) {
                 throw new Exception(ErrorMessageStatics.ERR_01);
             }
-            ObjectMapper mapper = new ObjectMapper();
-            SoilManagement soilManagement = mapper.readValue(context.getJsonRequest(), SoilManagement.class);
-            String id = UUID.randomUUID().toString();
-            soilManagement.setId(id);
 
-            SoilManagementRepository.add(soilManagement);
+            ObjectMapper mapper = new ObjectMapper();
+            SoilManagement sm = mapper.readValue(context.getJsonRequest(), SoilManagement.class);
+            SoilManagementRepository.update(sm);
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add(id);}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Soil Management has been updated.");}};
             response.setData(responseMessage);
             return response;
 
         } catch (Exception e) {
             return ErrorMessageStatics.handleException(e,this.getClass());
+
         }
     }
 }

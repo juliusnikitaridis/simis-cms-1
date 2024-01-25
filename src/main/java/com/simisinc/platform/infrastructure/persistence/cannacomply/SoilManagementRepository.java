@@ -80,10 +80,14 @@ public class SoilManagementRepository {
     }
 
 
-    public static DataResult query() {
+    public static DataResult query(SoilManagementSpecification specification) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
         SqlUtils orderBy = new SqlUtils();
+
+        if (specification != null) {
+            where.addIfExists("farm_id = ?" ,specification.getFarmId());
+        }
 
         return DB.selectAllFrom(
                 TABLE_NAME, select, where, orderBy, null, SoilManagementRepository::buildRecord);
