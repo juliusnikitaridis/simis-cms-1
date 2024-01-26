@@ -708,6 +708,28 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 }
 ###
 
+POST http://localhost:8080/api/cannacomply/CreateSoilPotService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-825ed5d7-e981-42c7-b879-de1701c301031
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "soilId":"soilId",
+  "quantity": "quantity",
+  "farmId":"farmId",
+  "date": "date",
+  "measurements":"measurements",
+  "status": "status",
+  "locationId": "locationId",
+  "locationType": "locationType",
+  "containerType": "containerType"
+}
+###
+
+
+
+
 
 
 POST http://localhost:8080/api/cannacomply/UpdateUserService
