@@ -130,9 +130,6 @@
   <service method="post" endpoint="cannacomply/CreateSoilPotService" class="com.simisinc.platform.rest.services.cannacomply.CreateSoilPotService"/>
   <service method="post" endpoint="cannacomply/UpdateSoilPotService" class="com.simisinc.platform.rest.services.cannacomply.UpdateSoilPotService"/>
   <service method="post" endpoint="cannacomply/SoilPotListService" class="com.simisinc.platform.rest.services.cannacomply.SoilPotListService"/>
-  <service method="post" endpoint="cannacomply/CreateWaterManagementService" class="com.simisinc.platform.rest.services.cannacomply.CreateWaterManagementService"/>
-  <service method="post" endpoint="cannacomply/UpdateWaterManagementService" class="com.simisinc.platform.rest.services.cannacomply.UpdateWaterManagementService"/>
-  <service method="post" endpoint="cannacomply/UpdateWaterManagementService" class="com.simisinc.platform.rest.services.cannacomply.UpdateWaterManagementService"/>
   <service method="post" endpoint="cannacomply/CreateWaterSourceService" class="com.simisinc.platform.rest.services.cannacomply.CreateWaterSourceService"/>
   <service method="post" endpoint="cannacomply/UpdateWaterSourceService" class="com.simisinc.platform.rest.services.cannacomply.UpdateWaterSourceService"/>
 

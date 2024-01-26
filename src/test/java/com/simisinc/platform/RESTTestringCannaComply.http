@@ -708,6 +708,52 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 }
 ###
 
+POST http://localhost:8080/api/cannacomply/CreateWaterManagementService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-825ed5d7-e981-42c7-b879-de1701c301031
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "userId": "UserId",
+  "locationId": "locationId",
+  "locationType": "locationType",
+  "waterUse": "waterUse",
+  "farmId": "farmId",
+  "waterSourceId": "waterSourceId",
+  "startTime": "startTime",
+  "endTime": "endTIme",
+  "methodUsed": "methodUsed",
+  "flowRate": "flowRate",
+  "waterQuantity": "waterQty",
+  "waterUnitsUsed": "waterUnitsUsed",
+  "waterTemp": "waterTemp",
+  "waterPh": "waterPh",
+  "rateUnit": "rateUnit",
+  "date": "date",
+  "ppmLevels": "ppm_levels",
+  "deviceId": "deviceId"
+}
+###
+
+GET http://localhost:8080/api/cannacomply/WaterManagementListService
+X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
+Authorization:Bearer API-825ed5d7-e981-42c7-b879-de1701c301031
+Content-Type: application/json
+Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+
+{
+  "farmId": "farmId"
+}
+###
+
+
+
+
+
+
+
+
 POST http://localhost:8080/api/cannacomply/CreateSoilPotService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-825ed5d7-e981-42c7-b879-de1701c301031

@@ -26,7 +26,7 @@ public class WaterManagementRepository {
                 .add("location_type",record.getLocationType())
                 .add("water_use",record.getWaterUse())
                 .add("farm_id",record.getFarmId())
-                .add("water_source",record.getWaterSource())
+                .add("water_source_id",record.getWaterSourceId())
                 .add("start_time",record.getStartTime())
                 .add("end_time",record.getEndTime())
                 .add("method_used",record.getMethodUsed())
@@ -62,7 +62,7 @@ public class WaterManagementRepository {
                 .add("location_type",record.getLocationType())
                 .add("water_use",record.getWaterUse())
                 .add("farm_id",record.getFarmId())
-                .add("water_source",record.getWaterSource())
+                .add("water_source_id",record.getWaterSourceId())
                 .add("start_time",record.getStartTime())
                 .add("end_time",record.getEndTime())
                 .add("ppm_levels",record.getPpmLevels())
@@ -136,7 +136,7 @@ public class WaterManagementRepository {
             waterManagement.setLocationType(rs.getString("location_type"));
             waterManagement.setWaterUse(rs.getString("water_use"));
             waterManagement.setFarmId(rs.getString("farm_id"));
-            waterManagement.setWaterSource(rs.getString("water_source"));
+            waterManagement.setWaterSourceId(rs.getString("water_source_id"));
             waterManagement.setStartTime(rs.getString("start_time"));
             waterManagement.setEndTime(rs.getString("end_time"));
             waterManagement.setMethodUsed(rs.getString("method_used"));

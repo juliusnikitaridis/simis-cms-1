@@ -1,7 +1,7 @@
 package com.simisinc.platform.domain.model.cannacomply;
 
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
+
 import com.simisinc.platform.domain.model.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +22,7 @@ public class WaterManagement extends Entity {
 
     private String farmId;
 
-    private String waterSource;
+    private String waterSourceId;
 
     private String startTime;
 
