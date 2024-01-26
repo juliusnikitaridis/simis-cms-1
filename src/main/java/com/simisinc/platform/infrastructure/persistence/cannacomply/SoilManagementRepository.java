@@ -27,8 +27,9 @@ public class SoilManagementRepository {
                 .add("date",record.getDate())
                 .add("nutrient_levels", record.getNutrientLevels())
                 .add("soil_type",record.getSoilType())
-                .add("warehouse_item_id",record.getWharehouseItemId())
+                .add("warehouse_item_id",record.getWarehouseItemId())
                 .add("organic_matter",record.getOrganicMatter())
+                .add("location_type",record.getLocationType())
                 .add("location_id",record.getLocationId());
 
         try (Connection connection = DB.getConnection();
@@ -54,8 +55,9 @@ public class SoilManagementRepository {
                 .add("date",record.getDate())
                 .add("nutrient_levels", record.getNutrientLevels())
                 .add("soil_type",record.getSoilType())
-                .add("warehouse_item_id",record.getWharehouseItemId())
+                .add("warehouse_item_id",record.getWarehouseItemId())
                 .add("organic_matter",record.getOrganicMatter())
+                .add("location_type",record.getLocationType())
                 .add("location_id",record.getLocationId());
 
             try (Connection connection = DB.getConnection();
@@ -116,7 +118,7 @@ public class SoilManagementRepository {
             soilManagement.setNutrientLevels(rs.getString("nutrient_levels"));
             soilManagement.setSoilType(rs.getString("soil_type"));
             soilManagement.setLocationType(rs.getString("location_type"));
-            soilManagement.setWharehouseItemId(rs.getString("warehouse_item_id"));
+            soilManagement.setWarehouseItemId(rs.getString("warehouse_item_id"));
             soilManagement.setOrganicMatter(rs.getString("organic_matter"));
 
             return soilManagement;

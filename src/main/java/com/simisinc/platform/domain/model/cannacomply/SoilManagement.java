@@ -18,6 +18,6 @@ public class  SoilManagement extends Entity {
     private String soilType;
     private String locationId;
     private String locationType;
-    private String wharehouseItemId;
+    private String warehouseItemId;
     private String organicMatter;
 }
