@@ -5,6 +5,7 @@ import com.simisinc.platform.domain.model.cannacomply.WaterSource;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.WaterManagementRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.WaterManagementSpecification;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.WaterSourceRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.WaterSourceSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
@@ -31,11 +32,21 @@ public class WaterSourceListService {
             }
 
             String id = context.getParameter("id");
+            String farmId = context.getParameter("farmId");
 
-            WaterSource watersourceList = (WaterSource) WaterSourceRepository.findById(id);
+            WaterSourceSpecification specification = new WaterSourceSpecification();
+            if(farmId != null) {
+                specification.setFarmId(farmId);
+            }
+
+            if(id != null) {
+                specification.setId(id);
+            }
+
+            List<WaterSource> watersourceList = (List<WaterSource>) WaterSourceRepository.query(specification).getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
-           // ServiceResponseCommand.addMeta(response, "Water Source List", watersourceList, null);
+            ServiceResponseCommand.addMeta(response, "Water Source List", watersourceList, null);
             response.setData(watersourceList);
             return response;
         } catch (Exception e) {

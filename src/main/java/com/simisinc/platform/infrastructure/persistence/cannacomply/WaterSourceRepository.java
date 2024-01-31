@@ -81,6 +81,7 @@ public class WaterSourceRepository {
     }
 
 
+
     public static DataResult query(WaterSourceSpecification specification) {
         SqlUtils select = new SqlUtils();
         SqlUtils where = new SqlUtils();
@@ -88,6 +89,7 @@ public class WaterSourceRepository {
 
         if (specification != null) {
             where.addIfExists("farm_id = ?" ,specification.getFarmId());
+            where.addIfExists("id = ?",specification.getId());
         }
 
         return DB.selectAllFrom(

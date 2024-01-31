@@ -11,4 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class WaterSourceSpecification {
     private String farmId;
+    private String id;
 }
