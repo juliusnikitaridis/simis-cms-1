@@ -23,6 +23,7 @@ public class CropRepository {
                 .add("crop_type", record.getCropType())
                 .add("growth_stage", record.getGrowthStage())
                 .add("block_id",record.getBlockId())
+                .add("pot_id",record.getPotId())
                 .add("status",record.getStatus())
                 .add("strain_name",record.getStrainName())
                 .add("seed_company",record.getSeedCompany())
@@ -60,6 +61,7 @@ public class CropRepository {
                 .addIfExists("strain_name",record.getStrainName())
                 .addIfExists("seed_company",record.getSeedCompany())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("pot_id",record.getPotId())
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("crop_label",record.getCropLabel())
@@ -131,6 +133,7 @@ public class CropRepository {
             crop.setUserId(rs.getString("user_id"));
             crop.setLocationId(rs.getString("location_id"));
             crop.setLocationType(rs.getString("location_type"));
+            crop.setPotId(rs.getString("pot_id"));
             crop.setCropLabel(rs.getString("crop_label"));
             crop.setBarcodeData(rs.getString("barcode_data"));
             crop.setCreatedDate(rs.getString("created_date"));

@@ -117,6 +117,7 @@ public class SoilManagementRepository {
             soilManagement.setDate(rs.getString("date"));
             soilManagement.setNutrientLevels(rs.getString("nutrient_levels"));
             soilManagement.setSoilType(rs.getString("soil_type"));
+            soilManagement.setLocationId(rs.getString("location_id"));
             soilManagement.setLocationType(rs.getString("location_type"));
             soilManagement.setWarehouseItemId(rs.getString("warehouse_item_id"));
             soilManagement.setOrganicMatter(rs.getString("organic_matter"));

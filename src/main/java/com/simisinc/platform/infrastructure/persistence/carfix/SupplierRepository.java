@@ -21,6 +21,7 @@ public class SupplierRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("farm_id", record.getFarmId())
+                .add("total_quantity",record.getTotalQuantity())
                 .add("contact_no",record.getContactNo())
                 .add("contact_title",record.getContactTitle())
                 .add("email",record.getEmail())
@@ -60,6 +61,7 @@ public class SupplierRepository {
                 .addIfExists("contact_title",record.getContactTitle())
                 .addIfExists("email",record.getEmail())
                 .addIfExists("site",record.getSite())
+                .addIfExists("total_quantity",record.getTotalQuantity())
                 .addIfExists("expiry_date", record.getExpiryDate())
                 .addIfExists("receipt", record.getReceipt())
                 .addIfExists("type", record.getType())
@@ -131,6 +133,7 @@ public class SupplierRepository {
             record.setContactTitle(rs.getString("contact_title"));
             record.setEmail(rs.getString("email"));
             record.setSite(rs.getString("site"));
+            record.setTotalQuantity(rs.getString("total_quantity"));
             record.setType(rs.getString("type"));
             record.setLotNumber(rs.getString("lot_number"));
             record.setContainer(rs.getString("container"));

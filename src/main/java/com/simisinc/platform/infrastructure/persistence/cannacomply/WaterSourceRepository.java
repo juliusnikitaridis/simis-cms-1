@@ -28,7 +28,6 @@ public class WaterSourceRepository {
                 .add("volume",record.getVolume())
                 .add("usage",record.getUsage())
                 .add("geo_data",record.getGeoData())
-                .add("colour",record.getColour())
                 .add("units",record.getUnits())
                 .add("colour",record.getColour());
 
@@ -57,7 +56,6 @@ public class WaterSourceRepository {
                 .add("volume",record.getVolume())
                 .add("usage",record.getUsage())
                 .add("geo_data",record.getGeoData())
-                .add("colour",record.getColour())
                 .add("units",record.getUnits())
                 .add("colour",record.getColour());
 
