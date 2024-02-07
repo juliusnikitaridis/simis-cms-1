@@ -90,6 +90,7 @@ public class WaterSourceRepository {
         if (specification != null) {
             where.addIfExists("farm_id = ?" ,specification.getFarmId());
             where.addIfExists("id = ?",specification.getId());
+            where.addIfExists("name = ?",specification.getName());
         }
 
         return DB.selectAllFrom(

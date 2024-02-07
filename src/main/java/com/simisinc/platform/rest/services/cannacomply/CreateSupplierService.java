@@ -34,12 +34,13 @@ public class CreateSupplierService {
             }
             ObjectMapper mapper = new ObjectMapper();
             Supplier item = mapper.readValue(context.getJsonRequest(), Supplier.class);
-            item.setId(UUID.randomUUID().toString());
+            String itemId = UUID.randomUUID().toString();
+            item.setId(itemId);
 
             SupplierRepository.add(item);
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Supplier has been added");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add(itemId);}};
             response.setData(responseMessage);
             return response;
 

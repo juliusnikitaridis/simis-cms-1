@@ -12,4 +12,5 @@ import lombok.Setter;
 public class WaterSourceSpecification {
     private String farmId;
     private String id;
+    private String name;
 }

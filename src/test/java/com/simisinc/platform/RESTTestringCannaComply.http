@@ -743,7 +743,7 @@ Content-Type: application/json
 Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 {
-  "name": "name",
+  "name": "name2",
   "optimalReadingsJson": "optimal_readings_json",
   "farmId": "farm_id",
   "date": "date",
