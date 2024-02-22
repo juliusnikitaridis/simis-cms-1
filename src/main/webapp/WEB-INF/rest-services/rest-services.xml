@@ -133,6 +133,7 @@
   <service method="post" endpoint="cannacomply/CreateWaterSourceService" class="com.simisinc.platform.rest.services.cannacomply.CreateWaterSourceService"/>
   <service method="post" endpoint="cannacomply/UpdateWaterSourceService" class="com.simisinc.platform.rest.services.cannacomply.UpdateWaterSourceService"/>
   <service method="post" endpoint="cannacomply/WaterSourceListService" class="com.simisinc.platform.rest.services.cannacomply.WaterSourceListService"/>
+  <service method="get" endpoint="cannacomply/CropDataListService" class="com.simisinc.platform.rest.services.cannacomply.CropDataListService"/>
 
 
 

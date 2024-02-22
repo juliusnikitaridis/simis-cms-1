@@ -48,15 +48,15 @@ public class SoilPotRepository {
 
     public static void update(SoilPot record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .add("soil_id", record.getSoilId())
-                .add("quantity", record.getQuantity())
-                .add("farm_id",record.getFarmId())
-                .add("date",record.getDate())
-                .add("measurements", record.getMeasurements())
-                .add("status",record.getStatus())
-                .add("location_id",record.getLocationId())
-                .add("location_type",record.getLocationType())
-                .add("container_type",record.getContainerType());
+                .addIfExists("soil_id", record.getSoilId())
+                .addIfExists("quantity", record.getQuantity())
+                .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("date",record.getDate())
+                .addIfExists("measurements", record.getMeasurements())
+                .addIfExists("status",record.getStatus())
+                .addIfExists("location_id",record.getLocationId())
+                .addIfExists("location_type",record.getLocationType())
+                .addIfExists("container_type",record.getContainerType());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
