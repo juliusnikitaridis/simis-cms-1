@@ -42,7 +42,7 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/cannacomply/CropListService
 X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
-Authorization:Bearer API-7fb0c867-04ca-4859-b086-ea39cddd222029
+Authorization:Bearer API-d24e22ba-14ea-4da4-b782-f2616513c4ac63
 Content-Type: application/json
 Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 ###
