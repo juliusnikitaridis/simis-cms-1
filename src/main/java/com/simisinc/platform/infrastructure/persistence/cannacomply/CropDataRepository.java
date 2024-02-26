@@ -45,7 +45,6 @@ public class CropDataRepository {
 
     public static void update(CropData record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .addIfExists("item_code", record.getItemCode())
                 .addIfExists("item_name", record.getItemName())
                 .addIfExists("country",record.getCountry())
                 .addIfExists("seasonality",record.getSeasonality())
@@ -57,7 +56,7 @@ public class CropDataRepository {
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
                 // In a transaction (use the existing connection)
-                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("id = ?", record.getId()));
+                DB.update(connection, TABLE_NAME, updateValues, new SqlUtils().add("item_code = ?", record.getItemCode()));
                 transaction.commit();
 
         } catch (Exception se) {

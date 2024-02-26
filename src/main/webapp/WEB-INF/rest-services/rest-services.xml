@@ -136,7 +136,7 @@
   <service method="post" endpoint="cannacomply/UpdateCropDataService" class="com.simisinc.platform.rest.services.cannacomply.UpdateCropDataService"/>
   <service method="post" endpoint="cannacomply/CreateFeedbackService" class="com.simisinc.platform.rest.services.cannacomply.CreateFeedbackService"/>
   <service method="post" endpoint="cannacomply/FeedbackListService" class="com.simisinc.platform.rest.services.cannacomply.FeedbackListService"/>
-
+  <service method="post" endpoint="cannacomply/CropDataListService" class="com.simisinc.platform.rest.services.cannacomply.CropDataListService"/>
 
 </services>
 

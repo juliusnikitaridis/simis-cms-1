@@ -41,6 +41,31 @@ Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 
 ###
 
+POST https://organicsimis.connectmobiles24.com/api/cannacomply/CreateFeedbackService
+X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
+Authorization:Bearer API-7fb0c867-04ca-4859-b086-ea39cddd222029
+Content-Type: application/json
+Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
+
+{
+  "farmId": "farm_id",
+  "userId": "user_id",
+  "comment": "comment",
+  "date":"date"
+}
+
+###
+
+GET https://organicsimis.connectmobiles24.com/api/cannacomply/FeedbackListService?farmId=farm_id
+X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
+Authorization:Bearer API-7fb0c867-04ca-4859-b086-ea39cddd222029
+Content-Type: application/json
+Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
+
+###
+
+
+
 
 ###
 POST https://cannacomply.connectmobiles24.com/api/cannacomply/UpdateSupplierService
