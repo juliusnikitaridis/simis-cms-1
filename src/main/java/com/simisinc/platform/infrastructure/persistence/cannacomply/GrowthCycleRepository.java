@@ -23,7 +23,8 @@ public class GrowthCycleRepository {
                 .add("plants",record.getPlants())
                 .add("start_date",record.getStartDate())
                 .add("end_date",record.getEndDate())
-                .add("strain",record.getStrain())
+                .add("variety",record.getVariety())
+                .add("commodity",record.getCommodity())
                 .add("yield",record.getYield())
                 .add("growth_cycle_name",record.getGrowthCycleName())
                 .add("farm_id",record.getFarmId());
@@ -50,9 +51,10 @@ public class GrowthCycleRepository {
                 .addIfExists("plants",record.getPlants())
                 .addIfExists("start_date",record.getStartDate())
                 .addIfExists("end_date",record.getEndDate())
-                .addIfExists("strain",record.getStrain())
+                .addIfExists("variety",record.getVariety())
                 .addIfExists("growth_cycle_name",record.getGrowthCycleName())
                 .addIfExists("yield",record.getYield())
+                .addIfExists("commodity",record.getCommodity())
                 .addIfExists("farm_id",record.getFarmId());
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -105,9 +107,10 @@ public class GrowthCycleRepository {
         try {
           cycle.setId(rs.getString("id"));
           cycle.setPlants(rs.getString("plants"));
-          cycle.setStrain(rs.getString("strain"));
+          cycle.setVariety(rs.getString("variety"));
           cycle.setFarmId(rs.getString("farm_id"));
           cycle.setYield(rs.getString("yield"));
+          cycle.setCommodity(rs.getString("commodity"));
           cycle.setGrowthCycleName(rs.getString("growth_cycle_name"));
           cycle.setStartDate(rs.getString("start_date"));
           cycle.setEndDate(rs.getString("end_date"));

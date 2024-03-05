@@ -19,6 +19,7 @@ public class BlockRepository {
     public static Block add(Block record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
+                .add("soil_id",record.getSoilId())
                 .add("block_location", record.getBlockLocation())
                 .add("barcode_data", record.getBarcodeData())
                 .add("location_id",record.getLocationId())
@@ -45,6 +46,7 @@ public class BlockRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("block_location", record.getBlockLocation())
                 .addIfExists("barcode_data", record.getBarcodeData())
+                .addIfExists("soil_id",record.getSoilId())
                 .addIfExists("location_id",record.getLocationId())
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("dimensions",record.getDimensions())
@@ -116,6 +118,7 @@ public class BlockRepository {
               block.setBlockLocation(rs.getString("block_location"));
               block.setBarcodeData(rs.getString("barcode_data"));
               block.setDimensions(rs.getString("dimensions"));
+              block.setSoilId(rs.getString("soil_id"));
               block.setFarmId(rs.getString("farm_id"));
               block.setLocationId(rs.getString("location_id"));
               block.setDate(rs.getString("date"));

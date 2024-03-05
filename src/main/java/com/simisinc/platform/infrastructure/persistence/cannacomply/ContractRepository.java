@@ -21,6 +21,7 @@ public class ContractRepository {
                 .add("id", record.getId())
                 .add("strain",record.getStrain())
                 .add("customer_id",record.getCustomerId())
+                .add("variety",record.getVariety())
                 .add("farm_id",record.getFarmId())
                 .add("delivery_date",record.getDeliveryDate())
                 .add("type",record.getType())
@@ -52,6 +53,7 @@ public class ContractRepository {
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("delivery_date",record.getDeliveryDate())
                 .addIfExists("type",record.getType())
+                .addIfExists("variety",record.getVariety())
                 .addIfExists("price",record.getPrice())
                 .addIfExists("quantity",record.getQuantity())
                 .addIfExists("contract_date",record.getContractDate())
@@ -114,6 +116,7 @@ public class ContractRepository {
           contract.setDeliveryDate(rs.getString("delivery_date"));
           contract.setType(rs.getString("type"));
           contract.setPrice(rs.getString("price"));
+          contract.setVariety(rs.getString("variety"));
           contract.setQuantity(rs.getString("quantity"));
           contract.setContractDate(rs.getString("contract_date"));
           contract.setGrowthCycleId(rs.getString("growth_cycle_id"));

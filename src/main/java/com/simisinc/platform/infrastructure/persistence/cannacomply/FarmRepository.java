@@ -21,6 +21,7 @@ public class FarmRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("name", record.getName())
+                .add("commodities",record.getCommodities())
                 .add("latitude", record.getLatitude())
                 .add("longitude", record.getLongitude())
                 .add("type",record.getType())
@@ -50,6 +51,7 @@ public class FarmRepository {
                 .addIfExists("latitude", record.getLatitude())
                 .addIfExists("longitude", record.getLongitude())
                 .addIfExists("type",record.getType())
+                .addIfExists("commodities",record.getCommodities())
                 .addIfExists("logo_data",record.getLogoData())
                 .addIfExists("location_data",record.getLocationData())
                 .addIfExists("user_id",record.getUserId())
@@ -111,6 +113,7 @@ public class FarmRepository {
             farm.setLongitude(rs.getString("longitude"));
             farm.setLogoData(rs.getString("logo_data"));
             farm.setName(rs.getString("name"));
+            farm.setCommodities(rs.getString("commodities"));
             farm.setType(rs.getString("type"));
             farm.setAddress(rs.getString("address"));
             farm.setUserId(rs.getString("user_id"));

@@ -24,6 +24,8 @@ public class SupplierRepository {
                 .add("total_quantity",record.getTotalQuantity())
                 .add("contact_no",record.getContactNo())
                 .add("contact_title",record.getContactTitle())
+                .add("location_type",record.getLocationType())
+                .add("location_id",record.getLocationId())
                 .add("email",record.getEmail())
                 .add("site",record.getSite())
                 .add("supplier_name", record.getSupplierName())
@@ -65,6 +67,8 @@ public class SupplierRepository {
                 .addIfExists("expiry_date", record.getExpiryDate())
                 .addIfExists("receipt", record.getReceipt())
                 .addIfExists("type", record.getType())
+                .addIfExists("location_type",record.getLocationType())
+                .addIfExists("location_id",record.getLocationId())
                 .addIfExists("lot_number",record.getLotNumber())
                 .addIfExists("container",record.getContainer())
                 .addIfExists("mass",record.getMass());
@@ -135,6 +139,8 @@ public class SupplierRepository {
             record.setSite(rs.getString("site"));
             record.setTotalQuantity(rs.getString("total_quantity"));
             record.setType(rs.getString("type"));
+            record.setLocationId(rs.getString("location_id"));
+            record.setLocationType("location_type");
             record.setLotNumber(rs.getString("lot_number"));
             record.setContainer(rs.getString("container"));
             record.setMass(rs.getString("mass"));

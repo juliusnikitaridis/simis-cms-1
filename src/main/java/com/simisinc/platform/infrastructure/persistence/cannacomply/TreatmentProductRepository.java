@@ -30,6 +30,8 @@ public class TreatmentProductRepository {
                 .add("active_ingredients",record.getActiveIngredients())
                 .add("expiry_date",record.getExpiryDate())
                 .add("instructions",record.getInstructions())
+                .add("location_type",record.getLocationType())
+                .add("location_id",record.getLocationId())
                 .add("purpose",record.getPurpose());
 
         try (Connection connection = DB.getConnection();
@@ -58,6 +60,8 @@ public class TreatmentProductRepository {
                 .addIfExists("active_ingredients",record.getActiveIngredients())
                 .addIfExists("expiry_date",record.getExpiryDate())
                 .addIfExists("units",record.getUnits())
+                .addIfExists("location_type",record.getLocationType())
+                .addIfExists("location_id",record.getLocationId())
                 .addIfExists("instructions",record.getInstructions())
                 .addIfExists("purpose",record.getPurpose());
 
@@ -119,6 +123,8 @@ public class TreatmentProductRepository {
             product.setUnits(rs.getString("units"));
             product.setQuantity(rs.getString("quantity"));
             product.setFarmId(rs.getString("farm_id"));
+            product.setLocationId("location_id");
+            product.setLocationType("location_type");
             product.setImageData(rs.getString("image_data"));
             product.setProductId(rs.getString("product_id"));
             product.setActiveIngredients(rs.getString("active_ingredients"));

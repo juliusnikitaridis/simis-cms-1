@@ -1,7 +1,6 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Crop;
-import com.simisinc.platform.domain.model.cannacomply.Farm;
 import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
@@ -23,10 +22,10 @@ public class CropRepository {
                 .add("crop_type", record.getCropType())
                 .add("growth_stage", record.getGrowthStage())
                 .add("block_id",record.getBlockId())
-                .add("pot_id",record.getPotId())
                 .add("status",record.getStatus())
-                .add("strain_name",record.getStrainName())
+                .add("variety_name",record.getVarietyName())
                 .add("seed_company",record.getSeedCompany())
+                .add("contract_id",record.getContractId())
                 .add("farm_id",record.getFarmId())
                 .add("user_id",record.getUserId())
                 .add("barcode_data",record.getBarcodeData())
@@ -58,13 +57,13 @@ public class CropRepository {
                 .addIfExists("growth_stage", record.getGrowthStage())
                 .addIfExists("block_id",record.getBlockId())
                 .addIfExists("status",record.getStatus())
-                .addIfExists("strain_name",record.getStrainName())
+                .addIfExists("variety_name",record.getVarietyName())
                 .addIfExists("seed_company",record.getSeedCompany())
                 .addIfExists("farm_id",record.getFarmId())
-                .addIfExists("pot_id",record.getPotId())
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("crop_label",record.getCropLabel())
+                .addIfExists("contract_id",record.getContractId())
                 .addIfExists("location_id",record.getLocationId())
                 .addIfExists("location_type",record.getLocationType())
                 .addIfExists("last_updated",record.getLastUpdated())
@@ -127,18 +126,18 @@ public class CropRepository {
             crop.setCropType(rs.getString("crop_type"));
             crop.setGrowthStage(rs.getString("growth_stage"));
             crop.setStatus(rs.getString("status"));
-            crop.setStrainName(rs.getString("strain_name"));
+            crop.setVarietyName(rs.getString("variety_name"));
             crop.setSeedCompany(rs.getString("seed_company"));
             crop.setFarmId(rs.getString("farm_id"));
             crop.setUserId(rs.getString("user_id"));
             crop.setLocationId(rs.getString("location_id"));
             crop.setLocationType(rs.getString("location_type"));
-            crop.setPotId(rs.getString("pot_id"));
             crop.setCropLabel(rs.getString("crop_label"));
             crop.setBarcodeData(rs.getString("barcode_data"));
             crop.setCreatedDate(rs.getString("created_date"));
             crop.setBlockId(rs.getString("block_id"));
             crop.setLastUpdated(rs.getString("last_updated"));
+            crop.setContractId(rs.getString("contract_id"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;
         } catch (Exception e) {

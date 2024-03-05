@@ -18,4 +18,5 @@ public class Contract extends Entity {
    private String quantity;
    private String contractDate;
    private String growthCycleId;
+   private String variety;
 }

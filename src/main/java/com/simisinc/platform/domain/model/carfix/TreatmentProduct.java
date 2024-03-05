@@ -23,5 +23,7 @@ public class TreatmentProduct extends Entity {
    private String instructions = null;
    private String purpose = null;
    private String units;
+   private String locationType;
+   private String locationId;
 
 }

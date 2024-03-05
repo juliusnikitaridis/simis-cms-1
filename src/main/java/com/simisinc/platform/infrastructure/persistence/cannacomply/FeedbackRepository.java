@@ -91,7 +91,7 @@ public class FeedbackRepository {
             ws.setId(rs.getString("id"));
             ws.setFarmId(rs.getString("farm_id"));
             ws.setUserId(rs.getString("user_id"));
-            ws.setComment(rs.getString("comments"));
+            ws.setComment(rs.getString("comment"));
             ws.setDate(rs.getString("date"));
             return ws;
         } catch (Exception e) {

@@ -20,18 +20,18 @@ public class YieldRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("quantity", record.getQuantity())
-                .add("loss", record.getLoss())
                 .add("notes", record.getNotes())
                 .add("farm_id",record.getFarmId())
                 .add("harvest_batch_id", record.getHarvestBatchId())
                 .add("location_id", record.getLocationId())
                 .add("crop_id", record.getCropId())
                 .add("stage",record.getStage())
+                .add("variety", record.getVariety())
                 .add("last_updated",record.getLastUpdated())
                 .add("harvested_item",record.getHarvestedItem())
-                .add("strain", record.getStrain())
                 .add("from_block_id",record.getFromBlockId())
-                .add("wet_weight",record.getWetWeight())
+                .add("color",record.getColor())
+                .add("texture",record.getTexture())
                 .add("user_id",record.getUserId())
                 .add("date", record.getDate());
 
@@ -53,18 +53,18 @@ public class YieldRepository {
     public static void update(Yield record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("quantity", record.getQuantity())
-                .addIfExists("loss", record.getLoss())
                 .addIfExists("notes", record.getNotes())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("harvest_batch_id", record.getHarvestBatchId())
                 .addIfExists("location_id", record.getLocationId())
                 .addIfExists("crop_id", record.getCropId())
-                .addIfExists("strain", record.getStrain())
+                .addIfExists("variety", record.getVariety())
                 .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("harvested_item",record.getHarvestedItem())
-                .addIfExists("wet_weight",record.getWetWeight())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("stage",record.getStage())
+                .addIfExists("color",record.getColor())
+                .addIfExists("texture",record.getTexture())
                 .addIfExists("from_block_id",record.getFromBlockId())
                 .addIfExists("date", record.getDate());
 
@@ -123,10 +123,8 @@ public class YieldRepository {
         try {
             record.setId(rs.getString("id"));
             record.setQuantity(rs.getString("quantity"));
-            record.setLoss(rs.getString("loss"));
             record.setStage(rs.getString("stage"));
             record.setNotes(rs.getString("notes"));
-            record.setWetWeight(rs.getString("wet_weight"));
             record.setUserId(rs.getString("user_id"));
             record.setHarvestBatchId(rs.getString("harvest_batch_id"));
             record.setLocationId(rs.getString("location_id"));
@@ -136,7 +134,9 @@ public class YieldRepository {
             record.setHarvestedItem(rs.getString("harvested_item"));
             record.setFarmId(rs.getString("farm_id"));
             record.setFromBlockId(rs.getString("from_block_id"));
-            record.setStrain(rs.getString("strain"));
+            record.setVariety(rs.getString("variety"));
+            record.setColor("color");
+            record.setTexture("texture");
             return record;
         } catch (Exception e) {
             LOG.error("exception when building record for yield" + e.getMessage());

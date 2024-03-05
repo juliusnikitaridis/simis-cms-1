@@ -25,7 +25,7 @@ public class Crop extends Entity {
     private String blockLocation;
     private String growthStage;
     private String status;
-    private String strainName;
+    private String varietyName;
     private String seedCompany;
     private String farmId;
     private String userId;
@@ -37,7 +37,7 @@ public class Crop extends Entity {
     private String locationType;
     private String locationId;
     private String lastUpdated;
-    private String potId;
+    private String contractId;
 }
 
 
