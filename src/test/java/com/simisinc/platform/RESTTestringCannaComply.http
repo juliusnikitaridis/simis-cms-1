@@ -1,9 +1,17 @@
 
 ###
 POST http://localhost:8080/api/oauth2/authorize
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
 ###
+
+
+###this has the latest credentials for local testing
+GET http://localhost:8080/api/cannacomply/ContractListService?famrId=27eca4ed-b247-4fbb-ab60-3834101116ed
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-0c1175b6-6707-489a-8fe5-67d7293926b83
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 
 
 ###
@@ -41,10 +49,10 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/api/cannacomply/CropListService
-X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
-Authorization:Bearer API-d24e22ba-14ea-4da4-b782-f2616513c4ac63
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-d7be5b7c-5715-458b-a15c-0584b39900223
 Content-Type: application/json
-Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 ###
 
 ###
@@ -337,12 +345,12 @@ Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
 Content-Type: application/json
 Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
-###
+###this has the latest credentials for local testing
 GET http://localhost:8080/api/cannacomply/ContractListService?famrId=27eca4ed-b247-4fbb-ab60-3834101116ed
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-f45c1133-3a5e-4b56-88fa-075da5e13a2f1
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-0edc932c-1d7b-4ec7-b920-cb718f92600e3
 Content-Type: application/json
-Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 
 
 
