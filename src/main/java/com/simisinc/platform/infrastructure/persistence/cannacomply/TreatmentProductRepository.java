@@ -22,6 +22,7 @@ public class TreatmentProductRepository {
                 .add("id", record.getId())
                 .add("product_name", record.getProductName())
                 .add("units",record.getUnits())
+                .add("created_date",record.getCreatedDate())
                 .add("container", record.getContainer())
                 .add("mass", record.getMass())
                 .add("quantity",record.getQuantity())
@@ -52,6 +53,7 @@ public class TreatmentProductRepository {
                 .addIfExists("product_name", record.getProductName())
                 .addIfExists("container", record.getContainer())
                 .addIfExists("mass", record.getMass())
+                .addIfExists("created_date",record.getCreatedDate())
                 .addIfExists("quantity",record.getQuantity())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("product_id",record.getProductId())
@@ -118,6 +120,7 @@ public class TreatmentProductRepository {
             product.setMass(rs.getString("mass"));
             product.setUnits(rs.getString("units"));
             product.setQuantity(rs.getString("quantity"));
+            product.setCreatedDate(rs.getString("created_date"));
             product.setFarmId(rs.getString("farm_id"));
             product.setImageData(rs.getString("image_data"));
             product.setProductId(rs.getString("product_id"));

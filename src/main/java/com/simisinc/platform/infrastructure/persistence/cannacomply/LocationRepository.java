@@ -20,6 +20,7 @@ public class LocationRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("location_name", record.getLocationName())
+                .add("block_count",record.getBlockCount())
                 .add("location_description", record.getLocationDescription())
                 .add("location_color", record.getLocationColour())
                 .add("farm_id",record.getFarmId())
@@ -50,6 +51,7 @@ public class LocationRepository {
                 .addIfExists("location_description", record.getLocationDescription())
                 .addIfExists("location_color", record.getLocationColour())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("block_count",record.getBlockCount())
                 .addIfExists("optimal_readings",record.getOptimalReadings())
                 .addIfExists("purpose",record.getPurpose())
                 .addIfExists("dimensions",record.getDimensions())
@@ -124,6 +126,7 @@ public class LocationRepository {
               location.setLocationName(rs.getString("location_name"));
               location.setFarmId(rs.getString("farm_id"));
               location.setDimensions(rs.getString("dimensions"));
+              location.setBlockCount(rs.getString("block_count"));
               location.setLocationDescription(rs.getString("location_description"));
               location.setLocationColour(rs.getString("location_color"));
               location.setType(rs.getString("type"));

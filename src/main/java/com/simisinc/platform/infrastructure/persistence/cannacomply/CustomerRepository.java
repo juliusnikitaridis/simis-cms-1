@@ -23,6 +23,7 @@ public class CustomerRepository {
                 .add("city",record.getCity())
                 .add("contact_no",record.getContactNo())
                 .add("email",record.getEmail())
+                .add("created_date",record.getCreatedDate())
                 .add("farm_id",record.getFarmId())
                 .add("address",record.getAddress());
 
@@ -46,6 +47,7 @@ public class CustomerRepository {
                 .add("customer_name",record.getCustomerName())
                 .add("country",record.getCountry())
                 .add("city",record.getCity())
+                .add("created_date",record.getCreatedDate())
                 .add("contact_no",record.getContactNo())
                 .add("email",record.getEmail())
                 .add("farm_id",record.getFarmId())
@@ -103,6 +105,7 @@ public class CustomerRepository {
           customer.setId(rs.getString("id"));
           customer.setCustomerName(rs.getString("customer_name"));
           customer.setCountry(rs.getString("country"));
+          customer.setCreatedDate(rs.getString("created_date"));
           customer.setCity(rs.getString("city"));
           customer.setContactNo(rs.getString("contact_no"));
           customer.setEmail(rs.getString("email"));

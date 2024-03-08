@@ -16,4 +16,5 @@ public class Customer extends Entity {
    private String email;
    private String farmId;
    private String address;
+   private String createdDate;
 }
