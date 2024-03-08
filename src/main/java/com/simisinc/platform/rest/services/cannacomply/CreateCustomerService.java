@@ -2,19 +2,15 @@ package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.cannacomply.Customer;
-import com.simisinc.platform.domain.model.cannacomply.GrowthCycle;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.CustomerRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.GrowthCycleRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.InstantSource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
