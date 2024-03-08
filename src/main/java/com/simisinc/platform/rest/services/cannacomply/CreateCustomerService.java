@@ -12,7 +12,11 @@ import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHel
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.InstantSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -37,6 +41,11 @@ public class CreateCustomerService {
             Customer customer = mapper.readValue(context.getJsonRequest(), Customer.class);
             String cycleId = UUID.randomUUID().toString();
             customer.setId(cycleId);
+            Instant instant = Instant.now();
+            customer.setCreatedDate(instant.toString());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            customer.setCreatedDate(sdf.format(new Date()));
 
             CustomerRepository.add(customer);
 
