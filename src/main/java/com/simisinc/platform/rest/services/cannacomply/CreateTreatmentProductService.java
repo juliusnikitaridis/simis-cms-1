@@ -10,7 +10,9 @@ import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHel
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -27,6 +29,9 @@ public class CreateTreatmentProductService {
             ObjectMapper mapper = new ObjectMapper();
             TreatmentProduct product = mapper.readValue(context.getJsonRequest(), TreatmentProduct.class);
             product.setId(UUID.randomUUID().toString());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            product.setCreatedDate(sdf.format(new Date()));
 
             TreatmentProductRepository.add(product);
 
