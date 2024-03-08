@@ -27,6 +27,7 @@ public class Location extends Entity {
     private String optimalReadings;
     private String type;
     private String dimensions;
+    private String blockCount;
 }
 
 

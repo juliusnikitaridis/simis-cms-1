@@ -25,5 +25,6 @@ public class TreatmentProduct extends Entity {
    private String units;
    private String locationType;
    private String locationId;
+   private String createdDate;
 
 }

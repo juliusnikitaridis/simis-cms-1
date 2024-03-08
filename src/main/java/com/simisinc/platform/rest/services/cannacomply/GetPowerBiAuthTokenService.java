@@ -45,7 +45,7 @@ public class GetPowerBiAuthTokenService {
 
     public ApiResponse getToken() throws Exception {
 
-        String clientId =LoadSitePropertyCommand.loadByName("powerbi.client.id");
+        String clientId = LoadSitePropertyCommand.loadByName("powerbi.client.id");
         String clientSecret = LoadSitePropertyCommand.loadByName("powerbi.client.secret");
         String clientUrl = LoadSitePropertyCommand.loadByName("powerbi.client.url");
         String cookie = LoadSitePropertyCommand.loadByName("powerbi.client.cookie");

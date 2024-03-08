@@ -21,6 +21,7 @@ public class CustomerRepository {
                 .add("customer_name",record.getCustomerName())
                 .add("country",record.getCountry())
                 .add("city",record.getCity())
+                .add("created_date",record.getCreatedDate())
                 .add("contact_no",record.getContactNo())
                 .add("email",record.getEmail())
                 .add("farm_id",record.getFarmId())
@@ -43,13 +44,14 @@ public class CustomerRepository {
 
     public static void update(Customer record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .add("customer_name",record.getCustomerName())
-                .add("country",record.getCountry())
-                .add("city",record.getCity())
-                .add("contact_no",record.getContactNo())
-                .add("email",record.getEmail())
-                .add("farm_id",record.getFarmId())
-                .add("address",record.getAddress());
+                .addIfExists("customer_name",record.getCustomerName())
+                .addIfExists("country",record.getCountry())
+                .addIfExists("city",record.getCity())
+                .addIfExists("contact_no",record.getContactNo())
+                .addIfExists("email",record.getEmail())
+                .addIfExists("created_date",record.getCreatedDate())
+                .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("address",record.getAddress());
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
                  AutoRollback transaction = new AutoRollback(connection)) {
@@ -106,6 +108,7 @@ public class CustomerRepository {
           customer.setCity(rs.getString("city"));
           customer.setContactNo(rs.getString("contact_no"));
           customer.setEmail(rs.getString("email"));
+          customer.setCreatedDate(rs.getString("created_date"));
           customer.setFarmId(rs.getString("farm_id"));
           customer.setAddress(rs.getString("address"));
           return customer;

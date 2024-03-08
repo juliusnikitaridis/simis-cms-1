@@ -20,6 +20,7 @@ public class TreatmentProductRepository {
     public static TreatmentProduct add(TreatmentProduct record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
+                .add("created_date",record.getCreatedDate())
                 .add("product_name", record.getProductName())
                 .add("units",record.getUnits())
                 .add("container", record.getContainer())
@@ -53,6 +54,7 @@ public class TreatmentProductRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("product_name", record.getProductName())
                 .addIfExists("container", record.getContainer())
+                .addIfExists("created_date",record.getCreatedDate())
                 .addIfExists("mass", record.getMass())
                 .addIfExists("quantity",record.getQuantity())
                 .addIfExists("farm_id",record.getFarmId())
@@ -125,6 +127,7 @@ public class TreatmentProductRepository {
             product.setFarmId(rs.getString("farm_id"));
             product.setLocationId("location_id");
             product.setLocationType("location_type");
+            product.setCreatedDate("created_date");
             product.setImageData(rs.getString("image_data"));
             product.setProductId(rs.getString("product_id"));
             product.setActiveIngredients(rs.getString("active_ingredients"));
