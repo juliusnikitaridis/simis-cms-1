@@ -28,6 +28,7 @@ public class Location extends Entity {
     private String type;
     private String dimensions;
     private String blockCount;
+    private String spaceAvailable;
 }
 
 

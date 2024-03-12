@@ -199,6 +199,19 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 }
 ###
 
+GET https://cannacomply.connectmobiles24.com/api/cannacomply/TreatmentProductListService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-6c953258-7039-45ca-9ab3-4749d92d289d3
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "farm_id": "2ca8f7ca-dc16-49c3-af2c-49bbb7d1eb65"
+}
+###
+
+
+
 ###
 GET http://localhost:8080/api/cannacomply/CustomerListService?famrId=farmId
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200

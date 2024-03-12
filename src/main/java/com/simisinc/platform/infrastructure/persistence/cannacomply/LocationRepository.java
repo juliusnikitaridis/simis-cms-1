@@ -23,6 +23,7 @@ public class LocationRepository {
                 .add("block_count",record.getBlockCount())
                 .add("location_description", record.getLocationDescription())
                 .add("location_color", record.getLocationColour())
+                .add("space_available",record.getSpaceAvailable())
                 .add("farm_id",record.getFarmId())
                 .add("dimensions",record.getDimensions())
                 .add("purpose",record.getPurpose())
@@ -51,6 +52,7 @@ public class LocationRepository {
                 .addIfExists("location_description", record.getLocationDescription())
                 .addIfExists("location_color", record.getLocationColour())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("space_available",record.getSpaceAvailable())
                 .addIfExists("block_count",record.getBlockCount())
                 .addIfExists("optimal_readings",record.getOptimalReadings())
                 .addIfExists("purpose",record.getPurpose())
@@ -129,6 +131,7 @@ public class LocationRepository {
               location.setBlockCount(rs.getString("block_count"));
               location.setLocationDescription(rs.getString("location_description"));
               location.setLocationColour(rs.getString("location_color"));
+              location.setSpaceAvailable(rs.getString("space_available"));
               location.setType(rs.getString("type"));
               location.setOptimalReadings(rs.getString("optimal_readings"));
               location.setLocationData(rs.getString("location_data"));
