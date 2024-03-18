@@ -1,8 +1,20 @@
 
 ###
 POST http://localhost:8080/api/oauth2/authorize
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Basic YWRtaW4xNjY1MTQ1MTgzNzQ2OmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+###
+
+###
+POST http://localhost:8080/api/cannacomply/UpdateLocationService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-790ffc27-3f66-40c2-a0d0-2f1d2f6197973
+Content-Type: application/json
+Farm-Id: d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "purpose": "New test farm"
+}
 ###
 
 
