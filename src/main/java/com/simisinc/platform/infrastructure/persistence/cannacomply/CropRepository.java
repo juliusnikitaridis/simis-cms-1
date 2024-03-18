@@ -20,6 +20,7 @@ public class CropRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("crop_type", record.getCropType())
+                .add("block_location",record.getBlockLocation())
                 .add("growth_stage", record.getGrowthStage())
                 .add("block_id",record.getBlockId())
                 .add("status",record.getStatus())
@@ -60,6 +61,7 @@ public class CropRepository {
                 .addIfExists("variety_name",record.getVarietyName())
                 .addIfExists("seed_company",record.getSeedCompany())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("block_location",record.getBlockLocation())
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("crop_label",record.getCropLabel())
@@ -130,6 +132,7 @@ public class CropRepository {
             crop.setSeedCompany(rs.getString("seed_company"));
             crop.setFarmId(rs.getString("farm_id"));
             crop.setUserId(rs.getString("user_id"));
+            crop.setBlockLocation(rs.getString("block_location"));
             crop.setLocationId(rs.getString("location_id"));
             crop.setLocationType(rs.getString("location_type"));
             crop.setCropLabel(rs.getString("crop_label"));
