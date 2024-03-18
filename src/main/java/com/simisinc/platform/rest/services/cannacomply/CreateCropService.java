@@ -1,8 +1,10 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simisinc.platform.domain.model.cannacomply.Block;
 import com.simisinc.platform.domain.model.cannacomply.Crop;
 import com.simisinc.platform.domain.model.cannacomply.Farm;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.BlockRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.CropRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
@@ -37,6 +39,12 @@ public class CreateCropService {
             Crop crop = mapper.readValue(context.getJsonRequest(), Crop.class);
             String cropId = UUID.randomUUID().toString();
             crop.setId(cropId);
+            //do a lookup of the block location
+            Block block = BlockRepository.findById(crop.getBlockId());
+            if(block == null) {
+                throw new Exception("Block could not be found when creating crop");
+            }
+            crop.setBlockLocation(block.getBlockLocation());
 
             CropRepository.add(crop);
 
