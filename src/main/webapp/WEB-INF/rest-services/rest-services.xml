@@ -137,6 +137,9 @@
   <service method="post" endpoint="cannacomply/CreateFeedbackService" class="com.simisinc.platform.rest.services.cannacomply.CreateFeedbackService"/>
   <service method="post" endpoint="cannacomply/FeedbackListService" class="com.simisinc.platform.rest.services.cannacomply.FeedbackListService"/>
   <service method="post" endpoint="cannacomply/CropDataListService" class="com.simisinc.platform.rest.services.cannacomply.CropDataListService"/>
+  <service method="post" endpoint="cannacomply/CreateFuelService" class="com.simisinc.platform.rest.services.cannacomply.CreateFuelService"/>
+  <service method="post" endpoint="cannacomply/UpdateFuelService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFuelService"/>
+  <service method="post" endpoint="cannacomply/FuelListService" class="com.simisinc.platform.rest.services.cannacomply.FuelListService"/>
 
 </services>
 
