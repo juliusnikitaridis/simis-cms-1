@@ -24,6 +24,8 @@ public class FuelRepository {
                 .add("end_time",record.getEndTime())
                 .add("fuel_consumption",record.getFuelConsumption())
                 .add("farm_id",record.getFarmId())
+                .add("capacity",record.getCapacity())
+                .add("fuel_used",record.getFuelUsed())
                 .add("mileage",record.getMileage())
                 .add("reason_for_usage",record.getReasonForUsage())
                 .add("warehouse_item_id",record.getWarehouseItemId())
@@ -54,6 +56,8 @@ public class FuelRepository {
                 .addIfExists("fuel_consumption",record.getFuelConsumption())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("mileage",record.getMileage())
+                .addIfExists("fuel_used",record.getFuelUsed())
+                .addIfExists("capacity",record.getCapacity())
                 .addIfExists("reason_for_usage",record.getReasonForUsage())
                 .addIfExists("warehouse_item_id",record.getWarehouseItemId())
                 .addIfExists("user_id",record.getUserId())
@@ -113,6 +117,7 @@ public class FuelRepository {
           fuel.setFuelConsumption(rs.getString("fuel_consumption"));
           fuel.setFarmId(rs.getString("farm_id"));
           fuel.setMileage(rs.getString("mileage"));
+          fuel.setFuelUsed(rs.getString("fuel_used"));
           fuel.setReasonForUsage(rs.getString("reason_for_usage"));
           fuel.setCapacity(rs.getString("capacity"));
           fuel.setWarehouseItemId(rs.getString("warehouse_item_id"));
