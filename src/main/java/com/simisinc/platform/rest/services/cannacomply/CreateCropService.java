@@ -40,11 +40,13 @@ public class CreateCropService {
             String cropId = UUID.randomUUID().toString();
             crop.setId(cropId);
             //do a lookup of the block location
-            Block block = BlockRepository.findById(crop.getBlockId());
-            if(block == null) {
-                throw new Exception("Block could not be found when creating crop");
+            if(crop.getBlockId() != null) {
+                Block block = BlockRepository.findById(crop.getBlockId());
+                if(block == null) {
+                    throw new Exception("Block could not be found when creating crop");
+                }
+                crop.setBlockLocation(block.getBlockLocation());
             }
-            crop.setBlockLocation(block.getBlockLocation());
 
             CropRepository.add(crop);
 

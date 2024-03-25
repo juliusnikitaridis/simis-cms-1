@@ -32,6 +32,7 @@ public class Fuel extends Entity {
     private String warehouseItemId;
     private String userId;
     private String date;
+    private String fuelUsed;
 }
 
 
