@@ -5,6 +5,29 @@ X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
 Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
 ### API-ad757670-f1f8-4bcc-b879-3d511fbdc7b73
 
+
+### user julius-niki = farmer role
+POST https://cannacomply.connectmobiles24.com/api/cannacomply/CreateCropService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-049a21c8-382a-4557-a191-fc2a579108ee3
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "cropType": "dsfasdf",
+  "blockId": null
+}
+
+
+
+
+
+
+
+
+
+
+
 ###
 GET https://cannacomply.connectmobiles24.com/api/cannacomply/ContractListService?farmId=43a506c4-21b4-49a4-8f0e-b9f8022a2a88
 X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
@@ -53,7 +76,7 @@ Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 
 POST https://organicsimis.connectmobiles24.com/api/cannacomply/CreateFeedbackService
 X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
-Authorization:Bearer API-7fb0c867-04ca-4859-b086-ea39cddd222029
+Authorization:Bearer API-d14c7379-7acb-49eb-9423-88f5d6c3b70f3
 Content-Type: application/json
 Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 

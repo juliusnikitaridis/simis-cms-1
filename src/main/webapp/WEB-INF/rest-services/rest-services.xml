@@ -140,6 +140,10 @@
   <service method="post" endpoint="cannacomply/CreateFuelService" class="com.simisinc.platform.rest.services.cannacomply.CreateFuelService"/>
   <service method="post" endpoint="cannacomply/UpdateFuelService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFuelService"/>
   <service method="post" endpoint="cannacomply/FuelListService" class="com.simisinc.platform.rest.services.cannacomply.FuelListService"/>
+  <service method="post" endpoint="cannacomply/CreateFeedingRegimeService" class="com.simisinc.platform.rest.services.cannacomply.CreateFeedingRegimeService"/>
+  <service method="post" endpoint="cannacomply/FeedingRegimeListService" class="com.simisinc.platform.rest.services.cannacomply.FeedingRegimeListService"/>
+  <service method="post" endpoint="cannacomply/UpdateFeedingRegimeService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFeedingRegimeService"/>
+
 
 </services>
 
