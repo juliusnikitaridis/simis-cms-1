@@ -1,7 +1,6 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Crop;
-import com.simisinc.platform.domain.model.cannacomply.Farm;
 import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
@@ -26,6 +25,7 @@ public class CropRepository {
                 .add("block_id",record.getBlockId())
                 .add("pot_id",record.getPotId())
                 .add("status",record.getStatus())
+                .add("feeding_regime_id",record.getFeedingRegimeId())
                 .add("strain_name",record.getStrainName())
                 .add("seed_company",record.getSeedCompany())
                 .add("farm_id",record.getFarmId())
@@ -65,6 +65,7 @@ public class CropRepository {
                 .addIfExists("pot_id",record.getPotId())
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
+                .addIfExists("feeding_regime_id",record.getFeedingRegimeId())
                 .addIfExists("crop_label",record.getCropLabel())
                 .addIfExists("location_id",record.getLocationId())
                 .addIfExists("location_type",record.getLocationType())
@@ -136,6 +137,7 @@ public class CropRepository {
             crop.setLocationId(rs.getString("location_id"));
             crop.setLocationType(rs.getString("location_type"));
             crop.setPotId(rs.getString("pot_id"));
+            crop.setFeedingRegimeId(rs.getString("feeding_regime_id"));
             crop.setCropLabel(rs.getString("crop_label"));
             crop.setBarcodeData(rs.getString("barcode_data"));
             crop.setCreatedDate(rs.getString("created_date"));
