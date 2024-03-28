@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 public class FeedingRegimeRepository {
 
     private static Log LOG = LogFactory.getLog(FeedingRegimeRepository.class);
-    private static String TABLE_NAME = "cannacomply.fuel";
+    private static String TABLE_NAME = "cannacomply.feeding_regime";
     private static String[] PRIMARY_KEY = new String[]{"id"};
 
     public static FeedingRegime add(FeedingRegime record) throws Exception {
