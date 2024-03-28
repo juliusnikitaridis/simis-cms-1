@@ -23,6 +23,7 @@ public class CropRepository {
                 .add("block_location",record.getBlockLocation())
                 .add("growth_stage", record.getGrowthStage())
                 .add("block_id",record.getBlockId())
+                .add("feeding_regime_id",record.getFeedingRegimeId())
                 .add("status",record.getStatus())
                 .add("variety_name",record.getVarietyName())
                 .add("seed_company",record.getSeedCompany())
@@ -61,6 +62,7 @@ public class CropRepository {
                 .addIfExists("variety_name",record.getVarietyName())
                 .addIfExists("seed_company",record.getSeedCompany())
                 .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("feeding_regime_id",record.getFeedingRegimeId())
                 .addIfExists("block_location",record.getBlockLocation())
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
@@ -140,6 +142,7 @@ public class CropRepository {
             crop.setCreatedDate(rs.getString("created_date"));
             crop.setBlockId(rs.getString("block_id"));
             crop.setLastUpdated(rs.getString("last_updated"));
+            crop.setFeedingRegimeId(rs.getString("feeding_regime_id"));
             crop.setContractId(rs.getString("contract_id"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;
