@@ -48,16 +48,16 @@ public class WaterSourceRepository {
 
     public static void update(WaterSource record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-                .add("name", record.getName())
-                .add("optimal_readings_json", record.getOptimalReadingsJson())
-                .add("farm_id",record.getFarmId())
-                .add("date",record.getDate())
-                .add("type", record.getType())
-                .add("volume",record.getVolume())
-                .add("usage",record.getUsage())
-                .add("geo_data",record.getGeoData())
-                .add("units",record.getUnits())
-                .add("colour",record.getColour());
+                .addIfExists("name", record.getName())
+                .addIfExists("optimal_readings_json", record.getOptimalReadingsJson())
+                .addIfExists("farm_id",record.getFarmId())
+                .addIfExists("date",record.getDate())
+                .addIfExists("type", record.getType())
+                .addIfExists("volume",record.getVolume())
+                .addIfExists("usage",record.getUsage())
+                .addIfExists("geo_data",record.getGeoData())
+                .addIfExists("units",record.getUnits())
+                .addIfExists("colour",record.getColour());
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);

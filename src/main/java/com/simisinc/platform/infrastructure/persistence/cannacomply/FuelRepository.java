@@ -27,6 +27,8 @@ public class FuelRepository {
                 .add("capacity",record.getCapacity())
                 .add("fuel_used",record.getFuelUsed())
                 .add("mileage",record.getMileage())
+                .add("distance_units",record.getDistanceUnits())
+                .add("fuel_units",record.getFuelUnits())
                 .add("reason_for_usage",record.getReasonForUsage())
                 .add("warehouse_item_id",record.getWarehouseItemId())
                 .add("user_id",record.getUserId())
@@ -57,6 +59,8 @@ public class FuelRepository {
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("mileage",record.getMileage())
                 .addIfExists("fuel_used",record.getFuelUsed())
+                .addIfExists("distance_units",record.getDistanceUnits())
+                .addIfExists("fuel_units",record.getFuelUnits())
                 .addIfExists("capacity",record.getCapacity())
                 .addIfExists("reason_for_usage",record.getReasonForUsage())
                 .addIfExists("warehouse_item_id",record.getWarehouseItemId())
@@ -118,6 +122,8 @@ public class FuelRepository {
           fuel.setFarmId(rs.getString("farm_id"));
           fuel.setMileage(rs.getString("mileage"));
           fuel.setFuelUsed(rs.getString("fuel_used"));
+          fuel.setDistanceUnits(rs.getString("distance_units"));
+          fuel.setFuelUnits(rs.getString("fuel_units"));
           fuel.setReasonForUsage(rs.getString("reason_for_usage"));
           fuel.setCapacity(rs.getString("capacity"));
           fuel.setWarehouseItemId(rs.getString("warehouse_item_id"));
