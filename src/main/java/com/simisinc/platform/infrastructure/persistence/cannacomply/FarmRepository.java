@@ -23,6 +23,7 @@ public class FarmRepository {
                 .add("name", record.getName())
                 .add("latitude", record.getLatitude())
                 .add("longitude", record.getLongitude())
+                .add("production_unit_code",record.getProductionUnitCode())
                 .add("type",record.getType())
                 .add("location_data",record.getLocationData())
                 .add("logo_data",record.getLogoData())
@@ -50,6 +51,7 @@ public class FarmRepository {
                 .addIfExists("latitude", record.getLatitude())
                 .addIfExists("longitude", record.getLongitude())
                 .addIfExists("type",record.getType())
+                .addIfExists("production_unit_code",record.getProductionUnitCode())
                 .addIfExists("logo_data",record.getLogoData())
                 .addIfExists("location_data",record.getLocationData())
                 .addIfExists("user_id",record.getUserId())
@@ -110,6 +112,7 @@ public class FarmRepository {
             farm.setLatitude(rs.getString("latitude"));
             farm.setLongitude(rs.getString("longitude"));
             farm.setLogoData(rs.getString("logo_data"));
+            farm.setProductionUnitCode(rs.getString("production_unit_code"));
             farm.setName(rs.getString("name"));
             farm.setType(rs.getString("type"));
             farm.setAddress(rs.getString("address"));

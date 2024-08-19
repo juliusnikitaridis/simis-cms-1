@@ -39,6 +39,7 @@ public class Crop extends Entity {
     private String lastUpdated;
     private String potId;
     private String feedingRegimeId;
+    private String growthCycleId;
 }
 
 

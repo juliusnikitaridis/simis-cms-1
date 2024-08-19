@@ -14,4 +14,5 @@ public class ActivitySpecification {
     private String farmId;
     private String blockId;
     private String itemId;
+    private String locationId;
 }

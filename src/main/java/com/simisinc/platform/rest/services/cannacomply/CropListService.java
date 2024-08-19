@@ -34,6 +34,7 @@ public class CropListService {
             String cropId = context.getParameter("cropId");
             String farmId = context.getParameter("farmId");
             String blockId = context.getParameter("blockId");
+            String locationId = context.getParameter("locationId");
             String roomId = context.getParameter("roomId");
 
             CropSpecification specification = new CropSpecification();
@@ -49,6 +50,9 @@ public class CropListService {
             }
             if(roomId != null) {
                 specification.setRoomId(roomId);
+            }
+            if(locationId != null) {
+                specification.setLocationId(locationId);
             }
             List<Crop> cropList = (List<Crop>) CropRepository.query(specification, null).getRecords();
 

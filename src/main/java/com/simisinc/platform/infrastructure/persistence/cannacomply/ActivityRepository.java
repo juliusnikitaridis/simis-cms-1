@@ -93,6 +93,7 @@ public class ActivityRepository {
             where
                     .addIfExists("id = ?", specification.getId())
                     .addIfExists("block_id = ?",specification.getBlockId())
+                    .addIfExists("location_id = ?",specification.getLocationId())
                     .addIfExists("item_id = ?",specification.getItemId())
                     .addIfExists("farm_id = ?",specification.getFarmId());
 
