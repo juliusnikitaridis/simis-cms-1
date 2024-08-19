@@ -32,5 +32,6 @@ public class Supplier extends Entity {
     private String contactNo;
     private String contactTitle;
     private String site;
+    private String units;
     private String totalQuantity;
 }

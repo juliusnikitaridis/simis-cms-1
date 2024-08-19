@@ -26,6 +26,7 @@ public class ReadingRepository {
                 .add("device_id", record.getDeviceId())
                 .add("reading_type", record.getReadingType())
                 .add("reading_value", record.getReadingValue())
+                .add("location_type",record.getLocationType())
                 .add("status", record.getStatus())
                 .add("farm_id", record.getFarmId())
                 .add("action_taken", record.getActionTaken())
@@ -53,6 +54,7 @@ public class ReadingRepository {
                 .addIfExists("reading_type", record.getReadingType())
                 .addIfExists("reading_value", record.getReadingValue())
                 .addIfExists("status", record.getStatus())
+                .addIfExists("location_type",record.getLocationType())
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("action_taken", record.getActionTaken())
                 .addIfExists("user_id", record.getUserId());
@@ -155,6 +157,7 @@ public class ReadingRepository {
             reading.setReadingValue(rs.getString("reading_value"));
             reading.setStatus(rs.getString("status"));
             reading.setFarmId(rs.getString("farm_id"));
+            reading.setLocationType(rs.getString("location_type"));
             reading.setActionTaken(rs.getString("action_taken"));
             reading.setUserId(rs.getString("user_id"));
             return reading;

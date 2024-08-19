@@ -16,4 +16,5 @@ public class GrowthCycle extends Entity {
    private String farmId;
    private String yield;
    private String growthCycleName;
+   private String units;
 }

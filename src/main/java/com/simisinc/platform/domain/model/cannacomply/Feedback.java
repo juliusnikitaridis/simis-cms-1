@@ -11,6 +11,6 @@ public class Feedback extends Entity {
     private String id;
     private String farmId;
     private String userId;
-    private String comment;
+    private String comments;
     private String date;
 }

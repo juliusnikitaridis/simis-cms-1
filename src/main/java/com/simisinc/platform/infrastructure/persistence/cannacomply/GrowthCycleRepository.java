@@ -20,6 +20,7 @@ public class GrowthCycleRepository {
     public static GrowthCycle add(GrowthCycle record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
+                .add("units",record.getUnits())
                 .add("plants",record.getPlants())
                 .add("start_date",record.getStartDate())
                 .add("end_date",record.getEndDate())
@@ -49,6 +50,7 @@ public class GrowthCycleRepository {
                 .addIfExists("id", record.getId())
                 .addIfExists("plants",record.getPlants())
                 .addIfExists("start_date",record.getStartDate())
+                .addIfExists("units",record.getUnits())
                 .addIfExists("end_date",record.getEndDate())
                 .addIfExists("strain",record.getStrain())
                 .addIfExists("growth_cycle_name",record.getGrowthCycleName())
@@ -108,6 +110,7 @@ public class GrowthCycleRepository {
           cycle.setStrain(rs.getString("strain"));
           cycle.setFarmId(rs.getString("farm_id"));
           cycle.setYield(rs.getString("yield"));
+          cycle.setUnits(rs.getString("units"));
           cycle.setGrowthCycleName(rs.getString("growth_cycle_name"));
           cycle.setStartDate(rs.getString("start_date"));
           cycle.setEndDate(rs.getString("end_date"));

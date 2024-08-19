@@ -24,7 +24,7 @@ public class FeedbackRepository {
                 .add("id", record.getId())
                 .add("farm_id", record.getFarmId())
                 .add("user_id", record.getUserId())
-                .add("comment",record.getComment())
+                .add("comments",record.getComments())
                 .add("date",record.getDate());
 
         try (Connection connection = DB.getConnection();
@@ -46,7 +46,7 @@ public class FeedbackRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("user_id", record.getUserId())
-                .addIfExists("comment",record.getComment())
+                .addIfExists("comments",record.getComments())
                 .addIfExists("date",record.getDate());
 
             try (Connection connection = DB.getConnection();
@@ -91,7 +91,7 @@ public class FeedbackRepository {
             ws.setId(rs.getString("id"));
             ws.setFarmId(rs.getString("farm_id"));
             ws.setUserId(rs.getString("user_id"));
-            ws.setComment(rs.getString("comments"));
+            ws.setComments(rs.getString("comments"));
             ws.setDate(rs.getString("date"));
             return ws;
         } catch (Exception e) {

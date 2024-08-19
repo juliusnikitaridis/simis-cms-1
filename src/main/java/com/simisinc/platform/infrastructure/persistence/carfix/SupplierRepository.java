@@ -30,6 +30,7 @@ public class SupplierRepository {
                 .add("supplier_name", record.getSupplierName())
                 .add("product_name", record.getProductName())
                 .add("quantity",record.getQuantity())
+                .add("units",record.getUnits())
                 .add("expiry_date", record.getExpiryDate())
                 .add("receipt", record.getReceipt())
                 .add("type", record.getType())
@@ -68,6 +69,7 @@ public class SupplierRepository {
                 .addIfExists("receipt", record.getReceipt())
                 .addIfExists("type", record.getType())
                 .addIfExists("lot_number",record.getLotNumber())
+                .addIfExists("units",record.getUnits())
                 .addIfExists("container",record.getContainer())
                 .addIfExists("mass",record.getMass());
 
@@ -136,6 +138,7 @@ public class SupplierRepository {
             record.setEmail(rs.getString("email"));
             record.setSite(rs.getString("site"));
             record.setAddress(rs.getString("address"));
+            record.setUnits(rs.getString("units"));
             record.setTotalQuantity(rs.getString("total_quantity"));
             record.setType(rs.getString("type"));
             record.setLotNumber(rs.getString("lot_number"));

@@ -17,4 +17,5 @@ public class Reading extends Entity {
    private String farmId;
    private String actionTaken;
    private String userId;
+   private String locationType;
 }
