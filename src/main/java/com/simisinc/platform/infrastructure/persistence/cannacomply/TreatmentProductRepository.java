@@ -114,7 +114,7 @@ public class TreatmentProductRepository {
 
         TreatmentProduct product = new TreatmentProduct();
         try {
-            product.setProductId(rs.getString("id"));
+            product.setId(rs.getString("id"));
             product.setProductName(rs.getString("product_name"));
             product.setContainer(rs.getString("container"));
             product.setMass(rs.getString("mass"));
