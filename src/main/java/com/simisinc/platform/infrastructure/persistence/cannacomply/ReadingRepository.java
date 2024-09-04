@@ -23,6 +23,7 @@ public class ReadingRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("date", record.getDate())
+                .add("location_id",record.getLocationId())
                 .add("device_id", record.getDeviceId())
                 .add("reading_type", record.getReadingType())
                 .add("reading_value", record.getReadingValue())
@@ -54,6 +55,7 @@ public class ReadingRepository {
                 .addIfExists("reading_type", record.getReadingType())
                 .addIfExists("reading_value", record.getReadingValue())
                 .addIfExists("status", record.getStatus())
+                .addIfExists("location_id",record.getLocationId())
                 .addIfExists("location_type",record.getLocationType())
                 .addIfExists("farm_id", record.getFarmId())
                 .addIfExists("action_taken", record.getActionTaken())
@@ -88,6 +90,7 @@ public class ReadingRepository {
             where
                     .addIfExists("id = ?", specification.getId())
                     .addIfExists("farm_id = ?", specification.getFarmId())
+                    .addIfExists("location_id = ?",specification.getLocationId())
                     .addIfExists("device_id = ?", specification.getDeviceId());
 
         }
@@ -157,6 +160,7 @@ public class ReadingRepository {
             reading.setReadingValue(rs.getString("reading_value"));
             reading.setStatus(rs.getString("status"));
             reading.setFarmId(rs.getString("farm_id"));
+            reading.setLocationId(rs.getString("location_id"));
             reading.setLocationType(rs.getString("location_type"));
             reading.setActionTaken(rs.getString("action_taken"));
             reading.setUserId(rs.getString("user_id"));

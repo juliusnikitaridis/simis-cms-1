@@ -39,8 +39,6 @@ public class CreateReadingService {
             Reading reading = mapper.readValue(context.getJsonRequest(), Reading.class);
             String readingId = UUID.randomUUID().toString();
             reading.setId(readingId);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            reading.setDate(sdf.format(new Date()));
 
             ReadingRepository.add(reading);
 

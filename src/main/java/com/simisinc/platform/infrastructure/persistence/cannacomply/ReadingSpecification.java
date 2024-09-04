@@ -13,4 +13,5 @@ public class ReadingSpecification {
     private String id = null;
     private String deviceId = null;
     private String farmId = null;
+    private String locationId = null;
 }

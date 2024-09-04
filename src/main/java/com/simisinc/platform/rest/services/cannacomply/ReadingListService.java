@@ -31,6 +31,7 @@ public class ReadingListService {
             String readingId = context.getParameter("readingId");
             String deviceId = context.getParameter("deviceId");
             String farmId = context.getParameter("farmId");
+            String locationId = context.getParameter("locationId");
 
             ReadingSpecification specification = new ReadingSpecification();
 
@@ -43,7 +44,9 @@ public class ReadingListService {
             if(farmId != null) {
                 specification.setFarmId(farmId);
             }
-
+            if(locationId != null) {
+                specification.setLocationId(locationId);
+            }
             List<Reading> readingsList = (List<Reading>) ReadingRepository.query(specification, null).getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
