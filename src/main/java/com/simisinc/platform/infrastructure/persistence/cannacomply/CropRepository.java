@@ -37,6 +37,7 @@ public class CropRepository {
                 .add("location_id",record.getLocationId())
                 .add("location_type",record.getLocationType())
                 .add("last_updated",record.getLastUpdated())
+                .add("lot_number",record.getLotNumber())
                 .add("starting_plant_data",record.getStartingPlantData());
 
         try (Connection connection = DB.getConnection();
@@ -72,6 +73,7 @@ public class CropRepository {
                 .addIfExists("location_type",record.getLocationType())
                 .addIfExists("growth_cycle_id",record.getGrowthCycleId())
                 .addIfExists("last_updated",record.getLastUpdated())
+                .addIfExists("lot_number",record.getLotNumber())
                 .addIfExists("starting_plant_data",record.getStartingPlantData());
 
             try (Connection connection = DB.getConnection();
@@ -147,6 +149,7 @@ public class CropRepository {
             crop.setCreatedDate(rs.getString("created_date"));
             crop.setBlockId(rs.getString("block_id"));
             crop.setLastUpdated(rs.getString("last_updated"));
+            crop.setLotNumber(rs.getString("lot_number"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;
         } catch (Exception e) {

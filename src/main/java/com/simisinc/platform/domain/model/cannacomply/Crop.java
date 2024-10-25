@@ -40,6 +40,7 @@ public class Crop extends Entity {
     private String potId;
     private String feedingRegimeId;
     private String growthCycleId;
+    private String lotNumber;
 }
 
 

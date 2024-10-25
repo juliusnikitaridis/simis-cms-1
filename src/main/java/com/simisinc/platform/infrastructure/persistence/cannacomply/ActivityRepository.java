@@ -31,7 +31,8 @@ public class ActivityRepository {
                 .add("item_id",record.getItemId())
                 .add("location_type",record.getLocationType())
                 .add("location_id",record.getLocationId())
-                .add("status",record.getStatus());
+                .add("status",record.getStatus())
+                .add("lot_number",record.getLotNumber());
 
         try (Connection connection = DB.getConnection();
              AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -61,6 +62,7 @@ public class ActivityRepository {
                 .addIfExists("item_id",record.getItemId())
                 .addIfExists("location_type",record.getLocationType())
                 .addIfExists("location_id",record.getLocationId())
+                .addIfExists("lot_number",record.getLotNumber())
                 .addIfExists("status",record.getStatus());
 
             try (Connection connection = DB.getConnection();
@@ -130,6 +132,7 @@ public class ActivityRepository {
               activity.setLocationId(rs.getString("location_id"));
               activity.setLocationType(rs.getString("location_type"));
               activity.setDate(rs.getString("date"));
+              activity.setLotNumber(rs.getString("lot_number"));
 
             return activity;
         } catch (Exception e) {
