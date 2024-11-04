@@ -1,4 +1,4 @@
-package com.simisinc.platform.infrastructure.persistence.carfix;
+package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 
 import lombok.Getter;
@@ -13,4 +13,5 @@ public class YieldSpecification {
     private String cropId = null;
     private String id = null;
     private String farmId = null;
+    private String batchNumber = null;
 }

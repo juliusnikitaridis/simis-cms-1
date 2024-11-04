@@ -1,4 +1,4 @@
-package com.simisinc.platform.domain.model.carfix;
+package com.simisinc.platform.domain.model.cannacomply;
 
 import com.simisinc.platform.domain.model.Entity;
 import lombok.Getter;
@@ -20,7 +20,8 @@ public class Yield extends Entity {
     private String id = null;
     private String quantity = null;
     private String loss = null;
-    private String harvestBatchId = null;
+    private String containerNumber = null;
+    private String batchNumber = null;
     private String cropId = null;
     private String strain = null;
     private String date = null;

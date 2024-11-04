@@ -1,11 +1,10 @@
-package com.simisinc.platform.infrastructure.persistence.carfix;
+package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
-import com.simisinc.platform.domain.model.carfix.Vehicle;
-import com.simisinc.platform.domain.model.carfix.Yield;
+
+import com.simisinc.platform.domain.model.cannacomply.Yield;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -20,10 +19,11 @@ public class YieldRepository {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
                 .add("quantity", record.getQuantity())
+                .add("batch_number",record.getBatchNumber())
                 .add("loss", record.getLoss())
                 .add("notes", record.getNotes())
                 .add("farm_id",record.getFarmId())
-                .add("harvest_batch_id", record.getHarvestBatchId())
+                .add("container_number", record.getContainerNumber())
                 .add("location_id", record.getLocationId())
                 .add("crop_id", record.getCropId())
                 .add("stage",record.getStage())
@@ -56,8 +56,9 @@ public class YieldRepository {
                 .addIfExists("loss", record.getLoss())
                 .addIfExists("notes", record.getNotes())
                 .addIfExists("farm_id",record.getFarmId())
-                .addIfExists("harvest_batch_id", record.getHarvestBatchId())
+                .addIfExists("container_number", record.getContainerNumber())
                 .addIfExists("location_id", record.getLocationId())
+                .addIfExists("batch_number",record.getBatchNumber())
                 .addIfExists("crop_id", record.getCropId())
                 .addIfExists("strain", record.getStrain())
                 .addIfExists("last_updated",record.getLastUpdated())
@@ -83,9 +84,9 @@ public class YieldRepository {
     }
 
 
-    public static Vehicle findById(String id) {
+    public static Yield findById(String id) {
 
-        return (Vehicle) DB.selectRecordFrom(
+        return (Yield) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 YieldRepository::buildRecord);
     }
@@ -99,6 +100,7 @@ public class YieldRepository {
             where
                     .addIfExists("id = ?", specification.getId())
                     .addIfExists("farm_id = ?",specification.getFarmId())
+                    .addIfExists("batch_number = ?",specification.getBatchNumber())
                     .addIfExists("crop_id = ?",specification.getCropId());
 
         }
@@ -128,8 +130,9 @@ public class YieldRepository {
             record.setNotes(rs.getString("notes"));
             record.setWetWeight(rs.getString("wet_weight"));
             record.setUserId(rs.getString("user_id"));
-            record.setHarvestBatchId(rs.getString("harvest_batch_id"));
+            record.setContainerNumber(rs.getString("container_number"));
             record.setLocationId(rs.getString("location_id"));
+            record.setBatchNumber(rs.getString("batch_number"));
             record.setCropId(rs.getString("crop_id"));
             record.setDate(rs.getString("date"));
             record.setLastUpdated(rs.getString("last_updated"));
