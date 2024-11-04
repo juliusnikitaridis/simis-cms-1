@@ -9,9 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class YieldSpecification {
-    private String cropId = null;
+public class HarvestSpecification {
+    private String containerNumber = null;
     private String id = null;
     private String farmId = null;
-    private String containerNumber = null;
+    private String batchNumber = null;
 }
