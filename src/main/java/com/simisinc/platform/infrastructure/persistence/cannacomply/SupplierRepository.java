@@ -1,15 +1,12 @@
-package com.simisinc.platform.infrastructure.persistence.carfix;
+package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
-import com.simisinc.platform.domain.model.carfix.Supplier;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
-import com.simisinc.platform.domain.model.carfix.Yield;
+
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
-
+import com.simisinc.platform.domain.model.cannacomply.Supplier;
 
 public class SupplierRepository {
 
@@ -88,9 +85,9 @@ public class SupplierRepository {
     }
 
 
-    public static Vehicle findById(String id) {
+    public static Supplier findById(String id) {
 
-        return (Vehicle) DB.selectRecordFrom(
+        return (Supplier) DB.selectRecordFrom(
                 TABLE_NAME, new SqlUtils().add("id = ?", id),
                 SupplierRepository::buildRecord);
     }

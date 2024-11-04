@@ -1,4 +1,4 @@
-package com.simisinc.platform.domain.model.carfix;
+package com.simisinc.platform.domain.model.cannacomply;
 
 import com.simisinc.platform.domain.model.Entity;
 import lombok.Getter;

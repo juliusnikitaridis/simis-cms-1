@@ -1,8 +1,9 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
-import com.simisinc.platform.domain.model.carfix.Supplier;
-import com.simisinc.platform.infrastructure.persistence.carfix.SupplierRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.SupplierSpecification;
+
+import com.simisinc.platform.domain.model.cannacomply.Supplier;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.SupplierRepository;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.SupplierSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;

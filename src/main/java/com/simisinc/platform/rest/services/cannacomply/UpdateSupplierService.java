@@ -1,10 +1,8 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.cannacomply.Packaging;
-import com.simisinc.platform.domain.model.carfix.Supplier;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.PackageRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.SupplierRepository;
+import com.simisinc.platform.domain.model.cannacomply.Supplier;
+import com.simisinc.platform.infrastructure.persistence.cannacomply.SupplierRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;

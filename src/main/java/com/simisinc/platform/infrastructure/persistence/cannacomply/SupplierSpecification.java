@@ -1,4 +1,4 @@
-package com.simisinc.platform.infrastructure.persistence.carfix;
+package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 
 import lombok.Getter;
