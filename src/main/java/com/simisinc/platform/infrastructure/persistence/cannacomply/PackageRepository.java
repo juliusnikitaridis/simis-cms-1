@@ -2,7 +2,6 @@ package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 
 import com.simisinc.platform.domain.model.cannacomply.Packaging;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,12 +71,6 @@ public class PackageRepository {
     }
 
 
-    public static Vehicle findById(String id) {
-
-        return (Vehicle) DB.selectRecordFrom(
-                TABLE_NAME, new SqlUtils().add("id = ?", id),
-                PackageRepository::buildRecord);
-    }
 
 
     public static DataResult query(PackagingSpecification specification, DataConstraints constraints) {

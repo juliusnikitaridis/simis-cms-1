@@ -1,7 +1,6 @@
 package com.simisinc.platform.domain.model.cannacomply;
 
 import com.simisinc.platform.domain.model.Entity;
-import com.simisinc.platform.domain.model.carfix.QuoteItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

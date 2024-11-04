@@ -1,13 +1,10 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 
-import com.simisinc.platform.domain.model.cannacomply.SoilManagement;
 import com.simisinc.platform.domain.model.cannacomply.SoilPot;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 

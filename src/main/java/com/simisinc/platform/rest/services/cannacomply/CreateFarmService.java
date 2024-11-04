@@ -2,10 +2,7 @@ package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.domain.model.cannacomply.Farm;
-import com.simisinc.platform.domain.model.carfix.Quote;
-import com.simisinc.platform.domain.model.carfix.QuoteItem;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.QuoteRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;

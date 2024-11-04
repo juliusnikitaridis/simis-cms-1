@@ -1,16 +1,12 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Farm;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.FarmSpecification;
-import com.simisinc.platform.infrastructure.persistence.carfix.VehicleRepository;
-import com.simisinc.platform.infrastructure.persistence.carfix.VehicleSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
 import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
-import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

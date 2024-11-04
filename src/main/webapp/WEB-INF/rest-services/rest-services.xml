@@ -144,6 +144,9 @@
   <service method="post" endpoint="cannacomply/FeedingRegimeListService" class="com.simisinc.platform.rest.services.cannacomply.FeedingRegimeListService"/>
   <service method="post" endpoint="cannacomply/UpdateFeedingRegimeService" class="com.simisinc.platform.rest.services.cannacomply.UpdateFeedingRegimeService"/>
   <service method="post" endpoint="cannacomply/UpdateTreatmentService" class="com.simisinc.platform.rest.services.cannacomply.UpdateTreatmentService"/>
+  <service method="post" endpoint="cannacomply/CreateHarvestService" class="com.simisinc.platform.rest.services.cannacomply.CreateHarvestService"/>
+  <service method="post" endpoint="cannacomply/UpdateHarvestService" class="com.simisinc.platform.rest.services.cannacomply.UpdateHarvestService"/>
+  <service method="post" endpoint="cannacomply/HarvestListService" class="com.simisinc.platform.rest.services.cannacomply.HarvestListService"/>
 
 
 </services>

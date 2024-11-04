@@ -2,12 +2,9 @@ package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 
 import com.simisinc.platform.domain.model.cannacomply.SoilManagement;
-import com.simisinc.platform.domain.model.cannacomply.Strain;
-import com.simisinc.platform.domain.model.carfix.Vehicle;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -74,12 +71,6 @@ public class SoilManagementRepository {
     }
 
 
-    public static Vehicle findById(String id) {
-
-        return (Vehicle) DB.selectRecordFrom(
-                TABLE_NAME, new SqlUtils().add("id = ?", id),
-                SoilManagementRepository::buildRecord);
-    }
 
 
     public static DataResult query(SoilManagementSpecification specification) {
