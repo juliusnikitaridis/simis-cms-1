@@ -1,7 +1,7 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.carfix.TreatmentProduct;
+import com.simisinc.platform.domain.model.cannacomply.TreatmentProduct;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.TreatmentProductRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;

@@ -1,9 +1,8 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Issue;
-import com.simisinc.platform.domain.model.carfix.TreatmentProduct;
+import com.simisinc.platform.domain.model.cannacomply.TreatmentProduct;
 import com.simisinc.platform.infrastructure.database.*;
-import com.simisinc.platform.infrastructure.persistence.carfix.TreatmentProductSpecification;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
