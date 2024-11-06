@@ -1,7 +1,7 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.cannacomply.Harvest;
+import com.simisinc.platform.domain.model.cannacomply.Yield;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.HarvestRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
@@ -32,16 +32,18 @@ public class UpdateHarvestService {
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            Harvest item = mapper.readValue(context.getJsonRequest(), Harvest.class);
-            if(item.getBatchNumber() == null) {
-                throw new Exception("batchNumber parameter is mandatory when calling update");
+            Yield item = mapper.readValue(context.getJsonRequest(), Yield.class);
+            if(item.getContainerNumber() == null) {
+                throw new Exception("containerNumber parameter is mandatory when calling update");
             }
             //always re-calculate the totals when calling this update service
-            CreateHarvestService.calculateAmountsFromYieldRecords(item.getBatchNumber(),item);
+
+            //allow these totals to be updated and not re-calculated - comment out the line below.
+            //CreateHarvestService.calculateAmountsFromYieldRecords(item.getContainerNumber(),item);
             HarvestRepository.update(item);
 
             ServiceResponse response = new ServiceResponse(200);
-            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Yield has been updated");}};
+            ArrayList<String> responseMessage = new ArrayList<String>(){{add("Harvest has been updated");}};
             response.setData(responseMessage);
             return response;
 

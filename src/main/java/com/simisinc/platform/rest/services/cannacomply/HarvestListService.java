@@ -1,11 +1,9 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
-import com.simisinc.platform.domain.model.cannacomply.Harvest;
+
 import com.simisinc.platform.domain.model.cannacomply.Yield;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.HarvestRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.HarvestSpecification;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.YieldRepository;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.YieldSpecification;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.controller.ServiceResponseCommand;
@@ -44,7 +42,7 @@ public class HarvestListService {
             } else if (null != batchNumber) {
                 specification.setBatchNumber(batchNumber);
             }
-            List<Harvest> yieldList = (List<Harvest>) HarvestRepository.query(specification, null).getRecords();
+            List<Yield> yieldList = (List<Yield>) HarvestRepository.query(specification, null).getRecords();
 
             ServiceResponse response = new ServiceResponse(200);
             ServiceResponseCommand.addMeta(response, "Harvest List", yieldList, null);

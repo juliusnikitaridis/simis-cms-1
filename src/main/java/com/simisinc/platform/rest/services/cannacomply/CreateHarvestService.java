@@ -1,7 +1,6 @@
 package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simisinc.platform.domain.model.cannacomply.Harvest;
 import com.simisinc.platform.domain.model.cannacomply.Yield;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.HarvestRepository;
 import com.simisinc.platform.infrastructure.persistence.cannacomply.YieldRepository;
@@ -12,10 +11,8 @@ import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 
@@ -37,12 +34,14 @@ public class CreateHarvestService {
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            Harvest harvest = mapper.readValue(context.getJsonRequest(), Harvest.class);
-            harvest.setId(UUID.randomUUID().toString());
+            Yield harvest = mapper.readValue(context.getJsonRequest(), Yield.class);
+            YieldSpecification spec = new YieldSpecification();
+            spec.setContainerNumber(harvest.getContainerNumber());
+            Yield yieldRecord = (Yield) YieldRepository.query(spec,null).getRecords().get(0);
+            yieldRecord.setIsMixed(harvest.getIsMixed());
+            calculateAmountsFromYieldRecords(harvest.getContainerNumber(),yieldRecord);
 
-            calculateAmountsFromYieldRecords(harvest.getContainerNumber(),harvest);
-
-            HarvestRepository.add(harvest);
+            HarvestRepository.add(yieldRecord);
 
 
             ServiceResponse response = new ServiceResponse(200);
@@ -59,7 +58,7 @@ public class CreateHarvestService {
     }
 
     //add up everything from all the records in the harvest table
-    public static void calculateAmountsFromYieldRecords(String containerNumber, Harvest harvestDto) throws Exception {
+    public static void calculateAmountsFromYieldRecords(String containerNumber, Yield yieldDto) throws Exception {
         YieldSpecification specification = new YieldSpecification();
         specification.setContainerNumber(containerNumber);
         List<Yield> yieldRecords = (List<Yield>) YieldRepository.query(specification, null).getRecords();
@@ -76,8 +75,8 @@ public class CreateHarvestService {
             totalLoss.updateAndGet(x -> x + Double.valueOf(yield.getLoss()));
         });
 
-        harvestDto.setQuantity(totalQuantity.toString());
-        harvestDto.setWetWeight(totalWetWeight.toString());
-        harvestDto.setLoss(totalLoss.toString());
+        yieldDto.setQuantity(totalQuantity.toString());
+        yieldDto.setWetWeight(totalWetWeight.toString());
+        yieldDto.setLoss(totalLoss.toString());
     }
 }

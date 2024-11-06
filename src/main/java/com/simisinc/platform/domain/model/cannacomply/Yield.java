@@ -34,4 +34,6 @@ public class Yield extends Entity {
     private String harvestedItem;
     private String lastUpdated;
     private String locationId;
+    private String isMixed;
+
 }

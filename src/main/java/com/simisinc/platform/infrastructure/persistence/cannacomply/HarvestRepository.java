@@ -1,11 +1,10 @@
 package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
-import com.simisinc.platform.domain.model.cannacomply.Harvest;
+
 import com.simisinc.platform.domain.model.cannacomply.Yield;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -16,12 +15,12 @@ public class HarvestRepository {
     private static String TABLE_NAME = "cannacomply.harvest";
     private static String[] PRIMARY_KEY = new String[]{"id"};
 
-    public static Harvest add(Harvest record) throws Exception {
+    public static Yield add(Yield record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
-//                .add("quantity", record.getQuantity())
+                .add("quantity", record.getQuantity())
                 .add("batch_number",record.getBatchNumber())
-//                .add("loss", record.getLoss())
+                .add("loss", record.getLoss())
                 .add("notes", record.getNotes())
                 .add("farm_id",record.getFarmId())
                 .add("container_number", record.getContainerNumber())
@@ -32,9 +31,9 @@ public class HarvestRepository {
                 .add("harvested_item",record.getHarvestedItem())
                 .add("strain", record.getStrain())
                 .add("from_block_id",record.getFromBlockId())
-//                .add("wet_weight",record.getWetWeight())
+                .add("wet_weight",record.getWetWeight())
                 .add("user_id",record.getUserId())
-                .add("isMixed",record.getIsMixed())
+                .add("is_mixed",record.getIsMixed())
                 .add("date", record.getDate());
 
         try (Connection connection = DB.getConnection();
@@ -52,10 +51,10 @@ public class HarvestRepository {
     }
 
 
-    public static void update(Harvest record) throws Exception {
+    public static void update(Yield record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
-//                .addIfExists("quantity", record.getQuantity())
-//                .addIfExists("loss", record.getLoss())
+                .addIfExists("quantity", record.getQuantity())
+                .addIfExists("loss", record.getLoss())
                 .addIfExists("notes", record.getNotes())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("container_number", record.getContainerNumber())
@@ -65,11 +64,11 @@ public class HarvestRepository {
                 .addIfExists("strain", record.getStrain())
                 .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("harvested_item",record.getHarvestedItem())
-//                .addIfExists("wet_weight",record.getWetWeight())
+                .addIfExists("wet_weight",record.getWetWeight())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("stage",record.getStage())
                 .addIfExists("from_block_id",record.getFromBlockId())
-                .addIfExists("isMixed",record.getIsMixed())
+                .addIfExists("is_mixed",record.getIsMixed())
                 .addIfExists("date", record.getDate());
 
 
@@ -122,9 +121,9 @@ public class HarvestRepository {
     }
 
 
-    private static Harvest buildRecord(ResultSet rs) {
+    private static Yield buildRecord(ResultSet rs) {
 
-        Harvest record = new Harvest();
+        Yield record = new Yield();
         try {
             record.setId(rs.getString("id"));
             record.setQuantity(rs.getString("quantity"));
@@ -143,10 +142,10 @@ public class HarvestRepository {
             record.setFarmId(rs.getString("farm_id"));
             record.setFromBlockId(rs.getString("from_block_id"));
             record.setStrain(rs.getString("strain"));
-            record.setIsMixed(rs.getString("isMixed"));
+            record.setIsMixed(rs.getString("is_mixed"));
             return record;
         } catch (Exception e) {
-            LOG.error("exception when building record for yield" + e.getMessage());
+            LOG.error("exception when building record for harvest" + e.getMessage());
             return null;
         }
     }

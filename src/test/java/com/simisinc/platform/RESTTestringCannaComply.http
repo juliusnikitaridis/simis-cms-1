@@ -30,8 +30,8 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8080/api/cannacomply/CreateYieldService
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-957e93dc-30e9-4511-a3d6-3e95f0cd0f151
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
 Content-Type: application/json
 
 {
@@ -46,6 +46,45 @@ Content-Type: application/json
   "date": "11112332"
 }
 ###
+POST http://localhost:8080/api/cannacomply/CreateHarvestService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "containerNumber": "greenhaze2407202414:32",
+  "isMixed": "false"
+}
+###
+
+GET http://localhost:8080/api/cannacomply/HarvestListService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "farmId": "fe781918-0117-400b-b9fd-3994bed157fb"
+}
+###
+
+POST http://localhost:8080/api/cannacomply/UpdateHarvestService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "354cfb63-1a6e-4fa4-a6b7-1b97481c88e3",
+  "containerNumber": "greenhaze2407202414:32",
+  "isMixed": "true22"
+}
+###
+
+
+
+
 
 ###
 GET http://localhost:8080/api/cannacomply/CropListService
