@@ -33,9 +33,9 @@ public class UpdateHarvestService {
 
             ObjectMapper mapper = new ObjectMapper();
             Yield item = mapper.readValue(context.getJsonRequest(), Yield.class);
-            if(item.getContainerNumber() == null) {
-                throw new Exception("containerNumber parameter is mandatory when calling update");
-            }
+//            if(item.getContainerNumber() == null) {
+//                throw new Exception("containerNumber parameter is mandatory when calling update");
+//            }
             //always re-calculate the totals when calling this update service
 
             //allow these totals to be updated and not re-calculated - comment out the line below.
