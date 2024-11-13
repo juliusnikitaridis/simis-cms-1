@@ -2,19 +2,19 @@ package com.simisinc.platform.rest.services.cannacomply;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simisinc.platform.application.admin.LoadSitePropertyCommand;
-import com.simisinc.platform.domain.model.cannacomply.Hygiene;
-import com.simisinc.platform.infrastructure.persistence.cannacomply.HygieneRepository;
 import com.simisinc.platform.rest.controller.ServiceContext;
 import com.simisinc.platform.rest.controller.ServiceResponse;
 import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import lombok.Data;
-import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.util.ArrayList;
-import java.util.UUID;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Julius Nikitaridis
@@ -45,29 +45,38 @@ public class GetPowerBiAuthTokenService {
 
     public ApiResponse getToken() throws Exception {
 
-        String clientId =LoadSitePropertyCommand.loadByName("powerbi.client.id");
+        String clientId = LoadSitePropertyCommand.loadByName("powerbi.client.id");
         String clientSecret = LoadSitePropertyCommand.loadByName("powerbi.client.secret");
         String clientUrl = LoadSitePropertyCommand.loadByName("powerbi.client.url");
         String cookie = LoadSitePropertyCommand.loadByName("powerbi.client.cookie");
 
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        HttpClient client = HttpClient.newHttpClient();
+
+        // Construct the form data as a URL-encoded string
+        String formData = Map.of(
+                        "client_id", clientId,
+                        "scope", "https://analysis.windows.net/powerbi/api/.default",
+                        "grant_type", "client_credentials",
+                        "client_secret", clientSecret
+                ).entrySet().stream()
+                .map(entry -> entry.getKey() + "=" + entry.getValue())
+                .collect(Collectors.joining("&"));
+
+        // Build HttpRequest
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(clientUrl))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("Cookie", cookie)
+                .POST(HttpRequest.BodyPublishers.ofString(formData))
                 .build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("client_id", clientId)
-                .addFormDataPart("scope", "https://analysis.windows.net/powerbi/api/.default")
-                .addFormDataPart("grant_type", "client_credentials")
-                .addFormDataPart("client_secret", clientSecret)
-                .build();
-        Request request = new Request.Builder()
-                .url(clientUrl)
-                .method("POST", body)
-                .addHeader("Cookie", cookie)
-                .build();
-        Response response = client.newCall(request).execute();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Status Code: " + response.statusCode());
+        System.out.println("Response Body: " + response.body());
+
 
         ObjectMapper mapper = new ObjectMapper();
-        ApiResponse apiResponse = mapper.readValue(response.body().string(),ApiResponse.class);
+        ApiResponse apiResponse = mapper.readValue(response.body(), ApiResponse.class);
         return apiResponse;
     }
 

@@ -96,9 +96,10 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 
 ###
 GET http://localhost:8080/api/cannacomply/BlogListService
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-6774641f-2ad2-4d30-be0e-ea281b88a7ff1
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
 Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 ###
 
 ###
@@ -1024,10 +1025,10 @@ Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
 
 ###
 GET http://localhost:8080/api/cannacomply/GetPowerBiAuthTokenService
-X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
-Authorization:Bearer API-dd6b62df-6bbf-4486-be79-17ac65ca67301
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
 Content-Type: application/json
-Farm-Id:c96f40ee-d211-4075-8d37-635febe1e3f4
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 ###
 
 ###

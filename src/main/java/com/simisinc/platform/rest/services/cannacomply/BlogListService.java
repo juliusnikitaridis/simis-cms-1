@@ -9,19 +9,22 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import lombok.Getter;
 import lombok.Setter;
-import okhttp3.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author Julius Nikitaridis
  * @created 25/04/23 11:28 AM
  */
+
+@Slf4j
 public class BlogListService {
 
     private static Log LOG = LogFactory.getLog(BlogListService.class);
@@ -32,16 +35,16 @@ public class BlogListService {
 
             String xmlContentFromOneView = getContentFfromOneView();
             XStream xstream = new XStream();
-           // xstream.addImplicitCollection(channel.class,"contactDetailsList");
+            // xstream.addImplicitCollection(channel.class,"contactDetailsList");
             xstream.processAnnotations(rss.class);
             xstream.allowTypesByWildcard(new String[]{"com.simisinc.platform.rest.services.cannacomply.**"});
             xstream.ignoreUnknownElements();
             xstream.useAttributeFor(Media.class, "url");
-            rss channelList = (rss)xstream.fromXML(xmlContentFromOneView);
+            rss channelList = (rss) xstream.fromXML(xmlContentFromOneView);
 
             channel chennel = channelList.getChannel();
             List<BlogServiceResponse> blogs = new ArrayList<>();
-            chennel.getItem().stream().forEach(x-> {
+            chennel.getItem().stream().forEach(x -> {
                 BlogServiceResponse item = new BlogServiceResponse();
                 item.setContent(x.getContent());
                 item.setDescription(x.getDescription());
@@ -66,18 +69,21 @@ public class BlogListService {
     }
 
     public String getContentFfromOneView() throws Exception {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://app.ddc-as.com/rv/alertfeed/rss_2.0?projectId=92F6041E-6A3F-3A93-F9C9-D12EFAF89D48"))
+                .GET() // use .POST(HttpRequest.BodyPublishers.ofString("data")) for a POST request
                 .build();
 
-        Request request = new Request.Builder()
-                .url("https://app.ddc-as.com/rv/alertfeed/rss_2.0?projectId=92F6041E-6A3F-3A93-F9C9-D12EFAF89D48")
-                .build();
-        Response response = client.newCall(request).execute();
-        String responseString = response.body().string();
-        return responseString;
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        log.info("Response status code: " + response.statusCode());
+        log.info("Response body: " + response.body());
+
+        return response.body();
     }
 }
-
 
 
 @Getter

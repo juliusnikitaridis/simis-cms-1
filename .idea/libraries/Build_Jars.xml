@@ -34,7 +34,7 @@
       <root url="file://$PROJECT_DIR$/lib/build/xstream" />
       <root url="file://$PROJECT_DIR$/lib/build/jmail" />
       <root url="file://$PROJECT_DIR$/lib/build/httpClient" />
-      <root url="file://$PROJECT_DIR$/lib/build/okhttpclient" />
+      <root url="file://$PROJECT_DIR$/lib/build/xstream" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -62,7 +62,6 @@
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/jsoup" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/jstl" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/libphonenumber" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/lib/build/okhttpclient" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/postgresql" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/pushy" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/restfb" recursive="false" />
@@ -73,6 +72,7 @@
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/thymeleaf" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/timeago" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/uniVocity-parsers" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/build/xstream" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/build/xstream" recursive="false" />
   </library>
 </component>

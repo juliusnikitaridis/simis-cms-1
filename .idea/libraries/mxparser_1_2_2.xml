@@ -4,8 +4,10 @@
       <root url="jar://$PROJECT_DIR$/lib/build/xstream/mxparser-1.2.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/build/xstream/xmlpull-1.1.3.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/build/xstream/xstream-1.4.20.jar!/" />
+      <root url="file://$PROJECT_DIR$/lib/build/okhttpclient" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/build/okhttpclient" recursive="false" />
   </library>
 </component>
