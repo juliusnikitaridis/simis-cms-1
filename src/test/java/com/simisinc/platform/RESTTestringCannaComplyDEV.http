@@ -18,6 +18,13 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
   "blockId": null
 }
 
+###
+GET http://localhost:8080/api/cannacomply/GetPowerBiAuthTokenService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-34ea63f4-0127-4177-8a04-fd60b59526f63
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
 
 
 
@@ -271,9 +278,15 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 }
 
 ###
-GET https://cannacomply.connectmobiles24.com/api/cannacomply/GetPowerBiAuthTokenService
+GET https://cannacomply.co/api/cannacomply/GetPowerBiAuthTokenService
 X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
-Authorization:Bearer API-78b5502e-2c4a-4ac6-8ae0-52099f4c6bb93
+Authorization:Bearer API-442825cc-cc67-4817-8b68-347f5135c2103
 Content-Type: application/json
-Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+Farm-id:cbdff343-5b30-4a50-9382-95f455f15d9d
 ###
+
+### dcd673bb-6f82-43c5-979c-df30da062562
+POST  https://cannacomply.co/api/oauth2/authorize
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+### API-ad757670-f1f8-4bcc-b879-3d511fbdc7b73

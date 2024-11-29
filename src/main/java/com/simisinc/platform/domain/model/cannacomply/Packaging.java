@@ -27,6 +27,10 @@ public class Packaging extends Entity {
     private String harvestId;
     private String lastUpdated;
     private String userId;
+    private String budSize;
+    private String containerType;
+    private String stage;
+
 }
 
 

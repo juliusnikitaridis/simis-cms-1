@@ -27,6 +27,9 @@ public class PackageRepository {
                 .add("last_updated",record.getLastUpdated())
                 .add("status",record.getStatus())
                 .add("date",record.getDate())
+                .add("bud_size",record.getBudSize())
+                .add("container_type",record.getContainerType())
+                .add("stage",record.getStage())
                 .add("harvest_id",record.getHarvestId());
 
         try (Connection connection = DB.getConnection();
@@ -55,6 +58,9 @@ public class PackageRepository {
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("date",record.getDate())
+                .addIfExists("bud_size",record.getBudSize())
+                .addIfExists("container_type",record.getContainerType())
+                .addIfExists("stage",record.getStage())
                 .addIfExists("harvest_id",record.getHarvestId());
 
             try (Connection connection = DB.getConnection();
@@ -110,6 +116,9 @@ public class PackageRepository {
             pack.setLastUpdated(rs.getString("last_updated"));
             pack.setLocation(rs.getString("location"));
             pack.setStatus(rs.getString("status"));
+            pack.setContainerType(rs.getString(("container_type")));
+            pack.setStage(rs.getString("stage"));
+            pack.setBudSize(rs.getString("bud_size"));
             pack.setDate(rs.getString("date"));
             pack.setHarvestId(rs.getString("harvest_id"));
 
