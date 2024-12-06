@@ -33,6 +33,7 @@ public class YieldRepository {
                 .add("from_block_id",record.getFromBlockId())
                 .add("wet_weight",record.getWetWeight())
                 .add("user_id",record.getUserId())
+                .add("moisture_loss",record.getMoistureLoss())
                 .add("date", record.getDate());
 
         try (Connection connection = DB.getConnection();
@@ -61,6 +62,7 @@ public class YieldRepository {
                 .addIfExists("batch_number",record.getBatchNumber())
                 .addIfExists("crop_id", record.getCropId())
                 .addIfExists("strain", record.getStrain())
+                .addIfExists("moisture_loss",record.getMoistureLoss())
                 .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("harvested_item",record.getHarvestedItem())
                 .addIfExists("wet_weight",record.getWetWeight())
@@ -138,6 +140,7 @@ public class YieldRepository {
             record.setLastUpdated(rs.getString("last_updated"));
             record.setHarvestedItem(rs.getString("harvested_item"));
             record.setFarmId(rs.getString("farm_id"));
+            record.setMoistureLoss(rs.getString("moisture_loss"));
             record.setFromBlockId(rs.getString("from_block_id"));
             record.setStrain(rs.getString("strain"));
             return record;

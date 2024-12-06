@@ -26,6 +26,7 @@ public class PackageRepository {
                 .add("user_id",record.getUserId())
                 .add("last_updated",record.getLastUpdated())
                 .add("status",record.getStatus())
+                .add("moisture_loss",record.getMoistureLoss())
                 .add("date",record.getDate())
                 .add("bud_size",record.getBudSize())
                 .add("container_type",record.getContainerType())
@@ -56,6 +57,7 @@ public class PackageRepository {
                 .addIfExists("location",record.getLocation())
                 .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("user_id",record.getUserId())
+                .addIfExists("moisture_loss",record.getMoistureLoss())
                 .addIfExists("status",record.getStatus())
                 .addIfExists("date",record.getDate())
                 .addIfExists("bud_size",record.getBudSize())
@@ -116,6 +118,7 @@ public class PackageRepository {
             pack.setLastUpdated(rs.getString("last_updated"));
             pack.setLocation(rs.getString("location"));
             pack.setStatus(rs.getString("status"));
+            pack.setMoistureLoss(rs.getString("moisture_loss"));
             pack.setContainerType(rs.getString(("container_type")));
             pack.setStage(rs.getString("stage"));
             pack.setBudSize(rs.getString("bud_size"));

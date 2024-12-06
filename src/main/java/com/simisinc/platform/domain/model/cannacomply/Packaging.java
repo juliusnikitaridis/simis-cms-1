@@ -29,6 +29,7 @@ public class Packaging extends Entity {
     private String userId;
     private String budSize;
     private String containerType;
+    private String moistureLoss;
     private String stage;
 
 }

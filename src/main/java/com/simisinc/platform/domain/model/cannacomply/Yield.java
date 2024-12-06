@@ -35,5 +35,6 @@ public class Yield extends Entity {
     private String lastUpdated;
     private String locationId;
     private String isMixed;
+    private String moistureLoss;
 
 }
