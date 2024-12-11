@@ -211,6 +211,35 @@ Content-Type: application/json
 ###
 
 ###
+POST http://localhost:8080/api/cannacomply/CreatePackageTotalsService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-68449553-d4d8-4549-b89f-8be78b9643293
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "packageTag": "z00012321",
+  "farmId": "43a506c4-21b4-49a4-8f0e-b9f8022a2a88"
+}
+###
+
+###
+GET http://localhost:8080/api/cannacomply/PackagingTotalsListService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-68449553-d4d8-4549-b89f-8be78b9643293
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "farmId": "43a506c4-21b4-49a4-8f0e-b9f8022a2a88"
+}
+###
+
+
+
+
+
+###
 POST http://localhost:8080/api/cannacomply/UpdatePackagingService
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
 Authorization:Bearer API-bb308df9-83a7-4f8c-967b-b577fcce39681

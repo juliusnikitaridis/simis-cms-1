@@ -12,4 +12,5 @@ import lombok.Setter;
 public class PackagingSpecification {
     private String id = null;
     private String farmId = null;
+    private String packageTag = null;
 }

@@ -5,14 +5,15 @@ import com.simisinc.platform.domain.model.cannacomply.Packaging;
 import com.simisinc.platform.infrastructure.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 
 
-public class PackageRepository {
+public class PackagingTotalsRepository {
 
-    private static Log LOG = LogFactory.getLog(PackageRepository.class);
-    private static String TABLE_NAME = "cannacomply.packaging";
+    private static Log LOG = LogFactory.getLog(PackagingTotalsRepository.class);
+    private static String TABLE_NAME = "cannacomply.packaging_totals";
     private static String[] PRIMARY_KEY = new String[]{"id"};
 
     public static Packaging add(Packaging record) throws Exception {
@@ -92,7 +93,7 @@ public class PackageRepository {
                     .addIfExists("farm_id = ?" ,specification.getFarmId());
         }
         return DB.selectAllFrom(
-                TABLE_NAME, select, where, orderBy, constraints, PackageRepository::buildRecord);
+                TABLE_NAME, select, where, orderBy, constraints, PackagingTotalsRepository::buildRecord);
     }
 
 
