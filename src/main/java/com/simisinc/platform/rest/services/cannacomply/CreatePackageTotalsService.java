@@ -57,9 +57,9 @@ public class CreatePackageTotalsService {
                 if(packaging.getMoistureLoss() == null) {
                     throw new RuntimeException("related packaging record has null value for moisture loss");
                 }
-                if(packaging.getQuantity() == null) {
-                    throw new RuntimeException("related packaging record has null value for quantity");
-                }
+//                if(packaging.getQuantity() == null) {
+//                    throw new RuntimeException("related packaging record has null value for quantity");
+//                }
               //  totalMoistureLoss.updateAndGet(x -> x + Double.valueOf(packaging.getMoistureLoss()));
                 totalQuantity.updateAndGet(x -> x + Double.valueOf(packaging.getQuantity()));
                 budSizes.add(packaging.getBudSize());
