@@ -40,12 +40,15 @@ public class CreatePackageTotalsService {
             if (request.getPackageTag() == null || request.getFarmId() == null) {
                 throw new Exception("Package tag parameter and farm ID parameter mandatory");
             }
+            if(request.getMoistureLoss() == null) {
+                request.setMoistureLoss("0");
+            }
             //get all related records in packaging table
             PackagingSpecification spec = new PackagingSpecification();
             spec.setPackageTag(request.getPackageTag());
             spec.setFarmId(request.getFarmId());
             List<Packaging> packagingRecords = (List<Packaging>) PackageRepository.query(spec, null).getRecords();
-            AtomicReference<Double> totalMoistureLoss = new AtomicReference<>(0.0);
+           // AtomicReference<Double> totalMoistureLoss = new AtomicReference<>(0.0);
             AtomicReference<Double> totalQuantity = new AtomicReference<Double>(0.0);
             Set<String> budSizes = new HashSet<>();
 
@@ -57,11 +60,12 @@ public class CreatePackageTotalsService {
                 if(packaging.getQuantity() == null) {
                     throw new RuntimeException("related packaging record has null value for quantity");
                 }
-                totalMoistureLoss.updateAndGet(x -> x + Double.valueOf(packaging.getMoistureLoss()));
+              //  totalMoistureLoss.updateAndGet(x -> x + Double.valueOf(packaging.getMoistureLoss()));
                 totalQuantity.updateAndGet(x -> x + Double.valueOf(packaging.getQuantity()));
                 budSizes.add(packaging.getBudSize());
             });
-            templateRecord.setMoistureLoss(String.valueOf(totalMoistureLoss));
+          //  templateRecord.setMoistureLoss(String.valueOf(totalMoistureLoss));
+            templateRecord.setMoistureLoss(request.getMoistureLoss());
             templateRecord.setQuantity(String.valueOf(totalQuantity));
             templateRecord.setBudSize(budSizes.toString());
             PackagingTotalsRepository.add(templateRecord);
