@@ -219,7 +219,8 @@ Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
 
 {
   "packageTag": "z00012321",
-  "farmId": "43a506c4-21b4-49a4-8f0e-b9f8022a2a88"
+  "farmId": "43a506c4-21b4-49a4-8f0e-b9f8022a2a88",
+  "moistureLoss": "200"
 }
 ###
 

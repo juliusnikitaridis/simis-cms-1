@@ -43,30 +43,36 @@ public class CreatePackageTotalsService {
             if(request.getMoistureLoss() == null) {
                 request.setMoistureLoss("0");
             }
+            if(request.getQuantity() == null) {
+                throw new Exception("Quantity parameter mandatory");
+            }
             //get all related records in packaging table
             PackagingSpecification spec = new PackagingSpecification();
             spec.setPackageTag(request.getPackageTag());
             spec.setFarmId(request.getFarmId());
             List<Packaging> packagingRecords = (List<Packaging>) PackageRepository.query(spec, null).getRecords();
            // AtomicReference<Double> totalMoistureLoss = new AtomicReference<>(0.0);
-            AtomicReference<Double> totalQuantity = new AtomicReference<Double>(0.0);
+           // AtomicReference<Double> totalQuantity = new AtomicReference<Double>(0.0);
             Set<String> budSizes = new HashSet<>();
 
             Packaging templateRecord = packagingRecords.stream().findFirst().orElseThrow(() -> new Exception("related packaging records not found"));
             packagingRecords.forEach(packaging -> {
-                if(packaging.getMoistureLoss() == null) {
-                    throw new RuntimeException("related packaging record has null value for moisture loss");
-                }
+//                if(packaging.getMoistureLoss() == null) {
+//                    throw new RuntimeException("related packaging record has null value for moisture loss");
+//                }
 //                if(packaging.getQuantity() == null) {
 //                    throw new RuntimeException("related packaging record has null value for quantity");
 //                }
               //  totalMoistureLoss.updateAndGet(x -> x + Double.valueOf(packaging.getMoistureLoss()));
-                totalQuantity.updateAndGet(x -> x + Double.valueOf(packaging.getQuantity()));
+             //   totalQuantity.updateAndGet(x -> x + Double.valueOf(packaging.getQuantity()));
                 budSizes.add(packaging.getBudSize());
             });
           //  templateRecord.setMoistureLoss(String.valueOf(totalMoistureLoss));
             templateRecord.setMoistureLoss(request.getMoistureLoss());
-            templateRecord.setQuantity(String.valueOf(totalQuantity));
+
+           // templateRecord.setQuantity(String.valueOf(totalQuantity));
+            templateRecord.setQuantity(request.getQuantity());
+
             templateRecord.setBudSize(budSizes.toString());
             PackagingTotalsRepository.add(templateRecord);
 
