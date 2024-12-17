@@ -72,9 +72,10 @@ public class CreatePackageTotalsService {
 
            // templateRecord.setQuantity(String.valueOf(totalQuantity));
             templateRecord.setQuantity(request.getQuantity());
-
+            templateRecord.setLastUpdated(String.valueOf(System.currentTimeMillis()));
             templateRecord.setBudSize(budSizes.toString());
             PackagingTotalsRepository.add(templateRecord);
+
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{
