@@ -11,6 +11,7 @@ import com.simisinc.platform.rest.services.cannacomply.util.ErrorMessageStatics;
 import com.simisinc.platform.rest.services.cannacomply.util.ValidateApiAccessHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,7 @@ public class CreatePackageTotalsService {
 
     private static Log LOG = LogFactory.getLog(CreatePackageTotalsService.class);
 
-    public ServiceResponse post(ServiceContext context) {
+    public ServiceResponse post(ServiceContext context) throws Exception {
 
         try {
             if (!ValidateApiAccessHelper.validateAccess(this.getClass().getName(), context)) {
@@ -40,42 +41,39 @@ public class CreatePackageTotalsService {
             if (request.getPackageTag() == null || request.getFarmId() == null) {
                 throw new Exception("Package tag parameter and farm ID parameter mandatory");
             }
-            if(request.getMoistureLoss() == null) {
+            if (request.getMoistureLoss() == null) {
                 request.setMoistureLoss("0");
             }
-            if(request.getQuantity() == null) {
-                throw new Exception("Quantity parameter mandatory");
-            }
+
             //get all related records in packaging table
             PackagingSpecification spec = new PackagingSpecification();
             spec.setPackageTag(request.getPackageTag());
             spec.setFarmId(request.getFarmId());
             List<Packaging> packagingRecords = (List<Packaging>) PackageRepository.query(spec, null).getRecords();
-           // AtomicReference<Double> totalMoistureLoss = new AtomicReference<>(0.0);
-           // AtomicReference<Double> totalQuantity = new AtomicReference<Double>(0.0);
+            //AtomicReference<Double> totalMoistureLoss = new AtomicReference<>(0.0);
+            AtomicReference<Double> totalQuantity = new AtomicReference<Double>(0.0);
             Set<String> budSizes = new HashSet<>();
 
             Packaging templateRecord = packagingRecords.stream().findFirst().orElseThrow(() -> new Exception("related packaging records not found"));
             packagingRecords.forEach(packaging -> {
-//                if(packaging.getMoistureLoss() == null) {
-//                    throw new RuntimeException("related packaging record has null value for moisture loss");
-//                }
-//                if(packaging.getQuantity() == null) {
-//                    throw new RuntimeException("related packaging record has null value for quantity");
-//                }
-              //  totalMoistureLoss.updateAndGet(x -> x + Double.valueOf(packaging.getMoistureLoss()));
-             //   totalQuantity.updateAndGet(x -> x + Double.valueOf(packaging.getQuantity()));
+                //totalMoistureLoss.updateAndGet(x -> x + Double.valueOf(packaging.getMoistureLoss()));
+                if (packaging.getQuantity() != null) {
+                    totalQuantity.updateAndGet(x -> x + Double.valueOf(packaging.getQuantity()));
+                }
                 budSizes.add(packaging.getBudSize());
             });
-          //  templateRecord.setMoistureLoss(String.valueOf(totalMoistureLoss));
+            //  templateRecord.setMoistureLoss(String.valueOf(totalMoistureLoss));
             templateRecord.setMoistureLoss(request.getMoistureLoss());
+            if (request.getQuantity() == null) {
+                templateRecord.setQuantity(String.valueOf(totalQuantity));
+            } else {
+                templateRecord.setQuantity(request.getQuantity());
+            }
 
-           // templateRecord.setQuantity(String.valueOf(totalQuantity));
-            templateRecord.setQuantity(request.getQuantity());
             templateRecord.setLastUpdated(String.valueOf(System.currentTimeMillis()));
             templateRecord.setBudSize(budSizes.toString());
-            PackagingTotalsRepository.add(templateRecord);
 
+            PackagingTotalsRepository.add(templateRecord);
 
             ServiceResponse response = new ServiceResponse(200);
             ArrayList<String> responseMessage = new ArrayList<String>() {{
