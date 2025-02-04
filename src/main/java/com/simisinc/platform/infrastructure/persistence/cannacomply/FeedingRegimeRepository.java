@@ -31,6 +31,8 @@ public class FeedingRegimeRepository {
                 .add("notes",record.getNotes())
                 .add("nutrient_conc",record.getNutrientConc())
                 .add("farm_id",record.getFarmId())
+                .add("growth_cycle_id",record.getGrowthCycleId())
+                .add("strain",record.getStrain())
                 .add("name",record.getName());
 
         try (Connection connection = DB.getConnection();
@@ -59,6 +61,8 @@ public class FeedingRegimeRepository {
                 .addIfExists("watering_schedule",record.getWateringSchedule())
                 .addIfExists("flush_schedule",record.getFlushSchedule())
                 .addIfExists("notes",record.getNotes())
+                .addIfExists("growth_cycle_id",record.getGrowthCycleId())
+                .addIfExists("strain",record.getStrain())
                 .addIfExists("nutrient_conc",record.getNutrientConc())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("name",record.getName());
@@ -122,6 +126,8 @@ public class FeedingRegimeRepository {
           regime.setNotes(rs.getString("notes"));
           regime.setNutrientConc(rs.getString("nutrient_conc"));
           regime.setFarmId(rs.getString("farm_id"));
+          regime.setGrowthCycleId(rs.getString("growth_cycle_id"));
+          regime.setStrain(rs.getString("strain"));
           regime.setName(rs.getString("name"));
           return regime;
         } catch (Exception e) {

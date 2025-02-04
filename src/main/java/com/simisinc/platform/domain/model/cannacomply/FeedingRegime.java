@@ -22,6 +22,8 @@ public class FeedingRegime extends Entity {
 
     private String id;
     private String growthStage;
+    private String growthCycleId;
+    private String strain;
     private String weeks;
     private String nutrientId;
     private String volume;
