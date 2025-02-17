@@ -270,6 +270,24 @@ Content-Type: application/json
 
 ###
 
+
+###
+POST http://localhost:8080/api/cannacomply/UpdateBlockService
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Bearer API-2b5fcc3b-bb20-4c3f-a51c-b78ff9d6cec83
+Content-Type: application/json
+Farm-id:d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "8eae0641-3838-4c32-b303-2f42ae3bc531",
+  "farmId": "43a506c4-21b4-49a4-8f0e-b9f8022a2a11"
+}
+
+###
+
+
+
+
 ###
 GET http://localhost:8080/api/cannacomply/PackagingListService?farmId=c6ce8140-bb1e-41b0-ae52-32a4419e2091
 X-API-Key:b67e14c8-093d-4502-8b10-d3c15c503200
