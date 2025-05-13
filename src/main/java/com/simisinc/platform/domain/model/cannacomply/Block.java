@@ -16,4 +16,5 @@ public class Block extends Entity {
     private String locationId;
     private String dimensions;
     private String numberOfCrops;
+    private String soilId;
 }

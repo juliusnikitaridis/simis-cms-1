@@ -22,19 +22,22 @@ public class Yield extends Entity {
     private String loss = null;
     private String containerNumber = null;
     private String batchNumber = null;
+    private String harvestBatchId = null;
     private String cropId = null;
-    private String strain = null;
+    private String variety = null;
     private String date = null;
     private String farmId = null;
     private String notes = null;
     private String stage = null;
     private String fromBlockId = null;
-    private String wetWeight = null;
+    private String strain;
     private String userId;
     private String harvestedItem;
     private String lastUpdated;
     private String locationId;
     private String isMixed;
     private String moistureLoss;
-
+    private String wetWeight;
+    private String color;
+    private String texture;
 }

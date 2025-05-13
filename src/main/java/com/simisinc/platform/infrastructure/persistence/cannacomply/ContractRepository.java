@@ -19,8 +19,8 @@ public class ContractRepository {
     public static Contract add(Contract record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
-                .add("strain",record.getStrain())
                 .add("customer_id",record.getCustomerId())
+                .add("variety",record.getVariety())
                 .add("farm_id",record.getFarmId())
                 .add("delivery_date",record.getDeliveryDate())
                 .add("type",record.getType())
@@ -47,11 +47,11 @@ public class ContractRepository {
     public static void update(Contract record) throws Exception {
         SqlUtils updateValues = new SqlUtils()
 
-                .addIfExists("strain",record.getStrain())
                 .addIfExists("customer_id",record.getCustomerId())
                 .addIfExists("farm_id",record.getFarmId())
                 .addIfExists("delivery_date",record.getDeliveryDate())
                 .addIfExists("type",record.getType())
+                .addIfExists("variety",record.getVariety())
                 .addIfExists("price",record.getPrice())
                 .addIfExists("quantity",record.getQuantity())
                 .addIfExists("contract_date",record.getContractDate())
@@ -108,12 +108,12 @@ public class ContractRepository {
         Contract contract = new Contract();
         try {
           contract.setId(rs.getString("id"));
-          contract.setStrain(rs.getString("strain"));
           contract.setCustomerId(rs.getString("customer_id"));
           contract.setFarmId(rs.getString("farm_id"));
           contract.setDeliveryDate(rs.getString("delivery_date"));
           contract.setType(rs.getString("type"));
           contract.setPrice(rs.getString("price"));
+          contract.setVariety(rs.getString("variety"));
           contract.setQuantity(rs.getString("quantity"));
           contract.setContractDate(rs.getString("contract_date"));
           contract.setGrowthCycleId(rs.getString("growth_cycle_id"));

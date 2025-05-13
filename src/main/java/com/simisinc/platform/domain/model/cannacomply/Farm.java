@@ -27,6 +27,7 @@ public class Farm extends Entity {
     private String locationData;
     private String address;
     private String userId;
+    private String commodities;
     private String productionUnitCode;
 }
 

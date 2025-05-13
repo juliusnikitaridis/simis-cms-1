@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public class Contract extends Entity {
    private String id;
-   private String strain;
    private String customerId;
    private String farmId;
    private String deliveryDate;
@@ -18,4 +17,5 @@ public class Contract extends Entity {
    private String quantity;
    private String contractDate;
    private String growthCycleId;
+   private String variety;
 }

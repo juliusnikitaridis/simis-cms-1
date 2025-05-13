@@ -34,4 +34,6 @@ public class Supplier extends Entity {
     private String site;
     private String units;
     private String totalQuantity;
+    private String locationType;
+    private String locationId;
 }

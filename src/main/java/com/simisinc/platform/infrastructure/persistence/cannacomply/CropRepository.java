@@ -25,7 +25,9 @@ public class CropRepository {
                 .add("status",record.getStatus())
                 .add("feeding_regime_id",record.getFeedingRegimeId())
                 .add("strain_name",record.getStrainName())
+                .add("variety_name",record.getVarietyName())
                 .add("seed_company",record.getSeedCompany())
+                .add("contract_id",record.getContractId())
                 .add("farm_id",record.getFarmId())
                 .add("growth_cycle_id",record.getGrowthCycleId())
                 .add("user_id",record.getUserId())
@@ -59,20 +61,24 @@ public class CropRepository {
                 .addIfExists("growth_stage", record.getGrowthStage())
                 .addIfExists("block_id",record.getBlockId())
                 .addIfExists("status",record.getStatus())
-                .addIfExists("strain_name",record.getStrainName())
+                .addIfExists("variety_name",record.getVarietyName())
                 .addIfExists("seed_company",record.getSeedCompany())
                 .addIfExists("farm_id",record.getFarmId())
-                .addIfExists("pot_id",record.getPotId())
+                .addIfExists("feeding_regime_id",record.getFeedingRegimeId())
+                .addIfExists("block_location",record.getBlockLocation())
                 .addIfExists("barcode_data",record.getBarcodeData())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("feeding_regime_id",record.getFeedingRegimeId())
                 .addIfExists("crop_label",record.getCropLabel())
+                .addIfExists("contract_id",record.getContractId())
                 .addIfExists("location_id",record.getLocationId())
                 .addIfExists("location_type",record.getLocationType())
                 .addIfExists("growth_cycle_id",record.getGrowthCycleId())
                 .addIfExists("last_updated",record.getLastUpdated())
                 .addIfExists("lot_number",record.getLotNumber())
+                .addIfExists("strain_name",record.getStrainName())
                 .addIfExists("starting_plant_data",record.getStartingPlantData());
+
 
             try (Connection connection = DB.getConnection();
                  AutoStartTransaction a = new AutoStartTransaction(connection);
@@ -126,6 +132,7 @@ public class CropRepository {
             crop.setCropType(rs.getString("crop_type"));
             crop.setGrowthStage(rs.getString("growth_stage"));
             crop.setStatus(rs.getString("status"));
+            crop.setVarietyName(rs.getString("variety_name"));
             crop.setStrainName(rs.getString("strain_name"));
             crop.setSeedCompany(rs.getString("seed_company"));
             crop.setFarmId(rs.getString("farm_id"));
@@ -141,6 +148,8 @@ public class CropRepository {
             crop.setCreatedDate(rs.getString("created_date"));
             crop.setBlockId(rs.getString("block_id"));
             crop.setLastUpdated(rs.getString("last_updated"));
+            crop.setFeedingRegimeId(rs.getString("feeding_regime_id"));
+            crop.setContractId(rs.getString("contract_id"));
             crop.setLotNumber(rs.getString("lot_number"));
             crop.setStartingPlantData(rs.getString("starting_plant_data"));
             return crop;

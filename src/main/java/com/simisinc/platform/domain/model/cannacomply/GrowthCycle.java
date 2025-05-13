@@ -12,9 +12,10 @@ public class GrowthCycle extends Entity {
    private String plants;
    private String startDate;
    private String endDate;
-   private String strain;
+   private String variety;
    private String farmId;
    private String yield;
    private String growthCycleName;
    private String units;
+   private String commodity;
 }

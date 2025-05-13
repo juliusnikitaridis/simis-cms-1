@@ -84,6 +84,7 @@ Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 POST https://organicsimis.connectmobiles24.com/api/cannacomply/CreateFeedbackService
 X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
 Authorization:Bearer API-d14c7379-7acb-49eb-9423-88f5d6c3b70f3
+Authorization:Bearer API-d14c7379-7acb-49eb-9423-88f5d6c3b70f3
 Content-Type: application/json
 Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 
@@ -115,6 +116,14 @@ Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 GET https://organicsimis.connectmobiles24.com/api/cannacomply/FeedbackListService?farmId=farm_id
 X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
 Authorization:Bearer API-f184b4e6-868e-44ce-afed-c54a7495c36e3
+Content-Type: application/json
+Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
+
+###
+
+GET https://organicsimis.connectmobiles24.com/api/cannacomply/ContractListService?farmId=43a506c4-21b4-49a4-8f0e-b9f8022a2a88
+X-API-Key:e4e82dee-71e7-4773-86d4-1cb6dc1a2690
+Authorization:Bearer API-7fb0c867-04ca-4859-b086-ea39cddd222029
 Content-Type: application/json
 Farm-id:596dc593-7ff4-4f2a-97bc-d12f35204a52
 

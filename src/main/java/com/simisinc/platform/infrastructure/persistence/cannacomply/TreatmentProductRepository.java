@@ -19,6 +19,7 @@ public class TreatmentProductRepository {
     public static TreatmentProduct add(TreatmentProduct record) throws Exception {
         SqlUtils insertValues = new SqlUtils()
                 .add("id", record.getId())
+                .add("created_date",record.getCreatedDate())
                 .add("product_name", record.getProductName())
                 .add("units",record.getUnits())
                 .add("created_date",record.getCreatedDate())
@@ -30,6 +31,8 @@ public class TreatmentProductRepository {
                 .add("active_ingredients",record.getActiveIngredients())
                 .add("expiry_date",record.getExpiryDate())
                 .add("instructions",record.getInstructions())
+                .add("location_type",record.getLocationType())
+                .add("location_id",record.getLocationId())
                 .add("purpose",record.getPurpose());
 
         try (Connection connection = DB.getConnection();
@@ -51,6 +54,7 @@ public class TreatmentProductRepository {
         SqlUtils updateValues = new SqlUtils()
                 .addIfExists("product_name", record.getProductName())
                 .addIfExists("container", record.getContainer())
+                .addIfExists("created_date",record.getCreatedDate())
                 .addIfExists("mass", record.getMass())
                 .addIfExists("created_date",record.getCreatedDate())
                 .addIfExists("quantity",record.getQuantity())
@@ -59,6 +63,8 @@ public class TreatmentProductRepository {
                 .addIfExists("active_ingredients",record.getActiveIngredients())
                 .addIfExists("expiry_date",record.getExpiryDate())
                 .addIfExists("units",record.getUnits())
+                .addIfExists("location_type",record.getLocationType())
+                .addIfExists("location_id",record.getLocationId())
                 .addIfExists("instructions",record.getInstructions())
                 .addIfExists("purpose",record.getPurpose());
 
@@ -121,6 +127,9 @@ public class TreatmentProductRepository {
             product.setQuantity(rs.getString("quantity"));
             product.setCreatedDate(rs.getString("created_date"));
             product.setFarmId(rs.getString("farm_id"));
+            product.setLocationId("location_id");
+            product.setLocationType("location_type");
+            product.setCreatedDate("created_date");
             product.setImageData(rs.getString("image_data"));
             product.setProductId(rs.getString("product_id"));
             product.setActiveIngredients(rs.getString("active_ingredients"));

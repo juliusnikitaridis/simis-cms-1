@@ -37,11 +37,9 @@ public class CreateCustomerService {
             Customer customer = mapper.readValue(context.getJsonRequest(), Customer.class);
             String cycleId = UUID.randomUUID().toString();
             customer.setId(cycleId);
+
             Instant instant = Instant.now();
             customer.setCreatedDate(instant.toString());
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            customer.setCreatedDate(sdf.format(new Date()));
 
             CustomerRepository.add(customer);
 
