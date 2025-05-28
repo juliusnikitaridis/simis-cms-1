@@ -132,7 +132,7 @@ public class DeviceRepository {
             return device;
         } catch (Exception e) {
             LOG.error("exception when building record for Device" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

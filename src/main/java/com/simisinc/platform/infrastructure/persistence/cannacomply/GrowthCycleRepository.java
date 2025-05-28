@@ -120,7 +120,7 @@ public class GrowthCycleRepository {
           return cycle;
         } catch (Exception e) {
             LOG.error("exception when building record for Growth Cycle" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

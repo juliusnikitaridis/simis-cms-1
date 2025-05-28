@@ -121,7 +121,7 @@ public class FarmRepository {
             return farm;
         } catch (Exception e) {
             LOG.error("exception when building record for farm" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

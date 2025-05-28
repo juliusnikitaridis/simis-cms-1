@@ -114,7 +114,7 @@ public class StrainRepository {
             return pack;
         } catch (Exception e) {
             LOG.error("exception when building record for Strain" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

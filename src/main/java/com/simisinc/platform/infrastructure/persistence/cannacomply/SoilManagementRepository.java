@@ -116,7 +116,7 @@ public class SoilManagementRepository {
             return soilManagement;
         } catch (Exception e) {
             LOG.error("exception when building record for SoilManagement" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

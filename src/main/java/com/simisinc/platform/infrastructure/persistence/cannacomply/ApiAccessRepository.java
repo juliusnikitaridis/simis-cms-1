@@ -79,7 +79,7 @@ public class ApiAccessRepository {
           return access;
         } catch (Exception e) {
             LOG.error("exception when building record for API Access" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

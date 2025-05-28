@@ -127,7 +127,7 @@ public class WaterSourceRepository {
             return ws;
         } catch (Exception e) {
             LOG.error("exception when building record for Water source record" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

@@ -146,7 +146,7 @@ public class HarvestRepository {
             return record;
         } catch (Exception e) {
             LOG.error("exception when building record for harvest" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

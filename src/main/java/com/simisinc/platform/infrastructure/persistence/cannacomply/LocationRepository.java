@@ -141,7 +141,7 @@ public class LocationRepository {
             return location;
         } catch (Exception e) {
             LOG.error("exception when building record for Location" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

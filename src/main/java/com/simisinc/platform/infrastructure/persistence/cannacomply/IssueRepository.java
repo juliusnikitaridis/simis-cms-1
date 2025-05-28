@@ -139,7 +139,7 @@ public class IssueRepository {
             return issue;
         } catch (Exception e) {
             LOG.error("exception when building record for issue" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

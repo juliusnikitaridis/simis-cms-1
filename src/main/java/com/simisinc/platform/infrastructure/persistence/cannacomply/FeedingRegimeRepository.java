@@ -132,7 +132,7 @@ public class FeedingRegimeRepository {
           return regime;
         } catch (Exception e) {
             LOG.error("exception when building record for FeedingRegime" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

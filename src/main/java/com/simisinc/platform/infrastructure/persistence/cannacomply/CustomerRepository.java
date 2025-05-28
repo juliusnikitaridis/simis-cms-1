@@ -114,7 +114,7 @@ public class CustomerRepository {
           return customer;
         } catch (Exception e) {
             LOG.error("exception when building record for Customer" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

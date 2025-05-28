@@ -130,7 +130,7 @@ public class BlockRepository {
             return block;
         } catch (Exception e) {
             LOG.error("exception when building record for block" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

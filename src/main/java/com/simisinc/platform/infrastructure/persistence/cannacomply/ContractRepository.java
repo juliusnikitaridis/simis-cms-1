@@ -120,7 +120,7 @@ public class ContractRepository {
           return contract;
         } catch (Exception e) {
             LOG.error("exception when building record for contract" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

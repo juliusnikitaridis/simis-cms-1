@@ -178,7 +178,7 @@ public class ComplianceUserRepository {
             return complianceUser;
         } catch (Exception e) {
             LOG.error("exception when building record for ComplianceUser" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

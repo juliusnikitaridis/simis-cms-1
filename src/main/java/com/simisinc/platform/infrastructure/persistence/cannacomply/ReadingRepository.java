@@ -167,7 +167,7 @@ public class ReadingRepository {
             return reading;
         } catch (Exception e) {
             LOG.error("exception when building record for Reading" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

@@ -120,7 +120,7 @@ public class SoilPotRepository {
             return soilPot;
         } catch (Exception e) {
             LOG.error("exception when building record for SoilPot record" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

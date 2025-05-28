@@ -150,7 +150,7 @@ public class WaterManagementRepository {
             return waterManagement;
         } catch (Exception e) {
             LOG.error("exception when building record for Strain" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

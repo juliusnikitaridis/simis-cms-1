@@ -150,7 +150,7 @@ public class SupplierRepository {
             return record;
         } catch (Exception e) {
             LOG.error("exception when building record for Supplier" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

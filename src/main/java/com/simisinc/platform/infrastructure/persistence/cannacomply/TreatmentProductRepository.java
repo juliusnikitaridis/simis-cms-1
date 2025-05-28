@@ -140,7 +140,7 @@ public class TreatmentProductRepository {
             return product;
         } catch (Exception e) {
             LOG.error("exception when building record for TreatmentProduct" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

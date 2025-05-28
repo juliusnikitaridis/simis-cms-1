@@ -3,10 +3,12 @@ package com.simisinc.platform.infrastructure.persistence.cannacomply;
 
 import com.simisinc.platform.domain.model.cannacomply.Yield;
 import com.simisinc.platform.infrastructure.database.*;
+import lombok.SneakyThrows;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class YieldRepository {
@@ -123,6 +125,7 @@ public class YieldRepository {
     }
 
 
+
     private static Yield buildRecord(ResultSet rs) {
 
         Yield record = new Yield();
@@ -148,7 +151,7 @@ public class YieldRepository {
             return record;
         } catch (Exception e) {
             LOG.error("exception when building record for yield" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

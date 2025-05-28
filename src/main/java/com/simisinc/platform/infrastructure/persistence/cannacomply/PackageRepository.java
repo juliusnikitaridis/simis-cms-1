@@ -129,7 +129,7 @@ public class PackageRepository {
             return pack;
         } catch (Exception e) {
             LOG.error("exception when building record for Packaging" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

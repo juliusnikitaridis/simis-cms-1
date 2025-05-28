@@ -114,7 +114,7 @@ public class CropDataRepository {
             return ws;
         } catch (Exception e) {
             LOG.error("exception when building record for crop data" + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }
