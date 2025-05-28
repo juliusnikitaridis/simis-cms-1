@@ -1,0 +1,42 @@
+###
+POST http://localhost:8080/api/oauth2/authorize
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+###
+
+
+
+###
+GET http://localhost:8080/api/cannacomply/FarmListService?userId=grace-gope-2
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:API-fc6beea4-3167-4ccf-9e94-2ced2a2c26243"
+Content-Type: application/json
+
+{
+  "id": "51b89fd6-830e-4a58-b153-02f9b41878a8"
+}
+###
+
+
+
+
+
+
+
+
+###
+POST https://organicsimis.connectmobiles24.com/api/oauth2/authorize
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOmRjZDY3M2JiLTZmODItNDNjNS05NzljLWRmMzBkYTA2MjU2Mg==
+###
+
+###
+GET https://organicsimis.connectmobiles24.com/api/cannacomply/FarmListService?userId=grace-gope-2
+X-API-Key:62e647ee-bd61-410e-9c66-adea21352f9f
+Authorization:API-08e48941-7667-4946-88c5-b60b17c85f363
+Content-Type: application/json
+
+{
+  "id": "51b89fd6-830e-4a58-b153-02f9b41878a8"
+}
+###
