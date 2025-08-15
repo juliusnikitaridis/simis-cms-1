@@ -41,6 +41,7 @@ public class CreatePackageTotalsService {
             if (request.getPackageTag() == null || request.getFarmId() == null) {
                 throw new Exception("Package tag parameter and farm ID parameter mandatory");
             }
+
             if (request.getMoistureLoss() == null) {
                 request.setMoistureLoss("0");
             }
@@ -72,6 +73,17 @@ public class CreatePackageTotalsService {
 
             templateRecord.setLastUpdated(String.valueOf(System.currentTimeMillis()));
             templateRecord.setBudSize(budSizes.toString());
+            if(request.getStage() != null) {
+                templateRecord.setStage(request.getStage());
+            }
+
+            if(request.getStatus() != null) {
+                templateRecord.setStatus(request.getStatus());
+            }
+
+            if(request.getMoistureLoss() != null) {
+                templateRecord.setMoistureLoss(request.getMoistureLoss());
+            }
 
             PackagingTotalsRepository.add(templateRecord);
 
