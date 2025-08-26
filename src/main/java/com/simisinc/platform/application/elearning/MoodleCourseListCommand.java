@@ -56,9 +56,9 @@ public class MoodleCourseListCommand {
     // Retrieve the courses
     Map<String, String> parameters = new HashMap<>();
     parameters.put("userid", String.valueOf(userId));
-    if (!withUserCount) {
-      parameters.put("returnusercount", "0");
-    }
+//    if (!withUserCount) {
+//      parameters.put("returnusercount", "0");
+//    }
     JsonNode json = MoodleApiClientCommand.sendHttpGet(GET_USERS_COURSES_API, parameters);
 
     // Verify that record(s) have been returned
