@@ -84,6 +84,9 @@ public class CreatePackageTotalsService {
             if(request.getMoistureLoss() != null) {
                 templateRecord.setMoistureLoss(request.getMoistureLoss());
             }
+            if(request.getLocation() != null) {
+                templateRecord.setLocation(request.getLocation());
+            }
 
             PackagingTotalsRepository.add(templateRecord);
 
