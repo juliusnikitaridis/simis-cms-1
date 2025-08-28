@@ -54,6 +54,15 @@ public class MoodleUserCommand {
 
   public static long retrieveUserId(String email) {
     // Determine the user's Moodle id
+    /**
+     * curl -X POST \
+     *   -d "wstoken=6b94436ca86db5fc08cda196f322a0bb" \
+     *   -d "moodlewsrestformat=json" \
+     *   -d "wsfunction=core_user_get_users_by_field" \
+     *   -d "field=email" \
+     *   -d "values[0]=julius.admin@connectmobiles24.com" \
+     *   https://moodle.connectmobiles24.com/webservice/rest/server.php
+     */
     Map<String, String> parameters = new HashMap<>();
     parameters.put("field", "email");
     parameters.put("values[0]", email);

@@ -92,6 +92,14 @@ public class RemoteCourseListWidget extends GenericWidget {
       }
     } else {
       // Retrieve the Moodle course list for 'student' role
+      /**
+       *   curl -X POST \
+       *   -d "wstoken=6b94436ca86db5fc08cda196f322a0bb" \
+       *   -d "wsfunction=core_enrol_get_users_courses" \
+       *   -d "moodlewsrestformat=json" \
+       *   -d "userid=6" \
+       *   https://moodle.connectmobiles24.com/webservice/rest/server.php
+       */
       if (moodleEnabled) {
         List<CourseUserAggregate> moodleList = MoodleLeanerCourseCommand.retrieveLearnerCourses(context.getUserSession().getUser(), showParticipants);
         if (moodleList != null) {
