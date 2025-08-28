@@ -48,6 +48,8 @@ public class MoodleCourseListCommand {
     if (userId == -1) {
       LOG.debug("UserId was not found for: " + user.getEmail());
       return null;
+    } else {
+      LOG.debug("user found in moodle "+userId);
     }
     return retrieveCoursesEnrolledForRemoteUserId(userId, withUserCount);
   }

@@ -45,9 +45,9 @@ public class MoodleUserCommand {
   private static Log LOG = LogFactory.getLog(MoodleUserCommand.class);
 
   public static long retrieveUserId(User user) {
-    Long moodleUserId = userCache.get(user.getEmail());
+    Long moodleUserId = retrieveUserId(user.getEmail());
     if (moodleUserId == null || moodleUserId <= 0) {
-      return -1;
+      throw new RuntimeException("could lot lookup user in moodle");
     }
     return moodleUserId;
   }
@@ -56,7 +56,7 @@ public class MoodleUserCommand {
     // Determine the user's Moodle id
     Map<String, String> parameters = new HashMap<>();
     parameters.put("field", "email");
-    parameters.put("values[]", email);
+    parameters.put("values[0]", email);
     JsonNode json = MoodleApiClientCommand.sendHttpGet(GET_USERS_API, parameters);
 
     // Verify that record(s) have been returned
