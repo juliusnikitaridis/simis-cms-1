@@ -31,6 +31,7 @@ public class Yield extends Entity {
     private String fromBlockId = null;
     private String wetWeight = null;
     private String userId;
+    private String units;
     private String harvestedItem;
     private String lastUpdated;
     private String locationId;

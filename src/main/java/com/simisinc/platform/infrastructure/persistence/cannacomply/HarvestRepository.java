@@ -33,6 +33,7 @@ public class HarvestRepository {
                 .add("from_block_id",record.getFromBlockId())
                 .add("wet_weight",record.getWetWeight())
                 .add("user_id",record.getUserId())
+                .add("units",record.getUnits())
                 .add("is_mixed",record.getIsMixed())
                 .add("date", record.getDate());
 
@@ -67,6 +68,7 @@ public class HarvestRepository {
                 .addIfExists("wet_weight",record.getWetWeight())
                 .addIfExists("user_id",record.getUserId())
                 .addIfExists("stage",record.getStage())
+                .addIfExists("units",record.getUnits())
                 .addIfExists("from_block_id",record.getFromBlockId())
                 .addIfExists("is_mixed",record.getIsMixed())
                 .addIfExists("date", record.getDate());
@@ -137,6 +139,7 @@ public class HarvestRepository {
             record.setBatchNumber(rs.getString("batch_number"));
             record.setCropId(rs.getString("crop_id"));
             record.setDate(rs.getString("date"));
+            record.setUnits(rs.getString("units"));
             record.setLastUpdated(rs.getString("last_updated"));
             record.setHarvestedItem(rs.getString("harvested_item"));
             record.setFarmId(rs.getString("farm_id"));
@@ -150,4 +153,3 @@ public class HarvestRepository {
         }
     }
 }
-
