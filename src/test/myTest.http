@@ -1,0 +1,41 @@
+
+POST localhost:8080/api/oauth2/authorize
+Authorization:Basic anVsaXVzQGNvbm5lY3Rtb2JpbGVzMjQuY29tOjEyMzQ1Ng==
+X-API-Key:5bee43e2-53ca-4364-8ed6-91fa882ec708
+
+
+
+###
+##UPDATE LOCATION and STAGE for this crop
+POST http://localhost:8080/api/cannacomply/UpdateCropService
+X-API-Key:5bee43e2-53ca-4364-8ed6-91fa882ec708
+Authorization:Bearer API-f5460af9-7b6f-4408-a3d8-8c8058e4d1c03
+Content-Type: application/json
+Farm-Id: d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "b2ea9722-6fcc-4728-b672-4159791cf2e1",
+  "status": "growth_stage",
+  "locationId": "8691f440-e914-48b0-8e4d-996ed4e38737"
+}
+###
+
+##UPDATE Block to count new crop line
+POST http://localhost:8080/api/cannacomply/UpdateBlockService
+X-API-Key:5bee43e2-53ca-4364-8ed6-91fa882ec708
+Authorization:Bearer API-f5460af9-7b6f-4408-a3d8-8c8058e4d1c03
+Content-Type: application/json
+Farm-Id: d5ccb179-dea5-47da-b5bf-811f46da056a
+
+{
+  "id": "8691f440-e914-48b0-8e4d-996ed4e38737"
+}
+###
+
+##check block
+GET http://localhost:8080/api/cannacomply/BlockListService?blockId=8691f440-e914-48b0-8e4d-996ed4e38737
+X-API-Key:5bee43e2-53ca-4364-8ed6-91fa882ec708
+Authorization:Bearer API-f5460af9-7b6f-4408-a3d8-8c8058e4d1c03
+Content-Type: application/json
+Farm-Id: d5ccb179-dea5-47da-b5bf-811f46da056a
+###
