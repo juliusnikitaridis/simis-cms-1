@@ -59,7 +59,7 @@ public class UpdateBlockService {
             if(existingBLock == null) {
                 throw new Exception("could not find existing block to update");
             }
-            int cropRecordCount = getRelatedCropsRecords(existingBLock.getLocationId());
+            int cropRecordCount = getRelatedCropsRecords(existingBLock.getId());
             block.setNumberOfCrops(String.valueOf(cropRecordCount));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String updatedDate = LocalDateTime.now().format(formatter);
